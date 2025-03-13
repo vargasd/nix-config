@@ -5,7 +5,7 @@
 		[
 			pkgs.ast-grep
 			pkgs.bat
-			pkgs.brave
+			# pkgs.brave
 			pkgs.btop
 			# pkgs.calibre # not supported for darwin
 			pkgs.cmake
@@ -25,15 +25,28 @@
 			pkgs.neovim
 			pkgs.nodejs
 			# pkgs.orcaslicer # not available at all (bambu-studio is but only for linux)
-			pkgs.rectangle
 			pkgs.ripgrep
 			pkgs.skhd
 			pkgs.sqlite
 			pkgs.stow
-			pkgs.wezterm
+			# pkgs.wezterm # undercurl doesn't work. use casks instead
 			pkgs.yazi
 			pkgs.zoxide
 		];
+
+	homebrew = {
+		enable = true;
+		casks = [
+			"orcaslicer"
+			"brave-browser"
+			"calibre"
+			"homerow"
+			"orcaslicer"
+			"rectangle"
+			"spotify"
+			"wezterm"
+		];
+	};
 
 	fonts.packages = [ pkgs.jetbrains-mono ];
 
