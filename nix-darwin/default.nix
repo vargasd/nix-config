@@ -32,6 +32,25 @@
 			# pkgs.wezterm # undercurl doesn't work. use casks instead
 			pkgs.yazi
 			pkgs.zoxide
+
+			# language servers
+			pkgs.bash-language-server
+			pkgs.clang-tools
+			pkgs.vscode-langservers-extracted # css, eslint, html, json
+			pkgs.efm-langserver
+			pkgs.harper
+			pkgs.lua-language-server
+			pkgs.marksman
+			pkgs.nixd
+			pkgs.rust-analyzer
+			pkgs.terraform-ls
+			pkgs.typescript-language-server
+			pkgs.vtsls
+
+			# formatters
+			pkgs.stylua
+			pkgs.prettierd
+			pkgs.nixfmt-rfc-style
 		];
 
 	homebrew = {

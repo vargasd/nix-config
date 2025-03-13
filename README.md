@@ -1,6 +1,6 @@
 # My nix configuration
 
-So far, it's just nix-darwin. For now, I'm using nix on a trial basis, particularly since macos setting management is not so great.
+So far, it's just nix-darwin. For now, I'm using nix on a trial basis, particularly since MacOS setting management is not so great.
 
 ## nix-darwin
 
