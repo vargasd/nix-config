@@ -25,13 +25,13 @@
     pkgs.nodejs
     # pkgs.orcaslicer # not available at all (bambu-studio is but only for linux)
     pkgs.ripgrep
-    pkgs.skhd
     pkgs.sqlite
     pkgs.stow
     # pkgs.wezterm # undercurl doesn't work. use casks instead
     pkgs.yazi
     pkgs.zoxide
 
+    # TODO Use nix-env for most of these? At least the ones that you don't use all the time
     # language servers
     pkgs.bash-language-server
     pkgs.clang-tools
@@ -103,6 +103,13 @@
     keyboard = {
       enableKeyMapping = true;
       remapCapsLockToEscape = true;
+    };
+  };
+
+  services = {
+    skhd = {
+      enable = true;
+      skhdConfig = builtins.readFile ./skhdrc;
     };
   };
 
