@@ -1,4 +1,7 @@
 { pkgs, ... }:
+let
+  user = "sam";
+in
 {
   environment.systemPackages = [
     pkgs.ast-grep
@@ -137,7 +140,7 @@
       };
 
       screencapture = {
-        # location = "~/Desktop" # but we need the user so...
+        location = "/Users/${user}/Desktop";
         show-thumbnail = false;
         type = "png";
       };
