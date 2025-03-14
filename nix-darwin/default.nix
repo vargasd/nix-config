@@ -11,6 +11,7 @@
     pkgs.delta
     pkgs.fd
     pkgs.fzf
+    pkgs.gh
     pkgs.git
     pkgs.gnumake
     pkgs.gnupg
@@ -66,7 +67,22 @@
   fonts.packages = [ pkgs.jetbrains-mono ];
 
   # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
+  nix = {
+    settings.experimental-features = "nix-command flakes";
+
+    gc = {
+      automatic = true;
+      interval = {
+        Hour = 0;
+        Minute = 0;
+        Weekday = 0;
+      };
+    };
+  };
+
+  power = {
+    restartAfterPowerFailure = true;
+  };
 
   system = {
     # Set Git commit hash for darwin-version.
@@ -88,13 +104,37 @@
         persistent-apps = [ ];
       };
 
+      finder = {
+        # TODO manage favorites?
+        AppleShowAllExtensions = true;
+        AppleShowAllFiles = true;
+        FXEnableExtensionChangeWarning = false;
+        FXPreferredViewStyle = "clmv"; # this doesn't seem to work
+        FXRemoveOldTrashItems = true;
+        NewWindowTarget = "Home";
+        QuitMenuItem = true;
+        ShowPathbar = true;
+        ShowStatusBar = true;
+        _FXSortFoldersFirst = true;
+      };
+
+      menuExtraClock.Show24Hour = true;
+
       NSGlobalDomain = {
         InitialKeyRepeat = 15;
         KeyRepeat = 2;
         "com.apple.swipescrolldirection" = false;
         "com.apple.sound.beep.volume" = 0.0;
         ApplePressAndHoldEnabled = false;
+        NSDocumentSaveNewDocumentsToCloud = false;
       };
+
+      screencapture = {
+        # location = "~/Desktop" # but we need the user so...
+        show-thumbnail = false;
+        type = "png";
+      };
+      #TODO night shift? https://github.com/LnL7/nix-darwin/issues/1046
     };
 
     keyboard = {
@@ -108,6 +148,11 @@
       enable = true;
       skhdConfig = builtins.readFile ./skhdrc;
     };
+  };
+
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    watchIdAuth = true;
   };
 
   # The platform the configuration will be used on.
