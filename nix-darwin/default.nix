@@ -1,12 +1,10 @@
 { pkgs, ... }:
 {
-  # List packages installed in system profile. To search by name, run:
   environment.systemPackages = [
     pkgs.ast-grep
     pkgs.bat
     # pkgs.brave
     pkgs.btop
-    # pkgs.calibre # not supported for darwin
     pkgs.cmake
     pkgs.clang
     pkgs.eza
@@ -57,7 +55,6 @@
     casks = [
       "orcaslicer"
       "brave-browser"
-      "calibre"
       "homerow"
       "orcaslicer"
       "rectangle"
