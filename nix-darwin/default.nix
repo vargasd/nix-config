@@ -155,8 +155,36 @@ in
           cycleSizesIsChanged = true;
           selectedCycleSizes = 18; # 2^1 + 2^4 -> https://github.com/rxhanson/Rectangle/blob/main/Rectangle/CycleSize.swift
         };
+
+        # night shift https://github.com/LnL7/nix-darwin/issues/1046
+        "com.apple.CoreBrightness.plist" =
+          let
+            userId = builtins.readFile (
+              pkgs.runCommand "user-id" { }
+                "/usr/bin/dscl . -read /Users/${user} GeneratedUID | /usr/bin/sed 's/GeneratedUID: //' | /usr/bin/tr -d \\\\n > $out"
+            );
+          in
+          {
+            "CBUser-${userId}" = {
+              CBBlueLightReductionCCTTargetRaw = "3393.025";
+              CBBlueReductionStatus = {
+                AutoBlueReductionEnabled = 1;
+                BlueLightReductionDisableScheduleAlertCounter = 3;
+                BlueLightReductionSchedule = {
+                  DayStartHour = 7;
+                  DayStartMinute = 0;
+                  NightStartHour = 22;
+                  NightStartMinute = 0;
+                };
+                BlueReductionAvailable = 1;
+                BlueReductionEnabled = 1;
+                BlueReductionMode = 1;
+                BlueReductionSunScheduleAllowed = 1;
+                Version = 1;
+              };
+            };
+          };
       };
-      #TODO night shift? https://github.com/LnL7/nix-darwin/issues/1046
     };
 
     keyboard = {
