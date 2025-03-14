@@ -134,6 +134,18 @@
         show-thumbnail = false;
         type = "png";
       };
+
+      CustomUserPreferences = {
+        "com.knollsoft.Rectangle" = {
+          launchOnLogin = true;
+          gapSize = 0;
+          almostMaximizeHeight = 0.75;
+          almostMaximizeWidth = 0.6;
+          hideMenuBarIcon = true;
+          cycleSizesIsChanged = true;
+          selectedCycleSizes = 18; # 2^1 + 2^4 -> https://github.com/rxhanson/Rectangle/blob/main/Rectangle/CycleSize.swift
+        };
+      };
       #TODO night shift? https://github.com/LnL7/nix-darwin/issues/1046
     };
 
