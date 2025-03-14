@@ -127,6 +127,12 @@
         "com.apple.sound.beep.volume" = 0.0;
         ApplePressAndHoldEnabled = false;
         NSDocumentSaveNewDocumentsToCloud = false;
+        NSAutomaticCapitalizationEnabled = false;
+        NSAutomaticDashSubstitutionEnabled = false;
+        NSAutomaticInlinePredictionEnabled = false;
+        NSAutomaticPeriodSubstitutionEnabled = false;
+        NSAutomaticQuoteSubstitutionEnabled = false;
+        NSAutomaticSpellingCorrectionEnabled = false;
       };
 
       screencapture = {
