@@ -7,6 +7,7 @@
     pkgs.btop
     pkgs.cmake
     pkgs.clang
+    pkgs.defaultbrowser
     pkgs.eza
     pkgs.delta
     pkgs.fd
@@ -158,6 +159,11 @@
     keyboard = {
       enableKeyMapping = true;
       remapCapsLockToEscape = true;
+    };
+
+    activationScripts = {
+      # Inspired by https://tommorris.org/posts/2024/til-setting-default-browser-on-macos-using-nix/
+      postUserActivation.text = "defaultbrowser browser"; # this is brave I guess 🤷
     };
   };
 
