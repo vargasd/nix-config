@@ -3,57 +3,59 @@ let
   user = "sam";
 in
 {
-  environment.systemPackages = [
-    pkgs.ast-grep
-    pkgs.bat
-    # pkgs.brave
-    pkgs.btop
-    pkgs.cmake
-    pkgs.clang
-    pkgs.defaultbrowser
-    pkgs.eza
-    pkgs.delta
-    pkgs.fd
-    pkgs.fzf
-    pkgs.gh
-    pkgs.git
-    pkgs.gnumake
-    pkgs.gnupg
-    pkgs.jless
-    pkgs.jq
-    pkgs.lazygit
-    pkgs.less
-    pkgs.neofetch
-    pkgs.neovim
-    pkgs.nodejs
-    # pkgs.orcaslicer # not available at all (bambu-studio is but only for linux)
-    pkgs.ripgrep
-    pkgs.sqlite
-    pkgs.stow
-    # pkgs.wezterm # undercurl doesn't work. use casks instead
-    pkgs.yazi
-    pkgs.zoxide
+  environment = {
+    systemPackages = with pkgs; [
+      ast-grep
+      bat
+      # brave
+      btop
+      cmake
+      clang
+      defaultbrowser
+      eza
+      delta
+      fd
+      fzf
+      gh
+      git
+      gnumake
+      gnupg
+      jless
+      jq
+      lazygit
+      less
+      neofetch
+      neovim
+      nodejs
+      # orcaslicer # not available at all (bambu-studio is but only for linux)
+      ripgrep
+      sqlite
+      stow
+      # wezterm # undercurl doesn't work. use casks instead
+      yazi
+      zoxide
 
-    # TODO Use nix-env for most of these? At least the ones that you don't use all the time
-    # language servers
-    pkgs.bash-language-server
-    pkgs.clang-tools
-    pkgs.vscode-langservers-extracted # css, eslint, html, json
-    pkgs.efm-langserver
-    pkgs.harper
-    pkgs.lua-language-server
-    pkgs.marksman
-    pkgs.nixd
-    pkgs.rust-analyzer
-    pkgs.terraform-ls
-    pkgs.typescript-language-server
-    pkgs.vtsls
+      # TODO Use nix-env for most of these? At least the ones that you don't use all the time
+      # language servers
+      bash-language-server
+      clang-tools
+      vscode-langservers-extracted # css, eslint, html, json
+      efm-langserver
+      harper
+      lua-language-server
+      marksman
+      nixd
+      rust-analyzer
+      terraform-ls
+      typescript-language-server
+      vtsls
 
-    # formatters
-    pkgs.stylua
-    pkgs.prettierd
-    pkgs.nixfmt-rfc-style
-  ];
+      # formatters
+      stylua
+      prettierd
+      nixfmt-rfc-style
+    ];
+  };
 
   homebrew = {
     enable = true;
