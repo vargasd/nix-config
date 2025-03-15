@@ -55,6 +55,12 @@ in
       prettierd
       nixfmt-rfc-style
     ];
+
+    variables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
+    };
   };
 
   homebrew = {
