@@ -34,6 +34,7 @@
         file = "enhansi.tmTheme";
       };
     };
+    extraPackages = [ pkgs.bat-extras.batman ];
   };
 
   programs.btop = {
@@ -78,11 +79,10 @@
           --print-query \
           --preview "cat $1 | jq ''\${@:2} {q} | bat --color=always --plain -l json" \
         }; f'';
+      man = "batman";
     };
 
     sessionVariables = {
-      # TODO use batman?
-      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
       LESS = "-i -R --no-init --tabs 2";
       LESSHISTFILE = "-";
     };
