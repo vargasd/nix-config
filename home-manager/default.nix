@@ -213,6 +213,12 @@
     };
   };
 
+  programs.wezterm = {
+    enable = true;
+    enableZshIntegration = true;
+    extraConfig = builtins.readFile ./wezterm.lua;
+  };
+
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
