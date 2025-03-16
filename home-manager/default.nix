@@ -6,6 +6,22 @@
 
   programs.home-manager.enable = true;
 
+  programs.btop = {
+    enable = true;
+    settings = {
+      color_theme = "TTY";
+      theme_background = false;
+      truecolor = false;
+      rounded_corners = false;
+      shown_boxes = "proc cpu mem";
+      show_disks = false;
+      update_ms = 5000;
+      proc_tree = true;
+      proc_per_core = false;
+      log_level = "ERROR";
+    };
+  };
+
   programs.zsh = {
     enable = true;
     enableVteIntegration = true;
