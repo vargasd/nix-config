@@ -213,6 +213,88 @@
     };
   };
 
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+    initLua = ''
+      th.git = th.git or {}
+      th.git.modified = ui.Style():fg("blue")
+      th.git.deleted = ui.Style():fg("red")
+      th.git.added = ui.Style():fg("green")
+      th.git.ignored = ui.Style():fg("darkgray")
+
+      th.git.modified_sign = "M"
+      th.git.added_sign = "A"
+      th.git.untracked_sign = "U"
+      th.git.ignored_sign = "I"
+      th.git.deleted_sign = "D"
+
+      require("git"):setup()
+    '';
+
+    keymap = {
+      manager.prepend_keymap = [
+        {
+          on = [
+            "c"
+            "m"
+          ];
+          run = "plugin chmod";
+          desc = "Chmod on selected files";
+        }
+      ];
+    };
+
+    plugins =
+      let
+        plugins = pkgs.fetchFromGitHub {
+          owner = "yazi-rs";
+          repo = "plugins";
+          rev = "cb6165b25515b653a70f72a67889579d190facfe";
+          hash = "sha256-XDz67eHmVM5NrnQ/uPXN/jRgmrShs80anWnHpVmbPO8=";
+        };
+      in
+      {
+        git = plugins + "/git.yazi";
+        chmod = plugins + "/chmod.yazi";
+        bat = pkgs.fetchFromGitHub {
+          owner = "vargasd";
+          repo = "bat.yazi";
+          rev = "e5f28d52e51450fe0d66e0d4661e6ba7b6d5edd6";
+          hash = "sha256-tCOWMQC0Sea3DI0jEu28Qzzyt1l3bSuOlPWIRiHAQ50=";
+        };
+      };
+
+    settings = {
+      manager = {
+        show_hidden = true;
+        sort_by = "natural";
+        sort_reverse = false;
+        sort_dir_first = true;
+      };
+
+      plugin.prepend_previewers = [
+        {
+          name = "*.tsp";
+          run = "bat";
+        }
+      ];
+
+      plugin.prepend_fetchers = [
+        {
+          id = "git";
+          name = "*";
+          run = "git";
+        }
+        {
+          id = "git";
+          name = "*/";
+          run = "git";
+        }
+      ];
+    };
+  };
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
