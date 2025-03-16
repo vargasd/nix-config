@@ -53,6 +53,8 @@
     sessionVariables = {
       # TODO use batman?
       MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+      LESS = "-i -R --no-init --tabs 2";
+      LESSHISTFILE = "-";
     };
   };
 
