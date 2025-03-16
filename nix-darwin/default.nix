@@ -16,6 +16,7 @@ in
       delta
       fd
       fzf
+      fzf-git-sh
       gh
       git
       gnumake

@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   home.stateVersion = "25.05";
   home.username = "sam";
@@ -20,6 +20,8 @@
     };
 
     initContent = builtins.readFile ./init.zsh;
+
+    initExtra = "source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
 
     shellAliases = {
       jqi = ''
