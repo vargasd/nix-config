@@ -32,6 +32,7 @@ in
       ripgrep
       sqlite
       stow
+      tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
       # wezterm # undercurl doesn't work. use casks instead
       yazi
       zoxide
