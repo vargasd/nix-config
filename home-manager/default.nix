@@ -99,6 +99,13 @@
     defaultOptions = [ "--color=16" ];
   };
 
+  programs.gh = {
+    enable = true;
+    settings = {
+      git_protocol = "ssh";
+    };
+  };
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
