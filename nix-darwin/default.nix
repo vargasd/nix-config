@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   user = "sam";
 in
@@ -31,7 +31,6 @@ in
       # orcaslicer # not available at all (bambu-studio is but only for linux)
       ripgrep
       sqlite
-      stow
       tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
       # wezterm # undercurl doesn't work. use casks instead
       yazi
@@ -151,7 +150,7 @@ in
 
       screencapture = {
         location = "/Users/${user}/Desktop";
-        show-thumbnail = false;
+        show-thumbnail = true;
         type = "png";
       };
 
@@ -194,6 +193,78 @@ in
               };
             };
           };
+
+        # See https://apple.stackexchange.com/a/474905
+        "com.apple.symbolichotkeys".AppleSymbolicHotKeys =
+          let
+            #https://gist.github.com/stephancasas/74c4621e2492fb875f0f42778d432973
+            command = 1048576;
+            hyper = 1966080;
+            meh = 917504;
+            option = 524288;
+          in
+          {
+            # meh - z to screenshot
+            "28" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  122
+                  6
+                  meh
+                ];
+                type = "standard";
+              };
+            };
+            # meh - x to screenshot region
+            "30" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  120
+                  7
+                  meh
+                ];
+                type = "standard";
+              };
+            };
+            # hyper - x to show screenshot options
+            "184" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  120
+                  7
+                  hyper
+                ];
+                type = "standard";
+              };
+            };
+            # option-tab to switch app window
+            "27" = {
+              enabled = true;
+              value = {
+                parameters = [
+                  9
+                  48
+                  option
+                ];
+                type = "standard";
+              };
+            };
+            # disable ctrl-up/down
+            "32" = {
+              enabled = false;
+            };
+            "33" = {
+              enabled = false;
+            };
+          };
+
+        # meh-f15 to minimize (really just disabling cmd-m minimize)
+        NSGlobalDomain.NSUserKeyEquivalents = {
+          Minimize = "~^$\\Uf712";
+        };
       };
     };
 
