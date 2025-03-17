@@ -75,6 +75,11 @@ in
       "spotify"
       "wezterm"
     ];
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "zap";
+    };
   };
 
   fonts.packages = [ pkgs.jetbrains-mono ];
