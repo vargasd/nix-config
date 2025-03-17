@@ -231,7 +231,15 @@ in
         meh - b        : open -a "Brave Browser" --args --disable-smooth-scrolling
         hyper - b      : open -a safari
 
-        meh - escape   : osascript ${builtins.toString ./clear-notifications.scpt}
+        meh - escape   : osascript "${
+          pkgs.fetchFromGitHub {
+            owner = "Ptujec";
+            repo = "LaunchBar";
+            rev = "37360ee44155ae429bdb7f492ae66691816d3bb9";
+            hash = "sha256-osOWmpqSfgs96dkr3jy+0X+hMUmwFkIIDpDvbkC7EEI=";
+          }
+          + "/Notifications/macOS 15.1/Dismiss all notifications.lbaction/Contents/Scripts/default.applescript"
+        }"
 
         meh - delete   : open -a ScreenSaverEngine
 
