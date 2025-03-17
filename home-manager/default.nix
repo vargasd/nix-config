@@ -317,4 +317,8 @@
       "^u" = "deleteToBeginningOfLine:";
     };
   };
+
+  xdg = {
+    enable = true;
+  };
 }
