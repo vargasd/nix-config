@@ -1,0 +1,4 @@
+; inherits: sql
+
+; postgres
+

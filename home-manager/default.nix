@@ -320,5 +320,9 @@
 
   xdg = {
     enable = true;
+    configFile.nvim = {
+      enable = true;
+      source = ./nvim;
+    };
   };
 }
