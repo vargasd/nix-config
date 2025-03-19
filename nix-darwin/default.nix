@@ -64,8 +64,8 @@
   homebrew = {
     enable = true;
     casks = [
-      "orcaslicer"
       "brave-browser"
+      "firefox"
       "homerow"
       "orcaslicer"
       "rectangle"
@@ -277,7 +277,7 @@
 
     activationScripts = {
       # Inspired by https://tommorris.org/posts/2024/til-setting-default-browser-on-macos-using-nix/
-      postUserActivation.text = "defaultbrowser browser"; # this is brave I guess 🤷
+      postUserActivation.text = "defaultbrowser firefox";
     };
   };
 
@@ -301,7 +301,7 @@
         meh - t        : open -a wezterm
         hyper - t      : open -a ghostty
 
-        meh - b        : open -a "Brave Browser" --args --disable-smooth-scrolling
+        meh - b        : open -a firefox
         hyper - b      : open -a safari
 
         meh - escape   : osascript "${

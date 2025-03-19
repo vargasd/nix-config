@@ -1,5 +1,5 @@
 user:
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.stateVersion = "25.05";
 
@@ -58,6 +58,133 @@ user:
   programs.eza = {
     enable = true;
     enableZshIntegration = true;
+  };
+
+  programs.firefox = {
+    enable = true;
+    profiles.default =
+      let
+        ext = inputs.firefox-addons.packages.${pkgs.system};
+      in
+      {
+        bookmarks = [ ];
+        isDefault = true;
+        settings = {
+          "browser.startup.homepage" = "about:blank";
+          "browser.search.isUS" = true;
+          "browser.toolbarbuttons.introduced.sidebar-button" = true;
+          "browser.aboutConfig.showWarning" = false;
+          "browser.urlbar.suggest.searches" = false;
+
+          # UI stuff; not sure how much is actually needed
+          "sidebar.revamp" = true;
+          "sidebar.verticalTabs" = true;
+          "browser.uiCustomization.horizontalTabstrip" = [
+            "tabbrowser-tabs"
+            "new-tab-button"
+          ];
+          "browser.uiCustomization.navBarWhenVerticalTabs" = [
+            "sidebar-button"
+            "back-button"
+            "forward-button"
+            "urlbar-container"
+            "unified-extensions-button"
+          ];
+          "browser.uiCustomization.state" = {
+            "placements" = {
+              "widget-overflow-fixed-list" = [ ];
+              "unified-extensions-area" = [
+                "vimium-c_gdh1995_cn-browser-action"
+                "ublock0_raymondhill_net-browser-action"
+              ];
+              "nav-bar" = [
+                "sidebar-button"
+                "back-button"
+                "forward-button"
+                "urlbar-container"
+                "unified-extensions-button"
+              ];
+              "TabsToolbar" = [ ];
+              "vertical-tabs" = [ "tabbrowser-tabs" ];
+              "PersonalToolbar" = [ "personal-bookmarks" ];
+            };
+            "currentVersion" = 21;
+            "newElementCount" = 2;
+          };
+        };
+        extensions = with ext; {
+          force = true;
+          packages = [
+            vimium-c
+            ublock-origin
+          ];
+          settings.${ext.vimium-c.addonId} = {
+            force = true;
+            settings = {
+              newTabUrl_f = "about:newtab";
+              vimSync = true;
+              keyLayout = 2;
+              exclusionRules = [ ];
+              linkHintCharacters = "trasneiogm";
+              searchEngines = ''
+                g: https://www.google.com/search?q=%s
+                www.google.com re=/^(?:\.[a-z]{2,4})?\\/search\\b.*?[#&?]q=([^#&]*)/i
+                blank=https://www.google.com/ Google'';
+              regexFindMode = true;
+              # innerCSS = "1.99.997,136a;:host{display:contents!important}:host:before,:host:after{display:none!important}.R{all:initial;color:#000;contain:layout style;direction:ltr;font:12px/1 \"Helvetica Neue\",Arial,sans-serif;pointer-events:none;position:fixed;user-select:none;z-index:2147483647}.HM{font-weight:bold;position:absolute;white-space:nowrap}.DLG::backdrop{background:#0000}.LH{box-sizing:border-box;background:linear-gradient(#fff785,#ffc542);border:0.01px solid #e3be23;border-radius:3px;box-shadow:0 3px 5px #0000004d;box-sizing:border-box;contain:layout style;overflow:hidden;padding:2.5px 3px 2px;position:absolute}.IH{background:#fff7854d;border:0.01px solid #c38a22;position:absolute}.IHS{background:#f664;border-color:#933}.HUD,.TEE{bottom:-1px;font-size:14px;height:20px;line-height:16px;max-width:336px;min-width:152px;overflow:hidden;padding:4px 4px 1px;right:152px;text-overflow:ellipsis;white-space:nowrap}.HUD:after{background:#eee;border-radius:4px 4px 0 0;border:0.01px solid #bbb;content:\"\";position:absolute;z-index:-1}.HL{max-width:60vw;right:-4px;padding-right:8px}.HUD.UI{cursor:text;height:24px}.Find{cursor:text;position:static;width:100%}.Flash{box-shadow:0 0 4px 2px #4183c4;padding:1px}.AbsF{padding:0;position:absolute}.Sel{box-shadow:0 0 4px 2px #fa0}.Frame{border:5px solid #ff0}.Frame,.DLG,.HUD:after{box-sizing:border-box;height:100%;left:0;top:0;width:100%}.Omnibar{left:calc(10vw - 12px);height:520px;top:64px;width:calc(80vw + 24px)}.O2{left:calc(10% - 12px);width:calc(80% + 24px)}.BH{color:#902809}.MC,.MH{color:#d4ac3a}.One{border-color:#fa7}.UI,.DLG{color-scheme:light;pointer-events:all}.PO{all:initial;left:0;position:absolute;top:0}.D>.LH{background:linear-gradient(#cb0,#c80)}.HUD.D{color:#ccc}.HUD.D:after{background:#222}@media(forced-colors:active){.R{border-radius:0}.HM>.LH,.HUD:after{background:#000;border-radius:0}.Flash{outline:4px solid #fff}}.DLG>.Omnibar{position:absolute}\n.LH {\n  font-size: 15px;\n  opacity: 0.7;\n}\n\n.HUD {\n  top: -1px;\n  bottom: auto;\n  left: 50%;\n  right: auto;\n  padding: 0 4px 5px 4px;\n  border-radius: 0 0 4px 4px;\n  transform: translateX(-50%);\n}";
+              # findCSS = "737\n::selection { background: #ff9632 !important; }\nhtml, body, * { user-select: auto; }\n*{cursor:text;font:14px/16px \"Helvetica Neue\",Arial,sans-serif;margin:0;outline:none;white-space:pre}\n.r{all:initial;background:#fff;border-radius:3px 3px 0 0;box-shadow:inset 0 0 1.5px 1px #aaa;color:#000;\ncursor:text;display:flex;height:21px;padding:4px 4px 0}.r.D{background:#222;color:#d4d4d4}\n#s{flex:0 0 4px}#i{flex:0 1 auto;height:16px;min-width:9px;margin-left:2px;overflow:hidden;padding:0 2px 0 0}\n#h{flex:1 0 auto}br{all:inherit!important;display:inline!important}#c{flex:0 0 auto;margin-left:2px}\n#s::after{content:\"/\"}#c::after{content:attr(data-vimium);display:inline}\n:host,body{background:#0000!important;margin:0!important;height:24px}";
+              userDefinedCss = ''
+                 /* #ui */
+                .LH {
+                   font-size: 15px;
+                   opacity: 0.7;
+                 }
+
+                 .HUD {
+                   top: -1px;
+                   bottom: auto;
+                   left: 50%;
+                   right: auto;
+                   padding: 0 4px 5px 4px;
+                   border-radius: 0 0 4px 4px;
+                   transform: translateX(-50%);
+                 }
+              '';
+              keyMappings = ''
+                #!no-check
+                mapKey U X
+                mapKey t T
+                mapKey J K
+                mapKey K J
+                unmap p
+                unmap m
+                unmap /
+              '';
+              searchUrl = "https://www.google.com/search?q=$s Google";
+              showAdvancedCommands = false;
+            };
+          };
+        };
+        search = {
+          force = true;
+          default = "Kagi";
+          engines = {
+            "Kagi" = {
+              urls = [
+                {
+                  template = "https://kagi.com/search?";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+            };
+          };
+        };
+      };
   };
 
   programs.fzf = {
