@@ -16,6 +16,9 @@
       nixpkgs,
       nix-darwin,
     }:
+    let
+      user = "sam";
+    in
     {
       darwinConfigurations."sams-Mac-mini" = nix-darwin.lib.darwinSystem {
         modules = [
@@ -24,10 +27,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.sam = import ./home-manager/default.nix;
+            home-manager.users.${user} = import ./home-manager/default.nix user;
 
-            # Why did I need this?
-            users.users.sam.home = "/Users/sam";
+            users.users.${user}.home = "/Users/${user}";
           }
         ];
       };
