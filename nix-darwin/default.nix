@@ -1,7 +1,4 @@
-{ pkgs, lib, ... }:
-let
-  user = "sam";
-in
+{ pkgs, user, ... }:
 {
   environment = {
     systemPackages = with pkgs; [

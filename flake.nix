@@ -11,16 +11,18 @@
 
   outputs =
     {
-      self,
       home-manager,
-      nixpkgs,
       nix-darwin,
-    }:
+      ...
+    }@inputs:
     let
       user = "sam";
     in
     {
       darwinConfigurations."sams-Mac-mini" = nix-darwin.lib.darwinSystem {
+        specialArgs = inputs // {
+          inherit user;
+        };
         modules = [
           ./nix-darwin
           home-manager.darwinModules.home-manager
