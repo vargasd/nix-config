@@ -55,41 +55,6 @@ user:
     };
   };
 
-  programs.zsh = {
-    enable = true;
-    enableVteIntegration = true;
-
-    history = {
-      append = true;
-      ignoreAllDups = true;
-      ignoreSpace = true;
-      save = 50000;
-      size = 50000;
-      share = true;
-    };
-
-    initContent = builtins.readFile ./init.zsh;
-
-    initExtra = "source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
-
-    shellAliases = {
-      jqi = ''
-        f() { 
-          echo "" | fzf -q "." \
-          --bind "shift-up:preview-half-page-up,shift-down:preview-half-page-down,load:unbind(enter)" \
-          --preview-window "bottom:99%" \
-          --print-query \
-          --preview "cat $1 | jq ''\${@:2} {q} | bat --color=always --plain -l json" \
-        }; f'';
-      man = "batman";
-    };
-
-    sessionVariables = {
-      LESS = "-i -R --no-init --tabs 2";
-      LESSHISTFILE = "-";
-    };
-  };
-
   programs.eza = {
     enable = true;
     enableZshIntegration = true;
@@ -211,6 +176,41 @@ user:
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableVteIntegration = true;
+
+    history = {
+      append = true;
+      ignoreAllDups = true;
+      ignoreSpace = true;
+      save = 50000;
+      size = 50000;
+      share = true;
+    };
+
+    initContent = builtins.readFile ./init.zsh;
+
+    initExtra = "source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
+
+    shellAliases = {
+      jqi = ''
+        f() { 
+          echo "" | fzf -q "." \
+          --bind "shift-up:preview-half-page-up,shift-down:preview-half-page-down,load:unbind(enter)" \
+          --preview-window "bottom:99%" \
+          --print-query \
+          --preview "cat $1 | jq ''\${@:2} {q} | bat --color=always --plain -l json" \
+        }; f'';
+      man = "batman";
+    };
+
+    sessionVariables = {
+      LESS = "-i -R --no-init --tabs 2";
+      LESSHISTFILE = "-";
+    };
   };
 
   targets.darwin = {
