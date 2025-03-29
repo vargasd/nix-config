@@ -6,30 +6,31 @@
       bat
       # brave
       btop
-      cmake
       clang
       defaultbrowser
-      eza
       delta
+      docker
+      eza
       fd
       fzf
       fzf-git-sh
+      google-cloud-sdk
       gh
       git
-      gnumake
       gnupg
       jless
       jq
       lazygit
+      lazydocker
       less
       neofetch
       neovim
       nodejs
-      # orcaslicer # not available at all (bambu-studio is but only for linux)
+      openapi-tui
+      postgresql
       ripgrep
       sqlite
       tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
-      # wezterm # undercurl doesn't work. use casks instead
       yazi
       zoxide
 
@@ -44,6 +45,7 @@
       marksman
       nixd
       phpactor
+      postgres-lsp
       rust-analyzer
       terraform-ls
       typescript-language-server
@@ -68,6 +70,7 @@
     enable = true;
     casks = [
       "brave-browser"
+      "docker"
       "homerow"
       "orcaslicer"
       "notunes"
