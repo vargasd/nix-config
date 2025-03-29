@@ -3,7 +3,7 @@
 
   aliases = {
     co = "checkout";
-    bco = "!f() { git checkout -b \"$(whoami)/$1\"; }; f";
+    bco = ''!f() { git checkout -b "sam/$1"; }; f'';
     bclean = "!f() { git branch --merged origin/main | xargs git branch -D; }; f";
     fu = "commit --fixup";
     fua = "commit -a --fixup";
@@ -12,7 +12,7 @@
     ga = "log --graph --all --pretty=mine";
     mt = "mergetool";
     pf = "push --force";
-    ri = "!f() { git rebase -i ${"1:-origin/main"}; }; f";
+    ri = ''!f() { git rebase -i "''\${1:-origin/main}"; }; f;'';
     ra = "rebase --abort";
     rc = "rebase --continue";
     reste = "reset";
