@@ -284,52 +284,13 @@
   services = {
     skhd = {
       enable = true;
-      skhdConfig = ''
-        #meh - q        : open -a qutebrowser
-        meh - e        : open -a finder
-        meh - v        : open -a 'Google Meet'
-        meh - c        : open -a 'Google Calendar'
-        meh - s        : open -a slack
-        hyper - d      : open -a 'Visual Studio Code'
-        meh - m        : open -a spotify
-        hyper - m      : open -a messages
-        meh - p        : open -a 1password
-        hyper - p      : open -a passwords
-        meh - i        : open -a linear # https://linear.app
-        hyper - i      : open -a "iPhone Mirroring"
+      skhdConfig =
+        builtins.readFile ./skhdrc
+        + ''
+          meh - escape   : osascript "${./clear-notifications.scpt}"
+        ''
 
-        meh - t        : open -a wezterm
-        hyper - t      : open -a ghostty
-
-        meh - b        : open -a firefox
-        hyper - b      : open -a safari
-
-        meh - escape   : osascript "${
-          pkgs.fetchFromGitHub {
-            owner = "Ptujec";
-            repo = "LaunchBar";
-            rev = "37360ee44155ae429bdb7f492ae66691816d3bb9";
-            hash = "sha256-osOWmpqSfgs96dkr3jy+0X+hMUmwFkIIDpDvbkC7EEI=";
-          }
-          + "/Notifications/macOS 15.1/Dismiss all notifications.lbaction/Contents/Scripts/default.applescript"
-        }"
-
-        meh - delete   : open -a ScreenSaverEngine
-
-        hyper - left   : open -g "rectangle://execute-action?name=previous-display"
-        hyper - up     : open -g "rectangle://execute-action?name=larger"
-        hyper - down   : open -g "rectangle://execute-action?name=smaller"
-        hyper - right  : open -g "rectangle://execute-action?name=next-display"
-        meh - left     : open -g "rectangle://execute-action?name=left-half"
-        meh - up       : open -g "rectangle://execute-action?name=maximize"
-        meh - right    : open -g "rectangle://execute-action?name=right-half"
-        meh - down     : open -g "rectangle://execute-action?name=almost-maximize"
-
-        fn - h         : skhd -k left
-        fn - j         : skhd -k down
-        fn - k         : skhd -k up
-        fn - l         : skhd -k right
-      '';
+      ;
     };
   };
 
