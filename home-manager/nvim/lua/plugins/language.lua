@@ -58,7 +58,15 @@ return {
 				cssls = {},
 				html = {},
 				marksman = {},
-				harper_ls = {},
+				harper_ls = {
+					settings = {
+						["harper-ls"] = {
+							linters = {
+								SentenceCapitalization = false,
+							},
+						},
+					},
+				},
 				nixd = {},
 				prismals = {},
 				rust_analyzer = {},
