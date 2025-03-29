@@ -22,8 +22,27 @@
       ...
     }@inputs:
     {
-      darwinConfigurations."sams-Mac-mini" = nix-darwin.lib.darwinSystem (
-
+      darwinConfigurations.work = nix-darwin.lib.darwinSystem (
+        let
+          user = "I763291";
+        in
+        {
+          specialArgs = inputs // {
+            inherit user;
+          };
+          modules = [
+            ./nix-darwin
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${user} = import ./home-manager/default.nix user;
+              users.users.${user}.home = "/Users/${user}";
+            }
+          ];
+        }
+      );
+      darwinConfigurations.home = nix-darwin.lib.darwinSystem (
         let
           user = "sam";
         in
@@ -35,11 +54,9 @@
             ./nix-darwin
             home-manager.darwinModules.home-manager
             {
-              home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${user} = import ./home-manager/default.nix user;
-
               users.users.${user}.home = "/Users/${user}";
             }
           ];
