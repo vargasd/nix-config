@@ -49,6 +49,7 @@
       typescript-language-server
       vtsls
       vue-language-server
+      yaml-language-server
 
       # formatters
       stylua

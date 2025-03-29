@@ -85,6 +85,7 @@ return {
 					},
 				},
 				phpactor = {},
+				yamlls = {},
 				jsonls = {
 					settings = {
 						json = {
