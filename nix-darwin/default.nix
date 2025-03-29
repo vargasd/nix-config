@@ -72,6 +72,7 @@
       "firefox"
       "homerow"
       "orcaslicer"
+      "notunes"
       "rectangle"
       "spotify"
       "ueli"
@@ -278,6 +279,9 @@
         # meh-f15 to minimize (really just disabling cmd-m minimize)
         NSGlobalDomain.NSUserKeyEquivalents = {
           Minimize = "~^$\\Uf712";
+        "digital.twisted.noTunes" = {
+          hideIcon = true;
+          replacement = "/Applications/Spotify.app";
         };
       };
     };
