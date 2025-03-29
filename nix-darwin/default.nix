@@ -81,6 +81,9 @@
       upgrade = true;
       cleanup = "zap";
     };
+    caskArgs = {
+      no_quarantine = true;
+    };
   };
 
   fonts.packages = [ pkgs.jetbrains-mono ];
