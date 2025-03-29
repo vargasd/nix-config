@@ -104,5 +104,4 @@ for i = 0, 25 do
 	vim.keymap.set("n", "m" .. lower(i), "m" .. upper(i))
 	vim.keymap.set("n", "'" .. lower(i), "'" .. upper(i))
 	vim.keymap.set("n", "`" .. lower(i), "`" .. upper(i))
-	vim.keymap.set("n", "<Tab>" .. lower(i), "`" .. upper(i))
 end
