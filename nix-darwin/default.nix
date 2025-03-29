@@ -105,6 +105,7 @@
     };
   };
 
+  time.timeZone = "America/Indiana/Indianapolis";
 
   system = {
     # Set Git commit hash for darwin-version.
@@ -141,12 +142,15 @@
       };
 
       menuExtraClock.Show24Hour = true;
+      loginwindow.autoLoginUser = user;
 
       NSGlobalDomain = {
         InitialKeyRepeat = 15;
+        AppleICUForce24HourTime = true;
         KeyRepeat = 2;
         "com.apple.swipescrolldirection" = false;
         "com.apple.sound.beep.volume" = 0.0;
+        NSScrollAnimationEnabled = false;
         ApplePressAndHoldEnabled = false;
         NSDocumentSaveNewDocumentsToCloud = false;
         NSAutomaticCapitalizationEnabled = false;
@@ -172,6 +176,18 @@
           hideMenuBarIcon = true;
           cycleSizesIsChanged = true;
           selectedCycleSizes = 18; # 2^1 + 2^4 -> https://github.com/rxhanson/Rectangle/blob/main/Rectangle/CycleSize.swift
+          subsequentExecutionMode = 0; # resize on repeat
+        };
+
+        "com.superultra.Homerow" = {
+          "label-characters" = "sarteionmgdczvuyhkjlfwqb";
+          "label-font-size" = 16;
+          "launch-at-login" = true;
+          "show-menubar-icon" = false;
+          # not working -- this is the value set from the app, but it gets converted to the second line
+          # "non-search-shortcut" = builtins.fromJSON ''"\\U2303\\U2325\\U21e7F"''; # meh-f
+          # "\\U2303\\U2325\\Ud847\\Ude7f"
+
         };
 
         # night shift https://github.com/LnL7/nix-darwin/issues/1046
@@ -274,9 +290,14 @@
             };
           };
 
-        # meh-f15 to minimize (really just disabling cmd-m minimize)
-        NSGlobalDomain.NSUserKeyEquivalents = {
-          Minimize = "~^$\\Uf712";
+        NSGlobalDomain = {
+          NSUserKeyEquivalents = {
+            # meh-f16 to minimize (really just disabling cmd-m minimize)
+            Minimize = "~^$\\Uf713";
+          };
+          CGDisableCursorLocationMagnification = true;
+        };
+
         "digital.twisted.noTunes" = {
           hideIcon = true;
           replacement = "/Applications/Spotify.app";
