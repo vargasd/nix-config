@@ -43,10 +43,12 @@
       lua-language-server
       marksman
       nixd
+      phpactor
       rust-analyzer
       terraform-ls
       typescript-language-server
       vtsls
+      vue-language-server
 
       # formatters
       stylua

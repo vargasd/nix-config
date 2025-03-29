@@ -76,6 +76,15 @@ return {
 				tailwindcss = {
 					filetypes = { "svelte" },
 				},
+				volar = {
+					filetypes = { "typescript", "vue" },
+					init_options = {
+						vue = {
+							hybridMode = false,
+						},
+					},
+				},
+				phpactor = {},
 				jsonls = {
 					settings = {
 						json = {
@@ -101,6 +110,9 @@ return {
 					},
 				},
 				ts_ls = {
+					-- undo when we figure out volar per project (nvf/direnv?)
+					-- filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+					filetypes = { "javascript", "javascriptreact" },
 					settings = {
 						completions = {
 							completeFunctionCalls = true,

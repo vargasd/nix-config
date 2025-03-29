@@ -486,6 +486,8 @@ return {
 					"tsx",
 					"typespec",
 					"typescript",
+					"vue",
+					"php",
 				},
 				auto_install = false,
 				highlight = {
