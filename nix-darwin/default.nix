@@ -303,11 +303,6 @@
     };
   };
 
-  programs.zsh = {
-    enable = true;
-    enableFastSyntaxHighlighting = true;
-  };
-
   security.pam.services.sudo_local = {
     touchIdAuth = true;
     watchIdAuth = true;
