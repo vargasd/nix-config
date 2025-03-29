@@ -58,7 +58,6 @@
     ];
 
     variables = {
-      MOZ_DISABLE_SAFE_MODE_KEY = "1";
       EDITOR = "nvim";
       VISUAL = "nvim";
       LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
@@ -69,7 +68,6 @@
     enable = true;
     casks = [
       "brave-browser"
-      "firefox"
       "homerow"
       "orcaslicer"
       "notunes"
@@ -293,7 +291,7 @@
 
     activationScripts = {
       # Inspired by https://tommorris.org/posts/2024/til-setting-default-browser-on-macos-using-nix/
-      postUserActivation.text = "defaultbrowser firefox";
+      postUserActivation.text = "defaultbrowser browser";
     };
   };
 

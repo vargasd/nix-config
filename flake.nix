@@ -13,11 +13,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions/7772d48f5a728af51cd8ac85be5b124e2da0feac?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
