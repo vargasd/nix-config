@@ -14,17 +14,6 @@ return {
 	},
 
 	{
-		"numToStr/Comment.nvim",
-		event = "VeryLazy",
-		config = function()
-			local ft = require("Comment.ft")
-			ft.typespec = { "//%s", "/* %s */" }
-
-			require("Comment").setup()
-		end,
-	},
-
-	{
 		"folke/flash.nvim",
 		keys = {
 			{
