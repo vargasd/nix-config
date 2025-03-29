@@ -74,7 +74,8 @@
       "orcaslicer"
       "rectangle"
       "spotify"
-      "wezterm"
+      "ueli"
+      "wezterm" # needed because emoji finder crashes and for terminfo
     ];
     onActivation = {
       autoUpdate = true;
@@ -263,6 +264,10 @@
               enabled = false;
             };
             "33" = {
+              enabled = false;
+            };
+            # disable spotlight
+            "64" = {
               enabled = false;
             };
           };
