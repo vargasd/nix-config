@@ -363,4 +363,15 @@ user:
       source = ./nvim;
     };
   };
+
+  home.file = {
+    "Library/Application Support/ueli/ueli9.settings.json".text = builtins.toJSON {
+      "extensions.enabledExtensionIds" = [
+        "SystemSettings"
+        "ApplicationSearch"
+        "UeliCommand"
+      ];
+      "general.hotkey" = "Cmd+Space";
+    };
+  };
 }
