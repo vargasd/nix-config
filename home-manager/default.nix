@@ -221,21 +221,22 @@ user:
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
-    initLua = ''
-      th.git = th.git or {}
-      th.git.modified = ui.Style():fg("blue")
-      th.git.deleted = ui.Style():fg("red")
-      th.git.added = ui.Style():fg("green")
-      th.git.ignored = ui.Style():fg("darkgray")
+    initLua = # lua
+      ''
+        th.git = th.git or {}
+        th.git.modified = ui.Style():fg("blue")
+        th.git.deleted = ui.Style():fg("red")
+        th.git.added = ui.Style():fg("green")
+        th.git.ignored = ui.Style():fg("darkgray")
 
-      th.git.modified_sign = "M"
-      th.git.added_sign = "A"
-      th.git.untracked_sign = "U"
-      th.git.ignored_sign = "I"
-      th.git.deleted_sign = "D"
+        th.git.modified_sign = "M"
+        th.git.added_sign = "A"
+        th.git.untracked_sign = "U"
+        th.git.ignored_sign = "I"
+        th.git.deleted_sign = "D"
 
-      require("git"):setup()
-    '';
+        require("git"):setup()
+      '';
 
     keymap = {
       manager.prepend_keymap = [
@@ -323,15 +324,18 @@ user:
     initExtra = "source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
 
     shellAliases = {
-      jqi = ''
-        f() { 
-          echo "" | fzf -q "." \
-          --bind "shift-up:preview-half-page-up,shift-down:preview-half-page-down,load:unbind(enter)" \
-          --preview-window "bottom:99%" \
-          --print-query \
-          --preview "cat $1 | jq ''\${@:2} {q} | bat --color=always --plain -l json" \
-        }; f'';
+      jqi = # sh
+        ''
+          f() { 
+            echo "" | fzf -q "." \
+            --bind "shift-up:preview-half-page-up,shift-down:preview-half-page-down,load:unbind(enter)" \
+            --preview-window "bottom:99%" \
+            --print-query \
+            --preview "cat $1 | jq ''\${@:2} {q} | bat --color=always --plain -l json" \
+          }; f'';
       man = "batman";
+      nvim = # sh
+        "env TERM=wezterm nvim";
     };
 
     sessionVariables = {

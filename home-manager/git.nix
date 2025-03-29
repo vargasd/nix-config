@@ -3,8 +3,10 @@
 
   aliases = {
     co = "checkout";
-    bco = ''!f() { git checkout -b "sam/$1"; }; f'';
-    bclean = "!f() { git branch --merged origin/main | xargs git branch -D; }; f";
+    bco = # sh
+      ''!f() { git checkout -b "sam/$1"; }; f'';
+    bclean = # sh
+      "!f() { git branch --merged origin/main | xargs git branch -D; }; f";
     fu = "commit --fixup";
     fua = "commit -a --fixup";
     graph = "log --graph --pretty=mine";
@@ -12,7 +14,8 @@
     ga = "log --graph --all --pretty=mine";
     mt = "mergetool";
     pf = "push --force";
-    ri = ''!f() { git rebase -i "''\${1:-origin/main}"; }; f;'';
+    ri = # sh
+      ''!f() { git rebase -i "''\${1:-origin/main}"; }; f;'';
     ra = "rebase --abort";
     rc = "rebase --continue";
     reste = "reset";
@@ -79,9 +82,9 @@
       sort = "version:refname";
     };
     user = {
-      email = "sam@vargasd.com";
+      email = "samuel.varga@sap.com";
       name = "Samuel Varga";
-      signingKey = "9360638973266EE4";
+      signingKey = "8D55ED9FBACF24B1";
     };
     merge = {
       tool = "nvimdiff";
