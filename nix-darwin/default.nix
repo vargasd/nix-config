@@ -55,6 +55,7 @@
     ];
 
     variables = {
+      MOZ_DISABLE_SAFE_MODE_KEY = "1";
       EDITOR = "nvim";
       VISUAL = "nvim";
       LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
