@@ -109,8 +109,13 @@ config.keys = {
 			end),
 		}),
 	},
+	{
+		key = "s",
+		mods = "CMD",
+		action = workspace_switcher.switch_workspace(),
+	},
 }
-
+config.term = "wezterm"
 config.window_padding = {
 	left = 0,
 	right = 0,
@@ -118,7 +123,7 @@ config.window_padding = {
 	bottom = 0,
 }
 
-function tab_title(tab_info)
+local function tab_title(tab_info)
 	local title = tab_info.tab_title
 	-- if the tab title is explicitly set, take that
 	if title and #title > 0 then
@@ -142,11 +147,12 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	}
 end)
 
+config.default_workspace = "~"
 -- loads the state whenever I create a new workspace
 wezterm.on("smart_workspace_switcher.workspace_switcher.created", function(window, path, label)
 	local workspace_state = resurrect.workspace_state
 
-	workspace_state.restore_workspace(resurrect.load_state(label, "workspace"), {
+	workspace_state.restore_workspace(resurrect.state_manager.load_state(label, "workspace"), {
 		window = window,
 		relative = true,
 		restore_text = true,
@@ -157,7 +163,7 @@ end)
 -- Saves the state whenever I select a workspace
 wezterm.on("smart_workspace_switcher.workspace_switcher.selected", function(window, path, label)
 	local workspace_state = resurrect.workspace_state
-	resurrect.save_state(workspace_state.get_workspace_state())
+	resurrect.state_manager.save_state(workspace_state.get_workspace_state())
 end)
 workspace_switcher.workspace_formatter = function(label)
 	return wezterm.format({
