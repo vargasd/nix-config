@@ -327,7 +327,9 @@ return {
 		keys = {
 			{
 				"<leader>t",
-				vim.cmd.FloatermToggle,
+				function()
+					vim.cmd.FloatermToggle("main")
+				end,
 				desc = "Terminal",
 			},
 			{
