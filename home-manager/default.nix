@@ -315,7 +315,7 @@ user:
       ignoreSpace = true;
       save = 50000;
       size = 50000;
-      share = true;
+      share = false;
     };
 
     initContent = builtins.readFile ./init.zsh;
