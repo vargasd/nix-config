@@ -105,9 +105,6 @@
     };
   };
 
-  power = {
-    restartAfterPowerFailure = true;
-  };
 
   system = {
     # Set Git commit hash for darwin-version.
