@@ -353,6 +353,15 @@ return {
 				callback = function(args)
 					vim.keymap.set({ "n", "t" }, "<C-q>", vim.cmd.FloatermToggle, { buffer = args.buf })
 					vim.keymap.set("t", "<C-z>", "<C-\\><C-n>", { buffer = args.buf })
+					vim.keymap.set("n", "s", function()
+						require("flash").jump({
+							search = {
+								mode = function(str)
+									return "\\<" .. str
+								end,
+							},
+						})
+					end, { buffer = args.buf })
 				end,
 			})
 		end,
