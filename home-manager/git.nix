@@ -82,9 +82,9 @@
       sort = "version:refname";
     };
     user = {
-      email = "samuel.varga@sap.com";
+      email = "sam@varga.sh";
       name = "Samuel Varga";
-      signingKey = "8D55ED9FBACF24B1";
+      signingKey = "9360638973266EE4";
     };
     merge = {
       tool = "nvimdiff";
