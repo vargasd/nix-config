@@ -29,6 +29,7 @@
       openapi-tui
       postgresql
       ripgrep
+      ruby
       sqlite
       tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
       yazi
