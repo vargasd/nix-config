@@ -69,6 +69,7 @@ return {
 				html = {},
 				marksman = {},
 				harper_ls = {
+					filetypes = { "markdown", "asciidoc", "tex", "text" },
 					settings = {
 						["harper-ls"] = {
 							linters = {
