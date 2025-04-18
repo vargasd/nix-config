@@ -212,6 +212,12 @@ user:
       man = "batman";
       nvim = # sh
         "env TERM=wezterm nvim";
+      jwtde = # sh
+        ''
+          f() {
+            echo "$1" | jq -R 'split(".") | .[1] | @base64d | fromjson' 
+          }
+        '';
     };
 
     sessionVariables = {
