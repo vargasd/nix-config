@@ -23,6 +23,8 @@
       lazygit
       lazydocker
       less
+      k9s
+      kubectl
       neofetch
       neovim
       nodejs
