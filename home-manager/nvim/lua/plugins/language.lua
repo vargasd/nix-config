@@ -53,7 +53,17 @@ return {
 			require("lsp-format").setup({})
 
 			local servers = {
-				bashls = {},
+				bashls = {
+					settings = {
+						bashIde = {
+							shellcheckArguments = {
+								-- disable unused variables warning
+								"-e",
+								"SC2034",
+							},
+						},
+					},
+				},
 				clangd = {},
 				cssls = {},
 				html = {},
