@@ -29,6 +29,7 @@
       neovim
       nodejs
       openapi-tui
+      (pkgs.pass.withExtensions (exts: [ exts.pass-otp ]))
       postgresql
       ripgrep
       ruby
