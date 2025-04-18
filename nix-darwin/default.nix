@@ -1,67 +1,77 @@
 { pkgs, user, ... }:
 {
   environment = {
-    systemPackages = with pkgs; [
-      ast-grep
-      bat
-      # brave
-      btop
-      clang
-      defaultbrowser
-      delta
-      docker
-      eza
-      fd
-      fzf
-      fzf-git-sh
-      google-cloud-sdk
-      gh
-      git
-      gnupg
-      jless
-      jq
-      lazygit
-      lazydocker
-      less
-      k9s
-      kubectl
-      neofetch
-      neovim
-      nodejs
-      openapi-tui
-      (pkgs.pass.withExtensions (exts: [ exts.pass-otp ]))
-      postgresql
-      ripgrep
-      ruby
-      sqlite
-      tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
-      yazi
-      zoxide
+    systemPackages =
+      with pkgs;
+      let
+        gdk = pkgs.google-cloud-sdk.withExtraComponents (
+          with pkgs.google-cloud-sdk.components;
+          [
+            gke-gcloud-auth-plugin
+          ]
+        );
+      in
+      [
+        ast-grep
+        bat
+        # brave
+        btop
+        clang
+        defaultbrowser
+        delta
+        docker
+        eza
+        fd
+        fzf
+        fzf-git-sh
+        gdk
+        gh
+        git
+        gnupg
+        jless
+        jq
+        lazygit
+        lazydocker
+        less
+        k9s
+        kubectl
+        neofetch
+        neovim
+        nodejs
+        openapi-tui
+        (pkgs.pass.withExtensions (exts: [ exts.pass-otp ]))
+        postgresql
+        ripgrep
+        ruby
+        sqlite
+        tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
+        yazi
+        zoxide
 
-      # TODO Use nix-env for most of these? At least the ones that you don't use all the time
-      # language servers
-      bash-language-server
-      clang-tools
-      vscode-langservers-extracted # css, eslint, html, json
-      efm-langserver
-      harper
-      lua-language-server
-      marksman
-      nixd
-      phpactor
-      postgres-lsp
-      rust-analyzer
-      terraform-ls
-      typescript-language-server
-      vtsls
-      vue-language-server
-      yaml-language-server
+        # TODO Use nix-env for most of these? At least the ones that you don't use all the time
+        # language servers
+        bash-language-server
+        clang-tools
+        vscode-langservers-extracted # css, eslint, html, json
+        efm-langserver
+        harper
+        lua-language-server
+        marksman
+        nixd
+        phpactor
+        postgres-lsp
+        rust-analyzer
+        terraform-ls
+        typescript-language-server
+        vtsls
+        vue-language-server
+        yaml-language-server
 
-      # formatters
-      stylua
-      prettierd
-      nixfmt-rfc-style
-    ];
+        # formatters
+        stylua
+        prettierd
+        nixfmt-rfc-style
+      ];
 
     variables = {
       EDITOR = "nvim";
@@ -72,6 +82,11 @@
 
   homebrew = {
     enable = true;
+    taps = [ "edosrecki/tools" ];
+    brews = [
+      "edosrecki/tools/google-cloud-redis"
+      "edosrecki/tools/google-cloud-sql"
+    ];
     casks = [
       "brave-browser"
       "docker"
