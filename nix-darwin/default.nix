@@ -164,6 +164,8 @@
       loginwindow.autoLoginUser = user;
 
       NSGlobalDomain = {
+        AppleEnableMouseSwipeNavigateWithScrolls = false;
+        AppleEnableSwipeNavigateWithScrolls = false;
         InitialKeyRepeat = 15;
         AppleICUForce24HourTime = true;
         KeyRepeat = 2;
