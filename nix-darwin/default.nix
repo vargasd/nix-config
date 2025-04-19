@@ -58,7 +58,6 @@
         lua-language-server
         marksman
         nixd
-        phpactor
         postgres-lsp
         rust-analyzer
         terraform-ls

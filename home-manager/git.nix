@@ -30,6 +30,8 @@
     ".vim"
     ".samignore"
     ".gitoverlay"
+    ".direnv"
+    ".envrc"
   ];
 
   delta = {

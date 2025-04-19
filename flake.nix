@@ -13,12 +13,21 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    systems.url = "github:nix-systems/default";
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
   };
 
   outputs =
     {
       home-manager,
       nix-darwin,
+      flake-utils,
+      nixpkgs,
       ...
     }@inputs:
     {
@@ -70,5 +79,16 @@
           ];
         }
       );
-    };
+    }
+    // (flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        devShells = {
+          php = import ./devShells/php.nix pkgs;
+        };
+      }
+    ));
 }
