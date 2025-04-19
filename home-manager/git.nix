@@ -1,3 +1,4 @@
+{ email, gpgKey }:
 {
   enable = true;
 
@@ -82,9 +83,9 @@
       sort = "version:refname";
     };
     user = {
-      email = "sam@varga.sh";
+      email = email;
       name = "Samuel Varga";
-      signingKey = "9360638973266EE4";
+      signingKey = gpgKey;
     };
     merge = {
       tool = "nvimdiff";

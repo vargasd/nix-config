@@ -36,7 +36,11 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${user} = import ./home-manager/default.nix user;
+              home-manager.users.${user} = import ./home-manager/default.nix {
+                user = user;
+                email = "samuel.varga@sap.com";
+                gpgKey = "7FF62D2D";
+              };
               users.users.${user}.home = "/Users/${user}";
             }
           ];
@@ -56,7 +60,11 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${user} = import ./home-manager/default.nix user;
+              home-manager.users.${user} = import ./home-manager/default.nix {
+                user = user;
+                email = "sam@varga.sh";
+                gpgKey = "9360638973266";
+              };
               users.users.${user}.home = "/Users/${user}";
             }
           ];

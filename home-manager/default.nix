@@ -1,4 +1,8 @@
-user:
+{
+  user,
+  email,
+  gpgKey,
+}:
 { pkgs, inputs, ... }:
 {
   home.stateVersion = "25.05";
@@ -73,7 +77,10 @@ user:
     };
   };
 
-  programs.git = import ./git.nix;
+  programs.git = import ./git.nix {
+    email = email;
+    gpgKey = gpgKey;
+  };
 
   programs.lazygit = {
     enable = true;
