@@ -61,12 +61,10 @@
 
   programs.eza = {
     enable = true;
-    enableZshIntegration = true;
   };
 
   programs.fzf = {
     enable = true;
-    enableZshIntegration = true;
     defaultOptions = [ "--color=16" ];
   };
 
@@ -97,13 +95,11 @@
 
   programs.wezterm = {
     enable = true;
-    enableZshIntegration = true;
     extraConfig = builtins.readFile ./wezterm.lua;
   };
 
   programs.yazi = {
     enable = true;
-    enableZshIntegration = true;
     initLua = # lua
       ''
         th.git = th.git or {}
@@ -186,7 +182,6 @@
 
   programs.zoxide = {
     enable = true;
-    enableZshIntegration = true;
   };
 
   programs.zsh = {
