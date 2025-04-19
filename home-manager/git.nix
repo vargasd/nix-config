@@ -16,7 +16,7 @@
     mt = "mergetool";
     pf = "push --force";
     ri = # sh
-      ''!f() { git rebase -i "''\${1:-origin/main}"; }; f;'';
+      ''!f() { git rebase -i "''\${1:-origin/HEAD}"; }; f'';
     ra = "rebase --abort";
     rc = "rebase --continue";
     reste = "reset";
