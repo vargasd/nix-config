@@ -87,6 +87,7 @@
       in
       {
         devShells = {
+          c = import ./devShells/c.nix pkgs;
           php = import ./devShells/php.nix pkgs;
         };
       }

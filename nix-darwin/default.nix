@@ -16,7 +16,6 @@
         bat
         # brave
         btop
-        clang
         defaultbrowser
         delta
         docker
@@ -51,7 +50,6 @@
         # TODO Use nix-env for most of these? At least the ones that you don't use all the time
         # language servers
         bash-language-server
-        clang-tools
         vscode-langservers-extracted # css, eslint, html, json
         efm-langserver
         harper
