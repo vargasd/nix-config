@@ -91,6 +91,7 @@
           lua = import ./devShells/lua.nix pkgs;
           nix = import ./devShells/nix.nix pkgs;
           php = import ./devShells/php.nix pkgs;
+          ruby = import ./devShells/ruby.nix pkgs;
         };
       }
     ));
