@@ -54,7 +54,6 @@
         efm-langserver
         harper
         marksman
-        nixd
         postgres-lsp
         rust-analyzer
         terraform-ls
@@ -65,7 +64,6 @@
 
         # formatters
         prettierd
-        nixfmt-rfc-style
       ];
 
     variables = {
