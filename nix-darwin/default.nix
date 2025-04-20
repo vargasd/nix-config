@@ -57,8 +57,8 @@
         rust-analyzer
         terraform-ls
         typescript-language-server
+        typos-lsp
         vtsls
-        vue-language-server
         yaml-language-server
 
         # formatters

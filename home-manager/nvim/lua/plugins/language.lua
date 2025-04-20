@@ -87,14 +87,7 @@ return {
 				tailwindcss = {
 					filetypes = { "svelte" },
 				},
-				volar = {
-					filetypes = { "typescript", "vue" },
-					init_options = {
-						vue = {
-							hybridMode = false,
-						},
-					},
-				},
+				typos_lsp = {},
 				phpactor = {},
 				yamlls = {},
 				jsonls = {
@@ -122,9 +115,7 @@ return {
 					},
 				},
 				ts_ls = {
-					-- undo when we figure out volar per project (nvf/direnv?)
-					-- filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-					filetypes = { "javascript", "javascriptreact" },
+					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 					settings = {
 						completions = {
 							completeFunctionCalls = true,
@@ -219,6 +210,18 @@ return {
 					},
 				},
 			}
+
+			if os.getenv("SAM_VUE") ~= nil then
+				servers.ts_ls.filetypes = {}
+				servers.volar = {
+					filetypes = { "typescript", "vue" },
+					init_options = {
+						vue = {
+							hybridMode = false,
+						},
+					},
+				}
+			end
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)

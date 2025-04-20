@@ -92,6 +92,7 @@
           nix = import ./devShells/nix.nix pkgs;
           php = import ./devShells/php.nix pkgs;
           ruby = import ./devShells/ruby.nix pkgs;
+          vue = import ./devShells/vue.nix pkgs;
         };
       }
     ));
