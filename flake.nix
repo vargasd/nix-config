@@ -88,6 +88,7 @@
       {
         devShells = {
           c = import ./devShells/c.nix pkgs;
+          lua = import ./devShells/lua.nix pkgs;
           php = import ./devShells/php.nix pkgs;
         };
       }

@@ -53,7 +53,6 @@
         vscode-langservers-extracted # css, eslint, html, json
         efm-langserver
         harper
-        lua-language-server
         marksman
         nixd
         postgres-lsp
@@ -65,7 +64,6 @@
         yaml-language-server
 
         # formatters
-        stylua
         prettierd
         nixfmt-rfc-style
       ];
