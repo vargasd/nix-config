@@ -650,6 +650,7 @@ return {
 		---@type render.md.UserConfig
 		opts = {
 			completions = { lsp = { enabled = true } },
+			heading = { enabled = false },
 		},
 	},
 }
