@@ -87,7 +87,11 @@ return {
 				tailwindcss = {
 					filetypes = { "svelte" },
 				},
-				typos_lsp = {},
+				typos_lsp = {
+					init_options = {
+						config = os.getenv("XDG_CONFIG_HOME") .. "/typos-lsp/typos.toml",
+					},
+				},
 				phpactor = {},
 				yamlls = {},
 				jsonls = {

@@ -251,6 +251,16 @@
       enable = true;
       source = ./nvim;
     };
+    configFile."typos-lsp/typos.toml" = {
+      enable = true;
+      text = # toml
+        ''
+          [default]
+          extend-ignore-words-re = [
+            "\\b[Nn]oice\\b"
+          ]
+        '';
+    };
   };
 
   home.file = {
