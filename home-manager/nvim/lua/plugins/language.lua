@@ -217,7 +217,6 @@ return {
 			end
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 			for server_name, config in pairs(servers) do
 				require("lspconfig")[server_name].setup(vim.tbl_extend("keep", config, {
