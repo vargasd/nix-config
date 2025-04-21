@@ -19,6 +19,8 @@ vim.o.tabstop = 2
 vim.o.autoindent = true
 vim.o.smartindent = true
 
+vim.o.winborder = "rounded"
+
 vim.wo.signcolumn = "yes"
 vim.o.relativenumber = true
 vim.o.number = true

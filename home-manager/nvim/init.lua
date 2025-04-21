@@ -19,7 +19,6 @@ vim.diagnostic.config({
 		source = true,
 		header = "",
 		prefix = "",
-		border = "rounded",
 	},
 	update_in_insert = false,
 	severity_sort = true,
