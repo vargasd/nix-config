@@ -51,7 +51,7 @@ return {
 					":Telescope smart_open filename_first=false" .. (#git_sha == 0 and "" or " cwd_only=true") .. "<cr>"
 				),
 				dashboard.button("/", " " .. " Find Text", ":Telescope live_grep <CR>"),
-				dashboard.button("e", "󰙅 " .. " Open Explorer", ":FloatermNew yazi <CR>"),
+				dashboard.button("e", "󰙅 " .. " Open Explorer", ":Yazi <CR>"),
 				(function()
 					if branch ~= "" then
 						return dashboard.button(
