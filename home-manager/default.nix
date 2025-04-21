@@ -140,8 +140,8 @@
         plugins = pkgs.fetchFromGitHub {
           owner = "yazi-rs";
           repo = "plugins";
-          rev = "cb6165b25515b653a70f72a67889579d190facfe";
-          hash = "sha256-XDz67eHmVM5NrnQ/uPXN/jRgmrShs80anWnHpVmbPO8=";
+          rev = "4b027c79371af963d4ae3a8b69e42177aa3fa6ee";
+          hash = "sha256-auGNSn6tX72go7kYaH16hxRng+iZWw99dKTTUN91Cow=";
         };
       in
       {
