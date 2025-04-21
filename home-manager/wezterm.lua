@@ -5,6 +5,7 @@ local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/s
 local act = wezterm.action
 local config = wezterm.config_builder()
 
+config.cursor_blink_rate = 0
 config.tab_bar_at_bottom = true
 config.audible_bell = "Disabled"
 config.enable_tab_bar = true
