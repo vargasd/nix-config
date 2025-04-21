@@ -19,16 +19,26 @@ return {
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
+		---@module 'noice'
+		---@type NoiceConfig
 		opts = {
 			popupmenu = {
 				enabled = false,
 			},
-			lsp = {
-				hover = {
-					enabled = false,
+			presets = {
+				lsp_doc_border = true,
+			},
+			routes = {
+				{
+					view = "notify",
+					filter = { event = "msg_showmode" },
 				},
-				signature = {
-					enabled = false,
+				{
+					filter = {
+						kind = "",
+						find = "written",
+					},
+					opts = { skip = true },
 				},
 			},
 		},
@@ -41,23 +51,6 @@ return {
 				desc = "Search Messages",
 			},
 		},
-		config = function(self, opts)
-			require("noice").setup({
-				routes = {
-					{
-						view = "notify",
-						filter = { event = "msg_showmode" },
-					},
-					{
-						filter = {
-							kind = "",
-							find = "written",
-						},
-						opts = { skip = true },
-					},
-				},
-			})
-		end,
 	},
 
 	{

@@ -43,13 +43,6 @@ return {
 			local prettier = require("efmls-configs.formatters.prettier")
 			local nixfmt = require("efmls-configs.formatters.nixfmt")
 
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-				border = "rounded",
-			})
-			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-				border = "rounded",
-			})
-
 			require("lsp-format").setup({})
 
 			local servers = {
