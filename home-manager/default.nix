@@ -207,23 +207,15 @@
     initExtra = "source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
 
     shellAliases = {
-      jqi = # sh
-        ''
-          f() { 
-            echo "" | fzf -q "." \
-            --bind "shift-up:preview-half-page-up,shift-down:preview-half-page-down,load:unbind(enter)" \
-            --preview-window "bottom:99%" \
-            --print-query \
-            --preview "cat $1 | jq ''\${@:2} {q} | bat --color=always --plain -l json" \
-          }; f'';
       man = "batman";
       nvim = # sh
         "env TERM=wezterm nvim";
-      jwtde = # sh
+      jwt-decode = "f() { echo \"$1\" | jq -R 'split(\".\") | .[1] | @base64d | fromjson' }; f";
+      nixpkgs-search = # sh
         ''
-          f() {
-            echo "$1" | jq -R 'split(".") | .[1] | @base64d | fromjson' 
-          }
+          nix search nixpkgs --no-write-lock-file --reference-lock-file ${../flake.lock} ^ --json 2> /dev/null | \
+          jq -r 'to_entries | .[] | ((.key | sub("^legacyPackages.[^.]*."; "")) + ": " + .value.description)' | \
+          fzf --multi --bind 'enter:become(cut -d : -f 1 {+f})'
         '';
     };
 
