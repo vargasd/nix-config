@@ -20,6 +20,11 @@
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
     };
+
+    yazi-plugins = {
+      url = "github:yazi-rs/plugins";
+      flake = false;
+    };
   };
 
   outputs =

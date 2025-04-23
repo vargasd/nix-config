@@ -1,5 +1,6 @@
 {
   pkgs,
+  inputs,
   user,
   email,
   gpgKey,
@@ -136,25 +137,11 @@
       ];
     };
 
-    plugins =
-      let
-        plugins = pkgs.fetchFromGitHub {
-          owner = "yazi-rs";
-          repo = "plugins";
-          rev = "4b027c79371af963d4ae3a8b69e42177aa3fa6ee";
-          hash = "sha256-auGNSn6tX72go7kYaH16hxRng+iZWw99dKTTUN91Cow=";
-        };
-      in
-      {
-        git = plugins + "/git.yazi";
-        chmod = plugins + "/chmod.yazi";
-        bat = pkgs.fetchFromGitHub {
-          owner = "vargasd";
-          repo = "bat.yazi";
-          rev = "e5f28d52e51450fe0d66e0d4661e6ba7b6d5edd6";
-          hash = "sha256-tCOWMQC0Sea3DI0jEu28Qzzyt1l3bSuOlPWIRiHAQ50=";
-        };
-      };
+    plugins = {
+      git = inputs.yazi-plugins + "/git.yazi";
+      chmod = inputs.yazi-plugins + "/chmod.yazi";
+      piper = inputs.yazi-plugins + "/piper.yazi";
+    };
 
     settings = {
       manager = {
@@ -167,7 +154,7 @@
       plugin.prepend_previewers = [
         {
           name = "*.tsp";
-          run = "bat";
+          run = "piper -- bat -p --color=always \"$1\"";
         }
       ];
 
