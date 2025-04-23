@@ -33,48 +33,48 @@
     {
       darwinConfigurations.work = nix-darwin.lib.darwinSystem (
         let
-          user = "I763291";
+          specialArgs = {
+            inherit inputs;
+            user = "I763291";
+            email = "samuel.varga@sap.com";
+            gpgKey = "7FF62D2D";
+          };
         in
         {
-          specialArgs = inputs // {
-            inherit user;
-          };
+          inherit specialArgs;
           modules = [
             ./nix-darwin
             home-manager.darwinModules.home-manager
             {
+              home-manager.extraSpecialArgs = specialArgs;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${user} = import ./home-manager/default.nix {
-                user = user;
-                email = "samuel.varga@sap.com";
-                gpgKey = "7FF62D2D";
-              };
-              users.users.${user}.home = "/Users/${user}";
+              home-manager.users.${specialArgs.user} = import ./home-manager/default.nix;
+              users.users.${specialArgs.user}.home = "/Users/${specialArgs.user}";
             }
           ];
         }
       );
       darwinConfigurations.home = nix-darwin.lib.darwinSystem (
         let
-          user = "sam";
+          specialArgs = {
+            inherit inputs;
+            user = "sam";
+            email = "sam@varga.sh";
+            gpgKey = "9360638973266";
+          };
         in
         {
-          specialArgs = inputs // {
-            inherit user;
-          };
+          inherit specialArgs;
           modules = [
             ./nix-darwin
             home-manager.darwinModules.home-manager
             {
+              home-manager.extraSpecialArgs = specialArgs;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${user} = import ./home-manager/default.nix {
-                user = user;
-                email = "sam@varga.sh";
-                gpgKey = "9360638973266";
-              };
-              users.users.${user}.home = "/Users/${user}";
+              home-manager.users.${specialArgs.user} = import ./home-manager/default.nix;
+              users.users.${specialArgs.user}.home = "/Users/${specialArgs.user}";
             }
           ];
         }

@@ -1,9 +1,10 @@
 {
+  pkgs,
   user,
   email,
   gpgKey,
+  ...
 }:
-{ pkgs, inputs, ... }:
 {
   home.stateVersion = "25.05";
 
