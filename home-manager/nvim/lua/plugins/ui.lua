@@ -19,9 +19,17 @@ return {
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
+		dependencies = { "MunifTanjim/nui.nvim" },
 		---@module 'noice'
 		---@type NoiceConfig
 		opts = {
+			lsp = {
+				override = {
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+				},
+			},
 			popupmenu = {
 				enabled = false,
 			},
@@ -630,12 +638,44 @@ return {
 
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown" },
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
 		---@module 'render-markdown'
 		---@type render.md.UserConfig
 		opts = {
 			completions = { lsp = { enabled = true } },
 			heading = { enabled = false },
+		},
+	},
+
+	{
+		"3rd/image.nvim",
+		ft = { "markdown" },
+		build = false, -- do not build with hererocks
+		---@module 'image'
+		---@type Options
+		opts = {
+			processor = "magick_cli",
+			kitty_method = "normal",
+			backend = "kitty",
+			integrations = {
+				markdown = {
+					enabled = true,
+					clear_in_insert_mode = false,
+					only_render_image_at_cursor = true,
+					only_render_image_at_cursor_mode = "popup",
+					floating_windows = false, -- if true, images will be rendered in floating markdown windows
+					filetypes = { "markdown" }, -- markdown extensions (ie. quarto) can go here
+				},
+			},
+		},
+	},
+
+	{
+		"3rd/diagram.nvim",
+		ft = { "markdown" },
+		dependencies = {
+			"3rd/image.nvim",
 		},
 	},
 }

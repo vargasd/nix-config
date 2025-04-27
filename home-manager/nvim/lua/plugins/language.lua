@@ -62,6 +62,7 @@ return {
 				html = {},
 				marksman = {},
 				harper_ls = {
+					autostart = false,
 					filetypes = { "markdown", "asciidoc", "tex", "text" },
 					settings = {
 						["harper-ls"] = {
@@ -83,6 +84,7 @@ return {
 				typos_lsp = {
 					init_options = {
 						config = os.getenv("XDG_CONFIG_HOME") .. "/typos-lsp/typos.toml",
+						diagnosticSeverity = "hint",
 					},
 				},
 				phpactor = {},

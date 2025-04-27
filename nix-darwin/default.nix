@@ -27,6 +27,7 @@
         gh
         git
         gnupg
+        imagemagick
         jless
         jq
         lazygit
