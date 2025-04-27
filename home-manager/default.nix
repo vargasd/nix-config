@@ -95,7 +95,6 @@
           colorArg = "always";
           pager = "delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
         };
-        skipHookPrefix = "!";
       };
     };
   };
@@ -210,6 +209,7 @@
     sessionVariables = {
       LESS = "-i -R --no-init --tabs 2";
       LESSHISTFILE = "-";
+      HUSKY = 0;
     };
   };
 
