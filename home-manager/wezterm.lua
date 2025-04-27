@@ -14,7 +14,7 @@ config.tab_max_width = 1000
 config.show_tabs_in_tab_bar = true
 config.show_new_tab_button_in_tab_bar = false
 config.window_decorations = "RESIZE"
-config.font = wezterm.font("JetBrains Mono NL", { weight = "Bold" })
+config.font = wezterm.font("JetBrains Mono", { weight = "Bold" })
 config.font_size = 16
 config.use_resize_increments = false
 config.send_composed_key_when_left_alt_is_pressed = false
