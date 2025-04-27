@@ -181,7 +181,7 @@
     enableVteIntegration = true;
 
     history = {
-      append = true;
+      append = false; # using INC_APPEND_HISTORY which home-manager doesn't support
       ignoreAllDups = true;
       ignoreSpace = true;
       save = 50000;

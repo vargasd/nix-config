@@ -13,6 +13,8 @@ select-word-style bash
 bindkey -M emacs "^[[3~" delete-char
 bindkey -M emacs "^[3;5~" delete-char
 
+setopt INC_APPEND_HISTORY
+
 setopt PROMPT_SUBST
 export PROMPT='
 %B%(?.%F{green}.%F{red})%~ %F{cyan}$(
