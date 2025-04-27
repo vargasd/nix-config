@@ -12,7 +12,13 @@ local on_attach = function(client, bufnr)
 	nmap("<leader><C-r>", vim.cmd.LspStart, "Start / force restart")
 
 	nmap("<leader>r", vim.lsp.buf.rename, "Rename")
-	vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, { desc = "Code Action", buffer = bufnr }) -- 'weilbith/nvim-code-action-menu',
+	vim.keymap.set({ "n", "v" }, "<leader>a", function()
+		vim.lsp.buf.code_action({
+			filter = function(action)
+				return action.kind ~= "refactor.move"
+			end,
+		})
+	end, { desc = "Code Action", buffer = bufnr }) -- 'weilbith/nvim-code-action-menu',
 
 	nmap("gd", telescope.lsp_definitions, "Definition")
 	nmap("gr", telescope.lsp_references, "References")
@@ -211,7 +217,8 @@ return {
 			}
 
 			if os.getenv("SAM_VUE") ~= nil then
-				servers.ts_ls.filetypes = {}
+				servers.ts_ls.autostart = false
+				servers.vtsls.autostart = false
 				servers.volar = {
 					filetypes = { "typescript", "vue" },
 					init_options = {
