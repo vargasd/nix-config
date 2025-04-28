@@ -12,6 +12,12 @@
   home.username = user;
   home.homeDirectory = "/Users/${user}";
 
+  home.sessionVariables = {
+    LESS = "-i -R --no-init --tabs 2";
+    LESSHISTFILE = "-";
+    HUSKY = 0;
+  };
+
   programs.home-manager.enable = true;
 
   programs.bat = {
@@ -206,11 +212,6 @@
         '';
     };
 
-    sessionVariables = {
-      LESS = "-i -R --no-init --tabs 2";
-      LESSHISTFILE = "-";
-      HUSKY = 0;
-    };
   };
 
   targets.darwin = {
