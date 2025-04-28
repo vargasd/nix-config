@@ -17,8 +17,10 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.HINT] = "DiagnosticNumHint",
 		},
 	},
-	virtual_lines = {
-		current_line = true,
+	virtual_text = {
+		severity = {
+			min = vim.diagnostic.severity.WARN,
+		},
 	},
 	float = {
 		source = true,

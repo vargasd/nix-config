@@ -599,7 +599,11 @@ return {
 			vim.keymap.set({ "n", "x", "o" }, ",", move.repeat_last_move)
 			vim.keymap.set({ "n", "x", "o" }, ";", move.repeat_last_move_opposite)
 
-			local diagnostic_opts = { float = false, severity = { min = vim.diagnostic.severity.WARN } }
+			local diagnostic_opts = {
+				severity = {
+					min = vim.diagnostic.severity.WARN,
+				},
+			}
 			vim.keymap.set("n", "[d", diagnostics.goto_prev(diagnostic_opts), { desc = "Previous diagnostic" })
 			vim.keymap.set("n", "]d", diagnostics.goto_next(diagnostic_opts), { desc = "Next diagnostic" })
 		end,
