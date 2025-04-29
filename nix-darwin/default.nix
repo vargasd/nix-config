@@ -330,19 +330,6 @@
     };
   };
 
-  services = {
-    skhd = {
-      enable = true;
-      skhdConfig =
-        builtins.readFile ./skhdrc
-        + ''
-          meh - escape   : osascript "${./clear-notifications.scpt}"
-        ''
-
-      ;
-    };
-  };
-
   security.pam.services.sudo_local = {
     touchIdAuth = true;
     watchIdAuth = true;
