@@ -30,4 +30,39 @@ return {
 		opts = {},
 		cmd = { "MarpStart", "MarpToggle" },
 	},
+
+	{
+		"olimorris/codecompanion.nvim",
+		opts = {
+			strategies = {
+				chat = { adapter = "qwen2.5-coder" },
+				inline = { adapter = "qwen2.5-coder" },
+				cmd = { adapter = "qwen2.5-coder" },
+			},
+			adapters = {
+				["qwen2.5-coder"] = function()
+					return require("codecompanion.adapters").extend("ollama", {
+						name = "qwen",
+						schema = {
+							model = {
+								default = "qwen2.5-coder:14b",
+							},
+						},
+					})
+				end,
+			},
+			display = {
+				action_palette = { show_default_prompt_library = true },
+			},
+		},
+		init = function()
+			-- credit to haus20xx - https://github.com/olimorris/codecompanion.nvim/discussions/813#discussioncomment-12289384
+			require("plugins.utils.codecompanion-noice").init()
+		end,
+		dependencies = {
+			"folke/noice.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+	},
 }

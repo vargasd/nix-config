@@ -214,6 +214,10 @@
 
   };
 
+  services.ollama = {
+    enable = true;
+  };
+
   services.skhd = {
     enable = true;
     config =

@@ -82,6 +82,13 @@ return {
 				},
 			})
 
+			cmp.setup.filetype("codecompanion", {
+				sources = {
+					{ name = "codecompanion" },
+					{ name = "path" },
+					{ name = "buffer" },
+				},
+			})
 			vim.keymap.set("i", "<C-x>", cmp.complete)
 		end,
 	},
