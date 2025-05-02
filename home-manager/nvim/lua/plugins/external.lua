@@ -35,7 +35,7 @@ return {
 		"olimorris/codecompanion.nvim",
 		opts = {
 			strategies = {
-				chat = { adapter = "qwen2.5-coder" },
+				chat = { adapter = "qwen3" },
 				inline = { adapter = "qwen2.5-coder" },
 				cmd = { adapter = "qwen2.5-coder" },
 			},
@@ -46,6 +46,16 @@ return {
 						schema = {
 							model = {
 								default = "qwen2.5-coder:14b",
+							},
+						},
+					})
+				end,
+				qwen3 = function()
+					return require("codecompanion.adapters").extend("ollama", {
+						name = "qwen",
+						schema = {
+							model = {
+								default = "qwen3:30b-a3b",
 							},
 						},
 					})
