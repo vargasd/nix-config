@@ -95,6 +95,7 @@
           c = import ./devShells/c.nix pkgs;
           lua = import ./devShells/lua.nix pkgs;
           nix = import ./devShells/nix.nix pkgs;
+          node23 = import ./devShells/node23.nix pkgs;
           php = import ./devShells/php.nix pkgs;
           ruby = import ./devShells/ruby.nix pkgs;
           vue = import ./devShells/vue.nix pkgs;
