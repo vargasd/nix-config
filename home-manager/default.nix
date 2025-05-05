@@ -51,6 +51,8 @@
     extraPackages = [ pkgs.bat-extras.batman ];
   };
 
+  programs.browserpass.enable = true;
+
   programs.btop = {
     enable = true;
     settings = {
