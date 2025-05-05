@@ -40,12 +40,13 @@
         neovim
         nodejs
         openapi-tui
-        (pkgs.pass.withExtensions (exts: [ exts.pass-otp ]))
+        pass
         postgresql
         ripgrep
         sqlite
         tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
         yazi
+        yubikey-manager
         zoxide
 
         # TODO Use nix-env for most of these? At least the ones that you don't use all the time
