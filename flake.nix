@@ -88,7 +88,10 @@
     // (flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
       in
       {
         devShells = {
@@ -98,6 +101,7 @@
           node23 = import ./devShells/node23.nix pkgs;
           php = import ./devShells/php.nix pkgs;
           ruby = import ./devShells/ruby.nix pkgs;
+          terraform = import ./devShells/terraform.nix pkgs;
           vue = import ./devShells/vue.nix pkgs;
         };
       }

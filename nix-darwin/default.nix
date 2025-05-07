@@ -58,7 +58,6 @@
         marksman
         postgres-lsp
         rust-analyzer
-        terraform-ls
         typescript-language-server
         typos-lsp
         vtsls
