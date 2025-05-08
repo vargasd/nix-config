@@ -207,7 +207,6 @@
       man = "batman";
       nvim = # sh
         "env TERM=wezterm nvim";
-      jwt-decode = "f() { echo \"$1\" | jq -R 'split(\".\") | .[1] | @base64d | fromjson' }; f";
       nixpkgs-search = # sh
         ''
           nix search nixpkgs --no-write-lock-file --reference-lock-file ${../flake.lock} ^ --json 2> /dev/null | \
