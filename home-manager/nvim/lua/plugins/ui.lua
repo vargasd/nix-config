@@ -10,6 +10,7 @@ return {
 		config = function()
 			require("enhansi").setup({
 				transparent_mode = true,
+				invert_selection = true,
 			})
 
 			vim.cmd.colorscheme("enhansi")
