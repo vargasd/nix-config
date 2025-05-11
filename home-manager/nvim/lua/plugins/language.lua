@@ -89,7 +89,7 @@ return {
 				},
 				typos_lsp = {
 					init_options = {
-						config = os.getenv("XDG_CONFIG_HOME") .. "/typos-lsp/typos.toml",
+						config = vim.fn.stdpath("config") .. "/../typos-lsp/typos.toml",
 						diagnosticSeverity = "hint",
 					},
 				},
