@@ -5,6 +5,7 @@ vim.o.undodir = vim.fn.stdpath("state") .. "/undo//"
 vim.o.undofile = true
 
 vim.o.termguicolors = false
+vim.o.guicursor = "a:block-blinkon0,i-ci-ve:ver25,r-cr-o:hor20"
 vim.o.mouse = "nvi"
 vim.o.mousemodel = "extend"
 
