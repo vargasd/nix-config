@@ -16,6 +16,7 @@
         bat
         # brave
         btop
+        coreutils
         defaultbrowser
         delta
         docker
