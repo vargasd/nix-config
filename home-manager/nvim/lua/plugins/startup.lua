@@ -62,6 +62,7 @@ return {
 					end
 				end)(),
 				dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+				dashboard.button("d", " " .. " DBUI", ":bd<CR>:DBUI<CR>"),
 				{ type = "padding", val = 1 },
 				(function()
 					local group = {
