@@ -83,7 +83,6 @@ return {
 				end,
 			},
 			"nvim-telescope/telescope-ui-select.nvim",
-			"xiyaowong/telescope-emoji.nvim",
 		},
 		config = function()
 			local telescope = require("telescope")
