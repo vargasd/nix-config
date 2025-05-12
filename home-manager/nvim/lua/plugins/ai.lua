@@ -23,7 +23,12 @@ return {
 		},
 		opts = {
 			strategies = {
-				chat = { adapter = "qwen3" },
+				chat = {
+					adapter = "qwen3",
+					tools = {
+						knowledge = require("plugins.codecompanion.tools.sqlite-knowledge-base"),
+					},
+				},
 				inline = { adapter = "qwen3" },
 				cmd = { adapter = "qwen3" },
 			},

@@ -45,6 +45,7 @@
         postgresql
         ripgrep
         sqlite
+        sqlite-vec
         tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
         yazi
         yubikey-manager
@@ -72,6 +73,7 @@
       EDITOR = "nvim";
       VISUAL = "nvim";
       LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
+      LIBSQLITEVEC = "${pkgs.sqlite-vec.out}/lib/vec0.dylib";
     };
   };
 

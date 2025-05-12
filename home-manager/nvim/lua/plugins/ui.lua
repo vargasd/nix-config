@@ -70,7 +70,8 @@ return {
 				"danielfalk/smart-open.nvim",
 				branch = "0.2.x",
 				dependencies = {
-					"kkharji/sqlite.lua",
+					"vargasd/sqlite.lua",
+					--"kkharji/sqlite.lua",
 					-- Only required if using match_algorithm fzf
 					{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 				},
