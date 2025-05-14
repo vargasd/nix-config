@@ -40,9 +40,12 @@
         let
           specialArgs = {
             inherit inputs;
-            user = "I763291";
             email = "samuel.varga@sap.com";
             gpgKey = "7FF62D2D";
+            home = {
+              homeDirectory = "/Users/I763291";
+              user = "I763291";
+            };
           };
         in
         {
@@ -54,8 +57,8 @@
               home-manager.extraSpecialArgs = specialArgs;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.user} = import ./home-manager/default.nix;
-              users.users.${specialArgs.user}.home = "/Users/${specialArgs.user}";
+              home-manager.users.${specialArgs.home.user} = import ./home-manager/default.nix;
+              users.users.${specialArgs.home.user}.home = specialArgs.homeDirectory;
             }
           ];
         }
@@ -64,9 +67,12 @@
         let
           specialArgs = {
             inherit inputs;
-            user = "sam";
             email = "sam@varga.sh";
             gpgKey = "9360638973266";
+            home = {
+              user = "sam";
+              homeDirectory = "/Users/sam";
+            };
           };
         in
         {
@@ -78,8 +84,8 @@
               home-manager.extraSpecialArgs = specialArgs;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.user} = import ./home-manager/default.nix;
-              users.users.${specialArgs.user}.home = "/Users/${specialArgs.user}";
+              home-manager.users.${specialArgs.home.user} = import ./home-manager/default.nix;
+              users.users.${specialArgs.home.user}.home = specialArgs.homeDirectory;
             }
           ];
         }

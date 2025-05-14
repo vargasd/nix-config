@@ -1,16 +1,12 @@
 {
   pkgs,
   inputs,
-  user,
   email,
   gpgKey,
   ...
 }:
 {
   home.stateVersion = "25.05";
-
-  home.username = user;
-  home.homeDirectory = "/Users/${user}";
 
   home.sessionVariables = {
     LESS = "-i -R --no-init --tabs 2";
