@@ -1,78 +1,9 @@
 { pkgs, user, ... }:
 {
-  environment = {
-    systemPackages =
-      with pkgs;
-      let
-        gdk = pkgs.google-cloud-sdk.withExtraComponents (
-          with pkgs.google-cloud-sdk.components;
-          [
-            gke-gcloud-auth-plugin
-          ]
-        );
-      in
-      [
-        ast-grep
-        bat
-        # brave
-        btop
-        coreutils
-        defaultbrowser
-        delta
-        docker
-        eza
-        fd
-        fzf
-        fzf-git-sh
-        gdk
-        gh
-        git
-        gnupg
-        ijq
-        imagemagick
-        jless
-        jq
-        lazygit
-        lazydocker
-        less
-        k9s
-        kubectl
-        neofetch
-        neovim
-        nodejs
-        openapi-tui
-        pass
-        postgresql
-        ripgrep
-        sqlite
-        tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
-        yazi
-        yubikey-manager
-        zoxide
-
-        # TODO Use nix-env for most of these? At least the ones that you don't use all the time
-        # language servers
-        bash-language-server
-        vscode-langservers-extracted # css, eslint, html, json
-        efm-langserver
-        harper
-        marksman
-        postgres-lsp
-        rust-analyzer
-        typescript-language-server
-        typos-lsp
-        vtsls
-        yaml-language-server
-
-        # formatters
-        prettierd
-      ];
-
-    variables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-      LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
-    };
+  environment.variables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
   };
 
   homebrew = {
@@ -330,6 +261,17 @@
       # Inspired by https://tommorris.org/posts/2024/til-setting-default-browser-on-macos-using-nix/
       postUserActivation.text = "defaultbrowser browser";
     };
+  };
+
+  services.skhd = {
+    enable = true;
+    config =
+      builtins.readFile ./skhdrc
+      + ''
+        meh - escape   : osascript "${./clear-notifications.scpt}"
+        meh - tab      : osascript "${./tunnelblick.scpt}"
+        hyper - tab    : osascript -e $'tell application "Tunnelblick"\ndisconnect all\nend tell'
+      '';
   };
 
   security.pam.services.sudo_local = {

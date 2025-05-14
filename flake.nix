@@ -36,6 +36,33 @@
       ...
     }@inputs:
     {
+      nixosConfigurations.nuc = nixpkgs.lib.nixosSystem (
+        let
+          specialArgs = {
+            inherit inputs;
+            email = "sam@varga.sh";
+            gpgKey = "73266EE4";
+            home = {
+              homeDirectory = "/home/vargasd";
+              user = "vargasd";
+            };
+          };
+        in
+        {
+          system = "x86_64-linux";
+          modules = [
+            ./nixos/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${specialArgs.home.user} = import ./home-manager/default.nix;
+            }
+          ];
+
+        }
+      );
       darwinConfigurations.work = nix-darwin.lib.darwinSystem (
         let
           specialArgs = {
@@ -46,6 +73,12 @@
               homeDirectory = "/Users/I763291";
               user = "I763291";
             };
+            environment.systemPackages = [
+              nixpkgs.google-cloud-sdk.withExtraComponents
+              (with nixpkgs.google-cloud-sdk.components; [
+                gke-gcloud-auth-plugin
+              ])
+            ];
           };
         in
         {
@@ -54,7 +87,7 @@
             ./nix-darwin
             home-manager.darwinModules.home-manager
             {
-              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.extraSpecialArgs = specialArgs // import ./home-manager/darwin.nix;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${specialArgs.home.user} = import ./home-manager/default.nix;
@@ -81,7 +114,7 @@
             ./nix-darwin
             home-manager.darwinModules.home-manager
             {
-              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.extraSpecialArgs = specialArgs // import ./home-manager/darwin.nix;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${specialArgs.home.user} = import ./home-manager/default.nix;

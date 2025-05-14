@@ -14,6 +14,61 @@
     HUSKY = 0;
   };
 
+  home.packages = with pkgs; [
+    ast-grep
+    bat
+    # brave
+    btop
+    # defaultbrowser
+    delta
+    docker
+    eza
+    fd
+    fzf
+    fzf-git-sh
+    gh
+    git
+    gnupg
+    ijq
+    imagemagick
+    jless
+    jq
+    lazygit
+    lazydocker
+    less
+    k9s
+    kubectl
+    neofetch
+    neovim
+    nodejs
+    openapi-tui
+    pass
+    postgresql
+    ripgrep
+    sqlite
+    tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
+    yazi
+    yubikey-manager
+    zoxide
+
+    # TODO Use nix-env for most of these? At least the ones that you don't use all the time
+    # language servers
+    bash-language-server
+    vscode-langservers-extracted # css, eslint, html, json
+    efm-langserver
+    harper
+    marksman
+    postgres-lsp
+    rust-analyzer
+    typescript-language-server
+    typos-lsp
+    vtsls
+    yaml-language-server
+
+    # formatters
+    prettierd
+  ];
+
   programs.home-manager.enable = true;
 
   programs.bat = {
@@ -137,12 +192,18 @@
           run = "plugin chmod";
           desc = "Chmod on selected files";
         }
+        {
+          on = [ "M" ];
+          run = "plugin mount";
+          desc = "run mount";
+        }
       ];
     };
 
     plugins = {
       git = inputs.yazi-plugins + "/git.yazi";
       chmod = inputs.yazi-plugins + "/chmod.yazi";
+      mount = inputs.yazi-plugins + "/mount.yazi";
       piper = inputs.yazi-plugins + "/piper.yazi";
     };
 
@@ -183,6 +244,7 @@
   programs.zsh = {
     enable = true;
     enableVteIntegration = true;
+    defaultKeymap = "emacs";
 
     history = {
       append = false; # using INC_APPEND_HISTORY which home-manager doesn't support
@@ -201,8 +263,6 @@
 
     shellAliases = {
       man = "batman";
-      nvim = # sh
-        "env TERM=wezterm nvim";
       nixpkgs-search = # sh
         ''
           nix search nixpkgs --no-write-lock-file --reference-lock-file ${../flake.lock} ^ --json 2> /dev/null | \
@@ -215,29 +275,6 @@
 
   services.ollama = {
     enable = true;
-  };
-
-  services.skhd = {
-    enable = true;
-    config =
-      builtins.readFile ./skhdrc
-      + ''
-        meh - escape   : osascript "${./clear-notifications.scpt}"
-        meh - tab      : osascript "${./tunnelblick.scpt}"
-        hyper - tab    : osascript -e $'tell application "Tunnelblick"\ndisconnect all\nend tell'
-      '';
-  };
-
-  targets.darwin = {
-    keybindings = {
-      "~b" = "moveWordBackward:";
-      "~f" = "moveWordForward:";
-      "^a" = "moveToBeginningOfLine:";
-      "^e" = "moveToEndOfLine:";
-      "~d" = "deleteWordForward:";
-      "^w" = "deleteWordBackward:";
-      "^u" = "deleteToBeginningOfLine:";
-    };
   };
 
   xdg = {
