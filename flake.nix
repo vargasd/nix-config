@@ -105,7 +105,9 @@
           lua = import ./devShells/lua.nix pkgs;
           nix = import ./devShells/nix.nix pkgs;
           node23 = import ./devShells/node23.nix pkgs;
+          node24 = import ./devShells/node24.nix pkgs;
           php = import ./devShells/php.nix pkgs;
+          pnpm = import ./devShells/pnpm.nix pkgs;
           ruby = import ./devShells/ruby.nix pkgs;
           terraform = import ./devShells/terraform.nix pkgs;
           vue = import ./devShells/vue.nix pkgs;
