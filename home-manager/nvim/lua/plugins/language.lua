@@ -11,8 +11,7 @@ local on_attach = function(client, bufnr)
 	nmap("<leader>R", vim.cmd.LspRestart, "Restart")
 	nmap("<leader><C-r>", vim.cmd.LspStart, "Start / force restart")
 
-	nmap("<leader>r", vim.lsp.buf.rename, "Rename")
-	vim.keymap.set({ "n", "v" }, "<leader>a", function()
+	vim.keymap.set({ "n", "v" }, "gra", function()
 		vim.lsp.buf.code_action({
 			filter = function(action)
 				return action.kind ~= "refactor.move"
@@ -20,10 +19,10 @@ local on_attach = function(client, bufnr)
 		})
 	end, { desc = "Code Action", buffer = bufnr }) -- 'weilbith/nvim-code-action-menu',
 
-	nmap("gd", telescope.lsp_definitions, "Definition")
-	nmap("gr", telescope.lsp_references, "References")
-	nmap("gi", telescope.lsp_implementations, "Implementation")
-	nmap("gy", telescope.lsp_type_definitions, "Type")
+	nmap("grd", telescope.lsp_definitions, "Definition")
+	nmap("grr", telescope.lsp_references, "References")
+	nmap("gri", telescope.lsp_implementations, "Implementation")
+	nmap("gry", telescope.lsp_type_definitions, "Type")
 
 	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 	vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
