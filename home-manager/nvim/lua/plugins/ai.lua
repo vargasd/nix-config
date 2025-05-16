@@ -1,7 +1,40 @@
 ---@type LazySpec
 return {
 	{
+		"ravitemer/mcphub.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
+		},
+		build = "bundled_build.lua",
+		cmd = "MCPHub",
+		opts = {
+			use_bundled_binary = true,
+			auto_approve = true,
+			log = {
+				level = vim.log.levels.DEBUG,
+				to_file = true,
+				file_path = "/tmp/mcphub.log",
+				prefix = "MCPHub",
+			},
+		},
+	},
+
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		config = function()
+			require("copilot").setup({})
+		end,
+	},
+
+	{
 		"olimorris/codecompanion.nvim",
+		dependencies = {
+			"folke/noice.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		cmd = { "CodeCompanionChat", "CodeCompanionInline", "CodeCompanion", "CodeCompanionCmd" },
 		keys = {
 			{
 				"<leader>C",
@@ -19,16 +52,48 @@ return {
 				"Code companion chat add",
 				mode = "v",
 			},
-			{ "<leader>cf", vim.cmd.CodeCompanionActions, "Code companion actions" },
+			{ "<leader>cf", vim.cmd.CodeCompanionActions, "Code companion actions", mode = { "n", "v" } },
+			{ "<leader>cc", ":CodeCompanion ", "Code companion inline", mode = { "n", "v" } },
 		},
 		opts = {
+			extensions = {
+				mcphub = {
+					callback = "mcphub.extensions.codecompanion",
+					opts = {
+						show_result_in_chat = true,
+						make_vars = true,
+						make_slash_commands = true,
+					},
+				},
+			},
 			strategies = {
-				chat = { adapter = "qwen3" },
-				inline = { adapter = "qwen3" },
-				cmd = { adapter = "qwen3" },
+				chat = {
+					-- adapter = "qwen3",
+					tools = {
+						opts = {
+							requires_approval = false,
+							auto_submit_errors = true, -- Send any errors to the LLM automatically?
+							auto_submit_success = true, -- Send any successful output to the LLM automatically?
+						},
+					},
+					keymaps = {
+						clear = { modes = { n = "g<BS>" } },
+					},
+				},
+				-- inline = { adapter = "qwen3" },
+				-- cmd = { adapter = "qwen3" },
 			},
 			adapters = {
-				["qwen2.5-coder"] = function()
+				-- copilot = function()
+				-- 	return require("codecompanion.adapters").extend("copilot", {
+				-- 		schema = {
+				-- 			model = {
+				-- 				default = "claude-3.5-sonnet",
+				-- 			},
+				-- 		},
+				-- 	})
+				-- end,
+				qcode = function()
 					return require("codecompanion.adapters").extend("ollama", {
 						name = "qwen",
 						schema = {
@@ -38,7 +103,7 @@ return {
 						},
 					})
 				end,
-				qwen3 = function()
+				q3 = function()
 					return require("codecompanion.adapters").extend("ollama", {
 						name = "qwen",
 						schema = {
@@ -56,11 +121,8 @@ return {
 		init = function()
 			-- credit to haus20xx - https://github.com/olimorris/codecompanion.nvim/discussions/813#discussioncomment-12289384
 			require("plugins.ai.noice").init()
+			vim.g.codecompanion_auto_tool_mode = true
+			vim.g.mcphub_auto_approve = true
 		end,
-		dependencies = {
-			"folke/noice.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
 	},
 }
