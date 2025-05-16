@@ -1,3 +1,4 @@
+local markdown_fts = { "markdown", "codecompanion" }
 ---@type LazySpec
 return {
 	"nvim-tree/nvim-web-devicons",
@@ -642,7 +643,7 @@ return {
 
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		ft = { "markdown" },
+		ft = markdown_fts,
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
 		---@module 'render-markdown'
 		---@type render.md.UserConfig
@@ -654,7 +655,7 @@ return {
 
 	{
 		"3rd/image.nvim",
-		ft = { "markdown" },
+		ft = markdown_fts,
 		build = false, -- do not build with hererocks
 		---@module 'image'
 		---@type Options
@@ -677,7 +678,7 @@ return {
 
 	{
 		"3rd/diagram.nvim",
-		ft = { "markdown" },
+		ft = markdown_fts,
 		dependencies = {
 			"3rd/image.nvim",
 		},
