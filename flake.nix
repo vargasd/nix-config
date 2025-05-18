@@ -124,6 +124,7 @@
       {
         devShells = {
           c = import ./devShells/c.nix pkgs;
+          gcp = import ./devShells/gcp.nix pkgs;
           lua = import ./devShells/lua.nix pkgs;
           nix = import ./devShells/nix.nix pkgs;
           node23 = import ./devShells/node23.nix pkgs;

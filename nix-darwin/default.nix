@@ -12,6 +12,7 @@ with home;
 
   homebrew = {
     enable = true;
+    # TODO use these via devshell
     taps = [ "edosrecki/tools" ];
     brews = [
       "edosrecki/tools/google-cloud-redis"
