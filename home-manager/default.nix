@@ -5,7 +5,8 @@
   gpgKey,
   ...
 }:
-{
+import ./darwin/default.nix
+// {
   home.stateVersion = "25.05";
 
   home.sessionVariables = {
@@ -237,6 +238,7 @@
   programs.zsh = {
     enable = true;
     enableVteIntegration = true;
+    defaultKeymap = "emacs";
 
     history = {
       append = false; # using INC_APPEND_HISTORY which home-manager doesn't support
@@ -269,29 +271,6 @@
 
   services.ollama = {
     enable = true;
-  };
-
-  services.skhd = {
-    enable = true;
-    config =
-      builtins.readFile ./skhdrc
-      + ''
-        meh - escape   : osascript "${./clear-notifications.scpt}"
-        meh - tab      : osascript "${./tunnelblick.scpt}"
-        hyper - tab    : osascript -e $'tell application "Tunnelblick"\ndisconnect all\nend tell'
-      '';
-  };
-
-  targets.darwin = {
-    keybindings = {
-      "~b" = "moveWordBackward:";
-      "~f" = "moveWordForward:";
-      "^a" = "moveToBeginningOfLine:";
-      "^e" = "moveToEndOfLine:";
-      "~d" = "deleteWordForward:";
-      "^w" = "deleteWordBackward:";
-      "^u" = "deleteToBeginningOfLine:";
-    };
   };
 
   xdg = {
