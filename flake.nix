@@ -36,6 +36,31 @@
       ...
     }@inputs:
     {
+      nixosConfigurations.nuc = nixpkgs.lib.nixosSystem (
+        let
+          specialArgs = {
+            inherit inputs;
+            home = {
+              homeDirectory = "/home/vargasd";
+              user = "vargasd";
+            };
+            additionalConfig = { };
+          };
+        in
+        {
+          system = "x86_64-linux";
+          modules = [
+            ./nixos/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${specialArgs.home.user} = import ./home-manager/default.nix;
+            }
+          ];
+        }
+      );
       darwinConfigurations.work = nix-darwin.lib.darwinSystem (
         let
           specialArgs = {
