@@ -116,7 +116,12 @@ config.keys = {
 		action = workspace_switcher.switch_workspace(),
 	},
 }
+
 config.term = "wezterm"
+config.set_environment_variables = {
+	SAMTERM = "wezterm",
+}
+
 config.window_padding = {
 	left = 0,
 	right = 0,
