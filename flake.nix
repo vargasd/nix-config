@@ -68,7 +68,7 @@
           specialArgs = {
             inherit inputs;
             email = "sam@varga.sh";
-            gpgKey = "9360638973266";
+            gpgKey = "73266EE4";
             home = {
               user = "sam";
               homeDirectory = "/Users/sam";
