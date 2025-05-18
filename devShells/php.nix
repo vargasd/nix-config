@@ -1,5 +1,4 @@
-pkgs:
-pkgs.mkShell {
+pkgs: {
   packages = with pkgs; [
     phpactor
     php

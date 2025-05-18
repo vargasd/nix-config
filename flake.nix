@@ -9,17 +9,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    systems.url = "github:nix-systems/default";
-
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
-    };
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     yazi-plugins = {
       url = "github:yazi-rs/plugins";
@@ -29,9 +29,10 @@
 
   outputs =
     {
+      self,
       home-manager,
       nix-darwin,
-      flake-utils,
+      flake-parts,
       nixpkgs,
       ...
     }@inputs:
@@ -91,27 +92,54 @@
         }
       );
     }
-    // (flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      in
+    // (flake-parts.lib.mkFlake { inherit inputs; } (
+      top@{
+        allSystems,
+        config,
+        withSystem,
+        moduleWithSystem,
+        ...
+      }:
       {
-        devShells = {
-          c = import ./devShells/c.nix pkgs;
-          lua = import ./devShells/lua.nix pkgs;
-          nix = import ./devShells/nix.nix pkgs;
-          node23 = import ./devShells/node23.nix pkgs;
-          node24 = import ./devShells/node24.nix pkgs;
-          php = import ./devShells/php.nix pkgs;
-          pnpm = import ./devShells/pnpm.nix pkgs;
-          ruby = import ./devShells/ruby.nix pkgs;
-          terraform = import ./devShells/terraform.nix pkgs;
-          vue = import ./devShells/vue.nix pkgs;
-        };
+        imports = [
+          inputs.devshell.flakeModule
+        ];
+        flake = { };
+        systems = [
+          "aarch64-darwin"
+          "aarch64-linux"
+          "x86_64-darwin"
+          "x86_64-linux"
+        ];
+        perSystem =
+          {
+            pkgs,
+            system,
+            lib,
+            ...
+          }:
+          {
+            _module.args.pkgs = import self.inputs.nixpkgs {
+              inherit system;
+              config.allowUnfreePredicate =
+                pkg:
+                builtins.elem (lib.getName pkg) [
+                  "terraform"
+                ];
+            };
+            devshells = {
+              c = import ./devShells/c.nix pkgs;
+              lua = import ./devShells/lua.nix pkgs;
+              nix = import ./devShells/nix.nix pkgs;
+              node23 = import ./devShells/node23.nix pkgs;
+              node24 = import ./devShells/node24.nix pkgs;
+              php = import ./devShells/php.nix pkgs;
+              pnpm = import ./devShells/pnpm.nix pkgs;
+              ruby = import ./devShells/ruby.nix pkgs;
+              terraform = import ./devShells/terraform.nix pkgs;
+              vue = import ./devShells/vue.nix pkgs;
+            };
+          };
       }
     ));
 }

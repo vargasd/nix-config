@@ -1,7 +1,11 @@
-pkgs:
-pkgs.mkShell {
+pkgs: {
   packages = with pkgs; [
     vue-language-server
   ];
-  SAM_VUE = "1";
+  env = [
+    {
+      name = "SAM_VUE";
+      value = true;
+    }
+  ];
 }
