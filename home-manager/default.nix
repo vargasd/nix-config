@@ -1,9 +1,10 @@
 {
   pkgs,
   inputs,
+  additionalConfig,
   ...
 }:
-import ./darwin/default.nix
+additionalConfig
 // {
   home.stateVersion = "25.05";
 

@@ -44,6 +44,7 @@
               homeDirectory = "/Users/I763291";
               user = "I763291";
             };
+            additionalConfig = import ./home-manager/darwin/default.nix;
           };
         in
         {
@@ -69,6 +70,7 @@
               user = "sam";
               homeDirectory = "/Users/sam";
             };
+            additionalConfig = import ./home-manager/darwin/default.nix;
           };
         in
         {
