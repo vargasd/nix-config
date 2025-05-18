@@ -1,8 +1,6 @@
 {
   pkgs,
   inputs,
-  email,
-  gpgKey,
   ...
 }:
 import ./darwin/default.nix
@@ -141,10 +139,7 @@ import ./darwin/default.nix
     };
   };
 
-  programs.git = import ./git.nix {
-    email = email;
-    gpgKey = gpgKey;
-  };
+  programs.git = import ./git.nix;
 
   programs.lazygit = {
     enable = true;

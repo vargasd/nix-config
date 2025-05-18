@@ -1,4 +1,3 @@
-{ email, gpgKey }:
 {
   enable = true;
 
@@ -85,9 +84,9 @@
       sort = "version:refname";
     };
     user = {
-      email = email;
+      email = "sam@varga.sh";
+      signingKey = "73266EE4";
       name = "Samuel Varga";
-      signingKey = gpgKey;
     };
     merge = {
       tool = "nvimdiff";
@@ -99,4 +98,15 @@
       vimdiff.layout = "LOCAL,REMOTE / MERGED";
     };
   };
+  includes = [
+    {
+      condition = "gitdir:~/work";
+      contents = {
+        user = {
+          email = "samuel.varga@sap.com";
+          signingKey = "7FF62D2D";
+        };
+      };
+    }
+  ];
 }

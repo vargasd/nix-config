@@ -40,8 +40,6 @@
         let
           specialArgs = {
             inherit inputs;
-            email = "samuel.varga@sap.com";
-            gpgKey = "7FF62D2D";
             home = {
               homeDirectory = "/Users/I763291";
               user = "I763291";
@@ -67,8 +65,6 @@
         let
           specialArgs = {
             inherit inputs;
-            email = "sam@varga.sh";
-            gpgKey = "73266EE4";
             home = {
               user = "sam";
               homeDirectory = "/Users/sam";
