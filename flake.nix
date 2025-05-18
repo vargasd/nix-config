@@ -58,7 +58,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${specialArgs.home.user} = import ./home-manager/default.nix;
-              users.users.${specialArgs.home.user}.home = specialArgs.homeDirectory;
+              users.users.${specialArgs.home.user}.home = specialArgs.home.homeDirectory;
             }
           ];
         }
@@ -85,7 +85,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${specialArgs.home.user} = import ./home-manager/default.nix;
-              users.users.${specialArgs.home.user}.home = specialArgs.homeDirectory;
+              users.users.${specialArgs.home.user}.home = specialArgs.home.homeDirectory;
             }
           ];
         }

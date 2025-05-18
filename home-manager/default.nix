@@ -14,6 +14,60 @@
     HUSKY = 0;
   };
 
+  home.packages = with pkgs; [
+    ast-grep
+    bat
+    # brave
+    btop
+    delta
+    docker
+    eza
+    fd
+    fzf
+    fzf-git-sh
+    gh
+    git
+    gnupg
+    ijq
+    imagemagick
+    jless
+    jq
+    lazygit
+    lazydocker
+    less
+    k9s
+    kubectl
+    neofetch
+    neovim
+    nodejs
+    openapi-tui
+    pass
+    postgresql
+    ripgrep
+    sqlite
+    tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
+    yazi
+    yubikey-manager
+    zoxide
+
+    # TODO Use nix-env for most of these? At least the ones that you don't use all the time
+    # language servers
+    bash-language-server
+    vscode-langservers-extracted # css, eslint, html, json
+    efm-langserver
+    harper
+    marksman
+    postgres-lsp
+    rust-analyzer
+    typescript-language-server
+    typos-lsp
+    vtsls
+    yaml-language-server
+
+    # formatters
+    prettierd
+  ];
+
   programs.home-manager.enable = true;
 
   programs.bat = {
