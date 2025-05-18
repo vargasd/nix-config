@@ -119,14 +119,6 @@
             ...
           }:
           {
-            _module.args.pkgs = import self.inputs.nixpkgs {
-              inherit system;
-              config.allowUnfreePredicate =
-                pkg:
-                builtins.elem (lib.getName pkg) [
-                  "terraform"
-                ];
-            };
             devshells = {
               c = import ./devShells/c.nix pkgs;
               lua = import ./devShells/lua.nix pkgs;

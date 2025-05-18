@@ -1,6 +1,12 @@
 pkgs: {
   packages = with pkgs; [
-    terraform
+    opentofu
     terraform-ls
+  ];
+  commands = [
+    {
+      name = "terraform";
+      command = "tofu";
+    }
   ];
 }
