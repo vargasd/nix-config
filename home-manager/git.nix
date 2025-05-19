@@ -100,7 +100,7 @@
   };
   includes = [
     {
-      condition = "gitdir:~/work";
+      condition = "gitdir:~/work/";
       contents = {
         user = {
           email = "samuel.varga@sap.com";
