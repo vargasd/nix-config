@@ -273,6 +273,18 @@ with home;
     watchIdAuth = true;
   };
 
+  services.skhd = {
+    enable = true;
+    skhdConfig =
+      builtins.readFile ./skhdrc
+      + ''
+        meh - escape   : osascript "${./clear-notifications.scpt}"
+        meh - tab      : osascript "${./tunnelblick.scpt}"
+        hyper - tab    : osascript -e $'tell application "Tunnelblick"\ndisconnect all\nend tell'
+      '';
+  };
+
+
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
 }
