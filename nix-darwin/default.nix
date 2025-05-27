@@ -12,12 +12,7 @@ with home;
 
   homebrew = {
     enable = true;
-    # TODO use these via devshell
-    taps = [ "edosrecki/tools" ];
-    brews = [
-      "edosrecki/tools/google-cloud-redis"
-      "edosrecki/tools/google-cloud-sql"
-    ];
+    brews = [ ];
     casks = [
       "brave-browser"
       "docker"
@@ -283,7 +278,6 @@ with home;
         hyper - tab    : osascript -e $'tell application "Tunnelblick"\ndisconnect all\nend tell'
       '';
   };
-
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
