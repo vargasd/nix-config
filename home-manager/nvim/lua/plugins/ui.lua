@@ -191,7 +191,9 @@ return {
 			end
 
 			vim.keymap.set("n", "<leader>/", builtins.live_grep, { desc = "Live grep" })
-			vim.keymap.set("n", "<leader>?", builtins.grep_string, { desc = "Grep cword" })
+			vim.keymap.set("n", "<leader>?", function()
+				builtins.grep_string({ word_match = "-w" })
+			end, { desc = "Grep cword" })
 			vim.keymap.set("n", "<leader><leader>", builtins.pickers, { desc = "Recent pickers" })
 			vim.keymap.set("n", "<leader>.", grep_prompt, { desc = "Grep in files" })
 			vim.keymap.set("n", "<leader>>", function()
