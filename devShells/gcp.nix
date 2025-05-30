@@ -4,6 +4,7 @@ let
     with pkgs.google-cloud-sdk.components;
     [
       gke-gcloud-auth-plugin
+      config-connector
     ]
   );
 in
