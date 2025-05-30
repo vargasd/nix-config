@@ -37,12 +37,14 @@ additionalConfig
     less
     k9s
     kubectl
+    mermaid-cli
     neofetch
     neovim
     nodejs
     openapi-tui
     pass
     postgresql
+    presenterm
     ripgrep
     sqlite
     tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
@@ -284,6 +286,21 @@ additionalConfig
             "\\b[Nn]oice\\b"
           ]
         '';
+    };
+    configFile."presenterm/config.yaml" = {
+      enable = true;
+      text = builtins.toJSON {
+        defaults = {
+          theme = "terminal-dark";
+        };
+        options = {
+          command_prefix = ".";
+          # end_slide_shorthand = true;
+          # implicit_slide_ends = true;
+          strict_front_matter_parsing = false;
+          auto_render_languages = [ "mermaid" ];
+        };
+      };
     };
   };
 
