@@ -132,7 +132,14 @@
           php = import ./devShells/php.nix pkgs;
           pnpm = import ./devShells/pnpm.nix pkgs;
           ruby = import ./devShells/ruby.nix pkgs;
-          terraform = import ./devShells/terraform.nix pkgs;
+          terraform =
+            let
+              pkgs = import nixpkgs {
+                inherit system;
+                config.allowUnfree = true;
+              };
+            in
+            import ./devShells/terraform.nix pkgs;
           vue = import ./devShells/vue.nix pkgs;
         };
       }

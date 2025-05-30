@@ -1,10 +1,7 @@
 pkgs:
 pkgs.mkShell {
   packages = with pkgs; [
-    opentofu
+    terraform
     terraform-ls
   ];
-  shellHook = ''
-    alias terraform=tofu
-  '';
 }
