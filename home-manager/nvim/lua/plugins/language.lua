@@ -87,9 +87,9 @@ return {
 					filetypes = { "svelte" },
 				},
 				typos_lsp = {
+					autostart = false,
 					init_options = {
-						config = vim.fn.stdpath("config") .. "/../typos-lsp/typos.toml",
-						diagnosticSeverity = "hint",
+						config = vim.fn.stdpath("config"):gsub("/.*?", "") .. "/typos-lsp/typos.toml",
 					},
 				},
 				phpactor = {},
