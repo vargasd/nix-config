@@ -1,7 +1,6 @@
 { pkgs, home, ... }:
 with home;
 {
-
   environment.systemPackages = [ pkgs.defaultbrowser ];
 
   environment.variables = {
@@ -53,6 +52,7 @@ with home;
   time.timeZone = "America/Indiana/Indianapolis";
 
   system = {
+    primaryUser = user;
     # Set Git commit hash for darwin-version.
     configurationRevision = null;
 
@@ -259,7 +259,7 @@ with home;
 
     activationScripts = {
       # Inspired by https://tommorris.org/posts/2024/til-setting-default-browser-on-macos-using-nix/
-      postUserActivation.text = "defaultbrowser browser";
+      # postActivation.text = "sudo defaultbrowser browser";
     };
   };
 

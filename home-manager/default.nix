@@ -56,6 +56,7 @@ additionalConfig
     # language servers
     bash-language-server
     vscode-langservers-extracted # css, eslint, html, json
+    eslint_d
     efm-langserver
     harper
     marksman

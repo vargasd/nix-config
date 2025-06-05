@@ -8,9 +8,6 @@ local on_attach = function(client, bufnr)
 	end
 	local telescope = require("telescope.builtin")
 
-	nmap("<leader>R", vim.cmd.LspRestart, "Restart")
-	nmap("<leader><C-r>", vim.cmd.LspStart, "Start / force restart")
-
 	vim.keymap.set({ "n", "v" }, "gra", function()
 		vim.lsp.buf.code_action({
 			filter = function(action)
@@ -33,7 +30,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"lukas-reineke/lsp-format.nvim",
 			{
 				"creativenull/efmls-configs-nvim",
 				version = "v1.x.x", -- version is optional, but recommended
@@ -44,11 +40,10 @@ return {
 			local stylua = require("efmls-configs.formatters.stylua")
 			local terraform_fmt = require("efmls-configs.formatters.terraform_fmt")
 			-- not working right now
-			-- local prettier = require("efmls-configs.formatters.prettier_d")
-			local prettier = require("efmls-configs.formatters.prettier")
+			local prettier = require("efmls-configs.formatters.prettier_d")
+			-- local prettier = require("efmls-configs.formatters.prettier")
 			local nixfmt = require("efmls-configs.formatters.nixfmt")
-
-			require("lsp-format").setup({})
+			local eslint = require("efmls-configs.linters.eslint_d")
 
 			local servers = {
 				bashls = {
@@ -182,15 +177,14 @@ return {
 					},
 				},
 				efm = {
-					on_attach = require("lsp-format").on_attach,
 					init_options = { documentFormatting = true },
 					settings = {
 						languages = {
-							javascript = { prettier },
+							javascript = { eslint, prettier },
 							json = { prettier },
 							jsonc = { prettier },
-							typescript = { prettier },
-							svelte = { prettier },
+							typescript = { eslint, prettier },
+							svelte = { eslint, prettier },
 							sql = { prettier },
 							markdown = { prettier },
 							typespec = { prettier },
@@ -200,25 +194,26 @@ return {
 						},
 					},
 				},
-				eslint = {
-					on_attach = function(client, bufnr)
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							buffer = bufnr,
-							command = "EslintFixAll",
-						})
-						on_attach(client, bufnr)
-					end,
-					settings = {
-						workingDirectories = { mode = "auto" },
-						codeActionOnSave = { enable = true },
-					},
-				},
 			}
+
+			local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
+			vim.api.nvim_create_autocmd("BufWritePost", {
+				group = lsp_fmt_group,
+				callback = function(ev)
+					local efm = vim.lsp.get_clients({ name = "efm", bufnr = ev.buf })
+
+					if vim.tbl_isempty(efm) then
+						return
+					end
+
+					vim.lsp.buf.format({ name = "efm" })
+				end,
+			})
 
 			if os.getenv("SAM_VUE") ~= nil then
 				servers.ts_ls.autostart = false
 				servers.vtsls.autostart = false
-				servers.volar = {
+				servers.vue_ls = {
 					filetypes = { "typescript", "vue" },
 					init_options = {
 						vue = {
@@ -232,14 +227,20 @@ return {
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 			for server_name, config in pairs(servers) do
-				require("lspconfig")[server_name].setup(vim.tbl_extend("keep", config, {
-					capabilities = capabilities,
-					on_init = function(client)
-						-- treesitter does our highlighting, thanks
-						client.server_capabilities.semanticTokensProvider = nil
-					end,
-					on_attach = on_attach,
-				}))
+				if config.autostart ~= false then
+					vim.lsp.enable(server_name)
+				end
+				vim.lsp.config(
+					server_name,
+					vim.tbl_extend("keep", config, {
+						capabilities = capabilities,
+						on_init = function(client)
+							-- treesitter does our highlighting, thanks
+							client.server_capabilities.semanticTokensProvider = nil
+						end,
+						on_attach = on_attach,
+					})
+				)
 			end
 		end,
 	},
