@@ -26,36 +26,17 @@ return {
 		---@type NoiceConfig
 		opts = {
 			lsp = {
+				progress = { enabled = false, },
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 				},
 			},
-			popupmenu = {
-				enabled = false,
-			},
-			presets = {
-				lsp_doc_border = true,
-			},
-			routes = {
-				{
-					filter = {
-						kind = "",
-						find = "written",
-					},
-					opts = { skip = true },
-				},
-			},
-		},
-		keys = {
-			{
-				"<leader>m",
-				function()
-					vim.cmd.Telescope("noice")
-				end,
-				desc = "Search Messages",
-			},
+			notify = { enabled =false},
+			popupmenu = { enabled = false },
+			messages = { enabled = false },
+			presets = { lsp_doc_border = true },
 		},
 		init = function()
 			vim.o.showmode = false
@@ -380,7 +361,7 @@ return {
 
 	{
 		"mikavilpas/yazi.nvim",
-		dependencies = { "folke/snacks.nvim", lazy = true },
+		dependencies = { "folke/snacks.nvim"},
 		keys = {
 			{
 				"<leader>e",

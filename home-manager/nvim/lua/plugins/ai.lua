@@ -24,7 +24,6 @@ return {
 	{
 		"olimorris/codecompanion.nvim",
 		dependencies = {
-			"folke/noice.nvim",
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 		},
@@ -114,7 +113,9 @@ return {
 		},
 		init = function()
 			-- credit to haus20xx - https://github.com/olimorris/codecompanion.nvim/discussions/813#discussioncomment-12289384
-			require("plugins.ai.noice").init()
+			-- require("plugins.ai.noice").init()
+			-- credit to mbriggs - https://github.com/olimorris/codecompanion.nvim/discussions/912#discussion-7961073
+			require("plugins.ai.notifier").setup()
 			vim.g.codecompanion_auto_tool_mode = true
 			vim.g.mcphub_auto_approve = true
 		end,
