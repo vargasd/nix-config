@@ -220,12 +220,11 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		config = function()
+			vim.o.shortmess = vim.o.shortmess .. "q" -- disables macro message
 			local function macro_recording()
-				local mode = require("noice").api.status.mode.get()
-				if mode then
-					return string.match(mode, "^recording @.*") or ""
-				end
-				return ""
+				-- https://old.reddit.com/r/neovim/comments/18r2bxo/is_there_a_way_to_display_macro_recording_message/keze7b9/
+				local reg = vim.fn.reg_recording()
+				return reg == "" and "" or "recording @" .. reg
 			end
 
 			local base_config = {
