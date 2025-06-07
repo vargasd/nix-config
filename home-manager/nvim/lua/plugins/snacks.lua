@@ -9,7 +9,45 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			-- dashboard = { enabled = true },
-			-- picker = { enabled = true },
+			picker = {
+				enabled = true,
+				win = {
+					input = {
+						keys = {
+							["<Esc>"] = { "close", mode = { "n", "i" } },
+							["<a-a>"] = { "select_all", mode = { "i", "n" } },
+							["<c-a>"] = { "<home>", mode = { "i" }, replace_keycodes = true, expr = true },
+							["<c-u>"] = { "<c-u>", mode = { "i" }, replace_keycodes = true, expr = true },
+							["<a-f>"] = { "<s-right>", mode = { "i" }, replace_keycodes = true, expr = true },
+						},
+					},
+				},
+				prompt = "> ", -- no fancy stuff here
+				layouts = {
+					samvert = {
+						layout = {
+							backdrop = false,
+							width = 0.8,
+							min_width = 80,
+							height = 0.8,
+							min_height = 30,
+							box = "vertical",
+							border = "rounded",
+							title = "{title} {live} {flags}",
+							title_pos = "center",
+							{ win = "input", height = 1, border = "bottom" },
+							{ win = "list", border = "none" },
+							{ win = "preview", title = "{preview}", min_height = 25, height = 0.4, border = "top" },
+						},
+					},
+				},
+				layout = {
+					cycle = true,
+					preset = function()
+						return vim.o.columns >= 200 and "default" or "samvert"
+					end,
+				},
+			},
 			notifier = {
 				enabled = true,
 				top_down = false,
@@ -40,7 +78,12 @@ return {
 				function()
 					Snacks.notifier.show_history()
 				end,
-				desc = "Show Messages",
+			},
+			{
+				"<leader>o",
+				function()
+					Snacks.picker.lsp_symbols()
+				end,
 			},
 		},
 		init = function()

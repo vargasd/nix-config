@@ -146,15 +146,6 @@ return {
 							},
 						},
 					},
-					aerial = {
-						format_symbol = function(symbol_path, filetype)
-							if filetype == "json" or filetype == "yaml" then
-								return table.concat(symbol_path, ".")
-							else
-								return symbol_path[#symbol_path]
-							end
-						end,
-					},
 				},
 			})
 
@@ -387,38 +378,6 @@ return {
 					})
 				end,
 			},
-		},
-	},
-
-	{
-		"hedyhli/outline.nvim",
-		keys = {
-			{ "<leader>O", vim.cmd.Outline, desc = "Toggle outline" },
-		},
-		opts = {
-			outline_window = {
-				position = "left",
-				auto_close = true,
-			},
-		},
-	},
-
-	{
-		"stevearc/aerial.nvim",
-		opts = {},
-		keys = {
-			{
-				"<leader>o",
-				function()
-					vim.cmd.Telescope("aerial")
-				end,
-				desc = "Outline finder",
-			},
-		},
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-			"nvim-telescope/telescope.nvim",
 		},
 	},
 
