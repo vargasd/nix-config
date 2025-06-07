@@ -1,22 +1,8 @@
 local M = {}
 
 local uv = vim.uv
-local api = vim.api
 
 local active = {} -- dictionary of active requests
-
-local S = {
-	frames = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
-	speed = 80, -- milliseconds per frame
-}
-
-local function spinner_frame()
-	local time = math.floor(uv.hrtime() / (1e6 * S.speed))
-	local idx = time % #S.frames + 1
-	local frame = S.frames[idx]
-
-	return frame
-end
 
 local function refresh_notifications(key)
 	return function()
@@ -31,7 +17,7 @@ local function refresh_notifications(key)
 			opts = function(notif)
 				local icon = " "
 				if not req.done then
-					icon = spinner_frame()
+					icon = ""
 				end
 
 				notif.icon = icon
