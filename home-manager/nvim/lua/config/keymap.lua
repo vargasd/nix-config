@@ -41,16 +41,15 @@ local mappings = {
 	{ "]t", vim.cmd.tabnext, { desc = "Next tab" } },
 
 	-- quitty stuff
-	{ "<leader>q", vim.cmd.bdelete, { desc = "Quit buffer" } },
 	{
-		"<leader>Q",
+		"<leader>q",
 		function()
-			vim.cmd.bdelete({ bang = true })
+			Snacks.bufdelete.delete()
 		end,
-		{ desc = "Force quit buffer" },
+		{ desc = "Quit buffer" },
 	},
 	{
-		"<leader><c-q>",
+		"<leader>Q",
 		function()
 			vim.cmd.qall({ bang = true })
 		end,
@@ -87,7 +86,7 @@ local mappings = {
 }
 
 for _, mapping in ipairs(mappings) do
-	local mode = mapping[3] and mapping[3].mode or "n";
+	local mode = mapping[3] and mapping[3].mode or "n"
 	(mapping[3] or {})["mode"] = nil
 	vim.keymap.set(mode, mapping[1], mapping[2], mapping[3])
 end
