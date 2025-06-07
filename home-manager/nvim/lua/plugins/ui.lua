@@ -40,10 +40,6 @@ return {
 			},
 			routes = {
 				{
-					view = "notify",
-					filter = { event = "msg_showmode" },
-				},
-				{
 					filter = {
 						kind = "",
 						find = "written",
@@ -61,6 +57,9 @@ return {
 				desc = "Search Messages",
 			},
 		},
+		init = function()
+			vim.o.showmode = false
+		end,
 	},
 
 	{
