@@ -26,14 +26,14 @@ return {
 		---@type NoiceConfig
 		opts = {
 			lsp = {
-				progress = { enabled = false, },
+				progress = { enabled = false },
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 				},
 			},
-			notify = { enabled =false},
+			notify = { enabled = false },
 			popupmenu = { enabled = false },
 			messages = { enabled = false },
 			presets = { lsp_doc_border = true },
@@ -361,19 +361,17 @@ return {
 
 	{
 		"mikavilpas/yazi.nvim",
-		dependencies = { "folke/snacks.nvim"},
+		dependencies = { "folke/snacks.nvim" },
 		keys = {
 			{
 				"<leader>e",
 				vim.cmd.Yazi,
-				desc = "Open the file manager at buffer",
 			},
 			{
 				"<leader>E",
 				function()
 					vim.cmd.Yazi("cwd")
 				end,
-				desc = "Open the file manager at cwd",
 			},
 		},
 		---require('yazi')
