@@ -10,12 +10,6 @@ return {
 		opts = {
 			use_bundled_binary = true,
 			auto_approve = true,
-			log = {
-				level = vim.log.levels.DEBUG,
-				to_file = true,
-				file_path = "/tmp/mcphub.log",
-				prefix = "MCPHub",
-			},
 		},
 	},
 
