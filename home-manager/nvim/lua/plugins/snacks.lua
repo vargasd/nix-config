@@ -85,6 +85,30 @@ return {
 					Snacks.picker.lsp_symbols()
 				end,
 			},
+			{
+				"grd",
+				function()
+					Snacks.picker.lsp_definitions()
+				end,
+			},
+			{
+				"grr",
+				function()
+					Snacks.picker.lsp_references()
+				end,
+			},
+			{
+				"gri",
+				function()
+					Snacks.picker.lsp_implementations()
+				end,
+			},
+			{
+				"gry",
+				function()
+					Snacks.picker.lsp_type_definitions()
+				end,
+			},
 		},
 		init = function()
 			vim.g.snacks_animate = false

@@ -1,13 +1,4 @@
 local on_attach = function(client, bufnr)
-	local nmap = function(keys, func, desc)
-		if desc then
-			desc = "LSP: " .. desc
-		end
-
-		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-	end
-	local telescope = require("telescope.builtin")
-
 	vim.keymap.set({ "n", "v" }, "gra", function()
 		vim.lsp.buf.code_action({
 			filter = function(action)
@@ -15,13 +6,6 @@ local on_attach = function(client, bufnr)
 			end,
 		})
 	end, { desc = "Code Action", buffer = bufnr }) -- 'weilbith/nvim-code-action-menu',
-
-	nmap("grd", telescope.lsp_definitions, "Definition")
-	nmap("grr", telescope.lsp_references, "References")
-	nmap("gri", telescope.lsp_implementations, "Implementation")
-	nmap("gry", telescope.lsp_type_definitions, "Type")
-
-	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 	vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 end
 
