@@ -3,17 +3,6 @@ return {
 	{ "tpope/vim-sleuth", event = "VeryLazy" },
 
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		event = "InsertEnter",
-		opts = {
-			indent = { char = "·" },
-			scope = { enabled = false },
-			whitespace = { remove_blankline_trail = true },
-		},
-	},
-
-	{
 		"folke/flash.nvim",
 		keys = {
 			{
