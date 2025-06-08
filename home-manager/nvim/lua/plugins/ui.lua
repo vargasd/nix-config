@@ -148,55 +148,6 @@ return {
 	},
 
 	{
-		"voldikss/vim-floaterm",
-		cmd = {
-			"FloatermToggle",
-			"FloatermNew",
-		},
-		keys = {
-			{
-				"<leader>t",
-				function()
-					vim.cmd.FloatermToggle("main")
-				end,
-				desc = "Terminal",
-			},
-			{
-				"<leader>T",
-				"<cmd>FloatermNew! --disposable cd %:p:h<CR>",
-				desc = "Terminal at current dir",
-			},
-		},
-		init = function()
-			vim.g.floaterm_opener = "edit"
-			vim.g.floaterm_height = 0.9
-			vim.g.floaterm_width = 0.9
-
-			for i = 0, 9 do
-				vim.keymap.set("n", "<leader>" .. i, function()
-					vim.cmd.FloatermToggle("terminal " .. i)
-				end, { desc = "Terminal " .. i })
-			end
-
-			vim.api.nvim_create_autocmd("TermOpen", {
-				callback = function(args)
-					vim.keymap.set({ "n", "t" }, "<C-q>", vim.cmd.FloatermToggle, { buffer = args.buf })
-					vim.keymap.set("t", "<C-z>", "<C-\\><C-n>", { buffer = args.buf })
-					vim.keymap.set("n", "s", function()
-						require("flash").jump({
-							search = {
-								mode = function(str)
-									return "\\<" .. str
-								end,
-							},
-						})
-					end, { buffer = args.buf })
-				end,
-			})
-		end,
-	},
-
-	{
 		"chomosuke/term-edit.nvim",
 		event = "TermOpen",
 		version = "1.*",

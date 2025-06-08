@@ -1,4 +1,14 @@
 ---@module 'snacks'
+---@type snacks.win.Config
+local float_win = {
+	relative = "editor",
+	backdrop = false,
+	width = 0.8,
+	min_width = 80,
+	height = 0.8,
+	min_height = 30,
+	border = "rounded",
+}
 ---@type LazySpec
 return {
 	{
@@ -27,20 +37,14 @@ return {
 				prompt = "> ", -- no fancy stuff here
 				layouts = {
 					samvert = {
-						layout = {
-							backdrop = false,
-							width = 0.8,
-							min_width = 80,
-							height = 0.8,
-							min_height = 30,
+						layout = vim.tbl_extend("error", float_win, {
 							box = "vertical",
-							border = "rounded",
 							title = "{title} {live} {flags}",
 							title_pos = "center",
 							{ win = "input", height = 1, border = "bottom" },
 							{ win = "list", border = "none" },
 							{ win = "preview", title = "{preview}", min_height = 25, height = 0.4, border = "top" },
-						},
+						}),
 					},
 				},
 				layout = {
@@ -73,6 +77,7 @@ return {
 				end,
 			},
 			quickfile = { enabled = true },
+			terminal = { win = float_win, },
 		},
 		keys = {
 			{
@@ -195,6 +200,18 @@ return {
 				"<leader>G",
 				function()
 					Snacks.lazygit.open()
+				end,
+			},
+			{
+				"<leader>t",
+				function()
+					Snacks.terminal.toggle(vim.o.shell)
+				end,
+			},
+			{
+				"<leader>T",
+				function()
+					Snacks.terminal.toggle(vim.o.shell, { cwd = vim.fn.expand("%:p:h") })
 				end,
 			},
 		},
