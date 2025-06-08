@@ -150,7 +150,9 @@ return {
 			{
 				"<leader>b",
 				function()
-					Snacks.picker.buffers()
+					Snacks.picker.buffers({
+						current = false,
+					})
 				end,
 			},
 			{
