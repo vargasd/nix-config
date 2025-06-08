@@ -10,6 +10,7 @@ return {
 			bigfile = { enabled = true },
 			-- dashboard = { enabled = true },
 			image = { enabled = true },
+			lazygit = { configure = false },
 			picker = {
 				enabled = true,
 				win = {
@@ -180,6 +181,18 @@ return {
 				"<leader>H",
 				function()
 					Snacks.picker.highlights()
+				end,
+			},
+			{
+				"<leader>gh",
+				function()
+					Snacks.lazygit.log_file()
+				end,
+			},
+			{
+				"<leader>G",
+				function()
+					Snacks.lazygit.open()
 				end,
 			},
 		},

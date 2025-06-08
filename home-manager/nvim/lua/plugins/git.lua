@@ -74,14 +74,4 @@ return {
 		},
 	},
 
-	{
-		"kdheepak/lazygit.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		keys = {
-			{ "<leader>G", vim.cmd.LazyGit, desc = "LazyGit" },
-			{ "<leader>gh", vim.cmd.LazyGitFilterCurrentFile, desc = "Show file commits" },
-		},
-	},
 }
