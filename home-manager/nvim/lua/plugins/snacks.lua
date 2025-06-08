@@ -10,11 +10,6 @@ return {
 			bigfile = { enabled = true },
 			-- dashboard = { enabled = true },
 			image = { enabled = true },
-			indent = {
-				enabled = true,
-				indent = { char = "·" },
-				scope = { enabled = false },
-			},
 			picker = {
 				enabled = true,
 				win = {
@@ -113,6 +108,78 @@ return {
 				"gry",
 				function()
 					Snacks.picker.lsp_type_definitions()
+				end,
+			},
+			{
+				"<leader>/",
+				function()
+					Snacks.picker.grep({
+						hidden = true,
+						glob = "!**/.git/**/*",
+					})
+				end,
+			},
+			{
+				"<leader>?",
+				function()
+					Snacks.picker.grep_word()
+				end,
+			},
+			{
+				"<leader><leader>",
+				function()
+					Snacks.picker.resume()
+				end,
+			},
+			{
+				"<leader>f",
+				function()
+					Snacks.picker.smart()
+				end,
+			},
+			{
+				"<leader>F",
+				function()
+					Snacks.picker.files({
+						hidden = true,
+						ignored = true,
+					})
+				end,
+			},
+			{
+				"<leader>b",
+				function()
+					Snacks.picker.buffers()
+				end,
+			},
+			{
+				"<leader>B",
+				function()
+					Snacks.picker.recent()
+				end,
+			},
+			{
+				"<leader>d",
+				function()
+					Snacks.picker.diagnostics_buffer()
+				end,
+			},
+			{
+				"<leader>D",
+				function()
+					Snacks.picker.diagnostics()
+				end,
+			},
+			{
+				"<leader>h",
+				function()
+					Snacks.picker.help()
+				end,
+			},
+			{
+				"<leader>H",
+				function()
+					Snacks.picker.highlights()
 				end,
 			},
 		},
