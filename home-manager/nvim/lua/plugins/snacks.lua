@@ -3,10 +3,8 @@
 local float_win = {
 	relative = "editor",
 	backdrop = false,
-	width = 0.8,
-	min_width = 80,
-	height = 0.8,
-	min_height = 30,
+	width = 0.9,
+	height = 0.9,
 	border = "rounded",
 }
 ---@type LazySpec
