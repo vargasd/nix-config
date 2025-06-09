@@ -155,14 +155,7 @@ return {
 				end
 				vim.lsp.config(
 					server_name,
-					vim.tbl_extend("keep", config, {
-						capabilities = capabilities,
-						on_init = function(client)
-							-- treesitter does our highlighting, thanks
-							client.server_capabilities.semanticTokensProvider = nil
-						end,
-						on_attach = on_attach,
-					})
+					vim.tbl_extend("keep", config, { capabilities = capabilities, })
 				)
 			end
 		end,
