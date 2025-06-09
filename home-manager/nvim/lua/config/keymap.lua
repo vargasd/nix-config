@@ -83,6 +83,8 @@ local mappings = {
 		end,
 		{ desc = "Toggle quickfix" },
 	},
+
+	{ "<C-k>", vim.lsp.buf.signature_help, { mode = { "n", "i" }, desc = "Signature Help" } },
 }
 
 for _, mapping in ipairs(mappings) do

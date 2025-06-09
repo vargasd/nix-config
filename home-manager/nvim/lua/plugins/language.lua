@@ -1,14 +1,3 @@
-local on_attach = function(client, bufnr)
-	vim.keymap.set({ "n", "v" }, "gra", function()
-		vim.lsp.buf.code_action({
-			filter = function(action)
-				return action.kind ~= "refactor.move"
-			end,
-		})
-	end, { desc = "Code Action", buffer = bufnr }) -- 'weilbith/nvim-code-action-menu',
-	vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
-end
-
 ---@type LazySpec[]
 return {
 	{
