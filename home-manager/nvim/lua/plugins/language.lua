@@ -41,7 +41,6 @@ return {
 						},
 					},
 				},
-				clangd = {},
 				cssls = {},
 				html = {},
 				marksman = {},
@@ -56,12 +55,10 @@ return {
 						},
 					},
 				},
-				nixd = {},
 				prismals = {},
 				rust_analyzer = {},
 				svelte = {},
 				tsp_server = {},
-				terraformls = {},
 				tailwindcss = {
 					filetypes = { "svelte" },
 				},
@@ -71,7 +68,6 @@ return {
 						config = vim.fn.stdpath("config"):gsub("/.*?", "") .. "/typos-lsp/typos.toml",
 					},
 				},
-				phpactor = {},
 				yamlls = {},
 				jsonls = {
 					settings = {
@@ -146,19 +142,6 @@ return {
 						on_attach(client, bufnr)
 					end,
 				},
-				lua_ls = {
-					settings = {
-						Lua = {
-							telemetry = { enable = false },
-							workspace = {
-								checkThirdParty = false,
-								library = vim.api.nvim_get_runtime_file("", true),
-							},
-							diagnostics = {
-								globals = { "vim" },
-							},
-						},
-					},
 				},
 				efm = {
 					init_options = { documentFormatting = true },
@@ -193,19 +176,6 @@ return {
 					vim.lsp.buf.format({ name = "efm" })
 				end,
 			})
-
-			if os.getenv("SAM_VUE") ~= nil then
-				servers.ts_ls.autostart = false
-				servers.vtsls.autostart = false
-				servers.vue_ls = {
-					filetypes = { "typescript", "vue" },
-					init_options = {
-						vue = {
-							hybridMode = false,
-						},
-					},
-				}
-			end
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)

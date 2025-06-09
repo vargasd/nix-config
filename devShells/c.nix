@@ -4,4 +4,10 @@ pkgs.mkShell {
     clang
     clang-tools
   ];
+  shellHook = ''
+    cat <<- LUA > .lazy.lua
+      vim.lsp.enable("clangd")
+      return {}
+    LUA
+  '';
 }

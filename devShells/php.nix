@@ -4,4 +4,10 @@ pkgs.mkShell {
     phpactor
     php
   ];
+  shellHook = ''
+    cat <<- LUA > .lazy.lua
+      vim.lsp.enable("phpactor")
+      return {}
+    LUA
+  '';
 }
