@@ -44,13 +44,6 @@ return {
 						},
 					},
 				},
-				prismals = {},
-				rust_analyzer = {},
-				svelte = {},
-				tsp_server = {},
-				tailwindcss = {
-					filetypes = { "svelte" },
-				},
 				typos_lsp = {
 					autostart = false,
 					init_options = {
@@ -118,19 +111,6 @@ return {
 							},
 						},
 					},
-					on_attach = function(client, bufnr)
-						-- not working; open in picker
-						vim.keymap.set("n", "gD", function()
-							local params = vim.lsp.util.make_position_params()
-							vim.lsp.buf_request(0, "workspace/executeCommand", {
-								command = "typescript.goToSourceDefinition",
-								arguments = { params.textDocument.uri, params.position },
-							}, function() end)
-						end, { desc = "TypeScript: Source Definition" })
-
-						on_attach(client, bufnr)
-					end,
-				},
 				},
 				efm = {
 					init_options = { documentFormatting = true },
