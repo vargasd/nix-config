@@ -185,9 +185,8 @@ return {
 			open_for_directories = true,
 			integrations = {
 				grep_in_directory = function(cwd)
-					require("snacks.picker").grep({
+					Snacks.picker.grep({
 						cwd = cwd,
-						ignored = true,
 						hidden = true,
 					})
 				end,

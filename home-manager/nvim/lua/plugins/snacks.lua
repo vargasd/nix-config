@@ -126,7 +126,9 @@ return {
 			{
 				"<leader>?",
 				function()
-					Snacks.picker.grep_word()
+					Snacks.picker.grep_word({
+						hidden = true,
+					})
 				end,
 			},
 			{
