@@ -77,7 +77,7 @@ return {
 				end,
 			},
 			quickfile = { enabled = true },
-			terminal = { win = float_win, },
+			terminal = { win = float_win },
 		},
 		keys = {
 			{
@@ -157,6 +157,7 @@ return {
 				function()
 					Snacks.picker.buffers({
 						current = false,
+						sort_lastused = true,
 					})
 				end,
 			},
