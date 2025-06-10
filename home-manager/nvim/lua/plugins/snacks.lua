@@ -106,7 +106,7 @@ return {
 							title_pos = "center",
 							{ win = "input", height = 1, border = "bottom" },
 							{ win = "list", border = "none" },
-							{ win = "preview", title = "{preview}", min_height = 25, height = 0.4, border = "top" },
+							{ win = "preview", title = "{preview}", min_height = 15, height = 0.4, border = "top" },
 						}),
 					},
 				},
