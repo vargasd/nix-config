@@ -177,17 +177,11 @@ return {
 				}
 			end
 
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
 			for server_name, config in pairs(servers) do
 				if config.autostart ~= false then
 					vim.lsp.enable(server_name)
 				end
-				vim.lsp.config(
-					server_name,
-					vim.tbl_extend("keep", config, { capabilities = capabilities, })
-				)
+				vim.lsp.config(server_name, config)
 			end
 		end,
 	},
