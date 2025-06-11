@@ -86,6 +86,22 @@ return {
 			lazygit = { configure = false },
 			picker = {
 				enabled = true,
+				toggles = {
+					tests = "",
+				},
+				transform = function(item, ctx)
+					local disallowed = ".spec.ts"
+					local allowed = ctx.picker.opts.tests
+						or not (item.file and item.file:sub(-#disallowed) == disallowed)
+					return allowed
+				end,
+				tests = true,
+				actions = {
+					toggle_tests = function(picker)
+						picker.opts.tests = not picker.opts.tests
+						picker:find()
+					end,
+				},
 				win = {
 					input = {
 						keys = {
@@ -94,7 +110,23 @@ return {
 							["<c-a>"] = { "<home>", mode = { "i" }, replace_keycodes = true, expr = true },
 							["<c-u>"] = { "<c-u>", mode = { "i" }, replace_keycodes = true, expr = true },
 							["<a-f>"] = { "<s-right>", mode = { "i" }, replace_keycodes = true, expr = true },
+							["<a-t>"] = { "toggle_tests", mode = { "i", "n" } },
 						},
+					},
+				},
+				sources = {
+					grep = {
+						finder = function(opts, ctx)
+							local glob = "!**/*.spec.ts"
+							local globs = type(opts.glob) == "table" and opts.glob or { opts.glob }
+							opts.glob = vim.tbl_filter(function(arg)
+								return arg ~= glob
+							end, globs)
+							if not opts.tests then
+								table.insert(opts.glob, glob)
+							end
+							return require("snacks.picker.source.grep").grep(opts, ctx)
+						end,
 					},
 				},
 				prompt = "> ", -- no fancy stuff here
@@ -215,7 +247,6 @@ return {
 				function()
 					Snacks.picker.grep({
 						hidden = true,
-						glob = "!**/.git/**/*",
 					})
 				end,
 			},
