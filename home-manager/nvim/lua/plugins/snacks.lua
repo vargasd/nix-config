@@ -140,7 +140,20 @@ return {
 				end,
 			},
 			quickfile = { enabled = true },
-			terminal = { win = float_win },
+			terminal = {
+				win = vim.tbl_extend("error", float_win, {
+					keys = {
+						{ "<c-q>", "hide", mode = "t" },
+						{
+							"<c-z>",
+							function()
+								vim.cmd("stopinsert")
+							end,
+							mode = "t",
+						},
+					},
+				}),
+			},
 		},
 		keys = {
 			{
