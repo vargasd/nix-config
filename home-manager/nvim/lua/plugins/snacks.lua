@@ -165,6 +165,24 @@ return {
 			{
 				"<leader>o",
 				function()
+					Snacks.picker.lsp_symbols({
+						filter = {
+							default = {
+								"Class",
+								"Constructor",
+								"Function",
+								"Method",
+								"Module",
+								"Namespace",
+								"Package",
+							},
+						},
+					})
+				end,
+			},
+			{
+				"<leader>O",
+				function()
 					Snacks.picker.lsp_symbols()
 				end,
 			},
