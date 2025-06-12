@@ -183,6 +183,7 @@ return {
 							end,
 							mode = "t",
 						},
+						{ "<esc>", "<esc>", mode = "t", expr = true },
 					},
 				}),
 			},
