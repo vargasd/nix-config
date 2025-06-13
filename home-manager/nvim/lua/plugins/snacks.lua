@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields, inject-field
 ---@module 'snacks'
 ---@type snacks.win.Config
 local float_win = {
