@@ -35,7 +35,6 @@ additionalConfig
     lazygit
     lazydocker
     less
-    k9s
     kubectl
     mermaid-cli
     neofetch
@@ -149,6 +148,10 @@ additionalConfig
   };
 
   programs.git = import ./git.nix;
+
+  programs.k9s = {
+    enable = true;
+  };
 
   programs.lazygit = {
     enable = true;
