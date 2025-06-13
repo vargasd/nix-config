@@ -104,10 +104,15 @@ return {
 					files = { enabled = false },
 				},
 				transform = function(item, ctx)
-					local disallowed = ".spec.ts"
-					local allowed = ctx.picker.opts.tests
-						or not (item.file and item.file:sub(-#disallowed) == disallowed)
-					return allowed
+					local test_regexes = { "%.spec%.[tj]s$", "%.test%.[tj]s$" }
+					if not ctx.picker.opts.tests and item.file then
+						for _, value in ipairs(test_regexes) do
+							if item.file:match(value) ~= nil then
+								return false
+							end
+						end
+					end
+					return true
 				end,
 				tests = true,
 				actions = {
