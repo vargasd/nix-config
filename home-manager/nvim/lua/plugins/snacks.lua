@@ -89,6 +89,19 @@ return {
 				toggles = {
 					tests = "",
 				},
+				formatters = {
+					file = {
+						filename_first = true,
+						truncate = 60,
+					},
+					selected = {
+						show_always = true,
+						unselected = false,
+					},
+				},
+				icons = {
+					files = { enabled = false },
+				},
 				transform = function(item, ctx)
 					local disallowed = ".spec.ts"
 					local allowed = ctx.picker.opts.tests
@@ -128,6 +141,8 @@ return {
 							return require("snacks.picker.source.grep").grep(opts, ctx)
 						end,
 					},
+					smart = { formatters = { file = { filename_first = false, truncate = 80 } } },
+					files = { formatters = { file = { filename_first = false, truncate = 80 } } },
 				},
 				prompt = "> ", -- no fancy stuff here
 				layouts = {
