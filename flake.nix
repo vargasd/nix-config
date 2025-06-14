@@ -69,7 +69,6 @@
               homeDirectory = "/Users/I763291";
               user = "I763291";
             };
-            additionalConfig = import ./home-manager/darwin/default.nix;
           };
         in
         {
@@ -81,7 +80,7 @@
               home-manager.extraSpecialArgs = specialArgs;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.home.user} = import ./home-manager/default.nix;
+              home-manager.users.${specialArgs.home.user} = import ./home-manager/darwin.nix;
               users.users.${specialArgs.home.user}.home = specialArgs.home.homeDirectory;
             }
           ];
@@ -95,7 +94,6 @@
               user = "sam";
               homeDirectory = "/Users/sam";
             };
-            additionalConfig = import ./home-manager/darwin/default.nix;
           };
         in
         {
@@ -107,7 +105,7 @@
               home-manager.extraSpecialArgs = specialArgs;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.home.user} = import ./home-manager/default.nix;
+              home-manager.users.${specialArgs.home.user} = import ./home-manager/darwin.nix;
               users.users.${specialArgs.home.user}.home = specialArgs.home.homeDirectory;
             }
           ];

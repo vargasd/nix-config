@@ -1,11 +1,9 @@
 {
   pkgs,
   inputs,
-  additionalConfig,
   ...
 }:
-additionalConfig
-// {
+{
   home.stateVersion = "25.05";
 
   home.sessionVariables = {

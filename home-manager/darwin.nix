@@ -1,4 +1,9 @@
+{ pkgs, ... }:
 {
+  imports = [
+    ./default.nix
+  ];
+
   home.sessionVariables = {
     PUPPETEER_EXECUTABLE_PATH = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser";
   };
