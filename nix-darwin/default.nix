@@ -268,6 +268,11 @@ with home;
     watchIdAuth = true;
   };
 
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
   services.skhd = {
     enable = true;
     skhdConfig =

@@ -8,6 +8,8 @@
     PUPPETEER_EXECUTABLE_PATH = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser";
   };
 
+  services.gpg-agent.pinentry.package = pkgs.pinentry_mac;
+
   targets.darwin = {
     keybindings = {
       "~b" = "moveWordBackward:";
