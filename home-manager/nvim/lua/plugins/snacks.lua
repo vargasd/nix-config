@@ -147,6 +147,7 @@ return {
 							return require("snacks.picker.source.grep").grep(opts, ctx)
 						end,
 					},
+					buffers = { formatters = { file = { filename_first = false, truncate = 80 } } },
 					smart = { formatters = { file = { filename_first = false, truncate = 80 } } },
 					files = { formatters = { file = { filename_first = false, truncate = 80 } } },
 				},
