@@ -317,7 +317,11 @@ return {
 			vim.o.foldlevel = 99
 			vim.o.foldlevelstart = 99
 		end,
-		opts = {},
+		opts = {
+			provider_selector = function()
+				return { "treesitter", "indent" }
+			end,
+		},
 		keys = {
 			{
 				"zR",
