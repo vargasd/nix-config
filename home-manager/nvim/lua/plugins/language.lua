@@ -117,6 +117,7 @@ return {
 					},
 				},
 				lua_ls = {
+					enable_highlights = true,
 					settings = {
 						Lua = {
 							telemetry = { enable = false },
@@ -161,6 +162,18 @@ return {
 					end
 
 					vim.lsp.buf.format({ name = "efm" })
+				end,
+			})
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(ev)
+					local client = vim.lsp.get_client_by_id(ev.data.client_id)
+					if not servers[client.name].enable_highlights then
+						client.server_capabilities.semanticTokensProvider = nil
+					end
+
+					-- TODO: remove nvim-colorizer and use this when upgrading to 0.12
+					-- vim.lsp.document_color.enable(true, args.buf)
 				end,
 			})
 
