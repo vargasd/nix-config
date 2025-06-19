@@ -384,6 +384,7 @@ return {
 		"cameron-wags/rainbow_csv.nvim",
 		ft = require("common").csv_fts,
 		priority = 100,
+		opts = {},
 		keys = {
 			{
 				"<leader>r",
