@@ -1,8 +1,6 @@
 { pkgs, home, ... }:
 with home;
 {
-  environment.systemPackages = [ pkgs.defaultbrowser ];
-
   environment.variables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
@@ -271,17 +269,6 @@ with home;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-  };
-
-  services.skhd = {
-    enable = true;
-    skhdConfig =
-      builtins.readFile ./skhdrc
-      + ''
-        meh - escape   : osascript "${./clear-notifications.scpt}"
-        meh - tab      : osascript "${./tunnelblick.scpt}"
-        hyper - tab    : osascript -e $'tell application "Tunnelblick"\ndisconnect all\nend tell'
-      '';
   };
 
   # The platform the configuration will be used on.
