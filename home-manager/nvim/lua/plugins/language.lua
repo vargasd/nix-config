@@ -168,7 +168,8 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)
 					local client = vim.lsp.get_client_by_id(ev.data.client_id)
-					if not servers[client.name].enable_highlights then
+					local config = servers[client.name]
+					if config and not config.enable_highlights then
 						client.server_capabilities.semanticTokensProvider = nil
 					end
 
