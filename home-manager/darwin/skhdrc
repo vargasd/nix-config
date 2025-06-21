@@ -3,7 +3,7 @@ meh - v        : open -a 'Microsoft Teams'
 meh - s        : open -a slack
 meh - m        : open -a mail
 hyper - m      : open -a messages
-meh - p        : open -a 1password
+meh - p        : open -a spotify
 hyper - p      : open -a passwords
 meh - i        : open -a jira
 meh - l        : open -a logs
