@@ -53,6 +53,14 @@ return {
 				add = "Sa",
 				delete = "Sd",
 				replace = "Sr",
+				-- these will set horrible defaults if not blank
+				find = "",
+				find_left = "",
+				highlight = "",
+				update_n_lines = "",
+
+				suffix_last = "l",
+				suffix_next = "n",
 			},
 		},
 	},
