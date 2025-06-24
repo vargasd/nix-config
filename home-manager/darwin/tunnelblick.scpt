@@ -1,5 +1,6 @@
 try
-	set vpnPassword to do shell script "ykman oath accounts code -s emarsys-vpn"
+	set ykPasswordDialog to display dialog "Yubikey OATH password" default answer "" buttons {"Cancel", "OK"} default button "OK" with hidden answer
+	set vpnPassword to do shell script "ykman oath accounts code -s emarsys-vpn -p " & (text returned of the ykPasswordDialog)
 
 	tell application "Tunnelblick"
 			get configurations
