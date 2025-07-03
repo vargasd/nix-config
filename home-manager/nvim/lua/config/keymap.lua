@@ -71,7 +71,7 @@ local mappings = {
 
 	-- savey stuff
 	{ "<leader>w", vim.cmd.write, { desc = "Write" } },
-	{ "<leader>W", vim.cmd.wall, { desc = "Write" } },
+	{ "<leader>W", ":noa w<CR>", { desc = "Write", silent = true } },
 
 	{
 		"<C-q>",
