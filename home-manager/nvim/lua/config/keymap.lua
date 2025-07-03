@@ -10,14 +10,16 @@ local mappings = {
 	-- no space ops since it's the leader
 	{ "<Space>", "<Nop>", { silent = true, mode = { "n", "v" } } },
 	-- unhighlight on esc
-	{ "<esc>", 
-		function ()
-			vim.cmd('nohlsearch')
+	{
+		"<esc>",
+		function()
+			vim.cmd("nohlsearch")
 			if vim.snippet then
 				vim.snippet.stop()
 			end
-		end
-, { mode = { "n", "t" } } },
+		end,
+		{ mode = { "n", "t" } },
+	},
 
 	-- UI Line movement
 	{ "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true } },
