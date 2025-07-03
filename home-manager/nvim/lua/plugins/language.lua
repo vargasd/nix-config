@@ -152,16 +152,20 @@ return {
 			}
 
 			local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
-			vim.api.nvim_create_autocmd("BufWritePost", {
+			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = lsp_fmt_group,
 				callback = function(ev)
-					local efm = vim.lsp.get_clients({ name = "efm", bufnr = ev.buf })
-
-					if vim.tbl_isempty(efm) then
+					if not vim.bo.modifiable or vim.b.skip_autoformat == true then
 						return
 					end
 
-					vim.lsp.buf.format({ name = "efm" })
+					local efm = vim.lsp.get_clients({ name = "efm", bufnr = ev.buf })
+
+					if vim.tbl_isempty(efm) then
+						vim.lsp.buf.format()
+					else
+						vim.lsp.buf.format({ name = "efm" })
+					end
 				end,
 			})
 
