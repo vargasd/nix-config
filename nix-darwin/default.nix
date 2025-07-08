@@ -12,7 +12,6 @@ with home;
     brews = [ ];
     casks = [
       "brave-browser"
-      "docker"
       "homerow"
       "orcaslicer"
       "notunes"
