@@ -16,7 +16,6 @@ return {
 			local prettier = require("efmls-configs.formatters.prettier_d")
 			-- local prettier = require("efmls-configs.formatters.prettier")
 			local nixfmt = require("efmls-configs.formatters.nixfmt")
-			local eslint = require("efmls-configs.linters.eslint_d")
 
 			local servers = {
 				bashls = {
@@ -89,6 +88,7 @@ return {
 					init_options = {
 						hostInfo = "neovim",
 						preferences = {
+							importModuleSpecifierPreference = "relative",
 							includeCompletionsWithSnippetText = true,
 							includeCompletionsForImportStatements = true,
 						},
@@ -135,11 +135,11 @@ return {
 					init_options = { documentFormatting = true },
 					settings = {
 						languages = {
-							javascript = { eslint, prettier },
+							javascript = { prettier },
 							json = { prettier },
 							jsonc = { prettier },
-							typescript = { eslint, prettier },
-							svelte = { eslint, prettier },
+							typescript = { prettier },
+							svelte = { prettier },
 							sql = { prettier },
 							markdown = { prettier },
 							typespec = { prettier },
@@ -147,6 +147,12 @@ return {
 							lua = { stylua },
 							terraform = { terraform_fmt },
 						},
+					},
+				},
+				eslint = {
+					settings = {
+						workingDirectories = { mode = "auto" },
+						codeActionOnSave = { enable = true },
 					},
 				},
 			}
@@ -160,6 +166,10 @@ return {
 					end
 
 					local efm = vim.lsp.get_clients({ name = "efm", bufnr = ev.buf })
+					local eslint = vim.lsp.get_clients({ name = "eslint", bufnr = ev.buf })
+					if not vim.tbl_isempty(eslint) then
+						vim.cmd.LspEslintFixAll()
+					end
 
 					if vim.tbl_isempty(efm) then
 						vim.lsp.buf.format()
