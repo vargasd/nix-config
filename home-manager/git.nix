@@ -31,6 +31,7 @@
     ".gitoverlay"
     ".direnv"
     ".envrc"
+    ".lazy.lua"
   ];
 
   delta = {
