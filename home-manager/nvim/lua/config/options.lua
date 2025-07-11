@@ -24,6 +24,9 @@ vim.wo.signcolumn = "yes"
 vim.o.relativenumber = true
 vim.o.number = true
 
+-- until noice supports using this, we'll just go with what they use :(
+vim.o.winborder = "rounded"
+
 vim.opt.listchars = {
 	tab = "· ",
 	trail = "-",

@@ -6,7 +6,7 @@ local float_win = {
 	backdrop = false,
 	width = 0.9,
 	height = 0.9,
-	border = "rounded",
+	border = vim.o.winborder,
 }
 ---@type LazySpec
 return {
