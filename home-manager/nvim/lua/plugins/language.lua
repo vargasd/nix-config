@@ -17,7 +17,7 @@ return {
 			-- local prettier = require("efmls-configs.formatters.prettier")
 			local nixfmt = require("efmls-configs.formatters.nixfmt")
 
-			local servers = {
+			local servers = vim.tbl_deep_extend("keep", vim.g.sam_lsp_configs or {}, {
 				bashls = {
 					settings = {
 						bashIde = {
@@ -88,7 +88,6 @@ return {
 					init_options = {
 						hostInfo = "neovim",
 						preferences = {
-							importModuleSpecifierPreference = "relative",
 							includeCompletionsWithSnippetText = true,
 							includeCompletionsForImportStatements = true,
 						},
@@ -155,7 +154,7 @@ return {
 						codeActionOnSave = { enable = true },
 					},
 				},
-			}
+			})
 
 			local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
 			vim.api.nvim_create_autocmd("BufWritePre", {
