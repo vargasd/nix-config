@@ -21,7 +21,6 @@ vim.o.autoindent = true
 vim.o.smartindent = true
 
 vim.wo.signcolumn = "yes"
-vim.o.relativenumber = true
 vim.o.number = true
 
 -- until noice supports using this, we'll just go with what they use :(
