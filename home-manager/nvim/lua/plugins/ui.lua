@@ -26,27 +26,41 @@ return {
 		---@type NoiceConfig
 		opts = {
 			lsp = {
-				progress = { enabled = false },
+				progress = { enabled = true },
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 				},
 			},
-			notify = { enabled = false },
 			popupmenu = { enabled = false },
-			messages = { enabled = false },
+			messages = { enabled = true },
 			presets = { lsp_doc_border = true },
+			commands = {
+				all = {
+					view = "popup",
+					opts = { enter = true, format = "details" },
+				},
+			},
+		},
+		keys = {
+			{
+				"<leader>m",
+				function()
+					vim.cmd.Noice("all")
+				end,
+			},
 		},
 		init = function()
+			vim.o.shortmess = vim.o.shortmess .. "qCcSsWF"
 			vim.o.showmode = false
+			vim.o.cmdheight = 0
 		end,
 	},
 
 	{
 		"nvim-lualine/lualine.nvim",
 		config = function()
-			vim.o.shortmess = vim.o.shortmess .. "q" -- disables macro message
 			local function macro_recording()
 				-- https://old.reddit.com/r/neovim/comments/18r2bxo/is_there_a_way_to_display_macro_recording_message/keze7b9/
 				local reg = vim.fn.reg_recording()
