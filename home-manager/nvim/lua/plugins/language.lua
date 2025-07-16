@@ -80,15 +80,11 @@ return {
 				},
 				ts_ls = {
 					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-					settings = {
-						completions = {
-							completeFunctionCalls = true,
-						},
-					},
 					init_options = {
 						hostInfo = "neovim",
 						preferences = {
-							includeCompletionsWithSnippetText = true,
+							completions = { completeFunctionCalls = false },
+							includeCompletionsWithSnippetText = false,
 							includeCompletionsForImportStatements = true,
 						},
 					},
