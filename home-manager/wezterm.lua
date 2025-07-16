@@ -84,10 +84,7 @@ config.keys = {
 	{ mods = "ALT|SHIFT", key = "UpArrow", action = act.SplitPane({ direction = "Up" }) },
 	{ mods = "ALT|SHIFT", key = "DownArrow", action = act.SplitPane({ direction = "Down" }) },
 	{ mods = "ALT|SHIFT", key = "*", action = act.TogglePaneZoomState },
-	{ mods = "CMD", key = "w", action = act.CloseCurrentPane({ confirm = true }) },
-	{ mods = "ALT", key = "Enter", action = act.DisableDefaultAssignment },
-	{ mods = "CMD", key = "m", action = act.DisableDefaultAssignment },
-	{ mods = "CMD", key = "h", action = act.DisableDefaultAssignment },
+	{ mods = "CTRL|SHIFT", key = "w", action = act.CloseCurrentPane({ confirm = true }) },
 	{
 		key = "o",
 		mods = "CTRL|SHIFT",
@@ -100,21 +97,14 @@ config.keys = {
 		}),
 	},
 	{
-		key = "o",
-		mods = "CMD",
-		action = act.QuickSelectArgs({
-			patterns = { "https?://[^\\s]+" },
-			action = wezterm.action_callback(function(window, pane)
-				local url = window:get_selection_text_for_pane(pane)
-				wezterm.open_with(url)
-			end),
-		}),
-	},
-	{
 		key = "s",
-		mods = "CMD",
+		mods = "CTRL|SHIFT",
 		action = workspace_switcher.switch_workspace(),
 	},
+	-- defaults I don't like
+	{ mods = "ALT", key = "Enter", action = act.DisableDefaultAssignment },
+	{ mods = "CMD", key = "m", action = act.DisableDefaultAssignment },
+	{ mods = "CMD", key = "h", action = act.DisableDefaultAssignment },
 }
 
 config.term = "wezterm"
