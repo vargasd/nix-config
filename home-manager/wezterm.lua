@@ -168,17 +168,7 @@ wezterm.on("smart_workspace_switcher.workspace_switcher.selected", function(wind
 	local workspace_state = resurrect.workspace_state
 	resurrect.state_manager.save_state(workspace_state.get_workspace_state())
 end)
-workspace_switcher.workspace_formatter = function(label)
-	return wezterm.format({
-		{ Attribute = { Italic = true } },
-		{ Foreground = { AnsiColor = "Green" } },
-		{ Background = { Color = "black" } },
-		{ Text = "󱂬: " .. label },
-	})
-end
-wezterm.on("gui-startup", function()
-	resurrect.state_manager.resurrect_on_gui_startup()
-end)
+
 resurrect.state_manager.periodic_save({
 	interval_seconds = 60 * 5,
 	save_windows = true,
