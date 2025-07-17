@@ -1,6 +1,8 @@
 local wezterm = require("wezterm") --[[@as Wezterm]]
 local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
+local io = require("io")
+local os = require("os")
 
 local act = wezterm.action
 local config = wezterm.config_builder()
@@ -101,6 +103,11 @@ config.keys = {
 		mods = "CTRL|SHIFT",
 		action = workspace_switcher.switch_workspace(),
 	},
+	{
+		key = "x",
+		mods = "CTRL|SHIFT",
+		action = act.EmitEvent("trigger-vim-with-scrollback"),
+	},
 	-- defaults I don't like
 	{ mods = "ALT", key = "Enter", action = act.DisableDefaultAssignment },
 	{ mods = "CMD", key = "m", action = act.DisableDefaultAssignment },
@@ -177,6 +184,33 @@ resurrect.state_manager.periodic_save({
 	save_windows = true,
 	save_sessions = true,
 })
+
+wezterm.on("trigger-vim-with-scrollback", function(window, pane)
+	-- Retrieve the text from the pane
+	local text = pane:get_lines_as_text(pane:get_dimensions().scrollback_rows)
+
+	-- Create a temporary file to pass to vim
+	local name = os.tmpname()
+	local f = io.open(name, "w+")
+	f:write(text)
+	f:flush()
+	f:close()
+
+	window:perform_action(
+		act.SpawnCommandInNewTab({
+			args = {
+				os.getenv("SHELL"),
+				"-c",
+				"nvim " .. name,
+			},
+			cwd = "/",
+		}),
+		pane
+	)
+
+	wezterm.sleep_ms(1000)
+	os.remove(name)
+end)
 
 workspace_switcher.apply_to_config(config)
 return config
