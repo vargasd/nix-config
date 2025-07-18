@@ -230,6 +230,64 @@
 
   programs.wezterm = {
     enable = true;
+    colorSchemes = {
+      bluvbox =
+        let
+          bg = "#162229";
+          fg = "#efe2bc";
+          gray = "#46586a";
+          yellow = "#d8a657";
+        in
+        {
+          background = bg;
+          foreground = fg;
+          cursor_bg = fg;
+          cursor_border = fg;
+          cursor_fg = bg;
+          selection_bg = "#343d46";
+          selection_fg = fg;
+          indexed = {
+            # darkred
+            "52" = "#3b1c1c";
+            # darkgreen
+            "22" = "#1e3a24";
+            # darkblue
+            "17" = "#1c3557";
+          };
+          ansi = [
+            "#1b2b34"
+            "#c75c5c"
+            "#8fa35a"
+            "#b49545"
+            "#659093"
+            "#a06c85"
+            "#6e9a6e"
+            "#bfb47e"
+          ];
+          brights = [
+            gray
+            "#ea6962"
+            "#a9b665"
+            yellow
+            "#7daea3"
+            "#d3869b"
+            "#89b482"
+            fg
+          ];
+          # these should really be in the main config but whaddya gonna do
+          tab_bar = {
+            background = bg;
+            active_tab = {
+              bg_color = yellow;
+              fg_color = bg;
+            };
+            inactive_tab = {
+              bg_color = gray;
+              fg_color = bg;
+            };
+          };
+        };
+    };
     extraConfig = builtins.readFile ./wezterm.lua;
   };
 

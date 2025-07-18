@@ -24,7 +24,8 @@ config.send_composed_key_when_right_alt_is_pressed = false
 
 -- config.color_scheme = "Atlas (base16)"
 -- config.color_scheme = "GruvboxDark"
-config.color_scheme = "Popping and Locking"
+-- config.color_scheme = "Popping and Locking"
+config.color_scheme = "bluvbox"
 -- config.color_scheme = "atlas-mod"
 config.bold_brightens_ansi_colors = "No"
 config.quick_select_alphabet = "arstqwfpzxcvneioluymdhgjbk"
