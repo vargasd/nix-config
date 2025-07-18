@@ -338,27 +338,15 @@ return {
 		},
 		keys = {
 			{
-				"zR",
+				"zu",
 				function()
-					require("ufo").openAllFolds()
+					require("ufo").enable()
 				end,
 			},
 			{
-				"zM",
+				"zU",
 				function()
-					require("ufo").closeAllFolds()
-				end,
-			},
-			{
-				"zr",
-				function()
-					require("ufo").openFoldsExceptKinds()
-				end,
-			},
-			{
-				"zm",
-				function()
-					require("ufo").closeFoldsWith()
+					require("ufo").disable()
 				end,
 			},
 		},
