@@ -203,6 +203,15 @@
 
   programs.k9s = {
     enable = true;
+    settings = {
+      k9s = {
+        readonly = true;
+        skin = "term";
+      };
+    };
+    skins = {
+      term = ./k9s-skin.yaml;
+    };
   };
 
   programs.lazygit = {
@@ -253,6 +262,11 @@
           run = "plugin chmod";
           desc = "Chmod on selected files";
         }
+        {
+          on = "f";
+          run = "plugin jump-to-char";
+          desc = "Jump to char";
+        }
       ];
     };
 
@@ -260,6 +274,7 @@
       git = inputs.yazi-plugins + "/git.yazi";
       chmod = inputs.yazi-plugins + "/chmod.yazi";
       piper = inputs.yazi-plugins + "/piper.yazi";
+      "jump-to-char" = inputs.yazi-plugins + "/jump-to-char.yazi";
     };
 
     settings = {
