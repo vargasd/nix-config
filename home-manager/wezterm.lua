@@ -60,11 +60,11 @@ local open_link = act.QuickSelectArgs({
 })
 
 config.keys = {
-	{ mods = "ALT", key = "1", action = goto_pane(1) },
-	{ mods = "ALT", key = "2", action = goto_pane(2) },
-	{ mods = "ALT", key = "3", action = goto_pane(3) },
-	{ mods = "ALT", key = "4", action = goto_pane(4) },
-	{ mods = "ALT", key = "5", action = goto_pane(5) },
+	{ mods = "ALT", key = "1", action = goto_pane(0) },
+	{ mods = "ALT", key = "2", action = goto_pane(1) },
+	{ mods = "ALT", key = "3", action = goto_pane(2) },
+	{ mods = "ALT", key = "4", action = goto_pane(3) },
+	{ mods = "ALT", key = "5", action = goto_pane(4) },
 	{ mods = "ALT", key = "LeftArrow", action = act.ActivatePaneDirection("Left") },
 	{ mods = "ALT", key = "RightArrow", action = act.ActivatePaneDirection("Right") },
 	{ mods = "ALT", key = "UpArrow", action = act.ActivatePaneDirection("Up") },
