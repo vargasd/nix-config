@@ -1,4 +1,22 @@
 local markdown_fts = { "markdown", "codecompanion" }
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+	callback = function(ev)
+		vim.defer_fn(function()
+			local ok, size = pcall(vim.fn.getfsize, vim.api.nvim_buf_get_name(ev.buf))
+			if ok and size < 1024 * 1024 then
+				vim.opt.foldmethod = "expr"
+				vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+				vim.opt.foldtext = ""
+
+				vim.opt.foldnestmax = 4
+				vim.opt.foldlevel = 99
+				vim.opt.foldlevelstart = 99
+			end
+		end, 100)
+	end,
+})
+
 ---@type LazySpec
 return {
 	"nvim-tree/nvim-web-devicons",
@@ -30,7 +48,6 @@ return {
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 				},
 			},
 			popupmenu = { enabled = false },
@@ -321,35 +338,6 @@ return {
 				},
 			})
 		end,
-	},
-
-	{
-		"kevinhwang91/nvim-ufo",
-		dependencies = { "kevinhwang91/promise-async" },
-		init = function()
-			vim.o.foldenable = true
-			vim.o.foldlevel = 99
-			vim.o.foldlevelstart = 99
-		end,
-		opts = {
-			provider_selector = function()
-				return { "treesitter", "indent" }
-			end,
-		},
-		keys = {
-			{
-				"zu",
-				function()
-					require("ufo").enable()
-				end,
-			},
-			{
-				"zU",
-				function()
-					require("ufo").disable()
-				end,
-			},
-		},
 	},
 
 	{
