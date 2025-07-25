@@ -175,7 +175,7 @@ return {
 			terminal = {
 				win = vim.tbl_extend("error", float_win, {
 					keys = {
-						{ "<c-q>", "hide", mode = "t" },
+						{ "<c-q>", "hide", mode = { "t", "n" } },
 						{
 							"<c-z>",
 							function()
