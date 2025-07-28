@@ -1,5 +1,7 @@
 ---@type LazySpec
 return {
+	{ "tpope/vim-sleuth", event = "VeryLazy" },
+
 	{
 		"folke/flash.nvim",
 		keys = {
