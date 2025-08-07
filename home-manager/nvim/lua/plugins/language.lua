@@ -17,140 +17,123 @@ return {
 			-- local prettier = require("efmls-configs.formatters.prettier")
 			local nixfmt = require("efmls-configs.formatters.nixfmt")
 
-			local servers = vim.tbl_deep_extend("keep", vim.g.sam_lsp_configs or {}, {
-				bashls = {
-					settings = {
-						bashIde = {
-							shellcheckArguments = {
-								-- disable unused variables warning
-								"-e",
-								"SC2034",
-							},
-						},
-					},
-				},
-				clangd = {},
-				cssls = {},
-				html = {},
-				marksman = {},
-				harper_ls = {
-					autostart = false,
-					filetypes = { "markdown", "asciidoc", "tex", "text" },
-					settings = {
-						["harper-ls"] = {
-							linters = {
-								SentenceCapitalization = false,
-							},
-						},
-					},
-				},
-				nixd = {},
-				terraformls = {},
-				typos_lsp = {
-					autostart = false,
-					init_options = {
-						config = vim.fn.stdpath("config"):gsub("/.*?", "") .. "/typos-lsp/typos.toml",
-					},
-				},
-				phpactor = {},
-				yamlls = {},
-				jsonls = {
-					settings = {
-						json = {
-							schemas = {
-								{
-									fileMatch = { "package.json" },
-									url = "https://json.schemastore.org/package.json",
-								},
-								{
-									fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
-									url = "https://json.schemastore.org/prettierrc.json",
-								},
-								{
-									fileMatch = { ".swcrc", ".swcrc.json", "swc.config.json" },
-									url = "https://swc.rs/schema.json",
-								},
-								{
-									fileMatch = { "tsconfig.json", "tsconfig.*.json", "*.tsconfig.json" },
-									url = "http://json.schemastore.org/tsconfig",
+			local servers = vim.tbl_deep_extend(
+				"keep",
+				vim.g.sam_lsp_configs or {},
+				vim.json.decode(os.getenv("SAM_LSP_CONFIGS") or "{}"),
+				{
+					bashls = {
+						settings = {
+							bashIde = {
+								shellcheckArguments = {
+									-- disable unused variables warning
+									"-e",
+									"SC2034",
 								},
 							},
 						},
 					},
-				},
-				ts_ls = {
-					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-					init_options = {
-						hostInfo = "neovim",
-						preferences = {
-							completions = { completeFunctionCalls = false },
-							includeCompletionsWithSnippetText = false,
-							includeCompletionsForImportStatements = true,
-						},
-					},
-				},
-				vtsls = {
-					autostart = false,
-					settings = {
-						complete_function_calls = true,
-						vtsls = {
-							enableMoveToFileCodeAction = true,
-							autoUseWorkspaceTsdk = true,
-							experimental = {
-								completion = {
-									enableServerSideFuzzyMatch = true,
+					clangd = {},
+					cssls = {},
+					html = {},
+					marksman = {},
+					harper_ls = {
+						autostart = false,
+						filetypes = { "markdown", "asciidoc", "tex", "text" },
+						settings = {
+							["harper-ls"] = {
+								linters = {
+									SentenceCapitalization = false,
 								},
 							},
 						},
-						typescript = {
-							updateImportsOnFileMove = { enabled = "always" },
-							suggest = { completeFunctionCalls = true },
-							tsserver = {
-								maxTsServerMemory = 8192,
+					},
+					nixd = {},
+					terraformls = {},
+					typos_lsp = {
+						autostart = false,
+						init_options = {
+							config = vim.fn.stdpath("config"):gsub("/.*?", "") .. "/typos-lsp/typos.toml",
+						},
+					},
+					phpactor = {},
+					yamlls = {},
+					jsonls = {
+						settings = {
+							json = {
+								schemas = {
+									{
+										fileMatch = { "package.json" },
+										url = "https://json.schemastore.org/package.json",
+									},
+									{
+										fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
+										url = "https://json.schemastore.org/prettierrc.json",
+									},
+									{
+										fileMatch = { ".swcrc", ".swcrc.json", "swc.config.json" },
+										url = "https://swc.rs/schema.json",
+									},
+									{
+										fileMatch = { "tsconfig.json", "tsconfig.*.json", "*.tsconfig.json" },
+										url = "http://json.schemastore.org/tsconfig",
+									},
+								},
 							},
 						},
 					},
-				},
-				lua_ls = {
-					enable_highlights = true,
-					settings = {
-						Lua = {
-							telemetry = { enable = false },
-							workspace = {
-								checkThirdParty = false,
-								library = vim.api.nvim_get_runtime_file("", true),
-							},
-							diagnostics = {
-								globals = { "vim" },
+					ts_ls = {
+						filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }, -- when 4.4.0 is available , "vue"},
+						init_options = {
+							hostInfo = "neovim",
+							preferences = {
+								completions = { completeFunctionCalls = false },
+								includeCompletionsWithSnippetText = false,
+								includeCompletionsForImportStatements = true,
 							},
 						},
 					},
-				},
-				efm = {
-					init_options = { documentFormatting = true },
-					settings = {
-						languages = {
-							javascript = { prettier },
-							json = { prettier },
-							jsonc = { prettier },
-							typescript = { prettier },
-							svelte = { prettier },
-							sql = { prettier },
-							markdown = { prettier },
-							typespec = { prettier },
-							nix = { nixfmt },
-							lua = { stylua },
-							terraform = { terraform_fmt },
+					lua_ls = {
+						enable_highlights = true,
+						settings = {
+							Lua = {
+								telemetry = { enable = false },
+								workspace = {
+									checkThirdParty = false,
+									library = vim.api.nvim_get_runtime_file("", true),
+								},
+								diagnostics = {
+									globals = { "vim" },
+								},
+							},
 						},
 					},
-				},
-				eslint = {
-					settings = {
-						workingDirectories = { mode = "auto" },
-						codeActionOnSave = { enable = true },
+					efm = {
+						init_options = { documentFormatting = true },
+						settings = {
+							languages = {
+								javascript = { prettier },
+								json = { prettier },
+								jsonc = { prettier },
+								typescript = { prettier },
+								svelte = { prettier },
+								sql = { prettier },
+								markdown = { prettier },
+								typespec = { prettier },
+								nix = { nixfmt },
+								lua = { stylua },
+								terraform = { terraform_fmt },
+							},
+						},
 					},
-				},
-			})
+					eslint = {
+						settings = {
+							workingDirectories = { mode = "auto" },
+							codeActionOnSave = { enable = true },
+						},
+					},
+				}
+			)
 
 			local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
 			vim.api.nvim_create_autocmd("BufWritePre", {
@@ -163,7 +146,7 @@ return {
 					local efm = vim.lsp.get_clients({ name = "efm", bufnr = ev.buf })
 					local eslint = vim.lsp.get_clients({ name = "eslint", bufnr = ev.buf })
 					if not vim.tbl_isempty(eslint) then
-						vim.cmd.LspEslintFixAll()
+						vim.lsp.buf.format({ name = "eslint" })
 					end
 
 					if vim.tbl_isempty(efm) then
@@ -186,19 +169,6 @@ return {
 					-- vim.lsp.document_color.enable(true, args.buf)
 				end,
 			})
-
-			if os.getenv("SAM_VUE") ~= nil then
-				servers.ts_ls.autostart = false
-				servers.vtsls.autostart = false
-				servers.vue_ls = {
-					filetypes = { "typescript", "vue" },
-					init_options = {
-						vue = {
-							hybridMode = false,
-						},
-					},
-				}
-			end
 
 			for server_name, config in pairs(servers) do
 				if config.autostart ~= false then
