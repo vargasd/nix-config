@@ -125,8 +125,8 @@
           gcp = import ./devShells/gcp.nix pkgs;
           lua = import ./devShells/lua.nix pkgs;
           nix = import ./devShells/nix.nix pkgs;
-          node23 = import ./devShells/node23.nix pkgs;
           node24 = import ./devShells/node24.nix pkgs;
+          node22 = import ./devShells/node22.nix pkgs;
           php = import ./devShells/php.nix pkgs;
           pnpm = import ./devShells/pnpm.nix pkgs;
           ruby = import ./devShells/ruby.nix pkgs;
