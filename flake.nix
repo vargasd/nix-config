@@ -127,6 +127,7 @@
           nix = import ./devShells/nix.nix pkgs;
           node24 = import ./devShells/node24.nix pkgs;
           node22 = import ./devShells/node22.nix pkgs;
+          node20 = import ./devShells/node20.nix pkgs;
           php = import ./devShells/php.nix pkgs;
           pnpm = import ./devShells/pnpm.nix pkgs;
           ruby = import ./devShells/ruby.nix pkgs;
