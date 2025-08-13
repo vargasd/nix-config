@@ -11,7 +11,6 @@ vim.o.mousemodel = "extend"
 
 vim.o.swapfile = false
 vim.o.updatetime = 10
-vim.o.timeoutlen = 300
 
 vim.o.completeopt = "menuone,noselect"
 
