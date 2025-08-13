@@ -394,15 +394,6 @@ return {
 	},
 
 	{
-		"norcalli/nvim-colorizer.lua",
-		ft = "css",
-		cmd = { "ColorizerToggle" },
-		opts = {
-			"css",
-		},
-	},
-
-	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		ft = markdown_fts,
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
