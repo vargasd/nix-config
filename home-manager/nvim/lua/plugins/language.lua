@@ -123,6 +123,7 @@ return {
 								nix = { nixfmt },
 								lua = { stylua },
 								terraform = { terraform_fmt },
+								vue = { prettier },
 							},
 						},
 					},
