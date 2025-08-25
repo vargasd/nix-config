@@ -254,6 +254,7 @@ return {
 					"gitignore",
 					"jq",
 					"markdown",
+					"markdown_inline",
 					"nix",
 					"prisma",
 					"terraform",
@@ -285,7 +286,7 @@ return {
 				auto_install = false,
 				highlight = {
 					enable = true,
-					additional_vim_regex_highlighting = { "sql", "markdown" },
+					additional_vim_regex_highlighting = { "sql" },
 					disable = function(lang, buf)
 						if vim.list_contains(require("common").csv_fts, vim.bo.filetype) then
 							return false
