@@ -33,12 +33,10 @@
     lazygit
     lazydocker
     less
-    kubectl
     mermaid-cli
     neofetch
     neovim
     nodejs
-    openapi-tui
     pass
     postgresql
     presenterm
@@ -58,7 +56,6 @@
     harper
     marksman
     postgres-lsp
-    rust-analyzer
     typescript-language-server
     typos-lsp
     vtsls
@@ -198,19 +195,6 @@
       armor = true;
       use-agent = true;
       throw-keyids = true;
-    };
-  };
-
-  programs.k9s = {
-    enable = true;
-    settings = {
-      k9s = {
-        readonly = true;
-        skin = "term";
-      };
-    };
-    skins = {
-      term = ./k9s-skin.yaml;
     };
   };
 
@@ -383,11 +367,9 @@
       share = false;
     };
 
-    initContent =
-      builtins.readFile ./init.zsh
-      + ''
-        source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh
-      '';
+    initContent = builtins.readFile ./init.zsh + ''
+      source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh
+    '';
 
     shellAliases = {
       man = "batman";
