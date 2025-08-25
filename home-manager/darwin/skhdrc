@@ -1,11 +1,11 @@
 meh - e        : open -a finder
-meh - v        : open -a 'Microsoft Teams'
+meh - v        : open -a videoconf
 meh - s        : open -a slack
 meh - m        : open -a mail
 hyper - m      : open -a messages
 meh - p        : open -a spotify
 hyper - p      : open -a passwords
-meh - i        : open -a jira
+meh - i        : open -a issues
 meh - l        : open -a logs
 
 meh - t        : open -a wezterm
