@@ -39,7 +39,7 @@ local mappings = {
 	-- clipboard
 	{ "<leader>YA", ':let @+=expand("%:p")<CR>', { silent = true, desc = "Yank Absolute path" } },
 	{ "<leader>YF", ':let @+=expand("%:t")<CR>', { silent = true, desc = "Yank File name" } },
-	{ "<leader>YR", ':let @+=expand("%")<CR>', { silent = true, desc = "Yank Relative path" } },
+	{ "<leader>YR", ':let @+=expand("%:.")<CR>', { silent = true, desc = "Yank Relative path" } },
 	{ "<leader>y", '"*y', { desc = "Yank to system clipboard", mode = { "n", "v" } } },
 	{ "<leader>p", '"*p', { desc = "Paste from system clipboard", mode = { "n", "v" } } },
 	{ "<leader>P", '"*P', { desc = "Paste from system clipboard", mode = { "n", "v" } } },
