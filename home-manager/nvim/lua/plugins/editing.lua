@@ -20,19 +20,18 @@ return {
 				desc = "Flash",
 			},
 		},
-		config = function()
-			require("flash").setup({
-				labels = "arstgmneiozxcdvkqwfpbjluy",
-				modes = {
-					search = {
-						enabled = false,
-					},
-					char = {
-						enabled = false,
-					},
+		---@type Flash.Config
+		opts = {
+			labels = "arstgmneiozxcdvkqwfpbjluy",
+			modes = {
+				search = {
+					enabled = false,
 				},
-			})
-		end,
+				char = {
+					enabled = false,
+				},
+			},
+		},
 	},
 
 	{
