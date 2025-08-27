@@ -58,7 +58,6 @@
     postgres-lsp
     typescript-language-server
     typos-lsp
-    vtsls
     yaml-language-server
 
     # formatters
