@@ -2,7 +2,7 @@
 ---@field mode? string | string[]
 ---@type [string, string|function, KeyMapOpts?][]
 local mappings = {
-	{ "H", vim.diagnostic.open_float, { desc = "Open Diagnostics Float" } },
+	{ "H", vim.diagnostic.open_float },
 	-- Undo should be shift-u
 	{ "U", "<C-r>" },
 	-- center bottom
@@ -37,17 +37,17 @@ local mappings = {
 	{ "<M-f>", "<S-Right>", { mode = { "i", "c" } } },
 
 	-- clipboard
-	{ "<leader>YA", ':let @+=expand("%:p")<CR>', { silent = true, desc = "Yank Absolute path" } },
-	{ "<leader>YF", ':let @+=expand("%:t")<CR>', { silent = true, desc = "Yank File name" } },
-	{ "<leader>YR", ':let @+=expand("%:.")<CR>', { silent = true, desc = "Yank Relative path" } },
-	{ "<leader>y", '"*y', { desc = "Yank to system clipboard", mode = { "n", "v" } } },
-	{ "<leader>p", '"*p', { desc = "Paste from system clipboard", mode = { "n", "v" } } },
-	{ "<leader>P", '"*P', { desc = "Paste from system clipboard", mode = { "n", "v" } } },
+	{ "<leader>YA", ':let @+=expand("%:p")<CR>', { silent = true } },
+	{ "<leader>YF", ':let @+=expand("%:t")<CR>', { silent = true } },
+	{ "<leader>YR", ':let @+=expand("%:.")<CR>', { silent = true } },
+	{ "<leader>y", '"*y', { mode = { "n", "v" } } },
+	{ "<leader>p", '"*p', { mode = { "n", "v" } } },
+	{ "<leader>P", '"*P', { mode = { "n", "v" } } },
 
 	-- tabby stuff
-	{ "<C-w>t", "<C-w>T", { desc = "Send to tab" } },
-	{ "[t", vim.cmd.tabprevious, { desc = "Previous tab" } },
-	{ "]t", vim.cmd.tabnext, { desc = "Next tab" } },
+	{ "<C-w>t", "<C-w>T" },
+	{ "[t", vim.cmd.tabprevious },
+	{ "]t", vim.cmd.tabnext },
 
 	-- quitty stuff
 	{
@@ -55,14 +55,12 @@ local mappings = {
 		function()
 			Snacks.bufdelete.delete()
 		end,
-		{ desc = "Quit buffer" },
 	},
 	{
 		"<leader>Q",
 		function()
 			vim.cmd.qall({ bang = true })
 		end,
-		{ desc = "Force quit all" },
 	},
 
 	-- I hate accidentally macroing
@@ -70,8 +68,8 @@ local mappings = {
 	{ "Q", "q", {} },
 
 	-- savey stuff
-	{ "<leader>w", vim.cmd.write, { desc = "Write" } },
-	{ "<leader>W", ":noa w<CR>", { desc = "Write", silent = true } },
+	{ "<leader>w", vim.cmd.write },
+	{ "<leader>W", ":noa w<CR>", { silent = true } },
 
 	{
 		"<C-q>",
@@ -90,7 +88,6 @@ local mappings = {
 				vim.cmd("copen")
 			end
 		end,
-		{ desc = "Toggle quickfix" },
 	},
 }
 

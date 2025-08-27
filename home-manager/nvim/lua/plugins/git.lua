@@ -9,22 +9,19 @@ return {
 				function()
 					vim.cmd.Git("blame")
 				end,
-				desc = "Git Blame",
 			},
-			{ "<leader>gd", vim.cmd.Gdiffsplit, desc = "Git Diff" },
+			{ "<leader>gd", vim.cmd.Gdiffsplit },
 			{
 				"<leader>g<Left>",
 				function()
 					vim.cmd.diffget("LOCAL")
 				end,
-				desc = "Git local changes",
 			},
 			{
 				"<leader>g<Right>",
 				function()
 					vim.cmd.diffget("REMOTE")
 				end,
-				desc = "Git remote changes",
 			},
 		},
 		init = function()
@@ -60,18 +57,17 @@ return {
 					end
 					vim.schedule(next)
 					return "<Ignore>"
-				end, { expr = true, buffer = bufnr, desc = "Jump to next hunk" })
+				end, { expr = true, buffer = bufnr })
 				vim.keymap.set({ "n", "v" }, "[g", function()
 					if vim.wo.diff then
 						return "[g"
 					end
 					vim.schedule(prev)
 					return "<Ignore>"
-				end, { expr = true, buffer = bufnr, desc = "Jump to previous hunk" })
+				end, { expr = true, buffer = bufnr })
 				vim.keymap.set({ "n" }, "<leader>ga", gitsigns.stage_hunk)
 				vim.keymap.set({ "n" }, "<leader>g<BS>", gitsigns.reset_hunk)
 			end,
 		},
 	},
-
 }

@@ -21,7 +21,15 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 return {
 	"nvim-tree/nvim-web-devicons",
 
-	{ "folke/which-key.nvim", event = "VeryLazy" },
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts = {
+			filter = function(mapping)
+				return mapping.desc
+			end,
+		},
+	},
 
 	{
 		"vargasd/enhansi",
@@ -170,7 +178,6 @@ return {
 					vim.cmd.UndotreeShow()
 					vim.cmd.UndotreeFocus()
 				end,
-				desc = "Undo tree",
 			},
 		},
 		init = function()
@@ -366,8 +373,8 @@ return {
 					min = vim.diagnostic.severity.WARN,
 				},
 			}
-			vim.keymap.set("n", "[d", diagnostics.goto_prev(diagnostic_opts), { desc = "Previous diagnostic" })
-			vim.keymap.set("n", "]d", diagnostics.goto_next(diagnostic_opts), { desc = "Next diagnostic" })
+			vim.keymap.set("n", "[d", diagnostics.goto_prev(diagnostic_opts))
+			vim.keymap.set("n", "]d", diagnostics.goto_next(diagnostic_opts))
 		end,
 	},
 

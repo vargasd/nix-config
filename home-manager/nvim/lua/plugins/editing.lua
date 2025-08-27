@@ -17,7 +17,6 @@ return {
 						},
 					})
 				end,
-				desc = "Flash",
 			},
 		},
 		---@type Flash.Config
