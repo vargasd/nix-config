@@ -26,6 +26,7 @@
     gh
     git
     gnupg
+    hurl
     ijq
     imagemagick
     jless

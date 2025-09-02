@@ -259,6 +259,7 @@ return {
 					"gitattributes",
 					"gitcommit",
 					"gitignore",
+					"hurl",
 					"jq",
 					"markdown",
 					"markdown_inline",
