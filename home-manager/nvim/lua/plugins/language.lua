@@ -2,13 +2,7 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = {
-			{
-				"creativenull/efmls-configs-nvim",
-				version = "v1.x.x", -- version is optional, but recommended
-			},
-		},
-
+		dependencies = { "creativenull/efmls-configs-nvim" },
 		config = function()
 			local stylua = require("efmls-configs.formatters.stylua")
 			local terraform_fmt = require("efmls-configs.formatters.terraform_fmt")
@@ -117,7 +111,7 @@ return {
 								jsonc = { prettier },
 								typescript = { prettier },
 								svelte = { prettier },
-								sql = { prettier },
+								sql = { require("efmls-configs.formatters.sqruff") },
 								markdown = { prettier },
 								typespec = { prettier },
 								nix = { nixfmt },
