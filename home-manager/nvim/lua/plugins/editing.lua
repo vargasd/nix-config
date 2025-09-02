@@ -43,7 +43,7 @@ return {
 	},
 
 	{
-		"echasnovski/mini.surround",
+		"nvim-mini/mini.surround",
 		version = "*",
 		event = "VeryLazy",
 		opts = {
