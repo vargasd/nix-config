@@ -212,6 +212,22 @@
     };
   };
 
+  programs.opencode = {
+    enable = true;
+    settings = {
+      share = "disabled";
+      keybinds = {
+        leader = "tab";
+        agent_cycle = "shift+tab";
+        messages_half_page_up = "pgup";
+        messages_half_page_down = "pgdown";
+        messages_page_up = "ctrl+b";
+        messages_page_down = "ctrl+f";
+      };
+      mcp = { };
+    };
+  };
+
   programs.wezterm = {
     enable = true;
     colorSchemes = {
