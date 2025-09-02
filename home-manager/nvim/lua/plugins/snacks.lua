@@ -262,7 +262,7 @@ return {
 			{
 				"<leader>f",
 				function()
-					Snacks.picker.smart()
+					Snacks.picker.smart({ filter = { cwd = true } })
 				end,
 			},
 			{
