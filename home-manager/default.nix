@@ -223,6 +223,7 @@
         messages_half_page_down = "pgdown";
         messages_page_up = "ctrl+b";
         messages_page_down = "ctrl+f";
+        input_newline = "shift+enter,ctrl+j,alt+enter";
       };
       mcp = { };
     };
