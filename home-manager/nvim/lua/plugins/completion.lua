@@ -15,6 +15,7 @@ return {
 			completion = {
 				documentation = { auto_show = true },
 				menu = { border = "none", auto_show = true },
+				list = { preselect = false },
 			},
 			sources = {
 				default = { "lsp", "buffer", "path", "snippets" },
