@@ -6,7 +6,6 @@ return {
 		config = function()
 			local stylua = require("efmls-configs.formatters.stylua")
 			local terraform_fmt = require("efmls-configs.formatters.terraform_fmt")
-			-- not working right now
 			local prettier = require("efmls-configs.formatters.prettier_d")
 			-- local prettier = require("efmls-configs.formatters.prettier")
 			local nixfmt = require("efmls-configs.formatters.nixfmt")
@@ -51,7 +50,20 @@ return {
 						},
 					},
 					phpactor = {},
-					yamlls = {},
+					yamlls = {
+						settings = {
+							redhat = {
+								telemetry = {
+									enabled = false,
+								},
+							},
+							yaml = {
+								format = {
+									enable = false,
+								},
+							},
+						},
+					},
 					jsonls = {
 						settings = {
 							json = {
@@ -118,6 +130,7 @@ return {
 								lua = { stylua },
 								terraform = { terraform_fmt },
 								vue = { prettier },
+								yaml = { prettier },
 							},
 						},
 					},
