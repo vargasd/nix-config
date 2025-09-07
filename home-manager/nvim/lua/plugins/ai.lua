@@ -2,14 +2,16 @@
 return {
 	{
 		"NickvanDyke/opencode.nvim",
-		opts = {
-			terminal = {
-				win = {
-					position = "float",
-					enter = true,
+		init = function()
+			vim.g.opencode_opts = {
+				terminal = {
+					win = {
+						position = "float",
+						enter = true,
+					},
 				},
-			},
-		},
+			}
+		end,
 		keys = {
 			{
 				"<leader>C",
