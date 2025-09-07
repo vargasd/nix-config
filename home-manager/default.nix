@@ -63,6 +63,7 @@
 
     # formatters
     prettierd
+    vscode-js-debug
   ];
 
   programs.home-manager.enable = true;
