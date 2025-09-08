@@ -2,7 +2,13 @@
 return {
 	{
 		"saghen/blink.cmp",
-		dependencies = { "rafamadriz/friendly-snippets", lazy = true },
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			-- needed for dap
+			"saghen/blink.compat",
+			"rcarriga/cmp-dap",
+			lazy = true,
+		},
 		event = "InsertEnter",
 		version = "1.*",
 		---@module 'blink.cmp'
@@ -22,10 +28,12 @@ return {
 				per_filetype = {
 					sql = { "dadbod", "lsp", "buffer" },
 					lua = { "lazydev", "lsp", "buffer", "snippets", "path" },
+					["dap-repl"] = { "dap", "lsp", "buffer" },
 				},
 				providers = {
 					dadbod = { module = "vim_dadbod_completion.blink" },
 					lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
+					dap = { name = "dap", module = "blink.compat.source" },
 				},
 			},
 		},

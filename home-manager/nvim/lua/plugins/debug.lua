@@ -1,9 +1,68 @@
+---@type LazySpec[]
 return {
 	{
 		"mfussenegger/nvim-dap",
+		keys = {
+			{
+				"|b",
+				function()
+					require("dap").toggle_breakpoint()
+				end,
+			},
+			{
+				"|c",
+				function()
+					require("dap").continue()
+				end,
+			},
+			{
+				"|<Up>",
+				function()
+					require("dap").step_out()
+				end,
+			},
+			{
+				"|<Down>",
+				function()
+					require("dap").step_into()
+				end,
+			},
+			{
+				"|<Right>",
+				function()
+					require("dap").step_over()
+				end,
+			},
+			{
+				"||",
+				function()
+					require("dap").disconnect()
+				end,
+			},
+			{
+				"|v",
+				function()
+					local widgets = require("dap.ui.widgets")
+					widgets.centered_float(widgets.scopes, { border = "rounded" })
+				end,
+			},
+			{
+				"|f",
+				function()
+					local widgets = require("dap.ui.widgets")
+					widgets.centered_float(widgets.frames, { border = "rounded" })
+				end,
+			},
+			{
+				"|r",
+				function()
+					require("dap").repl.open()
+				end,
+			},
+		},
 		config = function()
 			local dap = require("dap")
-			dap.adapters["pwa-node"] = {
+			local node_adapter = {
 				type = "server",
 				host = "localhost",
 				port = "${port}",
@@ -12,89 +71,48 @@ return {
 					args = { "${port}" },
 				},
 			}
-			dap.configurations.javascript = {
+			dap.adapters.node = node_adapter
+			dap.adapters["pwa-node"] = node_adapter
+
+			local configs = {
 				{
 					type = "pwa-node",
 					request = "launch",
 					name = "Launch file",
 					program = "${file}",
 					cwd = "${workspaceFolder}",
+					resolveSourceMapLocations = { "!**" },
+					skipFiles = { "<node_internals>/**" },
+				},
+				{
+					type = "pwa-node",
+					request = "attach",
+					name = "Attach 9229",
+					port = 9229,
+					cwd = "${workspaceFolder}",
+					resolveSourceMapLocations = { "!**" },
+					skipFiles = { "<node_internals>/**" },
 				},
 			}
-		end,
-	},
 
-	-- this always freezes
-	-- {
-	--     "igorlfs/nvim-dap-view",
-	--     ---@module 'dap-view'
-	--     ---@type dapview.Config
-	--     opts = {},
-	-- },
+			dap.configurations.javascript = configs
+			dap.configurations.typescript = configs
 
-	{
-		"rcarriga/nvim-dap-ui",
-		config = function()
-			local dap, dapui = require("dap"), require("dapui")
-			dapui.setup({
-				icons = { expanded = "▾", collapsed = "▸", current_frame = "➜" },
-				layouts = {
-					{
-						elements = {
-							{ id = "scopes", size = 0.33 },
-							{ id = "breakpoints", size = 0.17 },
-							{ id = "stacks", size = 0.25 },
-							{ id = "watches", size = 0.25 },
-						},
-						size = 40, -- width of left panel
-						position = "left",
-					},
-					{
-						elements = {
-							"repl",
-							"console",
-						},
-						size = 10, -- height of bottom panel
-						position = "bottom",
-					},
-				},
-				controls = {
-					enabled = true,
-					element = "repl",
-					icons = {
-						pause = "⏸",
-						play = "▶",
-						step_into = "⏎",
-						step_over = "⏭",
-						step_out = "⏮",
-						step_back = "b",
-						run_last = "▶▶",
-						terminate = "⏹",
-						disconnect = "⏏",
-					},
-				},
+			for _, group in pairs({
+				"DapBreakpoint",
+				"DapBreakpointCondition",
+				"DapBreakpointRejected",
+				"DapLogPoint",
+			}) do
+				vim.fn.sign_define(group, { text = "●", texthl = group, priority = 50 })
+			end
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "dap-float",
+				callback = function()
+					vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true })
+				end,
 			})
-			-- Auto open/close dap-ui
-			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open()
-			end
-			dap.listeners.before.event_terminated["dapui_config"] = function()
-				dapui.close()
-			end
-			dap.listeners.before.event_exited["dapui_config"] = function()
-				dapui.close()
-			end
-			-- Keymap to toggle dap-ui
-			vim.keymap.set("n", "<leader>B", dap.toggle_breakpoint)
-			vim.keymap.set("n", "<leader>D", function()
-				dap.continue()
-				dapui.toggle()
-			end)
-			-- vim.keymap.set("n", "<Home>", dap.step_back)
-			vim.keymap.set("n", "<PageUp>", dap.step_out)
-			vim.keymap.set("n", "<PageDown>", dap.step_into)
-			vim.keymap.set("n", "<End>", dap.step_over)
 		end,
-		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
 	},
 }
