@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   ...
 }:
 {
@@ -331,10 +330,10 @@
     };
 
     plugins = {
-      git = inputs.yazi-plugins + "/git.yazi";
-      chmod = inputs.yazi-plugins + "/chmod.yazi";
-      piper = inputs.yazi-plugins + "/piper.yazi";
-      "jump-to-char" = inputs.yazi-plugins + "/jump-to-char.yazi";
+      git = pkgs.yaziPlugins.git;
+      chmod = pkgs.yaziPlugins.chmod;
+      piper = pkgs.yaziPlugins.piper;
+      "jump-to-char" = pkgs.yaziPlugins.jump-to-char;
     };
 
     settings = {

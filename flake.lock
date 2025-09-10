@@ -83,8 +83,7 @@
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
-        "systems": "systems",
-        "yazi-plugins": "yazi-plugins"
+        "systems": "systems"
       }
     },
     "systems": {
@@ -99,22 +98,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "yazi-plugins": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1755923740,
-        "narHash": "sha256-9+58QhdM4HVOAfEC224TrPEx1N7F2VLGMxKVLAM4nJw=",
-        "owner": "yazi-rs",
-        "repo": "plugins",
-        "rev": "d7588f6d29b5998733d5a71ec312c7248ba14555",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yazi-rs",
-        "repo": "plugins",
         "type": "github"
       }
     }
