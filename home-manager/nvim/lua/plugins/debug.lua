@@ -10,6 +10,12 @@ return {
 				end,
 			},
 			{
+				"|B",
+				function()
+					require("dap").toggle_breakpoint(vim.fn.input("condition: "))
+				end,
+			},
+			{
 				"|c",
 				function()
 					require("dap").continue()
@@ -40,6 +46,12 @@ return {
 				end,
 			},
 			{
+				"|<Left>",
+				function()
+					require("dap").step_back()
+				end,
+			},
+			{
 				"|v",
 				function()
 					local widgets = require("dap.ui.widgets")
@@ -47,7 +59,7 @@ return {
 				end,
 			},
 			{
-				"|f",
+				"|s",
 				function()
 					local widgets = require("dap.ui.widgets")
 					widgets.centered_float(widgets.frames, { border = "rounded" })
@@ -98,14 +110,12 @@ return {
 			dap.configurations.javascript = configs
 			dap.configurations.typescript = configs
 
-			for _, group in pairs({
-				"DapBreakpoint",
-				"DapBreakpointCondition",
-				"DapBreakpointRejected",
-				"DapLogPoint",
-			}) do
-				vim.fn.sign_define(group, { text = "●", texthl = group, priority = 50 })
-			end
+			vim.fn.sign_define("DapBreakpoint", { text = "", priority = 50 })
+			vim.fn.sign_define("DapBreakpointCondition", { text = "", priority = 50 })
+			vim.fn.sign_define("DapStopped", { text = "", priority = 50 })
+			vim.fn.sign_define("DapLogPoint", { text = "", priority = 50 })
+			--  vscode-js-debug will reject breakpoints but still hit them, so don't differentiate: https://github.com/mfussenegger/nvim-dap/issues/1522
+			vim.fn.sign_define("DapBreakpointRejected", { text = "", priority = 50 })
 
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "dap-float",
