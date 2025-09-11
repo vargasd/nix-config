@@ -25,9 +25,7 @@ return {
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {
-			filter = function(mapping)
-				return mapping.desc
-			end,
+			filter = function(mapping) return mapping.desc end,
 		},
 	},
 
@@ -71,9 +69,7 @@ return {
 		keys = {
 			{
 				"<leader>m",
-				function()
-					vim.cmd.Noice("all")
-				end,
+				function() vim.cmd.Noice("all") end,
 			},
 		},
 		init = function()
@@ -180,9 +176,7 @@ return {
 				end,
 			},
 		},
-		init = function()
-			vim.g.undotree_DiffAutoOpen = 0
-		end,
+		init = function() vim.g.undotree_DiffAutoOpen = 0 end,
 	},
 
 	{
@@ -212,9 +206,7 @@ return {
 			},
 			{
 				"<leader>E",
-				function()
-					vim.cmd.Yazi("cwd")
-				end,
+				function() vim.cmd.Yazi("cwd") end,
 			},
 		},
 		---require('yazi')
@@ -296,15 +288,11 @@ return {
 					enable = true,
 					additional_vim_regex_highlighting = { "sql" },
 					disable = function(lang, buf)
-						if vim.list_contains(require("common").csv_fts, vim.bo.filetype) then
-							return false
-						end
+						if vim.list_contains(require("common").csv_fts, vim.bo.filetype) then return false end
 
 						local max_filesize = 500 * 1024 -- 500 KB
 						local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-						if ok and stats and stats.size > max_filesize then
-							return true
-						end
+						if ok and stats and stats.size > max_filesize then return true end
 					end,
 				},
 				indent = { enable = true },

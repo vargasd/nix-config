@@ -147,15 +147,11 @@ return {
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = lsp_fmt_group,
 				callback = function(ev)
-					if not vim.bo.modifiable or vim.b.skip_autoformat == true then
-						return
-					end
+					if not vim.bo.modifiable or vim.b.skip_autoformat == true then return end
 
 					local efm = vim.lsp.get_clients({ name = "efm", bufnr = ev.buf })
 					local eslint = vim.lsp.get_clients({ name = "eslint", bufnr = ev.buf })
-					if not vim.tbl_isempty(eslint) then
-						vim.lsp.buf.format({ name = "eslint" })
-					end
+					if not vim.tbl_isempty(eslint) then vim.lsp.buf.format({ name = "eslint" }) end
 
 					if vim.tbl_isempty(efm) then
 						vim.lsp.buf.format()
@@ -179,9 +175,7 @@ return {
 			})
 
 			for server_name, config in pairs(servers) do
-				if config.autostart ~= false then
-					vim.lsp.enable(server_name)
-				end
+				if config.autostart ~= false then vim.lsp.enable(server_name) end
 				vim.lsp.config(server_name, config)
 			end
 		end,

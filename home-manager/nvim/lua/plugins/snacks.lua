@@ -107,9 +107,7 @@ return {
 					local test_regexes = { "%.spec%.[tj]s$", "%.test%.[tj]s$" }
 					if not ctx.picker.opts.tests and item.file then
 						for _, value in ipairs(test_regexes) do
-							if item.file:match(value) ~= nil then
-								return false
-							end
+							if item.file:match(value) ~= nil then return false end
 						end
 					end
 					return true
@@ -138,12 +136,8 @@ return {
 						finder = function(opts, ctx)
 							local glob = "!**/*.spec.ts"
 							local globs = type(opts.glob) == "table" and opts.glob or { opts.glob }
-							opts.glob = vim.tbl_filter(function(arg)
-								return arg ~= glob
-							end, globs)
-							if not opts.tests then
-								table.insert(opts.glob, glob)
-							end
+							opts.glob = vim.tbl_filter(function(arg) return arg ~= glob end, globs)
+							if not opts.tests then table.insert(opts.glob, glob) end
 							return require("snacks.picker.source.grep").grep(opts, ctx)
 						end,
 					},
@@ -166,9 +160,7 @@ return {
 				},
 				layout = {
 					cycle = true,
-					preset = function()
-						return vim.o.columns >= 200 and "default" or "samvert"
-					end,
+					preset = function() return vim.o.columns >= 200 and "default" or "samvert" end,
 				},
 			},
 			quickfile = { enabled = true },
@@ -178,9 +170,7 @@ return {
 						{ "<c-q>", "hide", mode = { "t", "n" } },
 						{
 							"<c-z>",
-							function()
-								vim.cmd("stopinsert")
-							end,
+							function() vim.cmd("stopinsert") end,
 							mode = "t",
 						},
 						{ "<esc>", "<esc>", mode = "t", expr = true },
@@ -209,33 +199,23 @@ return {
 			},
 			{
 				"<leader>O",
-				function()
-					Snacks.picker.lsp_symbols()
-				end,
+				function() Snacks.picker.lsp_symbols() end,
 			},
 			{
 				"grd",
-				function()
-					Snacks.picker.lsp_definitions()
-				end,
+				function() Snacks.picker.lsp_definitions() end,
 			},
 			{
 				"grr",
-				function()
-					Snacks.picker.lsp_references()
-				end,
+				function() Snacks.picker.lsp_references() end,
 			},
 			{
 				"gri",
-				function()
-					Snacks.picker.lsp_implementations()
-				end,
+				function() Snacks.picker.lsp_implementations() end,
 			},
 			{
 				"gry",
-				function()
-					Snacks.picker.lsp_type_definitions()
-				end,
+				function() Snacks.picker.lsp_type_definitions() end,
 			},
 			{
 				"<leader>/",
@@ -255,15 +235,11 @@ return {
 			},
 			{
 				"<leader><leader>",
-				function()
-					Snacks.picker.resume()
-				end,
+				function() Snacks.picker.resume() end,
 			},
 			{
 				"<leader>f",
-				function()
-					Snacks.picker.smart({ filter = { cwd = true } })
-				end,
+				function() Snacks.picker.smart({ filter = { cwd = true } }) end,
 			},
 			{
 				"<leader>F",
@@ -285,61 +261,41 @@ return {
 			},
 			{
 				"<leader>B",
-				function()
-					Snacks.picker.recent()
-				end,
+				function() Snacks.picker.recent() end,
 			},
 			{
 				"<leader>d",
-				function()
-					Snacks.picker.diagnostics_buffer()
-				end,
+				function() Snacks.picker.diagnostics_buffer() end,
 			},
 			{
 				"<leader>D",
-				function()
-					Snacks.picker.diagnostics()
-				end,
+				function() Snacks.picker.diagnostics() end,
 			},
 			{
 				"<leader>h",
-				function()
-					Snacks.picker.help()
-				end,
+				function() Snacks.picker.help() end,
 			},
 			{
 				"<leader>H",
-				function()
-					Snacks.picker.highlights()
-				end,
+				function() Snacks.picker.highlights() end,
 			},
 			{
 				"<leader>gh",
-				function()
-					Snacks.lazygit.log_file()
-				end,
+				function() Snacks.lazygit.log_file() end,
 			},
 			{
 				"<leader>G",
-				function()
-					Snacks.lazygit.open()
-				end,
+				function() Snacks.lazygit.open() end,
 			},
 			{
 				"<leader>t",
-				function()
-					Snacks.terminal.toggle(vim.o.shell)
-				end,
+				function() Snacks.terminal.toggle(vim.o.shell) end,
 			},
 			{
 				"<leader>T",
-				function()
-					Snacks.terminal.toggle(vim.o.shell, { cwd = vim.fn.expand("%:p:h") })
-				end,
+				function() Snacks.terminal.toggle(vim.o.shell, { cwd = vim.fn.expand("%:p:h") }) end,
 			},
 		},
-		init = function()
-			vim.g.snacks_animate = false
-		end,
+		init = function() vim.g.snacks_animate = false end,
 	},
 }

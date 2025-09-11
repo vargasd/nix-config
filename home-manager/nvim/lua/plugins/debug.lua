@@ -5,75 +5,51 @@ return {
 		keys = {
 			{
 				"|`",
-				function()
-					require("dap").toggle_breakpoint()
-				end,
+				function() require("dap").toggle_breakpoint() end,
 			},
 			{
 				"|b",
-				function()
-					require("dap").toggle_breakpoint()
-				end,
+				function() require("dap").toggle_breakpoint() end,
 			},
 			{
 				"|B",
-				function()
-					require("dap").toggle_breakpoint(vim.fn.input("condition: "))
-				end,
+				function() require("dap").toggle_breakpoint(vim.fn.input("condition: ")) end,
 			},
 			{
 				"|_",
-				function()
-					require("dap").continue()
-				end,
+				function() require("dap").continue() end,
 			},
 			{
 				"|c",
-				function()
-					require("dap").continue()
-				end,
+				function() require("dap").continue() end,
 			},
 			{
 				"|<Up>",
-				function()
-					require("dap").step_out()
-				end,
+				function() require("dap").step_out() end,
 			},
 			{
 				"|<Down>",
-				function()
-					require("dap").step_into()
-				end,
+				function() require("dap").step_into() end,
 			},
 			{
 				"|<Right>",
-				function()
-					require("dap").step_over()
-				end,
+				function() require("dap").step_over() end,
 			},
 			{
 				"|q",
-				function()
-					require("dap").disconnect()
-				end,
+				function() require("dap").disconnect() end,
 			},
 			{
 				"|d",
-				function()
-					require("dap.ui.widgets").hover()
-				end,
+				function() require("dap.ui.widgets").hover() end,
 			},
 			{
 				"||",
-				function()
-					require("dap.ui.widgets").hover()
-				end,
+				function() require("dap.ui.widgets").hover() end,
 			},
 			{
 				"|<Left>",
-				function()
-					require("dap").step_back()
-				end,
+				function() require("dap").step_back() end,
 			},
 			{
 				"|v",
@@ -91,9 +67,7 @@ return {
 			},
 			{
 				"|r",
-				function()
-					require("dap").repl.open()
-				end,
+				function() require("dap").repl.open() end,
 			},
 		},
 		config = function()
@@ -142,9 +116,7 @@ return {
 
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "dap-float",
-				callback = function()
-					vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true })
-				end,
+				callback = function() vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true }) end,
 			})
 		end,
 	},

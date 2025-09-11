@@ -6,27 +6,19 @@ return {
 		keys = {
 			{
 				"<leader>gb",
-				function()
-					vim.cmd.Git("blame")
-				end,
+				function() vim.cmd.Git("blame") end,
 			},
 			{ "<leader>gd", vim.cmd.Gdiffsplit },
 			{
 				"<leader>g<Left>",
-				function()
-					vim.cmd.diffget("LOCAL")
-				end,
+				function() vim.cmd.diffget("LOCAL") end,
 			},
 			{
 				"<leader>g<Right>",
-				function()
-					vim.cmd.diffget("REMOTE")
-				end,
+				function() vim.cmd.diffget("REMOTE") end,
 			},
 		},
-		init = function()
-			vim.g.fugitive_dynamic_colors = 0
-		end,
+		init = function() vim.g.fugitive_dynamic_colors = 0 end,
 	},
 
 	{
@@ -40,28 +32,27 @@ return {
 			on_attach = function(bufnr)
 				local gitsigns = require("gitsigns")
 				local move = require("nvim-next.move")
-				local prev, next = move.make_repeatable_pair(function()
-					gitsigns.nav_hunk("prev", {
-						navigation_message = false,
-					})
-				end, function()
-					gitsigns.nav_hunk("next", {
-						navigation_message = false,
-					})
-				end)
+				local prev, next = move.make_repeatable_pair(
+					function()
+						gitsigns.nav_hunk("prev", {
+							navigation_message = false,
+						})
+					end,
+					function()
+						gitsigns.nav_hunk("next", {
+							navigation_message = false,
+						})
+					end
+				)
 
 				-- don't override the built-in and fugitive keymaps
 				vim.keymap.set({ "n", "v" }, "]g", function()
-					if vim.wo.diff then
-						return "]g"
-					end
+					if vim.wo.diff then return "]g" end
 					vim.schedule(next)
 					return "<Ignore>"
 				end, { expr = true, buffer = bufnr })
 				vim.keymap.set({ "n", "v" }, "[g", function()
-					if vim.wo.diff then
-						return "[g"
-					end
+					if vim.wo.diff then return "[g" end
 					vim.schedule(prev)
 					return "<Ignore>"
 				end, { expr = true, buffer = bufnr })

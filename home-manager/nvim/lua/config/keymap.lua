@@ -14,9 +14,7 @@ local mappings = {
 		"<esc>",
 		function()
 			vim.cmd("nohlsearch")
-			if vim.snippet then
-				vim.snippet.stop()
-			end
+			if vim.snippet then vim.snippet.stop() end
 		end,
 		{ mode = { "n", "t" } },
 	},
@@ -52,15 +50,11 @@ local mappings = {
 	-- quitty stuff
 	{
 		"<leader>q",
-		function()
-			Snacks.bufdelete.delete()
-		end,
+		function() Snacks.bufdelete.delete() end,
 	},
 	{
 		"<leader>Q",
-		function()
-			vim.cmd.qall({ bang = true })
-		end,
+		function() vim.cmd.qall({ bang = true }) end,
 	},
 
 	-- I hate accidentally macroing
@@ -76,17 +70,13 @@ local mappings = {
 		function()
 			local qf_exists = false
 			for _, win in pairs(vim.fn.getwininfo()) do
-				if win["quickfix"] == 1 then
-					qf_exists = true
-				end
+				if win["quickfix"] == 1 then qf_exists = true end
 			end
 			if qf_exists == true then
 				vim.cmd("cclose")
 				return
 			end
-			if not vim.tbl_isempty(vim.fn.getqflist()) then
-				vim.cmd("copen")
-			end
+			if not vim.tbl_isempty(vim.fn.getqflist()) then vim.cmd("copen") end
 		end,
 	},
 }
@@ -98,12 +88,8 @@ for _, mapping in ipairs(mappings) do
 end
 
 -- Use lowercase for global marks and uppercase for local marks.
-local lower = function(i)
-	return string.char(97 + i)
-end
-local upper = function(i)
-	return string.char(65 + i)
-end
+local lower = function(i) return string.char(97 + i) end
+local upper = function(i) return string.char(65 + i) end
 
 for i = 0, 25 do
 	vim.keymap.set("n", "m" .. lower(i), "m" .. upper(i))
