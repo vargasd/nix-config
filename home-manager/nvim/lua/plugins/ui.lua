@@ -270,6 +270,7 @@ return {
 
 					"bash",
 					"css",
+					"gleam",
 					"glimmer", -- handlebars
 					"html",
 					"lua",

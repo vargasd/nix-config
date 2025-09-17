@@ -8,7 +8,6 @@ return {
 			local terraform_fmt = require("efmls-configs.formatters.terraform_fmt")
 			local prettier = require("efmls-configs.formatters.prettier_d")
 			-- local prettier = require("efmls-configs.formatters.prettier")
-			local nixfmt = require("efmls-configs.formatters.nixfmt")
 
 			local servers = vim.tbl_deep_extend(
 				"keep",
@@ -28,6 +27,7 @@ return {
 					},
 					clangd = {},
 					cssls = {},
+					gleam = {},
 					html = {},
 					marksman = {},
 					harper_ls = {
@@ -118,6 +118,7 @@ return {
 						init_options = { documentFormatting = true },
 						settings = {
 							languages = {
+								gleam = { require("efmls-configs.formatters.gleam_format") },
 								javascript = { prettier },
 								json = { prettier },
 								jsonc = { prettier },
@@ -126,7 +127,7 @@ return {
 								sql = { require("efmls-configs.formatters.sqruff") },
 								markdown = { prettier },
 								typespec = { prettier },
-								nix = { nixfmt },
+								nix = { require("efmls-configs.formatters.nixfmt") },
 								lua = { stylua },
 								terraform = { terraform_fmt },
 								vue = { prettier },

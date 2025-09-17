@@ -117,7 +117,24 @@
         "langthing": "langthing",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
+        "sublime-text-gleam": "sublime-text-gleam",
         "systems": "systems"
+      }
+    },
+    "sublime-text-gleam": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1750775515,
+        "narHash": "sha256-fzTwVG0lxSBh7F3A7nHET9Makh+UrIaIXjF/sc9Z5A0=",
+        "owner": "digitalcora",
+        "repo": "sublime-text-gleam",
+        "rev": "d2662e0fa8120ee21d0793194634fb9d31be9c6d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "digitalcora",
+        "repo": "sublime-text-gleam",
+        "type": "github"
       }
     },
     "systems": {

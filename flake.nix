@@ -30,6 +30,11 @@
       url = "github:vargasd/enhansi";
       flake = false;
     };
+
+    sublime-text-gleam = {
+      url = "github:digitalcora/sublime-text-gleam";
+      flake = false;
+    };
   };
 
   outputs =
@@ -128,6 +133,7 @@
         devShells = {
           c = import ./devShells/c.nix pkgs;
           gcp = import ./devShells/gcp.nix pkgs;
+          gleam = import ./devShells/gleam.nix pkgs;
           lua = import ./devShells/lua.nix pkgs;
           nix = import ./devShells/nix.nix pkgs;
           node24 = import ./devShells/node24.nix pkgs;
