@@ -75,6 +75,7 @@ return {
 		init = function()
 			vim.o.shortmess = vim.o.shortmess .. "qCcSsWF"
 			vim.o.showmode = false
+			vim.o.showcmd = false
 			vim.o.cmdheight = 0
 		end,
 	},
@@ -109,7 +110,7 @@ return {
 					},
 				},
 				lualine_c = { macro_recording },
-				lualine_x = { "encoding", "fileformat", "filetype", "location" },
+				lualine_x = { "encoding", "fileformat", { "filetype", colored = false }, "location" },
 				lualine_y = { "branch" },
 			}
 			local winbar = vim.tbl_extend("keep", base_config, {
