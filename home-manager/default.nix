@@ -1,5 +1,6 @@
 {
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -13,7 +14,6 @@
 
   home.packages = with pkgs; [
     ast-grep
-    bat
     # brave
     btop
     delta
@@ -75,23 +75,13 @@
     };
     syntaxes = {
       typespec = {
-        src = pkgs.fetchFromGitHub {
-          owner = "vargasd";
-          repo = "langthing";
-          rev = "581e54ee64b46ace0fbd23e221ade8088f491d4e";
-          hash = "sha256-/RLHHnCS4fMHPsSTRV/kLm7IUD2To3Hlk9vfiQG0UOs=";
-        };
+        src = inputs.langthing;
         file = "typespec/syntax/typespec.sublime-syntax";
       };
     };
     themes = {
       enhansi = {
-        src = pkgs.fetchFromGitHub {
-          owner = "vargasd";
-          repo = "enhansi";
-          rev = "7f28b3d4d4364309d8f098d99ba0d75e51bd3f2f";
-          hash = "sha256-kU642R/ugvSWpi99WR2OYfN3RT+Li0fe0HraCT9BP6M=";
-        };
+        src = inputs.enhansi;
         file = "enhansi.tmTheme";
       };
     };
@@ -344,12 +334,20 @@
         sort_dir_first = true;
       };
 
-      plugin.prepend_previewers = [
-        {
-          name = "*.tsp";
-          run = "piper -- bat -p --color=always \"$1\"";
-        }
-      ];
+      plugin.prepend_previewers =
+        let
+          bat = "piper -- bat -p --color=always \"$1\"";
+        in
+        [
+          {
+            name = "*.tsp";
+            run = bat;
+          }
+          {
+            name = "*.gleam";
+            run = bat;
+          }
+        ];
 
       plugin.prepend_fetchers = [
         {

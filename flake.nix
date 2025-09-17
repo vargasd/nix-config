@@ -20,6 +20,16 @@
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
     };
+
+    langthing = {
+      url = "github:vargasd/langthing";
+      flake = false;
+    };
+
+    enhansi = {
+      url = "github:vargasd/enhansi";
+      flake = false;
+    };
   };
 
   outputs =

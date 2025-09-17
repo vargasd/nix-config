@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "enhansi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1754938661,
+        "narHash": "sha256-Rs3BHxWWugdplsOqECPX2oWZ/T2ZABgpciH/tRIyUbM=",
+        "owner": "vargasd",
+        "repo": "enhansi",
+        "rev": "0d0c71dec0a129c33f0b37b109c971cebd9af4b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vargasd",
+        "repo": "enhansi",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": [
@@ -37,6 +53,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "langthing": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1750085972,
+        "narHash": "sha256-h9d4otkVLWlOpKt5UT/5uSpkxsM8MuNGjAvfaug/X0w=",
+        "owner": "vargasd",
+        "repo": "langthing",
+        "rev": "4852a6a36f2608f8048318fd0a460d6bb87b2edd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vargasd",
+        "repo": "langthing",
         "type": "github"
       }
     },
@@ -79,8 +111,10 @@
     },
     "root": {
       "inputs": {
+        "enhansi": "enhansi",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "langthing": "langthing",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "systems": "systems"
