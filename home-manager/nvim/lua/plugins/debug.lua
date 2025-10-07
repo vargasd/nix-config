@@ -2,6 +2,7 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
+		dependencies = { "theHamsta/nvim-dap-virtual-text" },
 		keys = {
 			{
 				"|`",
@@ -87,18 +88,18 @@ return {
 			local configs = {
 				{
 					type = "pwa-node",
-					request = "launch",
-					name = "Launch file",
-					program = "${file}",
+					request = "attach",
+					name = "Attach 9229",
+					port = 9229,
 					cwd = "${workspaceFolder}",
 					resolveSourceMapLocations = { "!**" },
 					skipFiles = { "<node_internals>/**" },
 				},
 				{
 					type = "pwa-node",
-					request = "attach",
-					name = "Attach 9229",
-					port = 9229,
+					request = "launch",
+					name = "Launch file",
+					program = "${file}",
 					cwd = "${workspaceFolder}",
 					resolveSourceMapLocations = { "!**" },
 					skipFiles = { "<node_internals>/**" },
@@ -118,6 +119,9 @@ return {
 				pattern = "dap-float",
 				callback = function() vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true }) end,
 			})
+
+			require("nvim-dap-virtual-text").setup({ clear_on_continue = true })
+			vim.api.nvim_set_hl(0, "NvimDapVirtualText", { link = "NonText" })
 		end,
 	},
 }
