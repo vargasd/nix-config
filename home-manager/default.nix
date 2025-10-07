@@ -26,7 +26,6 @@
     git
     gnupg
     hurl
-    ijq
     imagemagick
     jless
     jq
@@ -43,6 +42,7 @@
     ripgrep
     sqlite
     tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
+    up
     yazi
     yubikey-manager
     zoxide
