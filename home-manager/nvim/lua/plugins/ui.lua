@@ -19,7 +19,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 ---@type LazySpec
 return {
-	"nvim-tree/nvim-web-devicons",
+	{
+		"nvim-mini/mini.icons",
+		opts = {},
+	},
 
 	{
 		"folke/which-key.nvim",
@@ -82,12 +85,15 @@ return {
 
 	{
 		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-mini/mini.icons" },
 		config = function()
 			local function macro_recording()
 				-- https://old.reddit.com/r/neovim/comments/18r2bxo/is_there_a_way_to_display_macro_recording_message/keze7b9/
 				local reg = vim.fn.reg_recording()
 				return reg == "" and "" or "recording @" .. reg
 			end
+
+			require("mini.icons").mock_nvim_web_devicons()
 
 			local base_config = {
 				lualine_b = {
@@ -395,12 +401,13 @@ return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		ft = markdown_fts,
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" },
 		---@module 'render-markdown'
 		---@type render.md.UserConfig
 		opts = {
 			completions = { lsp = { enabled = true } },
 			heading = { enabled = false },
+			sign = { enabled = false },
 		},
 	},
 }
