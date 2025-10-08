@@ -166,7 +166,8 @@ with home;
         # See https://apple.stackexchange.com/a/474905
         "com.apple.symbolichotkeys".AppleSymbolicHotKeys =
           let
-            #https://gist.github.com/stephancasas/74c4621e2492fb875f0f42778d432973
+            # https://gist.github.com/stephancasas/74c4621e2492fb875f0f42778d432973
+            none = 65535;
             command = 1048576;
             hyper = 1966080;
             meh = 917504;
@@ -178,7 +179,7 @@ with home;
               enabled = true;
               value = {
                 parameters = [
-                  122
+                  none
                   6
                   meh
                 ];
@@ -190,7 +191,7 @@ with home;
               enabled = true;
               value = {
                 parameters = [
-                  120
+                  none
                   7
                   meh
                 ];
@@ -202,7 +203,7 @@ with home;
               enabled = true;
               value = {
                 parameters = [
-                  120
+                  none
                   7
                   hyper
                 ];
@@ -214,7 +215,7 @@ with home;
               enabled = true;
               value = {
                 parameters = [
-                  9
+                  none
                   48
                   option
                 ];
