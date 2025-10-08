@@ -17,7 +17,6 @@ with home;
       "notunes"
       "rectangle"
       "spotify"
-      "ueli"
       "wezterm" # needed because emoji finder crashes and for terminfo
     ];
     onActivation = {
@@ -231,7 +230,7 @@ with home;
             };
             # disable spotlight
             "64" = {
-              enabled = false;
+              enabled = true;
             };
           };
 
