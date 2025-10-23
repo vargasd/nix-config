@@ -31,6 +31,11 @@
       flake = false;
     };
 
+    clear-notifications = {
+      url = "git+https://gist.github.com/lancethomps/a5ac103f334b171f70ce2ff983220b4f.git";
+      flake = false;
+    };
+
     sublime-text-gleam = {
       url = "github:digitalcora/sublime-text-gleam";
       flake = false;

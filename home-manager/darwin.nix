@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     ./default.nix
@@ -13,7 +13,7 @@
   services.skhd = {
     enable = true;
     config = builtins.readFile ./darwin/skhdrc + ''
-      meh - escape   : osascript "${./darwin/clear-notifications.scpt}"
+      meh - escape : osascript "${inputs.clear-notifications}/close_notifications_applescript.js"
       meh - tab      : osascript "${./darwin/tunnelblick.scpt}"
       hyper - tab    : osascript -e $'tell application "Tunnelblick"\ndisconnect all\nend tell'
     '';

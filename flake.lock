@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "clear-notifications": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1760120549,
+        "narHash": "sha256-cjP74VZK5Nr0K/nUDxHXKYE5hrBKYGXSxtb+yLOWOa0=",
+        "ref": "refs/heads/master",
+        "rev": "fb0ce84938ec8754ba58b0c8dc1dedbfee46ca66",
+        "revCount": 16,
+        "type": "git",
+        "url": "https://gist.github.com/lancethomps/a5ac103f334b171f70ce2ff983220b4f.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://gist.github.com/lancethomps/a5ac103f334b171f70ce2ff983220b4f.git"
+      }
+    },
     "enhansi": {
       "flake": false,
       "locked": {
@@ -111,6 +127,7 @@
     },
     "root": {
       "inputs": {
+        "clear-notifications": "clear-notifications",
         "enhansi": "enhansi",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
