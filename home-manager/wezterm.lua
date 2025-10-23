@@ -120,7 +120,7 @@ wezterm.on("trigger-vim-with-scrollback", function(window, pane)
 
 	window:perform_action(
 		act.SpawnCommandInNewTab({
-			args = { os.getenv("SHELL"), "-c", "nvim " .. name },
+			args = { os.getenv("SHELL"), "-c", "nvim -c ':set nowrap nonumber signcolumn=no' " .. name },
 			cwd = "/",
 		}),
 		pane
