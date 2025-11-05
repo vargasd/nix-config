@@ -83,7 +83,10 @@ return {
 					{ section = "projects", padding = 1 },
 				},
 			},
-			image = { enabled = true },
+			image = {
+				enabled = true,
+				doc = { enabled = false },
+			},
 			lazygit = { configure = false },
 			picker = {
 				enabled = true,
@@ -294,6 +297,12 @@ return {
 			{
 				"<leader>T",
 				function() Snacks.terminal.toggle(vim.o.shell, { cwd = vim.fn.expand("%:p:h") }) end,
+			},
+			{
+				"H",
+				ft = "markdown",
+				function() Snacks.image.hover() end,
+				silent = true,
 			},
 		},
 		init = function() vim.g.snacks_animate = false end,
