@@ -251,7 +251,6 @@ return {
 
 					-- tools
 					"devicetree", -- zmk
-					"dockerfile",
 					"graphql",
 					"git_config",
 					"git_rebase",
@@ -296,7 +295,7 @@ return {
 					enable = true,
 					additional_vim_regex_highlighting = { "sql" },
 					disable = function(lang, buf)
-						if vim.list_contains(require("common").csv_fts, vim.bo.filetype) then return false end
+						if lang == "dockerfile" then return true end
 
 						local max_filesize = 500 * 1024 -- 500 KB
 						local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
