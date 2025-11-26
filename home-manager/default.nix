@@ -110,6 +110,16 @@
     };
   };
 
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      tabs = 2;
+      syntax-theme = "enhansi";
+    };
+  };
+
   programs.dircolors = {
     enable = true;
     enableZshIntegration = true;
@@ -196,10 +206,12 @@
     enable = true;
     settings = {
       git = {
-        paging = {
-          colorArg = "always";
-          pager = "delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
-        };
+        pagers = [
+          {
+            pager = "delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
+            colorArg = "always";
+          }
+        ];
         autoFetch = false;
       };
       os.editPreset = "nvim-remote";
@@ -209,6 +221,7 @@
   programs.opencode = {
     enable = true;
     settings = {
+      theme = "system";
       share = "disabled";
       keybinds = {
         leader = "tab";

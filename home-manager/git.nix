@@ -1,26 +1,6 @@
 {
   enable = true;
 
-  aliases = {
-    co = "checkout";
-    bco = # sh
-      ''!f() { git checkout -b "sam/$1"; }; f'';
-    bclean = # sh
-      "!f() { git branch --merged origin/main | xargs git branch -D; }; f";
-    fu = "commit --fixup";
-    fua = "commit -a --fixup";
-    graph = "log --graph --pretty=mine";
-    g = "log --graph --pretty=mine";
-    ga = "log --graph --all --pretty=mine";
-    mt = "mergetool";
-    pf = "push --force";
-    ri = # sh
-      ''!f() { git rebase -i "''\${1:-origin/HEAD}"; }; f'';
-    ra = "rebase --abort";
-    rc = "rebase --continue";
-    reste = "reset";
-  };
-
   ignores = [
     ".DS_Store"
     "[._]*.s[a-w][a-z]"
@@ -34,16 +14,27 @@
     ".lazy.lua"
   ];
 
-  delta = {
-    enable = true;
-    options = {
-      navigate = true;
-      tabs = 2;
-      syntax-theme = "enhansi";
+  settings = {
+    alias = {
+      co = "checkout";
+      bco = # sh
+        ''!f() { git checkout -b "sam/$1"; }; f'';
+      bclean = # sh
+        "!f() { git branch --merged origin/main | xargs git branch -D; }; f";
+      fu = "commit --fixup";
+      fua = "commit -a --fixup";
+      graph = "log --graph --pretty=mine";
+      g = "log --graph --pretty=mine";
+      ga = "log --graph --all --pretty=mine";
+      mt = "mergetool";
+      pf = "push --force";
+      ri = # sh
+        ''!f() { git rebase -i "''\${1:-origin/HEAD}"; }; f'';
+      ra = "rebase --abort";
+      rc = "rebase --continue";
+      reste = "reset";
     };
-  };
 
-  extraConfig = {
     log.date = "format-local:%F %R";
     column.ui = "auto";
     commit.gpgSign = true;
@@ -99,6 +90,7 @@
       vimdiff.layout = "LOCAL,REMOTE / MERGED";
     };
   };
+
   includes = [
     {
       condition = "gitdir:~/work/";
