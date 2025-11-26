@@ -411,10 +411,6 @@
     maxCacheTtl = 120;
   };
 
-  services.ollama = {
-    enable = true;
-  };
-
   xdg = {
     enable = true;
     configFile.nvim = {
