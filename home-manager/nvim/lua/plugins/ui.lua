@@ -261,6 +261,7 @@ return {
 					"jq",
 					"markdown",
 					"markdown_inline",
+					"mermaid",
 					"nix",
 					"prisma",
 					"terraform",
