@@ -110,7 +110,7 @@ resurrect.state_manager.periodic_save({
 })
 
 wezterm.on("trigger-vim-with-scrollback", function(window, pane)
-	local text = pane:get_lines_as_text(pane:get_dimensions().scrollback_rows)
+	local text = pane:get_lines_as_escapes(pane:get_dimensions().scrollback_rows)
 
 	local name = os.tmpname()
 	local f = io.open(name, "w+")
@@ -120,7 +120,7 @@ wezterm.on("trigger-vim-with-scrollback", function(window, pane)
 
 	window:perform_action(
 		act.SpawnCommandInNewTab({
-			args = { os.getenv("SHELL"), "-c", "nvim -c ':set nowrap nonumber signcolumn=no' " .. name },
+			args = { os.getenv("SHELL"), "-c", "nvim -c ':set nowrap nonumber signcolumn=no' ansify://" .. name },
 			cwd = "/",
 		}),
 		pane

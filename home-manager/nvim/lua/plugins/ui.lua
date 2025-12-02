@@ -19,6 +19,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 ---@type LazySpec
 return {
+	"tmccombs/ansify.nvim",
+
 	{
 		"nvim-mini/mini.icons",
 		opts = {},
@@ -261,7 +263,6 @@ return {
 					"jq",
 					"markdown",
 					"markdown_inline",
-					"mermaid",
 					"nix",
 					"prisma",
 					"terraform",
