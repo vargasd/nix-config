@@ -55,8 +55,8 @@
     efm-langserver
     harper
     marksman
-    typescript-language-server
     postgres-language-server
+    typescript-go
     typos-lsp
     yaml-language-server
 

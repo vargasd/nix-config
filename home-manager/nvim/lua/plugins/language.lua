@@ -89,7 +89,18 @@ return {
 						},
 					},
 					ts_ls = {
-						filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }, -- when 4.4.0 is available , "vue"},
+						filetypes = {},
+						init_options = {
+							hostInfo = "neovim",
+							preferences = {
+								completions = { completeFunctionCalls = false },
+								includeCompletionsWithSnippetText = false,
+								includeCompletionsForImportStatements = true,
+							},
+						},
+					},
+					tsgo = {
+						filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 						init_options = {
 							hostInfo = "neovim",
 							preferences = {
