@@ -61,6 +61,12 @@ return {
 								format = {
 									enable = false,
 								},
+								schemas = {
+									["https://taskfile.dev/schema.json"] = {
+										"**/Taskfile.yml",
+										"**/Taskfile.yaml",
+									},
+								},
 							},
 						},
 					},
