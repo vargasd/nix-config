@@ -1,22 +1,5 @@
 local markdown_fts = { "markdown", "codecompanion" }
 
-vim.api.nvim_create_autocmd("BufReadPost", {
-	callback = function(ev)
-		vim.defer_fn(function()
-			local ok, size = pcall(vim.fn.getfsize, vim.api.nvim_buf_get_name(ev.buf))
-			if ok and size < 1024 * 1024 then
-				vim.opt.foldmethod = "expr"
-				vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-				vim.opt.foldtext = ""
-
-				vim.opt.foldnestmax = 4
-				vim.opt.foldlevel = 99
-				vim.opt.foldlevelstart = 99
-			end
-		end, 100)
-	end,
-})
-
 ---@type LazySpec
 return {
 	"tmccombs/ansify.nvim",
@@ -235,114 +218,123 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"ghostbuster91/nvim-next",
-		},
+		branch = "main",
 		build = ":TSUpdate",
 		config = function()
-			require("nvim-next.integrations").treesitter_textobjects()
-			require("nvim-treesitter.configs").setup({
-				modules = {},
-				sync_install = false,
-				ignore_install = {},
-				ensure_installed = {
-					-- general
-					"comment",
-					"regex",
+			require("nvim-treesitter").install({
+				-- general
+				"comment",
+				"regex",
 
-					-- tools
-					"devicetree", -- zmk
-					"graphql",
-					"git_config",
-					"git_rebase",
-					"gitattributes",
-					"gitcommit",
-					"gitignore",
-					"hurl",
-					"jq",
-					"markdown",
-					"markdown_inline",
-					"nix",
-					"prisma",
-					"terraform",
-					"vim",
-					"vimdoc",
+				-- tools
+				"devicetree", -- zmk
+				"graphql",
+				"git_config",
+				"git_rebase",
+				"gitattributes",
+				"gitcommit",
+				"gitignore",
+				"hurl",
+				"jq",
+				"markdown",
+				"markdown_inline",
+				"nix",
+				"prisma",
+				"terraform",
+				"vim",
+				"vimdoc",
 
-					-- config
-					"json",
-					"jsonc",
-					"toml",
-					"yaml",
+				-- config
+				"json",
+				"jsonc",
+				"toml",
+				"yaml",
 
-					"bash",
-					"css",
-					"gleam",
-					"glimmer", -- handlebars
-					"html",
-					"lua",
-					"javascript",
-					"jsdoc",
-					"rust",
-					"sql",
-					"svelte",
-					"tsx",
-					"typespec",
-					"typescript",
-					"vue",
-					"php",
-				},
-				auto_install = false,
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = { "sql" },
-					disable = function(lang, buf)
-						if lang == "dockerfile" then return true end
-
-						local max_filesize = 500 * 1024 -- 500 KB
-						local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-						if ok and stats and stats.size > max_filesize then return true end
-					end,
-				},
-				indent = { enable = true },
-				playground = { enable = true },
-				textobjects = {
-					select = {
-						enable = true,
-						lookahead = true,
-						keymaps = {
-							["aa"] = "@parameter.outer",
-							["ia"] = "@parameter.inner",
-							["af"] = "@function.outer",
-							["if"] = "@function.inner",
-							["ac"] = "@comment.outer",
-							["ic"] = "@comment.inner",
-						},
-					},
-				},
-				nvim_next = {
-					enable = true,
-					textobjects = {
-						move = {
-							set_jumps = true,
-							goto_next_start = {
-								["]f"] = "@function.outer",
-								["]a"] = "@parameter.outer",
-								["]]"] = "@block.inner",
-								["]c"] = "@comment.inner",
-								["]v"] = "@assignment.lhs",
-							},
-							goto_previous_start = {
-								["[f"] = "@function.outer",
-								["[a"] = "@parameter.outer",
-								["[["] = "@block.inner",
-								["[c"] = "@comment.inner",
-								["[v"] = "@assignment.lhs",
-							},
-						},
-					},
-				},
+				"bash",
+				"css",
+				"gleam",
+				"glimmer", -- handlebars
+				"html",
+				"lua",
+				"javascript",
+				"jsdoc",
+				"rust",
+				"sql",
+				"svelte",
+				"tsx",
+				"typespec",
+				"typescript",
+				"vue",
+				"php",
 			})
+
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function(args)
+					local max_filesize = 500 * 1024 -- 500 KB
+					local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(args.buf))
+					if ok and stats and stats.size > max_filesize then return end
+
+					local lang = vim.treesitter.language.get_lang(args.match) or args.match
+					local installed = require("nvim-treesitter").get_installed("parsers")
+					if vim.tbl_contains(installed, lang) then vim.treesitter.start(args.buf) end
+
+					-- sql treesitter isn't quite as good
+					if lang == "sql" then vim.bo.syntax = "on" end
+
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+					vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+					vim.wo[0][0].foldmethod = "expr"
+
+					vim.wo[0][0].foldtext = ""
+
+					vim.wo[0][0].foldnestmax = 4
+					vim.wo[0][0].foldlevel = 99
+				end,
+			})
+		end,
+	},
+
+	{
+
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
+		dependencies = { "ghostbuster91/nvim-next" },
+		event = "VeryLazy",
+		init = function()
+			-- Disable entire built-in ftplugin mappings to avoid conflicts.
+			-- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+			vim.g.no_plugin_maps = true
+		end,
+		config = function()
+			local next_move = require("nvim-next.move")
+			local textobjects_move = require("nvim-treesitter-textobjects.move")
+			local textobjects_select = require("nvim-treesitter-textobjects.select")
+
+			local mappings = {
+				a = "@parameter",
+				f = "@function",
+				c = "@comment",
+			}
+			for key, selector in pairs(mappings) do
+				local p, n = next_move.make_repeatable_pair(
+					function() textobjects_move.goto_previous_start(selector .. ".outer", "textobjects") end,
+					function() textobjects_move.goto_next_start(selector .. ".outer", "textobjects") end
+				)
+
+				vim.keymap.set({ "n", "x", "o" }, "[" .. key, p)
+				vim.keymap.set({ "n", "x", "o" }, "]" .. key, n)
+				vim.keymap.set(
+					{ "x", "o" },
+					"a" .. key,
+					function() textobjects_select.select_textobject(selector .. ".outer", "textobjects") end
+				)
+				vim.keymap.set(
+					{ "x", "o" },
+					"i" .. key,
+					function() textobjects_select.select_textobject(selector .. ".inner", "textobjects") end
+				)
+			end
 		end,
 	},
 
@@ -354,7 +346,7 @@ return {
 			local move = require("nvim-next.move")
 			local next_integrations = require("nvim-next.integrations")
 			local diagnostics = next_integrations.diagnostic()
-			next_integrations.quickfix().setup()
+			local qf = next_integrations.quickfix()
 
 			require("nvim-next").setup({
 				items = {
@@ -371,8 +363,10 @@ return {
 					min = vim.diagnostic.severity.WARN,
 				},
 			}
-			vim.keymap.set("n", "[d", diagnostics.goto_prev(diagnostic_opts))
-			vim.keymap.set("n", "]d", diagnostics.goto_next(diagnostic_opts))
+			vim.keymap.set({ "n", "x", "o" }, "[d", diagnostics.goto_prev(diagnostic_opts))
+			vim.keymap.set({ "n", "x", "o" }, "]d", diagnostics.goto_next(diagnostic_opts))
+			vim.keymap.set("n", "[q", qf.cprevious)
+			vim.keymap.set("n", "]q", qf.cnext)
 		end,
 	},
 

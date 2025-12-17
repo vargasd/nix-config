@@ -64,6 +64,8 @@
     # formatters
     prettierd
     vscode-js-debug
+
+    tree-sitter
   ];
 
   programs.home-manager.enable = true;
