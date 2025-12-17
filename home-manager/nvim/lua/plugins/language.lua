@@ -43,6 +43,7 @@ return {
 					},
 					nixd = {},
 					terraformls = {},
+					tflint = {},
 					typos_lsp = {
 						autostart = false,
 						init_options = {
