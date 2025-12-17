@@ -22,6 +22,7 @@
     fd
     fzf
     fzf-git-sh
+    go-task
     gh
     git
     gnupg
