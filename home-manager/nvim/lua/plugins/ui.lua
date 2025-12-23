@@ -1,5 +1,3 @@
-local markdown_fts = { "markdown", "codecompanion" }
-
 ---@type LazySpec
 return {
 	"tmccombs/ansify.nvim",
@@ -372,7 +370,15 @@ return {
 
 	{
 		"cameron-wags/rainbow_csv.nvim",
-		ft = require("common").csv_fts,
+		ft = {
+			"csv",
+			"tsv",
+			"csv_semicolon",
+			"csv_whitespace",
+			"csv_pipe",
+			"rfc_csv",
+			"rfc_semicolon",
+		},
 		priority = 100,
 		opts = {},
 		keys = {
@@ -395,7 +401,7 @@ return {
 
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		ft = markdown_fts,
+		ft = { "markdown" },
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" },
 		---@module 'render-markdown'
 		---@type render.md.UserConfig
