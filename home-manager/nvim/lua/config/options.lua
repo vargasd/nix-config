@@ -33,6 +33,8 @@ vim.o.list = true
 vim.opt.iskeyword:append("-")
 vim.opt.iskeyword:append("#")
 
+vim.opt.isfname:append("@-@")
+
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
