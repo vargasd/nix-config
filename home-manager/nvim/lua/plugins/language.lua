@@ -28,8 +28,7 @@ return {
 					html = {},
 					marksman = {},
 					harper_ls = {
-						autostart = false,
-						filetypes = { "markdown", "asciidoc", "tex", "text" },
+						filetypes = { "markdown", "asciidoc", "tex" },
 						settings = {
 							["harper-ls"] = {
 								linters = {
