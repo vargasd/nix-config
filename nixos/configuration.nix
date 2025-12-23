@@ -9,6 +9,7 @@
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
+    "pipe-operators"
   ];
 
   # Use the systemd-boot EFI boot loader.
