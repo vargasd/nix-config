@@ -5,7 +5,6 @@ return {
 		dependencies = { "creativenull/efmls-configs-nvim" },
 		config = function()
 			local stylua = require("efmls-configs.formatters.stylua")
-			local terraform_fmt = require("efmls-configs.formatters.terraform_fmt")
 			local prettier = require("efmls-configs.formatters.prettier_d")
 			-- local prettier = require("efmls-configs.formatters.prettier")
 
@@ -25,9 +24,7 @@ return {
 							},
 						},
 					},
-					clangd = {},
 					cssls = {},
-					gleam = {},
 					html = {},
 					marksman = {},
 					harper_ls = {
@@ -41,9 +38,6 @@ return {
 							},
 						},
 					},
-					nixd = {},
-					terraformls = {},
-					tflint = {},
 					typos_lsp = {
 						autostart = false,
 						init_options = {
@@ -136,7 +130,6 @@ return {
 						init_options = { documentFormatting = true },
 						settings = {
 							languages = {
-								gleam = { require("efmls-configs.formatters.gleam_format") },
 								javascript = { prettier },
 								json = { prettier },
 								jsonc = { prettier },
@@ -145,9 +138,7 @@ return {
 								sql = { require("efmls-configs.formatters.sqruff") },
 								markdown = { prettier },
 								typespec = { prettier },
-								nix = { require("efmls-configs.formatters.nixfmt") },
 								lua = { stylua },
-								terraform = { terraform_fmt },
 								vue = { prettier },
 								yaml = { prettier },
 							},

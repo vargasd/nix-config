@@ -130,32 +130,43 @@
     // (flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = import nixpkgs {
-          inherit system;
+        inputs = {
+          pkgs = import nixpkgs {
+            inherit system;
+          };
+          helpers = {
+            extendJsonEnvVar =
+              pkgs: varName: json:
+              pkgs.lib.attrsets.recursiveUpdate (
+                builtins.getEnv varName
+                |> (val: if val == null || val == "" then "{}" else val) # handle invalid JSON?
+                |> builtins.fromJSON
+              ) json
+              |> builtins.toJSON;
+          };
         };
       in
       {
         devShells = {
-          c = import ./devShells/c.nix pkgs;
-          gcp = import ./devShells/gcp.nix pkgs;
-          gleam = import ./devShells/gleam.nix pkgs;
-          lua = import ./devShells/lua.nix pkgs;
-          nix = import ./devShells/nix.nix pkgs;
-          node24 = import ./devShells/node24.nix pkgs;
-          node22 = import ./devShells/node22.nix pkgs;
-          node20 = import ./devShells/node20.nix pkgs;
-          php = import ./devShells/php.nix pkgs;
-          pnpm = import ./devShells/pnpm.nix pkgs;
-          ruby = import ./devShells/ruby.nix pkgs;
-          terraform =
-            let
-              pkgs = import nixpkgs {
-                inherit system;
-                config.allowUnfree = true;
-              };
-            in
-            import ./devShells/terraform.nix pkgs;
-          vue = import ./devShells/vue.nix pkgs;
+          c = import ./devShells/c.nix inputs;
+          gcp = import ./devShells/gcp.nix inputs;
+          gleam = import ./devShells/gleam.nix inputs;
+          lua = import ./devShells/lua.nix inputs;
+          nix = import ./devShells/nix.nix inputs;
+          node24 = import ./devShells/node24.nix inputs;
+          node22 = import ./devShells/node22.nix inputs;
+          node20 = import ./devShells/node20.nix inputs;
+          php = import ./devShells/php.nix inputs;
+          pnpm = import ./devShells/pnpm.nix inputs;
+          ruby = import ./devShells/ruby.nix inputs;
+          terraform = import ./devShells/terraform.nix {
+            helpers = inputs.helpers;
+            pkgs = import nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          };
+          vue = import ./devShells/vue.nix inputs;
         };
       }
     ));
