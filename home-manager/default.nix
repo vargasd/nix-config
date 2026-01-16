@@ -70,6 +70,26 @@
 
   programs.home-manager.enable = true;
 
+  programs.atuin = {
+    enable = true;
+    flags = [ "--disable-up-arrow" ];
+    daemon.enable = true;
+    settings = {
+      update_check = false;
+      show_help = false;
+      invert = true;
+      enter_accept = true;
+      prefers_reduced_motion = true;
+      show_numeric_shortcuts = false;
+      search.filters = [
+        "workspace"
+        "global"
+        "session"
+        "directory"
+      ];
+    };
+  };
+
   programs.bat = {
     enable = true;
     config = {
