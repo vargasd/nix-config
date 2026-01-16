@@ -16,7 +16,6 @@ with home;
       "orcaslicer"
       "notunes"
       "rectangle"
-      "spotify"
       "wezterm" # needed because emoji finder crashes and for terminfo
     ];
     onActivation = {
@@ -244,7 +243,6 @@ with home;
 
         "digital.twisted.noTunes" = {
           hideIcon = true;
-          replacement = "/Applications/Spotify.app";
         };
       };
     };
