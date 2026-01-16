@@ -244,7 +244,6 @@ return {
 
 				-- config
 				"json",
-				"jsonc",
 				"toml",
 				"yaml",
 
