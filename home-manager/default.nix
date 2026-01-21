@@ -83,9 +83,8 @@
       prefers_reduced_motion = true;
       show_numeric_shortcuts = false;
       search.filters = [
-        "workspace"
         "global"
-        "session"
+        "workspace"
         "directory"
       ];
     };
