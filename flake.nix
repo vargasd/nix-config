@@ -148,6 +148,7 @@
       in
       {
         devShells = {
+          biome = import ./devShells/biome.nix inputs;
           c = import ./devShells/c.nix inputs;
           gcp = import ./devShells/gcp.nix inputs;
           gleam = import ./devShells/gleam.nix inputs;
