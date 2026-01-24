@@ -79,7 +79,6 @@
       update_check = false;
       show_help = false;
       invert = true;
-      enter_accept = true;
       prefers_reduced_motion = true;
       show_numeric_shortcuts = false;
       search.filters = [
