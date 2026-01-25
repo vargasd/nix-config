@@ -1,12 +1,23 @@
-# My nix configuration
+# Nix Configuration
 
-So far, it's just nix-darwin. For now, I'm using nix on a trial basis, particularly since MacOS setting management is not so great.
+## `nix-darwin`
 
-## nix-darwin
+### Installation
 
-1. [Install nix via Determinate Systems](https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#determinate-nix-installer) as described [here](https://github.com/LnL7/nix-darwin/blob/master/README.md#prerequisites).
-2. [Install homebrew](https://brew.sh/) since that's how we'll install GUI apps (and maybe some Mac-specific binaries at some point?)
+1. Install lix
+   1. This errors but running again has done the trick in the pashas done the trick in the past.
+   1. You can use Determinate Nix too, but either disable FileVault or use the installer package over the script.
+1. Add `pipe-operator` (lix) or `pipe-operators` (nix) experimental feature to `/etc/nix/nix.conf`.
+1. Install homebrew for GUI apps.
+1. Clone this repo (over HTTP).
+1. Apply config by running:
+   ```sh
+   sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#home
+   ```
+1. Log out and back in (or restart) and things should be loaded.
 
-Apply by running
+### Manual Things
 
-	darwin-rebuild switch --flake .#sams-Mac-mini
+Set Homerow shortcut manually. See note in [./home-manager/darwin.nix](./home-manager/darwin.nix).
+Add Night Shift to Control Center
+Remove desktop widgets 👎
