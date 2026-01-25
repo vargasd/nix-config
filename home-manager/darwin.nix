@@ -16,12 +16,13 @@
     ];
 
     sessionVariables = {
+      MOZ_DISABLE_SAFE_MODE_KEY = 1;
       LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
     };
 
     activation = {
       defaultbrowser = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        run ${pkgs.defaultbrowser}/bin/defaultbrowser browser
+        run ${pkgs.defaultbrowser}/bin/defaultbrowser ${home.defaultbrowser}
       '';
     };
   };
