@@ -156,6 +156,130 @@
     enable = true;
   };
 
+  programs.firefox = {
+    enable = true;
+    profiles.default =
+      let
+        ext = inputs.firefox-addons.packages.${pkgs.system};
+      in
+      {
+        isDefault = true;
+        settings = {
+          "browser.startup.homepage" = "about:blank";
+          "browser.search.isUS" = true;
+          "browser.toolbarbuttons.introduced.sidebar-button" = true;
+          "browser.aboutConfig.showWarning" = false;
+          "browser.urlbar.suggest.searches" = false;
+
+          # UI stuff; not sure how much is actually needed
+          "sidebar.revamp" = true;
+          "sidebar.verticalTabs" = true;
+          "browser.uiCustomization.horizontalTabstrip" = [
+            "tabbrowser-tabs"
+            "new-tab-button"
+          ];
+          "browser.uiCustomization.navBarWhenVerticalTabs" = [
+            "sidebar-button"
+            "back-button"
+            "forward-button"
+            "urlbar-container"
+            "unified-extensions-button"
+          ];
+          "browser.uiCustomization.state" = {
+            "placements" = {
+              "widget-overflow-fixed-list" = [ ];
+              "unified-extensions-area" = [
+                "vimium-c_gdh1995_cn-browser-action"
+                "ublock0_raymondhill_net-browser-action"
+              ];
+              "nav-bar" = [
+                "sidebar-button"
+                "back-button"
+                "forward-button"
+                "urlbar-container"
+                "unified-extensions-button"
+              ];
+              "TabsToolbar" = [ ];
+              "vertical-tabs" = [ "tabbrowser-tabs" ];
+              "PersonalToolbar" = [ "personal-bookmarks" ];
+            };
+            "currentVersion" = 21;
+            "newElementCount" = 2;
+          };
+        };
+        extensions = with ext; {
+          force = true;
+          packages = [
+            vimium-c
+            ublock-origin
+          ];
+          settings.${ext.vimium-c.addonId} = {
+            force = true;
+            settings = {
+              newTabUrl_f = "about:newtab";
+              vimSync = true;
+              keyLayout = 2;
+              exclusionRules = [ ];
+              linkHintCharacters = "trasneiogm";
+              searchEngines = ''
+                g: https://www.google.com/search?q=%s
+                www.google.com re=/^(?:\.[a-z]{2,4})?\\/search\\b.*?[#&?]q=([^#&]*)/i
+                blank=https://www.google.com/ Google'';
+              regexFindMode = true;
+              userDefinedCss = ''
+                 /* #ui */
+                .LH {
+                   font-size: 15px;
+                   opacity: 0.7;
+                 }
+
+                 .HUD {
+                   top: -1px;
+                   bottom: auto;
+                   left: 50%;
+                   right: auto;
+                   padding: 0 4px 5px 4px;
+                   border-radius: 0 0 4px 4px;
+                   transform: translateX(-50%);
+                 }
+              '';
+              keyMappings = ''
+                #!no-check
+                mapKey U X
+                mapKey t T
+                mapKey J K
+                mapKey K J
+                unmap p
+                unmap m
+                unmap /
+              '';
+              searchUrl = "https://www.google.com/search?q=$s Google";
+              showAdvancedCommands = false;
+            };
+          };
+        };
+        search = {
+          force = true;
+          default = "Kagi";
+          engines = {
+            "Kagi" = {
+              urls = [
+                {
+                  template = "https://kagi.com/search?";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+            };
+          };
+        };
+      };
+  };
+
   programs.fzf = {
     enable = true;
     defaultOptions = [ "--color=16" ];

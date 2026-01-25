@@ -40,6 +40,11 @@
       url = "github:digitalcora/sublime-text-gleam";
       flake = false;
     };
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -85,6 +90,7 @@
             home = {
               homeDirectory = "/Users/I763291";
               user = "I763291";
+              defaultbrowser = "browser";
             };
           };
         in
@@ -111,6 +117,7 @@
             home = {
               user = "vargasd";
               homeDirectory = "/Users/vargasd";
+              defaultbrowser = "firefox";
             };
           };
         in

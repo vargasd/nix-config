@@ -16,6 +16,7 @@
     ];
 
     sessionVariables = {
+      MOZ_DISABLE_SAFE_MODE_KEY = 1;
       LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
     };
 
@@ -25,6 +26,8 @@
       '';
     };
   };
+
+  # programs.firefox.package = null;
 
   services.gpg-agent.pinentry.package = pkgs.pinentry_mac;
 
