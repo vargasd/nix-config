@@ -164,6 +164,10 @@
     enable = true;
   };
 
+  programs.firefox = {
+    enable = true;
+  };
+
   programs.fzf = {
     enable = true;
     defaultOptions = [ "--color=16" ];

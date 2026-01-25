@@ -85,6 +85,7 @@
             home = {
               homeDirectory = "/Users/I763291";
               user = "I763291";
+              defaultbrowser = "browser";
             };
           };
         in
@@ -111,6 +112,7 @@
             home = {
               user = "vargasd";
               homeDirectory = "/Users/vargasd";
+              defaultbrowser = "firefox";
             };
           };
         in

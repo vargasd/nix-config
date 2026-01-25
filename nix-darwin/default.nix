@@ -5,6 +5,7 @@
     brews = [ ];
     casks = [
       "brave-browser"
+      "firefox"
       "homerow"
       "orcaslicer"
       "notunes"
