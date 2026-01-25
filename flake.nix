@@ -51,6 +51,7 @@
       ...
     }@inputs:
     {
+
       nixosConfigurations.nuc = nixpkgs.lib.nixosSystem (
         let
           specialArgs = {
@@ -76,6 +77,7 @@
           ];
         }
       );
+
       darwinConfigurations.work = nix-darwin.lib.darwinSystem (
         let
           specialArgs = {
@@ -101,6 +103,7 @@
           ];
         }
       );
+
       darwinConfigurations.home = nix-darwin.lib.darwinSystem (
         let
           specialArgs = {
@@ -127,6 +130,7 @@
         }
       );
     }
+
     // (flake-utils.lib.eachDefaultSystem (
       system:
       let
