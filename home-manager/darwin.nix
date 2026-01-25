@@ -80,6 +80,33 @@
         type = "png";
       };
 
+      # disable most spotlight junk (only enable apps and settings)
+      "com.apple.Spotlight".EnabledPreferenceRules = [
+        "Custom.relatedContents"
+        "System.files"
+        "System.folders"
+        "System.iphoneApps"
+        "System.menuItems"
+        "com.apple.AppStore"
+        "com.apple.iBooksX"
+        "com.apple.calculator"
+        "com.apple.iCal"
+        "com.apple.AddressBook"
+        "com.apple.Dictionary"
+        "com.apple.mail"
+        "com.apple.Notes"
+        "com.apple.Photos"
+        "com.apple.podcasts"
+        "com.apple.reminders"
+        "com.apple.Safari"
+        "com.apple.shortcuts"
+        "com.apple.tips"
+        "com.apple.VoiceMemos"
+      ];
+
+      # disable spotlight sharing
+      "com.apple.assistant.support"."Search Queries Data Sharing Status" = 2;
+
       NSGlobalDomain = {
         AppleShowAllExtensions = true;
         KeyRepeat = 2;
