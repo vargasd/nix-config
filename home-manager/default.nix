@@ -3,7 +3,7 @@
   inputs,
   config,
   ...
-}:
+}@all:
 {
   home.stateVersion = "25.05";
 
@@ -155,6 +155,8 @@
   programs.eza = {
     enable = true;
   };
+
+  programs.firefox = import ./firefox.nix all;
 
   programs.fzf = {
     enable = true;
