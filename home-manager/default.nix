@@ -11,6 +11,9 @@
     LESS = "-i -R --no-init --tabs 2";
     LESSHISTFILE = "-";
     HUSKY = 0;
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    TZ = "America/Indiana/Indianapolis";
   };
 
   home.packages = with pkgs; [
@@ -67,7 +70,12 @@
     vscode-js-debug
 
     tree-sitter
+
+    # fonts
+    jetbrains-mono
   ];
+
+  fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
 
