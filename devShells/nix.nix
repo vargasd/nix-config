@@ -2,7 +2,7 @@
 pkgs.mkShell {
   packages = with pkgs; [
     nixd
-    nixfmt-rfc-style
+    nixfmt
   ];
 
   SAM_LSP_CONFIGS = helpers.extendJsonEnvVar pkgs "SAM_LSP_CONFIGS" {
