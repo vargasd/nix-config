@@ -109,8 +109,8 @@
           specialArgs = {
             inherit inputs;
             home = {
-              user = "sam";
-              homeDirectory = "/Users/sam";
+              user = "vargasd";
+              homeDirectory = "/Users/vargasd";
             };
           };
         in
