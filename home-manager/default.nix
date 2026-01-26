@@ -20,21 +20,15 @@
     ast-grep
     # brave
     btop
-    delta
     docker
-    eza
     fd
     fzf
     fzf-git-sh
     go-task
-    gh
-    git
-    gnupg
     hurl
     imagemagick
     jless
     jq
-    lazygit
     lazydocker
     less
     mermaid-cli
@@ -48,9 +42,7 @@
     sqlite
     tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
     up
-    yazi
     yubikey-manager
-    zoxide
 
     # TODO Use nix-env for most of these? At least the ones that you don't use all the time
     # language servers
