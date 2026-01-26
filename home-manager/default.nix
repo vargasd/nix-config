@@ -349,7 +349,7 @@
       '';
 
     keymap = {
-      manager.prepend_keymap = [
+      mgr.prepend_keymap = [
         {
           on = [
             "c"
@@ -374,7 +374,7 @@
     };
 
     settings = {
-      manager = {
+      mgr = {
         show_hidden = true;
         sort_by = "natural";
         sort_reverse = false;
