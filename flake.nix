@@ -171,6 +171,7 @@
               config.allowUnfree = true;
             };
           };
+          tsserver = import ./devShells/tsserver.nix inputs;
           vue = import ./devShells/vue.nix inputs;
         };
       }
