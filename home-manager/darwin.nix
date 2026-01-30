@@ -237,16 +237,21 @@
               type = "standard";
             };
           };
-          # disable ctrl-up/down
+          # enable ctrl-up
           "32" = {
-            enabled = false;
+            enabled = true;
           };
+          # enable ctrl-left
+          "79" = {
+            enabled = true;
+          };
+          # enable ctrl-right
+          "81" = {
+            enabled = true;
+          };
+          # disable ctrl-up/down
           "33" = {
             enabled = false;
-          };
-          # disable spotlight
-          "64" = {
-            enabled = true;
           };
         };
 
