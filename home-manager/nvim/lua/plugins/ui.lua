@@ -312,6 +312,7 @@ return {
 				a = "@parameter",
 				f = "@function",
 				c = "@comment",
+				v = "@assignment",
 			}
 			for key, selector in pairs(mappings) do
 				local p, n = next_move.make_repeatable_pair(
