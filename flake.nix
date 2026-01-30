@@ -164,13 +164,7 @@
           php = import ./devShells/php.nix inputs;
           pnpm = import ./devShells/pnpm.nix inputs;
           ruby = import ./devShells/ruby.nix inputs;
-          terraform = import ./devShells/terraform.nix {
-            helpers = inputs.helpers;
-            pkgs = import nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          };
+          terraform = import ./devShells/terraform.nix inputs;
           tsserver = import ./devShells/tsserver.nix inputs;
           vue = import ./devShells/vue.nix inputs;
         };

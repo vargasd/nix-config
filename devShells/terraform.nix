@@ -1,7 +1,7 @@
 { pkgs, helpers }:
 pkgs.mkShell {
   packages = with pkgs; [
-    terraform
+    tenv
     terraform-ls
     tflint
   ];
