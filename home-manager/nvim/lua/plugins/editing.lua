@@ -32,15 +32,6 @@ return {
 	},
 
 	{
-		"mg979/vim-visual-multi",
-		keys = {
-			{ "<C-Down>", "<Plug>(VM-Add-Cursor-Down)" },
-			{ "<C-Up>", "<Plug>(VM-Add-Cursor-Up)" },
-			{ "<C-n>", "<Plug>(VM-Find-Under)" },
-		},
-	},
-
-	{
 		"nvim-mini/mini.surround",
 		version = "*",
 		event = "VeryLazy",
