@@ -28,6 +28,13 @@
 
   services.gpg-agent.pinentry.package = pkgs.pinentry_mac;
 
+  services.macos-remap-keys = {
+    enable = true;
+    keyboard = {
+      Capslock = "Escape";
+    };
+  };
+
   services.skhd = {
     enable = true;
     config = builtins.readFile ./darwin/skhdrc + ''
