@@ -3,7 +3,6 @@ return {
 	{
 		"saghen/blink.cmp",
 		dependencies = {
-			"rafamadriz/friendly-snippets",
 			-- needed for dap
 			"saghen/blink.compat",
 			"rcarriga/cmp-dap",
