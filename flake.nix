@@ -156,6 +156,7 @@
           c = import ./devShells/c.nix inputs;
           gcp = import ./devShells/gcp.nix inputs;
           gleam = import ./devShells/gleam.nix inputs;
+          kotlin = import ./devShells/kotlin.nix inputs;
           lua = import ./devShells/lua.nix inputs;
           nix = import ./devShells/nix.nix inputs;
           node24 = import ./devShells/node24.nix inputs;

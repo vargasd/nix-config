@@ -255,6 +255,7 @@ return {
 				"lua",
 				"javascript",
 				"jsdoc",
+				"kotlin",
 				"rust",
 				"sql",
 				"svelte",
