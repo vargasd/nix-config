@@ -173,7 +173,7 @@
   programs.gpg = {
     enable = true;
     publicKeys = [
-      { source = ./E35145037006CE1B.gpg; }
+      { source = ./D3346FA3521F7F13.asc; }
     ];
     settings = {
       personal-cipher-preferences = [

@@ -77,7 +77,7 @@
     };
     user = {
       email = "sam@varga.sh";
-      signingKey = "E35145037006CE1B";
+      signingKey = "D3346FA3521F7F13";
       name = "Samuel Varga";
     };
     merge = {
@@ -91,10 +91,10 @@
     };
   };
 
-  includes = [
-    {
-      condition = "gitdir:~/work/";
-      contents.user.email = "samuel.varga@sap.com";
-    }
-  ];
+  # includes = [
+  #   {
+  #     condition = "gitdir:~/work/";
+  #     contents.user.email = "samuel.varga@sap.com";
+  #   }
+  # ];
 }
