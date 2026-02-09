@@ -3,6 +3,7 @@
   inputs,
   home,
   lib,
+  skhdVars,
   ...
 }:
 {
@@ -38,11 +39,13 @@
 
   services.skhd = {
     enable = true;
-    config = builtins.readFile ./darwin/skhdrc + ''
-      meh - escape : osascript "${inputs.clear-notifications}/close_notifications_applescript.js"
-      meh - tab      : osascript "${./darwin/tunnelblick.scpt}"
-      hyper - tab    : osascript -e $'tell application "Tunnelblick"\ndisconnect all\nend tell'
-    '';
+    config = pkgs.replaceVars ./darwin/skhdrc (
+      {
+        clearNotificationsPkg = inputs.clear-notifications;
+        tunnelblickScript = ./darwin/tunnelblick.scpt;
+      }
+      // skhdVars
+    );
   };
 
   targets.darwin = {

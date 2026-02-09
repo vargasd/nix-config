@@ -1,17 +1,14 @@
 meh - e        : open -a finder
-meh - v        : open -a videoconf
+meh - v        : @videoconf@
 meh - s        : open -a slack
 meh - m        : open -a mail
 hyper - m      : open -a messages
-meh - p        : open -a spotify
-hyper - p      : open -a passwords
-meh - i        : open -a issues
-meh - l        : open -a logs
+meh - i        : @issues@
 
 meh - t        : open -a wezterm
 hyper - t      : open -a ghostty
 
-meh - b        : open -a "brave browser"
+meh - b        : open -a firefox
 hyper - b      : open -a safari
 
 meh - delete   : open -a ScreenSaverEngine
@@ -29,3 +26,7 @@ fn - h         : skhd -k left
 fn - j         : skhd -k down
 fn - k         : skhd -k up
 fn - l         : skhd -k right
+
+meh - escape : osascript "@clearNotificationsPkg@/close_notifications_applescript.js"
+meh - tab      : osascript "@tunnelblickScript@"
+hyper - tab    : osascript -e $'tell application "Tunnelblick"\ndisconnect all\nend tell'

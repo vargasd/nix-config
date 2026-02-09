@@ -90,7 +90,11 @@
             home = {
               homeDirectory = "/Users/I763291";
               user = "I763291";
-              defaultbrowser = "browser";
+              defaultbrowser = "firefox";
+            };
+            skhdVars = {
+              issues = "open 'https://emarsys.jira.com/jira/software/c/projects/SC/boards/1088?quickFilter=3743'";
+              videoconf = "open -a 'Microsoft Teams'";
             };
           };
         in
@@ -118,6 +122,10 @@
               user = "vargasd";
               homeDirectory = "/Users/vargasd";
               defaultbrowser = "firefox";
+            };
+            skhdVars = {
+              issues = "open https://github.com/vargasd";
+              videoconf = "open -a facetime";
             };
           };
         in
