@@ -25,10 +25,4 @@ return {
 			vim.api.nvim_set_hl(0, "NotificationError", { link = "DiagnosticFloatingError" })
 		end,
 	},
-
-	{
-		"mpas/marp-nvim",
-		opts = {},
-		cmd = { "MarpStart", "MarpToggle" },
-	},
 }
