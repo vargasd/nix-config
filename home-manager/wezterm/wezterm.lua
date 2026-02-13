@@ -1,8 +1,7 @@
----@diagnostic disable: missing-fields, undefined-field, need-check-nil
 local wezterm = require("wezterm") --[[@as Wezterm]]
-local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
 local io = require("io")
 local os = require("os")
+local workspaces = require("plugins.workspaces")
 
 local act = wezterm.action
 local config = wezterm.config_builder()
@@ -34,13 +33,9 @@ config.window_padding = {
 	bottom = 0,
 }
 
--- config.color_scheme = "Atlas (base16)"
--- config.color_scheme = "GruvboxDark"
--- config.color_scheme = "Popping and Locking"
 config.color_scheme = "bluvbox"
 config.bold_brightens_ansi_colors = "No"
 config.quick_select_alphabet = "arstqwfpzxcvneioluymdhgjbk"
--- config.unzoom_on_switch_pane = false
 
 local goto_pane = function(idx)
 	return act.Multiple({
@@ -75,7 +70,7 @@ config.keys = {
 	{ mods = "ALT|SHIFT", key = "*", action = act.TogglePaneZoomState },
 	{ mods = "CTRL|SHIFT", key = "w", action = act.CloseCurrentPane({ confirm = true }) },
 	{ key = "o", mods = "CTRL|SHIFT", action = open_link },
-	{ key = "s", mods = "CTRL|SHIFT", action = workspace_switcher.switch_workspace() },
+	{ key = "s", mods = "CTRL|SHIFT", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
 	{ key = "z", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCopyMode },
 	{ key = "x", mods = "CTRL|SHIFT", action = act.EmitEvent("trigger-vim-with-scrollback") },
 	-- defaults I don't like
@@ -109,5 +104,5 @@ wezterm.on("trigger-vim-with-scrollback", function(window, pane)
 	os.remove(name)
 end)
 
-workspace_switcher.apply_to_config(config)
+workspaces.apply_to_config(config)
 return config

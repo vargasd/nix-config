@@ -320,7 +320,7 @@
           };
         };
     };
-    extraConfig = builtins.readFile ./wezterm.lua;
+    extraConfig = builtins.readFile ./wezterm/wezterm.lua;
   };
 
   programs.yazi = {
@@ -454,6 +454,10 @@
     configFile.nvim = {
       enable = true;
       source = ./nvim;
+    };
+    configFile."wezterm/plugins" = {
+      enable = true;
+      source = ./wezterm/plugins;
     };
     configFile."typos-lsp/typos.toml" = {
       enable = true;
