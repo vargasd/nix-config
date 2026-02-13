@@ -2,10 +2,26 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "creativenull/efmls-configs-nvim" },
 		config = function()
-			local prettier = require("efmls-configs.formatters.prettier_d")
-			-- local prettier = require("efmls-configs.formatters.prettier")
+			local prettier = {
+				formatCanRange = true,
+				formatCommand = "prettierd '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd} --config-precedence=prefer-file",
+				formatStdin = true,
+				rootMarkers = {
+					".prettierrc",
+					".prettierrc.json",
+					".prettierrc.js",
+					".prettierrc.yml",
+					".prettierrc.yaml",
+					".prettierrc.json5",
+					".prettierrc.mjs",
+					".prettierrc.cjs",
+					".prettierrc.toml",
+					"prettier.config.js",
+					"prettier.config.cjs",
+					"prettier.config.mjs",
+				},
+			}
 
 			local servers = vim.tbl_deep_extend(
 				"keep",
