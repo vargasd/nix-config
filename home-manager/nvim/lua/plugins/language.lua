@@ -4,7 +4,6 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = { "creativenull/efmls-configs-nvim" },
 		config = function()
-			local stylua = require("efmls-configs.formatters.stylua")
 			local prettier = require("efmls-configs.formatters.prettier_d")
 			-- local prettier = require("efmls-configs.formatters.prettier")
 
@@ -110,21 +109,6 @@ return {
 							},
 						},
 					},
-					lua_ls = {
-						enable_highlights = true,
-						settings = {
-							Lua = {
-								telemetry = { enable = false },
-								workspace = {
-									checkThirdParty = false,
-									library = vim.api.nvim_get_runtime_file("", true),
-								},
-								diagnostics = {
-									globals = { "vim" },
-								},
-							},
-						},
-					},
 					efm = {
 						init_options = { documentFormatting = true },
 						settings = {
@@ -137,7 +121,6 @@ return {
 								sql = { require("efmls-configs.formatters.sqruff") },
 								markdown = { prettier },
 								typespec = { prettier },
-								lua = { stylua },
 								vue = { prettier },
 								yaml = { prettier },
 							},
