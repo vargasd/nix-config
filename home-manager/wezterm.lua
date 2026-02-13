@@ -1,6 +1,5 @@
 ---@diagnostic disable: missing-fields, undefined-field, need-check-nil
 local wezterm = require("wezterm") --[[@as Wezterm]]
-local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
 local io = require("io")
 local os = require("os")
@@ -84,30 +83,6 @@ config.keys = {
 	{ mods = "CMD", key = "m", action = act.DisableDefaultAssignment },
 	{ mods = "CMD", key = "h", action = act.DisableDefaultAssignment },
 }
-
--- loads the state whenever I create a new workspace
-wezterm.on("smart_workspace_switcher.workspace_switcher.created", function(window, path, label)
-	local workspace_state = resurrect.workspace_state
-
-	workspace_state.restore_workspace(resurrect.state_manager.load_state(label, "workspace"), {
-		window = window,
-		relative = true,
-		restore_text = true,
-		on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-	})
-end)
-
--- Saves the state whenever I select a workspace
-wezterm.on("smart_workspace_switcher.workspace_switcher.selected", function(window, path, label)
-	local workspace_state = resurrect.workspace_state
-	resurrect.state_manager.save_state(workspace_state.get_workspace_state())
-end)
-
-resurrect.state_manager.periodic_save({
-	interval_seconds = 60 * 5,
-	save_windows = true,
-	save_sessions = true,
-})
 
 wezterm.on("trigger-vim-with-scrollback", function(window, pane)
 	local text = pane:get_lines_as_escapes(pane:get_dimensions().scrollback_rows)
