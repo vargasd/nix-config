@@ -118,7 +118,13 @@ return {
 								jsonc = { prettier },
 								typescript = { prettier },
 								svelte = { prettier },
-								sql = { require("efmls-configs.formatters.sqruff") },
+								sql = {
+									{
+										formatCommand = "sqruff fix -",
+										formatStdin = true,
+										rootMarkers = { ".sqruff" },
+									},
+								},
 								markdown = { prettier },
 								typespec = { prettier },
 								vue = { prettier },
