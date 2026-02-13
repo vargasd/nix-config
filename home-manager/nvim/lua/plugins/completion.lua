@@ -23,10 +23,10 @@ return {
 				list = { selection = { preselect = false } },
 			},
 			sources = {
-				default = { "lsp", "buffer", "path", "snippets" },
+				default = { "lsp", "buffer", "path", "omni", "snippets" },
 				per_filetype = {
 					sql = { "dadbod", "lsp", "buffer" },
-					lua = { "lazydev", "lsp", "buffer", "snippets", "path" },
+					lua = { "lazydev", "lsp", "buffer", "omni", "snippets", "path" },
 					["dap-repl"] = { "dap", "lsp", "buffer" },
 				},
 				providers = {
