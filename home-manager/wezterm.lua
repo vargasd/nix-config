@@ -95,7 +95,11 @@ wezterm.on("trigger-vim-with-scrollback", function(window, pane)
 
 	window:perform_action(
 		act.SpawnCommandInNewTab({
-			args = { os.getenv("SHELL"), "-c", "nvim -c ':set nowrap nonumber signcolumn=no' ansify://" .. name },
+			args = {
+				os.getenv("SHELL"),
+				"-c",
+				"nvim -c ':set nowrap nonumber signcolumn=no' --cmd 'au VimEnter * term cat " .. name .. "'",
+			},
 			cwd = "/",
 		}),
 		pane

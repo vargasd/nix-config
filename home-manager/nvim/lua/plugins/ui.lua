@@ -1,6 +1,5 @@
 ---@type LazySpec
 return {
-	"tmccombs/ansify.nvim",
 
 	{
 		"folke/which-key.nvim",
