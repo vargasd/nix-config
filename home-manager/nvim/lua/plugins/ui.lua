@@ -3,11 +3,6 @@ return {
 	"tmccombs/ansify.nvim",
 
 	{
-		"nvim-mini/mini.icons",
-		opts = {},
-	},
-
-	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {
@@ -68,15 +63,12 @@ return {
 
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-mini/mini.icons" },
 		config = function()
 			local function macro_recording()
 				-- https://old.reddit.com/r/neovim/comments/18r2bxo/is_there_a_way_to_display_macro_recording_message/keze7b9/
 				local reg = vim.fn.reg_recording()
 				return reg == "" and "" or "recording @" .. reg
 			end
-
-			require("mini.icons").mock_nvim_web_devicons()
 
 			local base_config = {
 				lualine_b = {
@@ -403,7 +395,7 @@ return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		ft = { "markdown" },
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" },
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		---@module 'render-markdown'
 		---@type render.md.UserConfig
 		opts = {
