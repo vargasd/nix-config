@@ -161,23 +161,6 @@ return {
 	},
 
 	{
-		"chomosuke/term-edit.nvim",
-		event = "TermOpen",
-		version = "1.*",
-		---@module 'term-edit'
-		---@type TermEditOpts
-		---@diagnostic disable-next-line: missing-fields
-		opts = {
-			prompt_end = "%→ ",
-			mapping = {
-				n = {
-					s = false,
-				},
-			},
-		},
-	},
-
-	{
 		"mikavilpas/yazi.nvim",
 		dependencies = { "folke/snacks.nvim" },
 		keys = {
