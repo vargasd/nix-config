@@ -43,6 +43,7 @@
       {
         clearNotificationsPkg = inputs.clear-notifications;
         tunnelblickScript = ./darwin/tunnelblick.scpt;
+        home = home.homeDirectory;
       }
       // skhdVars
     );
@@ -86,7 +87,7 @@
       "com.apple.menuextra.clock".Show24Hour = true;
 
       "com.apple.screencapture" = {
-        location = "Desktop";
+        location = "/tmp";
         show-thumbnail = true;
         type = "png";
       };
