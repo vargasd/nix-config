@@ -19,11 +19,11 @@
     "enhansi": {
       "flake": false,
       "locked": {
-        "lastModified": 1754938661,
-        "narHash": "sha256-Rs3BHxWWugdplsOqECPX2oWZ/T2ZABgpciH/tRIyUbM=",
+        "lastModified": 1771092251,
+        "narHash": "sha256-1H6Wmqu+IB1DndAgB3b+Gmydq+nc0osYGCpVEfHoj/A=",
         "owner": "vargasd",
         "repo": "enhansi",
-        "rev": "0d0c71dec0a129c33f0b37b109c971cebd9af4b3",
+        "rev": "980abb08b7be041429393026b9406b204caf909a",
         "type": "github"
       },
       "original": {

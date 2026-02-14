@@ -3,20 +3,7 @@ require("config.lazy")
 require("config.keymap")
 
 vim.diagnostic.config({
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = "",
-			[vim.diagnostic.severity.WARN] = "",
-			[vim.diagnostic.severity.INFO] = "",
-			[vim.diagnostic.severity.HINT] = "",
-		},
-		numhl = {
-			[vim.diagnostic.severity.WARN] = "DiagnosticNumWarn",
-			[vim.diagnostic.severity.ERROR] = "DiagnosticNumError",
-			[vim.diagnostic.severity.INFO] = "DiagnosticNumInfo",
-			[vim.diagnostic.severity.HINT] = "DiagnosticNumHint",
-		},
-	},
+	signs = false,
 	virtual_text = {
 		severity = {
 			min = vim.diagnostic.severity.WARN,

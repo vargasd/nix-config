@@ -12,14 +12,7 @@ return {
 	{
 		"vargasd/enhansi",
 		priority = 1000,
-		config = function()
-			require("enhansi").setup({
-				transparent_mode = true,
-				invert_selection = true,
-			})
-
-			vim.cmd.colorscheme("enhansi")
-		end,
+		config = function() vim.cmd.colorscheme("enhansi") end,
 	},
 
 	{
@@ -115,20 +108,20 @@ return {
 					theme = {
 						normal = {
 							a = { bg = 7, fg = 0 },
-							b = { bg = "NONE", fg = 7 },
-							c = { bg = "NONE", fg = 7 },
+							b = { bg = nil, fg = 7 },
+							c = { bg = nil, fg = 7 },
 						},
 						insert = {
-							a = { bg = "Blue", fg = 0 },
+							a = { bg = 12, fg = 0 },
 						},
 						visual = {
-							a = { bg = "Yellow", fg = 0 },
+							a = { bg = 11, fg = 0 },
 						},
 						replace = {
-							a = { bg = "Red", fg = 0 },
+							a = { bg = 9, fg = 0 },
 						},
 						command = {
-							a = { bg = "Green", fg = 0 },
+							a = { bg = 10, fg = 0 },
 						},
 						inactive = {
 							a = { bg = 8, fg = 0 },
@@ -354,7 +347,6 @@ return {
 			"rfc_csv",
 			"rfc_semicolon",
 		},
-		priority = 100,
 		opts = {},
 		keys = {
 			{
