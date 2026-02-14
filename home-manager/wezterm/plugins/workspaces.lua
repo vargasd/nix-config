@@ -26,6 +26,8 @@ function shellcondense(path)
 end
 
 function M.apply_to_config(config)
+	wezterm.GLOBAL.workspaces = {}
+
 	wezterm.on("gui-startup", function()
 		local f = io.open(workspace_path, "r")
 
