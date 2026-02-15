@@ -18,43 +18,34 @@
   };
 
   home.packages = with pkgs; [
-    ast-grep
-    # brave
-    btop
     docker
     fd
-    fzf
-    fzf-git-sh
-    go-task
+    # go-task # Taskfile support
     hurl
-    imagemagick
+    # imagemagick
     jless
     jq
-    lazydocker
-    less
+    # lazydocker
     mermaid-cli
-    neofetch
+    # neofetch
     nodejs
     pass
     postgresql
-    presenterm
+    # presenterm
     ripgrep
     sqlite
-    tmux # TODO There was an error in fzf-git-sh if tmux isn't installed, which doesn't feel right
-    up
+    # up # https://github.com/akavel/up
     yubikey-manager
 
-    # TODO Use nix-env for most of these? At least the ones that you don't use all the time
     # language servers
     bash-language-server
     vscode-langservers-extracted # css, eslint, html, json
-    eslint_d
     efm-langserver
     harper
     marksman
     postgres-language-server
     typescript-go
-    typos-lsp
+    # typos-lsp
     yaml-language-server
 
     # formatters
