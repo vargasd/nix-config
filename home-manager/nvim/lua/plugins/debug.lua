@@ -1,9 +1,22 @@
----@type LazySpec[]
+---@type lze.Spec[]
 return {
+
+	-- TODO this isn't lazy-loading?
 	{
-		"mfussenegger/nvim-dap",
-		dependencies = { "theHamsta/nvim-dap-virtual-text" },
-		lazy = true,
+		"nvim-dap-virtual-text",
+		event = {
+			event = "User",
+			pattern = "DapProgressUpdate",
+		},
+		after = function()
+			require("nvim-dap-virtual-text").setup({ clear_on_continue = true })
+
+			vim.api.nvim_set_hl(0, "NvimDapVirtualText", { link = "NonText" })
+		end,
+	},
+
+	{
+		"nvim-dap",
 		keys = {
 			{
 				"|`",
@@ -72,7 +85,7 @@ return {
 				function() require("dap").repl.open() end,
 			},
 		},
-		config = function()
+		after = function()
 			local dap = require("dap")
 			local node_adapter = {
 				type = "server",
@@ -120,9 +133,6 @@ return {
 				pattern = "dap-float",
 				callback = function() vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true }) end,
 			})
-
-			require("nvim-dap-virtual-text").setup({ clear_on_continue = true })
-			vim.api.nvim_set_hl(0, "NvimDapVirtualText", { link = "NonText" })
 		end,
 	},
 }

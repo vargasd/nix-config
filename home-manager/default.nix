@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   config,
+  vimPkgs,
   ...
 }@all:
 {
@@ -33,7 +34,6 @@
     less
     mermaid-cli
     neofetch
-    neovim
     nodejs
     pass
     postgresql
@@ -60,8 +60,6 @@
     # formatters
     prettierd
     vscode-js-debug
-
-    tree-sitter
 
     # fonts
     jetbrains-mono
@@ -240,6 +238,11 @@
       };
       os.editPreset = "nvim-remote";
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+    plugins = (vimPkgs pkgs);
   };
 
   programs.opencode = {

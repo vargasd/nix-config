@@ -1,40 +1,37 @@
----@type LazySpec[]
+---@diagnostic disable: missing-fields
+---@type lze.Spec[]
 return {
+	-- TODO: move to dap
+	{ "blink.compat", dep_of = "cmp-dap" },
+	{ "cmp-dap", dep_of = "blink.cmp" },
+
 	{
-		"saghen/blink.cmp",
-		dependencies = {
-			-- needed for dap
-			"saghen/blink.compat",
-			"rcarriga/cmp-dap",
-			lazy = true,
-		},
+		"blink.cmp",
 		event = "InsertEnter",
-		version = "1.*",
-		---@module 'blink.cmp'
-		---@type blink.cmp.Config
-		opts = {
-			keymap = {
-				preset = "enter",
-				["<C-x>"] = { "show" },
-			},
-			completion = {
-				documentation = { auto_show = true },
-				menu = { border = "none", auto_show = true },
-				list = { selection = { preselect = false } },
-			},
-			sources = {
-				default = { "lsp", "buffer", "path", "omni", "snippets" },
-				per_filetype = {
-					sql = { "dadbod", "lsp", "buffer" },
-					lua = { "lazydev", "lsp", "buffer", "omni", "snippets", "path" },
-					["dap-repl"] = { "dap", "lsp", "buffer" },
+		after = function()
+			---@diagnostic disable-next-line: param-type-mismatch
+			require("blink.cmp").setup({
+				keymap = {
+					preset = "enter",
+					["<C-x>"] = { "show" },
 				},
-				providers = {
-					dadbod = { module = "vim_dadbod_completion.blink" },
-					lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
-					dap = { name = "dap", module = "blink.compat.source" },
+				completion = {
+					documentation = { auto_show = true },
+					menu = { border = "none", auto_show = true },
+					list = { selection = { preselect = false } },
 				},
-			},
-		},
+				sources = {
+					default = { "lsp", "buffer", "path", "omni", "snippets" },
+					per_filetype = {
+						sql = { "dadbod", "lsp", "buffer" },
+						["dap-repl"] = { "dap", "lsp", "buffer" },
+					},
+					providers = {
+						dadbod = { module = "vim_dadbod_completion.blink" },
+						dap = { name = "dap", module = "blink.compat.source" },
+					},
+				},
+			})
+		end,
 	},
 }

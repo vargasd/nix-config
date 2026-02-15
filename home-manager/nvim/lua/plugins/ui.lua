@@ -1,61 +1,65 @@
----@type LazySpec
+local func = require("vim.func")
+---@diagnostic disable: missing-fields
+---@type lze.Spec[]
 return {
 
 	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		opts = {
-			filter = function(mapping) return mapping.desc end,
-		},
+		"which-key.nvim",
+		event = "DeferredUIEnter",
+		after = function()
+			require("which-key").setup({
+				filter = function(mapping) return mapping.desc and mapping.desc ~= "" end,
+			})
+		end,
 	},
 
 	{
-		"vargasd/enhansi",
-		priority = 1000,
-		config = function() vim.cmd.colorscheme("enhansi") end,
+		"nui.nvim",
+		dep_of = "noice.nvim",
 	},
 
 	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		dependencies = { "MunifTanjim/nui.nvim" },
+		"noice.nvim",
+		event = "DeferredUIEnter",
+		before = function()
+			vim.o.shortmess = vim.o.shortmess .. "qCcSsWF"
+			vim.o.showmode = false
+			vim.o.showcmd = false
+			vim.o.cmdheight = 0
+		end,
 		---@module 'noice'
 		---@type NoiceConfig
-		opts = {
-			lsp = {
-				progress = { enabled = true },
-				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
+		after = function()
+			require("noice").setup({
+				lsp = {
+					progress = { enabled = true },
+					override = {
+						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+						["vim.lsp.util.stylize_markdown"] = true,
+					},
 				},
-			},
-			popupmenu = { enabled = false },
-			messages = { enabled = true },
-			presets = { lsp_doc_border = true },
-			commands = {
-				all = {
-					view = "popup",
-					opts = { enter = true, format = "details" },
+				popupmenu = { enabled = false },
+				messages = { enabled = true },
+				presets = { lsp_doc_border = true },
+				commands = {
+					all = {
+						view = "popup",
+						opts = { enter = true, format = "details" },
+					},
 				},
-			},
-		},
+			})
+		end,
 		keys = {
 			{
 				"<leader>m",
 				function() vim.cmd.Noice("all") end,
 			},
 		},
-		init = function()
-			vim.o.shortmess = vim.o.shortmess .. "qCcSsWF"
-			vim.o.showmode = false
-			vim.o.showcmd = false
-			vim.o.cmdheight = 0
-		end,
 	},
 
 	{
-		"nvim-lualine/lualine.nvim",
-		config = function()
+		"lualine.nvim",
+		after = function()
 			local function macro_recording()
 				-- https://old.reddit.com/r/neovim/comments/18r2bxo/is_there_a_way_to_display_macro_recording_message/keze7b9/
 				local reg = vim.fn.reg_recording()
@@ -139,7 +143,7 @@ return {
 	},
 
 	{
-		"mbbill/undotree",
+		"undotree",
 		cmd = { "UndotreeShow" },
 		keys = {
 			{
@@ -150,12 +154,11 @@ return {
 				end,
 			},
 		},
-		init = function() vim.g.undotree_DiffAutoOpen = 0 end,
+		before = function() vim.g.undotree_DiffAutoOpen = 0 end,
 	},
 
 	{
-		"mikavilpas/yazi.nvim",
-		dependencies = { "folke/snacks.nvim" },
+		"yazi.nvim",
 		keys = {
 			{
 				"<leader>e",
@@ -166,73 +169,24 @@ return {
 				function() vim.cmd.Yazi("cwd") end,
 			},
 		},
-		---require('yazi')
-		---@type YaziConfig | {}
-		opts = {
-			open_for_directories = true,
-			integrations = {
-				grep_in_directory = function(cwd)
-					Snacks.picker.grep({
-						cwd = cwd,
-						hidden = true,
-					})
-				end,
-			},
-		},
+		after = function()
+			require("yazi").setup({
+				open_for_directories = true,
+				integrations = {
+					grep_in_directory = function(cwd)
+						Snacks.picker.grep({
+							cwd = cwd,
+							hidden = true,
+						})
+					end,
+				},
+			})
+		end,
 	},
 
 	{
-		"nvim-treesitter/nvim-treesitter",
-		branch = "main",
-		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter").install({
-				-- general
-				"comment",
-				"regex",
-
-				-- tools
-				"devicetree", -- zmk
-				"graphql",
-				"git_config",
-				"git_rebase",
-				"gitattributes",
-				"gitcommit",
-				"gitignore",
-				"hurl",
-				"jq",
-				"markdown",
-				"markdown_inline",
-				"nix",
-				"prisma",
-				"terraform",
-				"vim",
-				"vimdoc",
-
-				-- config
-				"json",
-				"toml",
-				"yaml",
-
-				"bash",
-				"css",
-				"gleam",
-				"glimmer", -- handlebars
-				"html",
-				"lua",
-				"javascript",
-				"jsdoc",
-				"kotlin",
-				"rust",
-				"sql",
-				"svelte",
-				"tsx",
-				"typespec",
-				"typescript",
-				"vue",
-				"php",
-			})
-
+		"nvim-treesitter",
+		before = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				callback = function(args)
 					local max_filesize = 500 * 1024 -- 500 KB
@@ -261,17 +215,14 @@ return {
 	},
 
 	{
-
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		branch = "main",
-		dependencies = { "ghostbuster91/nvim-next" },
-		event = "VeryLazy",
-		init = function()
+		"nvim-treesitter-textobjects",
+		event = "DeferredUIEnter",
+		before = function()
 			-- Disable entire built-in ftplugin mappings to avoid conflicts.
 			-- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
 			vim.g.no_plugin_maps = true
 		end,
-		config = function()
+		after = function()
 			local next_move = require("nvim-next.move")
 			local textobjects_move = require("nvim-treesitter-textobjects.move")
 			local textobjects_select = require("nvim-treesitter-textobjects.select")
@@ -305,39 +256,7 @@ return {
 	},
 
 	{
-		"ghostbuster91/nvim-next",
-		event = "VeryLazy",
-		config = function()
-			local builtins = require("nvim-next.builtins")
-			local move = require("nvim-next.move")
-			local next_integrations = require("nvim-next.integrations")
-			local diagnostics = next_integrations.diagnostic()
-			local qf = next_integrations.quickfix()
-
-			require("nvim-next").setup({
-				items = {
-					builtins.f,
-					builtins.t,
-				},
-			})
-
-			vim.keymap.set({ "n", "x", "o" }, ",", move.repeat_last_move)
-			vim.keymap.set({ "n", "x", "o" }, ";", move.repeat_last_move_opposite)
-
-			local diagnostic_opts = {
-				severity = {
-					min = vim.diagnostic.severity.WARN,
-				},
-			}
-			vim.keymap.set({ "n", "x", "o" }, "[d", diagnostics.goto_prev(diagnostic_opts))
-			vim.keymap.set({ "n", "x", "o" }, "]d", diagnostics.goto_next(diagnostic_opts))
-			vim.keymap.set("n", "[q", qf.cprevious)
-			vim.keymap.set("n", "]q", qf.cnext)
-		end,
-	},
-
-	{
-		"cameron-wags/rainbow_csv.nvim",
+		"rainbow_csv",
 		ft = {
 			"csv",
 			"tsv",
@@ -367,15 +286,14 @@ return {
 	},
 
 	{
-		"MeanderingProgrammer/render-markdown.nvim",
+		"render-markdown.nvim",
 		ft = { "markdown" },
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		---@module 'render-markdown'
-		---@type render.md.UserConfig
-		opts = {
-			completions = { lsp = { enabled = true } },
-			heading = { enabled = false },
-			sign = { enabled = false },
-		},
+		after = function()
+			require("render-markdown").setup({
+				completions = { lsp = { enabled = true } },
+				heading = { enabled = false },
+				sign = { enabled = false },
+			})
+		end,
 	},
 }

@@ -1,8 +1,8 @@
----@type LazySpec[]
+---@type lze.Spec[]
 return {
 	{
-		"neovim/nvim-lspconfig",
-		config = function()
+		"nvim-lspconfig",
+		after = function()
 			local prettier = {
 				formatCanRange = true,
 				formatCommand = "prettierd '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd} --config-precedence=prefer-file",
@@ -193,23 +193,5 @@ return {
 				vim.lsp.config(server_name, config)
 			end
 		end,
-	},
-
-	{
-		"folke/lazydev.nvim",
-		dependencies = {
-			{ "gonstoll/wezterm-types", lazy = true },
-			{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-		},
-		ft = "lua", -- only load on lua files
-		opts = {
-			library = {
-				"lazy.nvim",
-				-- See the configuration section for more details
-				-- Load luvit types when the `vim.uv` word is found
-				{ path = "luvit-meta/library", words = { "vim%.uv" } },
-				{ path = "wezterm-types", mods = { "wezterm" } },
-			},
-		},
 	},
 }
