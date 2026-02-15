@@ -175,6 +175,7 @@ return {
 				function() vim.cmd.Yazi("cwd") end,
 			},
 		},
+		cmd = { "Yazi" },
 		after = function()
 			require("yazi").setup({
 				open_for_directories = true,
