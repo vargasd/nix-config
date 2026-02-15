@@ -11,7 +11,7 @@ return {
 		after = function()
 			require("nvim-dap-virtual-text").setup({ clear_on_continue = true })
 
-			vim.api.nvim_set_hl(0, "NvimDapVirtualText", { link = "NonText" })
+			vim.api.nvim_set_hl(0, "NvimDapVirtualText", { link = "Comment" })
 		end,
 	},
 
@@ -123,6 +123,7 @@ return {
 			dap.configurations.javascript = configs
 			dap.configurations.typescript = configs
 
+			vim.fn.sign_define("DapStopped", { text = "→", linehl = "DiffAdd" })
 			vim.fn.sign_define("DapBreakpoint", { text = "●" })
 			vim.fn.sign_define("DapBreakpointCondition", { text = "⊛" })
 			vim.fn.sign_define("DapLogPoint", { text = "⊙" })

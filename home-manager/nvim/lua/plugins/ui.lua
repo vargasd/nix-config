@@ -48,6 +48,12 @@ return {
 					},
 				},
 			})
+
+			vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { ctermfg = 12 })
+			vim.api.nvim_set_hl(0, "NoiceCmdlineIcon", { link = "NoiceCmdlinePopupBorder" })
+			vim.api.nvim_set_hl(0, "NoiceConfirmBorder", { link = "NoiceCmdlinePopupBorder" })
+			vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderSearch", { ctermfg = 11 })
+			vim.api.nvim_set_hl(0, "NoiceCmdlineIconSearch", { link = "NoiceCmdlinePopupBorderSearch" })
 		end,
 		keys = {
 			{
@@ -293,6 +299,9 @@ return {
 				completions = { lsp = { enabled = true } },
 				heading = { enabled = false },
 				sign = { enabled = false },
+				code = {
+					highlight_border = "Comment",
+				},
 			})
 		end,
 	},

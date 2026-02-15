@@ -181,6 +181,12 @@ return {
 					}),
 				},
 			})
+
+			vim.api.nvim_set_hl(0, "SnacksPickerLine", { link = "Visual" })
+			vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "Directory" })
+			vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "Directory" })
+			vim.api.nvim_set_hl(0, "SnacksPickerPathIgnored", { link = "Directory" })
+			vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { ctermfg = 11 })
 		end,
 		keys = {
 			{
@@ -306,6 +312,6 @@ return {
 				silent = true,
 			},
 		},
-		init = function() vim.g.snacks_animate = false end,
+		before = function() vim.g.snacks_animate = false end,
 	},
 }
