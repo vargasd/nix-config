@@ -1,9 +1,7 @@
 ---@diagnostic disable: missing-fields
 ---@type lze.Spec[]
 return {
-	-- TODO: move to dap
 	{ "blink.compat", dep_of = "cmp-dap" },
-	{ "cmp-dap", dep_of = "blink.cmp" },
 
 	{
 		"blink.cmp",

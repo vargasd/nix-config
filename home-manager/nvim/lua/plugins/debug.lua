@@ -1,13 +1,13 @@
 ---@type lze.Spec[]
 return {
+	{
+		"cmp-dap",
+		on_plugin = "nvim-dap",
+	},
 
-	-- TODO this isn't lazy-loading?
 	{
 		"nvim-dap-virtual-text",
-		event = {
-			event = "User",
-			pattern = "DapProgressUpdate",
-		},
+		on_plugin = "nvim-dap",
 		after = function()
 			require("nvim-dap-virtual-text").setup({ clear_on_continue = true })
 
