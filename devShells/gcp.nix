@@ -1,4 +1,4 @@
-{ pkgs, helpers }:
+{ pkgs, helpers, ... }:
 let
   gdk = pkgs.google-cloud-sdk.withExtraComponents (
     with pkgs.google-cloud-sdk.components;

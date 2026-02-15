@@ -31,6 +31,13 @@
       flake = false;
     };
 
+    gen-luarc.url = "github:mrcjkb/nix-gen-luarc-json";
+
+    nvim-next = {
+      url = "github:ghostbuster91/nvim-next";
+      flake = false;
+    };
+
     clear-notifications = {
       url = "git+https://gist.github.com/lancethomps/a5ac103f334b171f70ce2ff983220b4f.git";
       flake = false;
@@ -53,14 +60,77 @@
       nix-darwin,
       flake-utils,
       nixpkgs,
+      gen-luarc,
       ...
     }@inputs:
-    {
+    let
+      vimPkgs = (
+        pkgs:
+        with pkgs.vimPlugins;
+        (
+          [
+            # lazy
+            mini-surround
+            vim-sleuth
+            flash-nvim
+            (pkgs.vimUtils.buildVimPlugin {
+              pname = "nvim-next";
+              src = inputs.nvim-next;
+              version = inputs.nvim-next.rev;
+            })
 
+            vim-fugitive
+            gitsigns-nvim
+
+            blink-cmp
+
+            cmp-dap
+            blink-compat
+            nvim-dap
+            nvim-dap-virtual-text
+
+            vim-dadbod
+            vim-dadbod-completion
+            vim-dadbod-ui
+
+            persisted-nvim
+            which-key-nvim
+            yazi-nvim
+            nvim-treesitter-textobjects
+            undotree
+            lualine-nvim
+            noice-nvim
+            nui-nvim
+            render-markdown-nvim
+            rainbow_csv
+          ]
+          |> map (plugin: {
+            plugin = plugin;
+            optional = true;
+          })
+        )
+
+        ++ [
+          # eager
+          lze
+          nvim-lspconfig
+          snacks-nvim
+          nvim-treesitter.withAllGrammars # sure why not
+
+          (pkgs.vimUtils.buildVimPlugin {
+            pname = "enhansi";
+            src = inputs.enhansi;
+            version = inputs.enhansi.rev;
+          })
+        ]
+      );
+    in
+    {
       nixosConfigurations.nuc = nixpkgs.lib.nixosSystem (
         let
           specialArgs = {
             inherit inputs;
+            vimPkgs = vimPkgs;
             home = {
               homeDirectory = "/home/vargasd";
               user = "vargasd";
@@ -87,6 +157,7 @@
         let
           specialArgs = {
             inherit inputs;
+            vimPkgs = vimPkgs;
             home = {
               homeDirectory = "/Users/I763291";
               user = "I763291";
@@ -118,6 +189,7 @@
         let
           specialArgs = {
             inherit inputs;
+            vimPkgs = vimPkgs;
             home = {
               user = "vargasd";
               homeDirectory = "/Users/vargasd";
@@ -152,7 +224,11 @@
         inputs = {
           pkgs = import nixpkgs {
             inherit system;
+            overlays = [
+              gen-luarc.overlays.default
+            ];
           };
+          vimPkgs = vimPkgs;
           helpers = {
             extendJsonEnvVar =
               pkgs: varName: json:

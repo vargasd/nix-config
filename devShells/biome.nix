@@ -1,4 +1,4 @@
-{ pkgs, helpers }:
+{ pkgs, helpers, ... }:
 let
   efm_config = {
     formatCommand = "biome check --write --stdin-file-path '\${INPUT}'";
