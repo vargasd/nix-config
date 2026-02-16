@@ -2,6 +2,7 @@
 return {
 	{
 		"nvim-lspconfig",
+		lazy = false,
 		after = function()
 			local prettier = {
 				formatCanRange = true,

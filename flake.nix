@@ -109,6 +109,10 @@
             nui-nvim
             render-markdown-nvim
             rainbow_csv
+
+            nvim-lspconfig
+            snacks-nvim
+            nvim-treesitter.withAllGrammars # sure why not
           ]
           |> map (plugin: {
             plugin = plugin;
@@ -119,9 +123,6 @@
         ++ [
           # eager
           lze
-          nvim-lspconfig
-          snacks-nvim
-          nvim-treesitter.withAllGrammars # sure why not
           enhansi-nvim
         ]
       );

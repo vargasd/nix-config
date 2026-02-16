@@ -1,10 +1,6 @@
-require("enhansi").load()
+vim.cmd.colorscheme("enhansi")
 
 require("lze").load({
-	{
-		"enhansi",
-		colorscheme = "enhansi",
-	},
 	require("plugins.editing"),
 	require("plugins.git"),
 	require("plugins.completion"),
