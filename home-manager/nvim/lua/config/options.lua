@@ -45,6 +45,7 @@ vim.opt.fillchars.stlnc = " "
 
 -- --#region kitty/wezterm
 vim.o.laststatus = 0
+vim.o.statusline = ' '
 -- --#endregion kitty
 --#region alacritty/ghostty/tmux
 -- set title dynamimcally by buffer
