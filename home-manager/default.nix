@@ -126,6 +126,8 @@
       navigate = true;
       tabs = 2;
       syntax-theme = "enhansi";
+      line-numbers-minus-style = "red";
+      line-numbers-plus-style = "green";
     };
   };
 
