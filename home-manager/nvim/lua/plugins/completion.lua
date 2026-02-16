@@ -1,11 +1,10 @@
 ---@diagnostic disable: missing-fields
 ---@type lze.Spec[]
 return {
-	{ "blink.compat", dep_of = "cmp-dap" },
-
 	{
 		"blink.cmp",
 		event = "InsertEnter",
+		dep_of = { "vim-dadbod-completion" },
 		after = function()
 			---@diagnostic disable-next-line: param-type-mismatch
 			require("blink.cmp").setup({
@@ -17,17 +16,6 @@ return {
 					documentation = { auto_show = true },
 					menu = { border = "none", auto_show = true },
 					list = { selection = { preselect = false } },
-				},
-				sources = {
-					default = { "lsp", "buffer", "path", "omni", "snippets" },
-					per_filetype = {
-						sql = { "dadbod", "lsp", "buffer" },
-						["dap-repl"] = { "dap", "lsp", "buffer" },
-					},
-					providers = {
-						dadbod = { module = "vim_dadbod_completion.blink" },
-						dap = { name = "dap", module = "blink.compat.source" },
-					},
 				},
 			})
 			vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { link = "FloatBorder" })

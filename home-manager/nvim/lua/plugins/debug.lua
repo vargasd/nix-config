@@ -1,11 +1,6 @@
 ---@type lze.Spec[]
 return {
 	{
-		"cmp-dap",
-		on_plugin = "nvim-dap",
-	},
-
-	{
 		"nvim-dap-virtual-text",
 		on_plugin = "nvim-dap",
 		after = function()

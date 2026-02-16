@@ -8,6 +8,14 @@ return {
 			"vim-dadbod-completion",
 			on_plugin = "vim-dadbod-ui",
 			before = function() vim.g.vim_dadbod_completion_lowercase_keywords = 1 end,
+			after = function()
+				local blink = require("blink.cmp")
+				local source = "dadbod"
+				blink.add_source_provider(source, {
+					module = "vim_dadbod_completion.blink",
+				})
+				blink.add_filetype_source("sql", source)
+			end,
 		},
 
 		{

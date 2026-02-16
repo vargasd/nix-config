@@ -90,8 +90,6 @@
 
             blink-cmp
 
-            cmp-dap
-            blink-compat
             nvim-dap
             nvim-dap-virtual-text
 
