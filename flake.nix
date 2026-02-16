@@ -28,10 +28,13 @@
 
     enhansi = {
       url = "github:vargasd/enhansi";
-      flake = false;
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    gen-luarc.url = "github:mrcjkb/nix-gen-luarc-json";
+    gen-luarc = {
+      url = "github:mrcjkb/nix-gen-luarc-json";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nvim-next = {
       url = "github:ghostbuster91/nvim-next";
@@ -60,10 +63,13 @@
       nix-darwin,
       flake-utils,
       nixpkgs,
-      gen-luarc,
       ...
     }@inputs:
     let
+      overlays = [
+        inputs.gen-luarc.overlays.default
+        inputs.enhansi.overlays.default
+      ];
       vimPkgs = (
         pkgs:
         with pkgs.vimPlugins;
@@ -116,12 +122,7 @@
           nvim-lspconfig
           snacks-nvim
           nvim-treesitter.withAllGrammars # sure why not
-
-          (pkgs.vimUtils.buildVimPlugin {
-            pname = "enhansi";
-            src = inputs.enhansi;
-            version = inputs.enhansi.rev;
-          })
+          enhansi-nvim
         ]
       );
     in
@@ -142,6 +143,9 @@
           system = "x86_64-linux";
           modules = [
             ./nixos/configuration.nix
+            {
+              nixpkgs.overlays = overlays;
+            }
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = specialArgs;
@@ -173,6 +177,9 @@
           inherit specialArgs;
           modules = [
             ./nix-darwin
+            {
+              nixpkgs.overlays = overlays;
+            }
             home-manager.darwinModules.home-manager
             {
               home-manager.extraSpecialArgs = specialArgs;
@@ -205,6 +212,9 @@
           inherit specialArgs;
           modules = [
             ./nix-darwin
+            {
+              nixpkgs.overlays = overlays;
+            }
             home-manager.darwinModules.home-manager
             {
               home-manager.extraSpecialArgs = specialArgs;
@@ -224,9 +234,7 @@
         inputs = {
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [
-              gen-luarc.overlays.default
-            ];
+            inherit overlays;
           };
           vimPkgs = vimPkgs;
           helpers = {

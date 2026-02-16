@@ -94,11 +94,9 @@
         file = "package/Gleam.sublime-syntax";
       };
     };
-    themes = {
-      enhansi = {
-        src = inputs.enhansi;
-        file = "enhansi.tmTheme";
-      };
+    themes.enhansi = {
+      src = pkgs.enhansi-tmtheme;
+      file = "enhansi.tmTheme";
     };
     extraPackages = [ pkgs.bat-extras.batman ];
   };
