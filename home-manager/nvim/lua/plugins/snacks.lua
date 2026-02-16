@@ -10,7 +10,7 @@ local float_win = {
 return {
 	{
 		"persisted.nvim",
-		event = "DeferredUIEnter",
+		on_plugin = "snacks.nvim",
 		after = function()
 			require("persisted").setup({
 				autostart = false,
