@@ -22,16 +22,16 @@ end
 
 function shellcondense(path)
 	local home = os.getenv("HOME")
-	return path:gsub("^" .. home, "~")
+	return path:gsub("^" .. home, "~"):gsub("/$", "")
 end
 
 function M.apply_to_config(config)
-	wezterm.GLOBAL.workspaces = {}
-
 	wezterm.on("gui-startup", function()
 		local f = io.open(workspace_path, "r")
 
-		if f ~= nil then
+		if f == nil then
+			wezterm.GLOBAL.workspaces = {}
+		else
 			wezterm.GLOBAL.workspaces = wezterm.json_parse(f:read("*all")) or {}
 			f:close()
 		end
