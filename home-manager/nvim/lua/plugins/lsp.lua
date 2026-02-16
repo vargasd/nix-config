@@ -59,7 +59,6 @@ return {
 							config = vim.fn.stdpath("config"):gsub("/.*?", "") .. "/typos-lsp/typos.toml",
 						},
 					},
-					phpactor = {},
 					yamlls = {
 						settings = {
 							redhat = {
