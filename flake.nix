@@ -74,8 +74,8 @@
         pkgs:
         with pkgs.vimPlugins;
         (
+          # lazy
           [
-            # lazy
             mini-surround
             vim-sleuth
             flash-nvim
@@ -84,19 +84,14 @@
               src = inputs.nvim-next;
               version = inputs.nvim-next.rev;
             })
-
             vim-fugitive
             gitsigns-nvim
-
             blink-cmp
-
             nvim-dap
             nvim-dap-virtual-text
-
             vim-dadbod
             vim-dadbod-completion
             vim-dadbod-ui
-
             persisted-nvim
             which-key-nvim
             yazi-nvim
@@ -107,7 +102,6 @@
             nui-nvim
             render-markdown-nvim
             rainbow_csv
-
             nvim-lspconfig
             snacks-nvim
             nvim-treesitter.withAllGrammars # sure why not
@@ -117,9 +111,8 @@
             optional = true;
           })
         )
-
+        # eager
         ++ [
-          # eager
           lze
           enhansi-nvim
         ]
