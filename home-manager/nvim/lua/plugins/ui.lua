@@ -201,9 +201,8 @@ return {
 					local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(args.buf))
 					if ok and stats and stats.size > max_filesize then return end
 
-					local lang = vim.treesitter.language.get_lang(args.match) or args.match
-					local installed = require("nvim-treesitter").get_installed("parsers")
-					if vim.tbl_contains(installed, lang) then vim.treesitter.start(args.buf) end
+					local lang = vim.treesitter.language.get_lang(args.match)
+					if lang ~= nil and vim.treesitter.language.add(lang) then vim.treesitter.start(args.buf) end
 
 					-- sql treesitter isn't quite as good
 					if lang == "sql" then vim.bo.syntax = "on" end
@@ -215,7 +214,7 @@ return {
 
 					vim.wo[0][0].foldtext = ""
 
-					vim.wo[0][0].foldnestmax = 4
+					vim.wo[0][0].foldnestmax = 8
 					vim.wo[0][0].foldlevel = 99
 				end,
 			})
