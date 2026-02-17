@@ -92,7 +92,6 @@
             vim-dadbod
             vim-dadbod-completion
             vim-dadbod-ui
-            persisted-nvim
             which-key-nvim
             yazi-nvim
             nvim-treesitter-textobjects

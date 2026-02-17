@@ -9,16 +9,6 @@ local float_win = {
 ---@type lze.Spec[]
 return {
 	{
-		"persisted.nvim",
-		on_plugin = "snacks.nvim",
-		after = function()
-			require("persisted").setup({
-				autostart = false,
-			})
-		end,
-	},
-
-	{
 		"snacks.nvim",
 		dep_of = "yazi.nvim",
 		lazy = false,
@@ -46,8 +36,14 @@ return {
 								key = "s",
 								desc = "Start/Restore Session",
 								action = function()
-									require("persisted").start()
-									require("persisted").load()
+									vim.cmd("silent! source Session.vim")
+
+									vim.api.nvim_create_autocmd("VimLeavePre", {
+										callback = function()
+											vim.cmd("silent 1tabonly!") -- only keep the first tab
+											vim.cmd("silent mksession!")
+										end,
+									})
 								end,
 							},
 							{ icon = "󰙅 ", key = "e", desc = "Yazi", action = ":Yazi" },
@@ -76,7 +72,6 @@ return {
 							}
 						end,
 						{ section = "keys", gap = 1, padding = 1 },
-						{ title = "Sessions", padding = 1 },
 						{ section = "projects", padding = 1 },
 					},
 				},

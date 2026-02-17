@@ -18,6 +18,7 @@ vim.o.shiftwidth = 2
 vim.o.tabstop = 2
 vim.o.autoindent = true
 vim.o.smartindent = true
+vim.o.sessionoptions = "buffers,sesdir"
 
 vim.wo.signcolumn = "yes"
 vim.o.number = true
@@ -45,7 +46,7 @@ vim.opt.fillchars.stlnc = " "
 
 -- --#region kitty/wezterm
 vim.o.laststatus = 0
-vim.o.statusline = ' '
+vim.o.statusline = " "
 -- --#endregion kitty
 --#region alacritty/ghostty/tmux
 -- set title dynamimcally by buffer
