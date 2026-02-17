@@ -40,8 +40,8 @@ return {
 
 									vim.api.nvim_create_autocmd("VimLeavePre", {
 										callback = function()
-											vim.cmd("silent 1tabonly!") -- only keep the first tab
-											vim.cmd("silent mksession!")
+											vim.cmd("silent! 1tabonly!") -- only keep the first tab
+											vim.cmd("silent! mksession!")
 										end,
 									})
 								end,
