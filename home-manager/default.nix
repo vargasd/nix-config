@@ -361,6 +361,74 @@
       "jump-to-char" = pkgs.yaziPlugins.jump-to-char;
     };
 
+    theme = {
+      icon = {
+        dirs = [ ];
+        conds = [
+          {
+            "if" = "orphan";
+            text = "";
+            fg = "white";
+          }
+          {
+            "if" = "link";
+            text = "";
+            fg = "gray";
+          }
+          {
+            "if" = "block";
+            text = "";
+            fg = "yellow";
+          }
+          {
+            "if" = "char";
+            text = "";
+            fg = "yellow";
+          }
+          {
+            "if" = "fifo";
+            text = "";
+            fg = "yellow";
+          }
+          {
+            "if" = "sock";
+            text = "";
+            fg = "yellow";
+          }
+          {
+            "if" = "sticky & dir";
+            text = "󰉐";
+            fg = "yellow";
+          }
+          {
+            "if" = "sticky & !dir";
+            text = "";
+            fg = "yellow";
+          }
+          {
+            "if" = "dummy";
+            text = "";
+            fg = "red";
+          }
+          {
+            "if" = "dir";
+            text = "";
+            fg = "blue";
+          }
+          {
+            "if" = "exec";
+            text = "";
+            fg = "green";
+          }
+          {
+            "if" = "!dir";
+            text = "";
+            fg = "white";
+          }
+        ];
+      };
+    };
+
     settings = {
       mgr = {
         show_hidden = true;
