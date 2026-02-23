@@ -63,7 +63,7 @@
   programs.atuin = {
     enable = true;
     flags = [ "--disable-up-arrow" ];
-    daemon.enable = true;
+    # daemon.enable = true;
     settings = {
       update_check = false;
       show_help = false;
