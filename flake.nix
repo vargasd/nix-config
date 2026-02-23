@@ -36,11 +36,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvim-next = {
-      url = "github:ghostbuster91/nvim-next";
-      flake = false;
-    };
-
     clear-notifications = {
       url = "git+https://gist.github.com/lancethomps/a5ac103f334b171f70ce2ff983220b4f.git";
       flake = false;
@@ -79,11 +74,7 @@
             mini-surround
             vim-sleuth
             flash-nvim
-            (pkgs.vimUtils.buildVimPlugin {
-              pname = "nvim-next";
-              src = inputs.nvim-next;
-              version = inputs.nvim-next.rev;
-            })
+            nvim-next
             vim-fugitive
             gitsigns-nvim
             blink-cmp
