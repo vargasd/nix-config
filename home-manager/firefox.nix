@@ -49,7 +49,7 @@ in
       };
       isDefault = true;
       # https://support.mozilla.org/en-US/questions/1372399
-      userChrome = /*css*/ ''
+      userChrome = /* css */ ''
         .browserContainer > findbar {
           order: -1 !important; /* for 113 and newer */
           border-top: none !important;
@@ -68,6 +68,9 @@ in
         "browser.shell.checkDefaultBrowser" = false;
         "browser.toolbarbuttons.introduced.sidebar-button" = true;
         "browser.aboutConfig.showWarning" = false;
+
+        # always prompt on download
+        "browser.download.useDownloadDir" = false;
 
         # disable bad suggestions
         "browser.urlbar.suggest.engines" = false;
