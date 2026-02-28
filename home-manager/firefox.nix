@@ -22,6 +22,7 @@ in
       navbar = [
         "back-button"
         "forward-button"
+        "stop-reload-button"
         "urlbar-container"
         "unified-extensions-button"
       ];
