@@ -9,6 +9,7 @@
 {
   imports = [
     ./default.nix
+    inputs.paneru.homeModules.paneru
   ];
 
   home = {
@@ -34,6 +35,38 @@
     enable = true;
     keyboard = {
       Capslock = "Escape";
+    };
+  };
+
+  services.paneru = {
+    enable = true;
+    settings = {
+      options = {
+        preset_column_widths = [
+          0.25
+          0.33
+          0.5
+          0.66
+          0.75
+        ];
+        auto_center = true;
+        border_active_window = true;
+      };
+      bindings =
+        let
+          meh = "alt + ctrl + shift";
+          hyper = "${meh} + cmd";
+        in
+        {
+          window_focus_west = "${meh} - leftarrow";
+          window_focus_east = "${meh} - rightarrow";
+          window_swap_west = "${hyper} - leftarrow";
+          window_swap_east = "${hyper} - rightarrow";
+          window_center = "${meh} - c";
+          window_resize = "${meh} - downarrow";
+          window_fullwidth = "${meh} - uparrow";
+          window_manage = "${meh} - q";
+        };
     };
   };
 
@@ -137,17 +170,6 @@
         NSAutomaticPeriodSubstitutionEnabled = false;
         NSAutomaticQuoteSubstitutionEnabled = false;
         NSAutomaticSpellingCorrectionEnabled = false;
-      };
-
-      "com.knollsoft.Rectangle" = {
-        launchOnLogin = true;
-        gapSize = 0;
-        almostMaximizeHeight = 0.75;
-        almostMaximizeWidth = 0.6;
-        hideMenuBarIcon = true;
-        cycleSizesIsChanged = true;
-        selectedCycleSizes = 18; # 2^1 + 2^4 -> https://github.com/rxhanson/Rectangle/blob/main/Rectangle/CycleSize.swift
-        subsequentExecutionMode = 0; # resize on repeat
       };
 
       "com.superultra.Homerow" = {

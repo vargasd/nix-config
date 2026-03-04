@@ -50,6 +50,12 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    paneru = {
+      # TODO: switch back to karinushka/paneru after PR(s) merged
+      url = "github:vargasd/paneru?ref=firefox-no-animate";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

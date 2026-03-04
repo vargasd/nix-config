@@ -8,7 +8,6 @@
       "homerow"
       "orcaslicer"
       "notunes"
-      "rectangle"
       "wezterm" # needed for terminfo
     ];
     onActivation = {
