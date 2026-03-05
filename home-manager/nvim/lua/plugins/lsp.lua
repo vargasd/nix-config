@@ -24,138 +24,134 @@ return {
 				},
 			}
 
-			local servers = vim.tbl_deep_extend(
-				"keep",
-				vim.g.sam_lsp_configs or {},
-				vim.json.decode(os.getenv("SAM_LSP_CONFIGS") or "{}"),
-				{
-					bashls = {
-						settings = {
-							bashIde = {
-								shellcheckArguments = {
-									-- disable unused variables warning
-									"-e",
-									"SC2034",
+			local _, env_lsp = pcall(vim.json.decode, os.getenv("SAM_LSP_CONFIGS") or "{}")
+			local servers = vim.tbl_deep_extend("keep", vim.g.sam_lsp_configs or {}, env_lsp or {}, {
+				bashls = {
+					settings = {
+						bashIde = {
+							shellcheckArguments = {
+								-- disable unused variables warning
+								"-e",
+								"SC2034",
+							},
+						},
+					},
+				},
+				cssls = {},
+				html = {},
+				marksman = {},
+				harper_ls = {
+					filetypes = { "markdown", "asciidoc", "tex" },
+					settings = {
+						["harper-ls"] = {
+							linters = {
+								SentenceCapitalization = false,
+							},
+						},
+					},
+				},
+				typos_lsp = {
+					autostart = false,
+					init_options = {
+						config = vim.fn.stdpath("config"):gsub("/.*?", "") .. "/typos-lsp/typos.toml",
+					},
+				},
+				yamlls = {
+					settings = {
+						redhat = {
+							telemetry = {
+								enabled = false,
+							},
+						},
+						yaml = {
+							format = {
+								enable = false,
+							},
+							schemas = {
+								["https://taskfile.dev/schema.json"] = {
+									"**/Taskfile.yml",
+									"**/Taskfile.yaml",
 								},
 							},
 						},
 					},
-					cssls = {},
-					html = {},
-					marksman = {},
-					harper_ls = {
-						filetypes = { "markdown", "asciidoc", "tex" },
-						settings = {
-							["harper-ls"] = {
-								linters = {
-									SentenceCapitalization = false,
+				},
+				jsonls = {
+					settings = {
+						json = {
+							schemas = {
+								{
+									fileMatch = { "package.json" },
+									url = "https://json.schemastore.org/package.json",
+								},
+								{
+									fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
+									url = "https://json.schemastore.org/prettierrc.json",
+								},
+								{
+									fileMatch = { ".swcrc", ".swcrc.json", "swc.config.json" },
+									url = "https://swc.rs/schema.json",
+								},
+								{
+									fileMatch = { "tsconfig.json", "tsconfig.*.json", "*.tsconfig.json" },
+									url = "http://json.schemastore.org/tsconfig",
 								},
 							},
 						},
 					},
-					typos_lsp = {
-						autostart = false,
-						init_options = {
-							config = vim.fn.stdpath("config"):gsub("/.*?", "") .. "/typos-lsp/typos.toml",
+				},
+				ts_ls = {
+					filetypes = {},
+					init_options = {
+						hostInfo = "neovim",
+						preferences = {
+							completions = { completeFunctionCalls = false },
+							includeCompletionsWithSnippetText = false,
+							includeCompletionsForImportStatements = true,
 						},
 					},
-					yamlls = {
-						settings = {
-							redhat = {
-								telemetry = {
-									enabled = false,
+				},
+				tsgo = {
+					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+					init_options = {
+						hostInfo = "neovim",
+						preferences = {
+							completions = { completeFunctionCalls = false },
+							includeCompletionsWithSnippetText = false,
+							includeCompletionsForImportStatements = true,
+						},
+					},
+				},
+				efm = {
+					init_options = { documentFormatting = true },
+					settings = {
+						languages = {
+							javascript = { prettier },
+							json = { prettier },
+							jsonc = { prettier },
+							typescript = { prettier },
+							svelte = { prettier },
+							sql = {
+								{
+									formatCommand = "sqruff fix -",
+									formatStdin = true,
+									rootMarkers = { ".sqruff" },
 								},
 							},
-							yaml = {
-								format = {
-									enable = false,
-								},
-								schemas = {
-									["https://taskfile.dev/schema.json"] = {
-										"**/Taskfile.yml",
-										"**/Taskfile.yaml",
-									},
-								},
-							},
+							markdown = { prettier },
+							typespec = { prettier },
+							vue = { prettier },
+							yaml = { prettier },
 						},
 					},
-					jsonls = {
-						settings = {
-							json = {
-								schemas = {
-									{
-										fileMatch = { "package.json" },
-										url = "https://json.schemastore.org/package.json",
-									},
-									{
-										fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
-										url = "https://json.schemastore.org/prettierrc.json",
-									},
-									{
-										fileMatch = { ".swcrc", ".swcrc.json", "swc.config.json" },
-										url = "https://swc.rs/schema.json",
-									},
-									{
-										fileMatch = { "tsconfig.json", "tsconfig.*.json", "*.tsconfig.json" },
-										url = "http://json.schemastore.org/tsconfig",
-									},
-								},
-							},
-						},
+				},
+				eslint = {
+					settings = {
+						workingDirectories = { mode = "auto" },
+						codeActionOnSave = { enable = true },
 					},
-					ts_ls = {
-						filetypes = {},
-						init_options = {
-							hostInfo = "neovim",
-							preferences = {
-								completions = { completeFunctionCalls = false },
-								includeCompletionsWithSnippetText = false,
-								includeCompletionsForImportStatements = true,
-							},
-						},
-					},
-					tsgo = {
-						filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-						init_options = {
-							hostInfo = "neovim",
-							preferences = {
-								completions = { completeFunctionCalls = false },
-								includeCompletionsWithSnippetText = false,
-								includeCompletionsForImportStatements = true,
-							},
-						},
-					},
-					efm = {
-						init_options = { documentFormatting = true },
-						settings = {
-							languages = {
-								javascript = { prettier },
-								json = { prettier },
-								jsonc = { prettier },
-								typescript = { prettier },
-								svelte = { prettier },
-								sql = {
-									{
-										formatCommand = "sqruff fix -",
-										formatStdin = true,
-										rootMarkers = { ".sqruff" },
-									},
-								},
-								markdown = { prettier },
-								typespec = { prettier },
-								vue = { prettier },
-								yaml = { prettier },
-							},
-						},
-					},
-					eslint = {
-						settings = {
-							workingDirectories = { mode = "auto" },
-							codeActionOnSave = { enable = true },
-						},
-					},
-				}
-			)
+				},
+			})
 
 			local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
 			vim.api.nvim_create_autocmd("BufWritePre", {
