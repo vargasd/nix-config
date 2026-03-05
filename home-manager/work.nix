@@ -11,6 +11,13 @@
   home.packages = with pkgs; [
     mongosh
     kubectl
+    (google-cloud-sdk.withExtraComponents (
+      with google-cloud-sdk.components;
+      [
+        gke-gcloud-auth-plugin
+        config-connector
+      ]
+    ))
   ];
 
   programs.k9s = {
