@@ -1,4 +1,4 @@
-{ pkgs, helpers, ... }:
+{ pkgs, ... }:
 let
   efm_config = {
     formatCommand = "biome check --write --stdin-file-path '\${INPUT}'";
@@ -9,12 +9,10 @@ let
     ];
   };
 in
-pkgs.mkShell {
-  packages = with pkgs; [
-    biome
-  ];
+{
+  packages = with pkgs; [ biome ];
 
-  SAM_LSP_CONFIGS = helpers.extendJsonEnvVar pkgs "SAM_LSP_CONFIGS" {
+  lspConfig = {
     biome = { };
     efm.settings.languages = {
       html = [ efm_config ];

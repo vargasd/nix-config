@@ -1,5 +1,5 @@
-{ pkgs, helpers, ... }:
-pkgs.mkShell {
+{ pkgs, ... }:
+{
   packages = with pkgs; [
     jdk21_headless
     kotlin
@@ -8,7 +8,7 @@ pkgs.mkShell {
     ktlint
   ];
 
-  SAM_LSP_CONFIGS = helpers.extendJsonEnvVar pkgs "SAM_LSP_CONFIGS" {
+  lspConfig = {
     kotlin_language_server = { };
     efm.settings.languages.kotlin = [
       {

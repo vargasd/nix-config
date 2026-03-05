@@ -1,12 +1,12 @@
-{ pkgs, helpers, ... }:
-pkgs.mkShell {
+{ pkgs, ... }:
+{
   packages = with pkgs; [
     tenv
     terraform-ls
     tflint
   ];
 
-  SAM_LSP_CONFIGS = helpers.extendJsonEnvVar pkgs "SAM_LSP_CONFIGS" {
+  lspConfig = {
     terraformls = { };
     tflint = { };
     efm.settings.languages.terraform = [

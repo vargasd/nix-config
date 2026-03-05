@@ -1,11 +1,11 @@
-{ pkgs, helpers, ... }:
-pkgs.mkShell {
+{ pkgs, ... }:
+{
   packages = with pkgs; [
     phpactor
     php
   ];
 
-  SAM_LSP_CONFIGS = helpers.extendJsonEnvVar pkgs "SAM_LSP_CONFIGS" {
+  lspConfig = {
     phpactor = { };
   };
 }

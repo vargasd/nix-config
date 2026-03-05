@@ -1,11 +1,11 @@
-{ pkgs, helpers, ... }:
-pkgs.mkShell {
+{ pkgs, ... }:
+{
   packages = with pkgs; [
     vue-language-server
     typescript-language-server
   ];
 
-  SAM_LSP_CONFIGS = helpers.extendJsonEnvVar pkgs "SAM_LSP_CONFIGS" {
+  lspConfig = {
     vue_ls = { };
     tsgo = {
       autostart = false;

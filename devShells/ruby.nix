@@ -1,7 +1,9 @@
-{ pkgs, helpers, ... }:
-pkgs.mkShell {
+{ pkgs, ... }:
+{
   packages = with pkgs; [
     ruby
     bundler
   ];
+
+  lspConfig = { };
 }

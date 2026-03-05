@@ -219,42 +219,57 @@
     // (flake-utils.lib.eachDefaultSystem (
       system:
       let
-        inputs = {
-          pkgs = import nixpkgs {
-            inherit system;
-            inherit overlays;
-          };
-          vimPkgs = vimPkgs;
-          helpers = {
-            extendJsonEnvVar =
-              pkgs: varName: json:
-              pkgs.lib.attrsets.recursiveUpdate (
-                builtins.getEnv varName
-                |> (val: if val == null || val == "" then "{}" else val) # handle invalid JSON?
-                |> builtins.fromJSON
-              ) json
+        pkgs = import nixpkgs {
+          inherit system;
+          inherit overlays;
+        };
+
+        mkDevShell =
+          {
+            devEnvs,
+            lspConfig ? { },
+            packages ? [ ],
+          }:
+          pkgs.mkShell {
+            packages = (devEnvs |> (map (cfg: cfg.packages or [ ])) |> builtins.concatLists) ++ packages;
+
+            SAM_LSP_CONFIGS =
+              devEnvs
+              |> builtins.foldl' (
+                acc: cfg: pkgs.lib.attrsets.recursiveUpdate acc (cfg.lspConfig or { })
+              ) lspConfig
               |> builtins.toJSON;
+
+            shellHook =
+              devEnvs
+              |> map (cfg: cfg.shellHook or "")
+              |> builtins.filter (hook: hook != null && hook != "")
+              |> builtins.concatStringsSep "\n";
           };
+
+        devEnvs = {
+          biome = import ./devShells/biome.nix { inherit pkgs; };
+          c = import ./devShells/c.nix { inherit pkgs; };
+          gleam = import ./devShells/gleam.nix { inherit pkgs; };
+          kotlin = import ./devShells/kotlin.nix { inherit pkgs; };
+          lua = import ./devShells/lua.nix { inherit pkgs vimPkgs; };
+          nix = import ./devShells/nix.nix { inherit pkgs; };
+          php = import ./devShells/php.nix { inherit pkgs; };
+          pnpm = import ./devShells/pnpm.nix { inherit pkgs; };
+          ruby = import ./devShells/ruby.nix { inherit pkgs; };
+          terraform = import ./devShells/terraform.nix { inherit pkgs; };
+          tsserver = import ./devShells/tsserver.nix { inherit pkgs; };
+          vue = import ./devShells/vue.nix { inherit pkgs; };
         };
       in
       {
-        devShells = {
-          biome = import ./devShells/biome.nix inputs;
-          c = import ./devShells/c.nix inputs;
-          gcp = import ./devShells/gcp.nix inputs;
-          gleam = import ./devShells/gleam.nix inputs;
-          kotlin = import ./devShells/kotlin.nix inputs;
-          lua = import ./devShells/lua.nix inputs;
-          nix = import ./devShells/nix.nix inputs;
-          node24 = import ./devShells/node24.nix inputs;
-          node22 = import ./devShells/node22.nix inputs;
-          node20 = import ./devShells/node20.nix inputs;
-          php = import ./devShells/php.nix inputs;
-          pnpm = import ./devShells/pnpm.nix inputs;
-          ruby = import ./devShells/ruby.nix inputs;
-          terraform = import ./devShells/terraform.nix inputs;
-          tsserver = import ./devShells/tsserver.nix inputs;
-          vue = import ./devShells/vue.nix inputs;
+        inherit devEnvs;
+        inherit mkDevShell;
+        devShells.default = mkDevShell {
+          devEnvs = [
+            devEnvs.nix
+            devEnvs.lua
+          ];
         };
       }
     ));

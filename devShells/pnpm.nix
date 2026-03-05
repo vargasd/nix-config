@@ -1,6 +1,6 @@
-{ pkgs, helpers, ... }:
-pkgs.mkShell {
-  packages = with pkgs; [
-    pnpm
-  ];
+{ pkgs, ... }:
+{
+  packages = with pkgs; [ pnpm ];
+
+  lspConfig = { };
 }

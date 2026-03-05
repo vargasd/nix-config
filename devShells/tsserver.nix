@@ -1,10 +1,8 @@
-{ pkgs, helpers, ... }:
-pkgs.mkShell {
-  packages = with pkgs; [
-    typescript-language-server
-  ];
+{ pkgs, ... }:
+{
+  packages = with pkgs; [ typescript-language-server ];
 
-  SAM_LSP_CONFIGS = helpers.extendJsonEnvVar pkgs "SAM_LSP_CONFIGS" {
+  lspConfigs = {
     tsgo = {
       autostart = false;
     };
