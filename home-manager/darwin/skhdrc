@@ -12,6 +12,7 @@ meh - b        : open -a "@home@/Applications/Home Manager Apps/Firefox.app"
 hyper - b      : open -a safari
 
 meh - delete   : open -a ScreenSaverEngine
+hyper - q      : killall paneru
 
 fn - h         : skhd -k left
 fn - j         : skhd -k down

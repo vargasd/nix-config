@@ -51,6 +51,8 @@
         ];
         auto_center = true;
         border_active_window = true;
+        swipe_gesture_fingers = 3;
+        continuous_swipe = false;
       };
       bindings =
         let
