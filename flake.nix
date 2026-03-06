@@ -224,13 +224,13 @@
           inherit overlays;
         };
 
-        mkDevShell =
+        combine =
           {
             devEnvs,
             lspConfig ? { },
             packages ? [ ],
           }:
-          pkgs.mkShell {
+          {
             packages = (devEnvs |> (map (cfg: cfg.packages or [ ])) |> builtins.concatLists) ++ packages;
 
             SAM_LSP_CONFIGS =
@@ -248,6 +248,7 @@
           };
 
         devEnvs = {
+          lib.combine = combine;
           biome = import ./devShells/biome.nix { inherit pkgs; };
           c = import ./devShells/c.nix { inherit pkgs; };
           gleam = import ./devShells/gleam.nix { inherit pkgs; };
@@ -264,13 +265,14 @@
       in
       {
         inherit devEnvs;
-        inherit mkDevShell;
-        devShells.default = mkDevShell {
-          devEnvs = [
-            devEnvs.nix
-            devEnvs.lua
-          ];
-        };
+        devShells.default =
+          combine {
+            devEnvs = [
+              devEnvs.nix
+              devEnvs.lua
+            ];
+          }
+          |> pkgs.mkShell;
       }
     ));
 }
