@@ -43,13 +43,10 @@
     settings = {
       options = {
         preset_column_widths = [
-          0.25
           0.33
           0.5
           0.66
-          0.75
         ];
-        auto_center = true;
         border_active_window = true;
         swipe_gesture_fingers = 3;
         continuous_swipe = false;

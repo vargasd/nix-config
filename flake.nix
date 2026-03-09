@@ -53,7 +53,7 @@
 
     paneru = {
       # TODO: switch back to karinushka/paneru after PR(s) merged
-      url = "github:vargasd/paneru?ref=firefox-no-animate";
+      url = "github:vargasd/paneru";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
