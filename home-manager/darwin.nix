@@ -119,7 +119,7 @@
       "com.apple.menuextra.clock".Show24Hour = true;
 
       "com.apple.screencapture" = {
-        location = "/tmp";
+        location = "Desktop";
         show-thumbnail = true;
         type = "png";
       };
