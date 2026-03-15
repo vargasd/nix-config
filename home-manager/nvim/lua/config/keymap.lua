@@ -35,11 +35,10 @@ local mappings = {
 	{ "<M-f>", "<S-Right>", { mode = { "i", "c" } } },
 
 	-- clipboard
-	{ "<leader>YA", ':let @+=expand("%:p")<CR>', { silent = true } },
-	{ "<leader>YF", ':let @+=expand("%:t")<CR>', { silent = true } },
-	{ "<leader>YR", ':let @+=expand("%:.")<CR>', { silent = true } },
-	{ "<leader>y", '"*y', { mode = { "n", "v" } } },
-	{ "<leader>p", '"*p', { mode = { "n", "v" } } },
+	{ "<leader>yp", ':let @+=expand("%:p")<CR>', { silent = true } },
+	{ "<leader>yr", ':let @+=expand("%:.")<CR>', { silent = true } },
+	{ "<leader>y", '"+y', { mode = { "n", "v" } } },
+	{ "<leader>p", '"+p', { mode = { "n", "v" } } },
 	{ "<leader>P", '"*P', { mode = { "n", "v" } } },
 
 	-- tabby stuff
