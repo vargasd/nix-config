@@ -86,6 +86,11 @@ in
         # disable AI tab groups
         "browser.tabs.groups.smart.userEnabled" = false;
 
+        "ui.key.accelKey" = 91; # super
+        "ui.key.chromeAccess" = 8; # super
+        "ui.key.contentAccess" = 2; # ctrl
+        "ui.key.menuAccessKey" = 0; # disable
+
         "sidebar.revamp" = true;
         "sidebar.verticalTabs" = true;
         "sidebar.verticalTabs.dragToPinPromo.dismissed" = true; # ftux
