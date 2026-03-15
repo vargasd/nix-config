@@ -18,7 +18,6 @@
     ];
 
     sessionVariables = {
-      MOZ_DISABLE_SAFE_MODE_KEY = 1;
       LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
     };
 

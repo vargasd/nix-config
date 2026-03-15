@@ -15,6 +15,7 @@
     EDITOR = "nvim";
     VISUAL = "nvim";
     TZ = "America/Indiana/Indianapolis";
+    MOZ_DISABLE_SAFE_MODE_KEY = 1;
   };
 
   home.packages = with pkgs; [
