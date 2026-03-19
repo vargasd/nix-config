@@ -46,6 +46,8 @@
           0.5
           0.66
         ];
+        focus_follows_mouse = false;
+        mouse_follows_focus = false;
         border_active_window = true;
         swipe_gesture_fingers = 3;
         continuous_swipe = false;
