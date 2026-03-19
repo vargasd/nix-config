@@ -87,7 +87,7 @@ in
         "browser.tabs.groups.smart.userEnabled" = false;
 
         "ui.key.accelKey" = 91; # super
-        "ui.key.chromeAccess" = 8; # super
+        "ui.key.chromeAccess" = 2; # ctrl
         "ui.key.contentAccess" = 2; # ctrl
         "ui.key.menuAccessKey" = 0; # disable
 
