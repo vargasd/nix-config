@@ -11,6 +11,7 @@
   home.packages = with pkgs; [
     mongosh
     kubectl
+    claude-code
     (google-cloud-sdk.withExtraComponents (
       with google-cloud-sdk.components;
       [

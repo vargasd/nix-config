@@ -167,6 +167,7 @@
             ./nix-darwin
             {
               nixpkgs.overlays = overlays;
+              nixpkgs.config.allowUnfree = true;
             }
             home-manager.darwinModules.home-manager
             {
