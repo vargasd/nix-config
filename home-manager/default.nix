@@ -57,6 +57,8 @@
 
     # fonts
     jetbrains-mono
+    noto-fonts-monochrome-emoji
+    nerd-fonts.jetbrains-mono
   ];
 
   fonts.fontconfig.enable = true;

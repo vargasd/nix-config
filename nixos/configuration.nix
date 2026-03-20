@@ -53,7 +53,27 @@
     ];
   };
 
-  fonts.packages = [ pkgs.jetbrains-mono ];
+  fonts = {
+    enableDefaultPackages = false;
+    packages = with pkgs; [
+      jetbrains-mono
+      noto-fonts-monochrome-emoji
+      dejavu_fonts
+      freefont_ttf
+      gyre-fonts
+      liberation_ttf
+      unifont
+      nerd-fonts.jetbrains-mono
+    ];
+  };
+
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      monospace = [ "JetBrainsMono NF SemiBold" ];
+      emoji = [ "Noto Emoji" ];
+    };
+  };
 
   services = {
     udisks2 = {
