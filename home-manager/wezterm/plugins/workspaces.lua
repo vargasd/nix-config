@@ -26,7 +26,12 @@ function shellcondense(path)
 end
 
 function M.apply_to_config(config)
-	wezterm.on("gui-startup", function()
+	wezterm.on("gui-startup", function(cmd)
+		if cmd ~= nil then
+			wezterm.mux.spawn_window(cmd)
+			return
+		end
+
 		local f = io.open(workspace_path, "r")
 
 		if f == nil then
