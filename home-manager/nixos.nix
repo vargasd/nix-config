@@ -1,9 +1,263 @@
 {
   pkgs,
+  inputs,
+  lib,
+  colors,
   ...
 }:
 {
+  /*
+    TODO
+      - input
+        - xremap
+        - compose key
+        - emoji picker (bemoji?)
+      - foot as primary terminal
+        - tabbing rule (do we need stacking?)
+        - fuzzel switcher (open window jumping + zoxide to open new instance?)
+        - neovim scrollback
+      - clipboard (make it work/cliphist?)
+      - yazi as file picker (https://github.com/GermainZ/xdg-desktop-portal-termfilechooser?)
+      - better waybar (style or alternative)
+      - notifications (mako?)
+      - auto dark mode (darkman?)
+    FIXME
+      - colorless noto emoji
+      - pinentry for neovim terminal (use gui?)
+  */
+
   imports = [
     ./default.nix
+    inputs.niri-flake.homeModules.niri
   ];
+
+  home = {
+    packages = with pkgs; [
+      bluetui
+      brightnessctl
+      wifitui
+      wlrctl
+    ];
+  };
+
+  xdg = {
+    configFile."wifitui/theme.toml" = {
+      enable = true;
+      text = /* toml */ ''
+        Primary = ["13", "13"]
+        Subtle = ["8", "8"]
+        Success = ["10", "10"]
+        Error = ["9", "9"]
+        Normal = ["15", "15"]
+        Disabled = ["7", "7"]
+        Border = ["8", "8"]
+        SignalHigh = ["#${colors.named.white}", "#${colors.named.white}"]
+        SignalLow = ["#${colors.named.bright_black}}", "#${colors.named.bright_black}"]
+        Saved = ["15", "15"]
+
+        TitleIcon = "󰖩 "
+        NetworkSecureIcon = "󱚿 "
+        NetworkOpenIcon = "󱛀 "
+        NetworkUnknownIcon = " "
+        NetworkSavedIcon = "󰆓 "
+      '';
+    };
+  };
+
+  programs.foot = {
+    enable = true;
+    server.enable = true;
+    settings = {
+      main = {
+        font = "monospace:size=16";
+      };
+      cursor = {
+        blink = false;
+        blink-rate = 0;
+      };
+      colors =
+        with colors.named;
+        {
+          background = background;
+          foreground = white;
+          regular0 = black;
+          regular1 = dark_red;
+          regular2 = dark_green;
+          regular3 = dark_yellow;
+          regular4 = dark_blue;
+          regular5 = dark_magenta;
+          regular6 = dark_cyan;
+          regular7 = gray;
+          bright0 = bright_black;
+          bright1 = red;
+          bright2 = green;
+          bright3 = yellow;
+          bright4 = blue;
+          bright5 = magenta;
+          bright6 = cyan;
+          bright7 = white;
+        }
+        // builtins.listToAttrs (
+          builtins.genList (i: {
+            name = toString (i + 16);
+            value = builtins.elemAt colors.indexed (i + 16);
+          }) 240
+        );
+    };
+  };
+
+  programs.niri = {
+    enable = true;
+
+    settings = {
+      input.keyboard.repeat-delay = 200;
+      layout = {
+        gaps = 4;
+        focus-ring = {
+          enable = true;
+          width = 4;
+        };
+      };
+
+      spawn-at-startup = [
+        { argv = [ (lib.getExe pkgs.waybar) ]; }
+        {
+          argv = [
+            (lib.getExe pkgs.foot)
+            "--server"
+          ];
+        }
+        {
+          argv = [
+            (lib.getExe pkgs.wlsunset)
+            "-l"
+            "39.9"
+            "-L"
+            "-86.1"
+            "-t"
+            "3500"
+            "-T"
+            "5500"
+          ];
+        }
+      ];
+      hotkey-overlay.skip-at-startup = true;
+      prefer-no-csd = true;
+      screenshot-path = "/tmp/screenshot_%Y-%m-%dT%H-%M-%S.png";
+      animations.enable = false;
+
+      binds =
+        let
+          meh = "Alt+Ctrl+Shift";
+          hyper = "${meh}+Super";
+          focusOrSpawn =
+            winmatch: exe:
+            "${lib.getExe pkgs.wlrctl} window focus ${winmatch} || niri msg action spawn -- ${exe}";
+        in
+        {
+          "Ctrl+Up" = {
+            action.toggle-overview = [ ];
+            repeat = false;
+          };
+          "Super+Space".action.spawn = lib.getExe pkgs.fuzzel;
+          "Super+Q" = {
+            action.close-window = [ ];
+            repeat = false;
+          };
+
+          "${meh}+Slash".action."show-hotkey-overlay" = [ ];
+          "${meh}+T".action.spawn-sh = focusOrSpawn "app_id:org.wezfurlong.wezterm" (lib.getExe pkgs.wezterm);
+          "${meh}+B".action.spawn-sh = focusOrSpawn "app_id:firefox" (lib.getExe pkgs.firefox);
+          "${meh}+Left".action."focus-column-left" = [ ];
+          "${meh}+Right".action."focus-column-right" = [ ];
+          "${meh}+Down".action.switch-preset-column-width = [ ];
+          "${meh}+Up".action.maximize-column = [ ];
+          "${hyper}+Left".action.move-column-left = [ ];
+          "${hyper}+Down".action.move-window-down = [ ];
+          "${hyper}+Up".action.move-window-up = [ ];
+          "${hyper}+Right".action.move-column-right = [ ];
+          "${meh}+Delete".action.spawn = "${lib.getExe pkgs.swaylock}";
+          "${meh}+percent" = {
+            allow-when-locked = true;
+            action.spawn-sh = "brightnessctl --class=backlight set -10%";
+          };
+          "${meh}+asterisk" = {
+            allow-when-locked = true;
+            action.spawn-sh = "brightnessctl --class=backlight set +10%";
+          };
+
+          "${meh}+X".action.screenshot = [ ];
+
+          "${meh}+Z".action.screenshot-screen = [ ];
+          "${hyper}+Z".action.screenshot-window = [ ];
+
+          "${meh}+C".action.center-column = [ ];
+          "${meh}+Q".action.toggle-window-floating = [ ];
+          "${meh}+Home".action.focus-column-first = [ ];
+          "${meh}+End".action.focus-column-last = [ ];
+          "${meh}+WheelScrollDown".action.focus-column-right = [ ];
+          "${meh}+WheelScrollUp".action.focus-column-left = [ ];
+
+          "${meh}+F".action.spawn-sh =
+            focusOrSpawn "title:floating.bluetui" "${lib.getExe pkgs.foot} -T floating.bluetui ${lib.getExe pkgs.bluetui}";
+
+          "${meh}+W".action.spawn-sh =
+            focusOrSpawn "title:floating.wifitui" "${lib.getExe pkgs.foot} -T floating.wifitui ${lib.getExe pkgs.wifitui} --theme=$HOME/.config/wifitui/theme.toml";
+
+          "${hyper}+Home".action.move-column-to-first = [ ];
+          "${hyper}+End".action.move-column-to-last = [ ];
+          "${hyper}+C".action.center-visible-columns = [ ];
+          "${hyper}+WheelScrollDown".action.move-column-right = [ ];
+          "${hyper}+WheelScrollUp".action.move-column-left = [ ];
+          "${hyper}+Q".action.quit = [ ];
+        };
+
+      window-rules = [
+        {
+          matches = [
+            {
+              app-id = "foot";
+              title = "floating";
+            }
+          ];
+          open-floating = true;
+          default-column-width.proportion = 0.4;
+          default-window-height.proportion = 0.7;
+          open-focused = true;
+        }
+      ];
+    };
+  };
+
+  programs.waybar = {
+    enable = true;
+  };
+
+  programs.swaylock = {
+    enable = true;
+    settings = with colors.named; {
+      font = "monospace";
+      color = background;
+      font-size = 16;
+      indicator-radius = 100;
+      indicator-thickness = 15;
+      disable-caps-lock-text = true;
+      key-hl-color = magenta;
+      ring-color = white;
+      text-color = white;
+      text-ver-color = white;
+      text-wrong-color = white;
+      text-clear-color = white;
+      inside-clear-color = dark_yellow;
+      ring-clear-color = yellow;
+      ring-ver-color = blue;
+      inside-ver-color = dark_blue;
+      ring-wrong-color = red;
+      inside-wrong-color = dark_red;
+    };
+  };
+
+  programs.fuzzel = {
+    enable = true;
+  };
 }
