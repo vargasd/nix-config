@@ -261,7 +261,14 @@
     colorSchemes = {
       bluvbox =
         let
-          hexColors = colors |> builtins.mapAttrs (n: val: "#${val}");
+          hexColors = colors.named |> builtins.mapAttrs (n: val: "#${val}");
+          # Full 256-color indexed palette (indices 16-255); 0-15 are ansi/brights
+          indexedPalette = builtins.listToAttrs (
+            builtins.genList (i: {
+              name = builtins.toString (i + 16);
+              value = "#${builtins.elemAt colors.indexed (i + 16)}";
+            }) 240
+          );
         in
         with hexColors;
         {
@@ -272,14 +279,7 @@
           cursor_fg = background;
           selection_bg = "#343d46";
           selection_fg = white;
-          indexed = {
-            # darkred
-            "52" = "#3b1c1c";
-            # darkgreen
-            "22" = "#1e3a24";
-            # darkblue
-            "17" = "#1c3557";
-          };
+          indexed = indexedPalette;
           ansi = [
             black
             dark_red

@@ -33,7 +33,7 @@
   console = {
     font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Bold.ttf";
     keyMap = "us";
-    colors = with colors; [
+    colors = with colors.named; [
       black
       dark_red
       dark_green

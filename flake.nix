@@ -113,7 +113,7 @@
           enhansi-nvim
         ]
       );
-      colors = {
+      baseColors = {
         background = "162229";
         black = "1b2b34";
         dark_red = "c75c5c";
@@ -131,6 +131,11 @@
         magenta = "d3869b";
         cyan = "89b482";
         white = "efe2bc";
+      };
+      indexed = import ./color256.nix baseColors;
+      colors = {
+        named = baseColors;
+        inherit indexed;
       };
 
     in
