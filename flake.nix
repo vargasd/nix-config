@@ -158,7 +158,7 @@
               home-manager.extraSpecialArgs = specialArgs;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.home.user} = import ./home-manager/default.nix;
+              home-manager.users.${specialArgs.home.user} = import ./home-manager/nixos.nix;
             }
           ];
         }

@@ -1,0 +1,9 @@
+{
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    ./default.nix
+  ];
+}
