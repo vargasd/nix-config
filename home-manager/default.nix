@@ -3,6 +3,7 @@
   inputs,
   config,
   vimPkgs,
+  colors,
   ...
 }@all:
 {
@@ -260,19 +261,17 @@
     colorSchemes = {
       bluvbox =
         let
-          bg = "#162229";
-          fg = "#efe2bc";
-          gray = "#46586a";
-          yellow = "#d8a657";
+          hexColors = colors |> builtins.mapAttrs (n: val: "#${val}");
         in
+        with hexColors;
         {
-          background = bg;
-          foreground = fg;
-          cursor_bg = fg;
-          cursor_border = fg;
-          cursor_fg = bg;
+          background = background;
+          foreground = white;
+          cursor_bg = white;
+          cursor_border = white;
+          cursor_fg = background;
           selection_bg = "#343d46";
-          selection_fg = fg;
+          selection_fg = white;
           indexed = {
             # darkred
             "52" = "#3b1c1c";
@@ -282,35 +281,35 @@
             "17" = "#1c3557";
           };
           ansi = [
-            "#1b2b34"
-            "#c75c5c"
-            "#8fa35a"
-            "#b49545"
-            "#659093"
-            "#a06c85"
-            "#6e9a6e"
-            "#bfb47e"
+            black
+            dark_red
+            dark_green
+            dark_yellow
+            dark_blue
+            dark_magenta
+            dark_cyan
+            gray
           ];
           brights = [
-            gray
-            "#ea6962"
-            "#a9b665"
+            bright_black
+            red
+            green
             yellow
-            "#7daea3"
-            "#d3869b"
-            "#89b482"
-            fg
+            blue
+            magenta
+            cyan
+            white
           ];
           # these should really be in the main config but whaddya gonna do
           tab_bar = {
-            background = bg;
+            background = background;
             active_tab = {
               bg_color = yellow;
-              fg_color = bg;
+              fg_color = background;
             };
             inactive_tab = {
-              bg_color = gray;
-              fg_color = bg;
+              bg_color = bright_black;
+              fg_color = background;
             };
           };
         };

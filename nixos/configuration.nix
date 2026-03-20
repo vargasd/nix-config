@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+{
+  pkgs,
+  colors,
+  ...
+}:
 
 {
   nix.settings.experimental-features = [
@@ -29,23 +33,23 @@
   console = {
     font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Bold.ttf";
     keyMap = "us";
-    colors = [
-      "1d2021"
-      "cc241d"
-      "98971a"
-      "d79921"
-      "458588"
-      "b16286"
-      "689d6a"
-      "a89984"
-      "928374"
-      "f42c3e"
-      "b8bb26"
-      "fabd2f"
-      "99c6ca"
-      "d3869b"
-      "7ec16e"
-      "ebdbb2"
+    colors = with colors; [
+      black
+      dark_red
+      dark_green
+      dark_yellow
+      dark_blue
+      dark_magenta
+      dark_cyan
+      gray
+      bright_black
+      red
+      green
+      yellow
+      blue
+      magenta
+      cyan
+      white
     ];
   };
 
