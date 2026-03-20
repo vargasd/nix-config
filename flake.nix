@@ -124,16 +124,14 @@
               homeDirectory = "/home/vargasd";
               user = "vargasd";
             };
-            additionalConfig = { };
           };
         in
         {
+          inherit specialArgs;
           system = "x86_64-linux";
           modules = [
-            ./nixos/configuration.nix
-            {
-              nixpkgs.overlays = overlays;
-            }
+            { nixpkgs.overlays = overlays; }
+            ./nixos/nuc.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = specialArgs;

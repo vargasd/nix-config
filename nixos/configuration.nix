@@ -1,11 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    # TODO make dynamic
-    ./hardware/nuc.nix
-  ];
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
