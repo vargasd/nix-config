@@ -80,6 +80,16 @@
       enable = true;
       mountOnMedia = true;
     };
+
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri";
+          user = "vargasd";
+        };
+      };
+    };
   };
 
   users.users.vargasd = {
@@ -99,7 +109,14 @@
     LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
   };
 
-  programs.sway.enable = true;
+  environment.systemPackages = with pkgs; [
+    vim
+    neovim
+    git
+    wl-clipboard-rs
+  ];
+
+  programs.niri.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -108,8 +125,6 @@
     enable = true;
     enableSSHSupport = true;
   };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -120,6 +135,9 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  services.geoclue2.enable = true;
+
+  hardware.bluetooth.enable = true;
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
