@@ -12,6 +12,7 @@
   home.sessionVariables = {
     LESS = "-i -R --no-init --tabs 2";
     LESSHISTFILE = "-";
+    MANPAGER = "nvim +Man!";
     HUSKY = 0;
     EDITOR = "nvim";
     VISUAL = "nvim";
@@ -100,7 +101,6 @@
       src = pkgs.enhansi-tmtheme;
       file = "enhansi.tmTheme";
     };
-    extraPackages = [ pkgs.bat-extras.batman ];
   };
 
   programs.browserpass.enable = true;
@@ -491,7 +491,6 @@
     '';
 
     shellAliases = {
-      man = "batman";
       nvim = # sh
         "env TERM=\${SAMTERM:-$TERM} nvim";
       nixpkgs-search = # sh
