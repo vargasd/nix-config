@@ -190,8 +190,8 @@
           };
 
           "${meh}+Slash".action."show-hotkey-overlay" = [ ];
-          "${meh}+T".action.spawn-sh = focusOrSpawn "app_id:org.wezfurlong.wezterm" (lib.getExe pkgs.wezterm);
-          "${meh}+B".action.spawn-sh = focusOrSpawn "app_id:firefox" (lib.getExe pkgs.firefox);
+          "${meh}+T".action.spawn-sh = focusOrSpawn "foot" (lib.getExe pkgs.foot);
+          "${meh}+B".action.spawn-sh = focusOrSpawn "firefox" (lib.getExe pkgs.firefox);
           "${meh}+Left".action."focus-column-left" = [ ];
           "${meh}+Right".action."focus-column-right" = [ ];
           "${meh}+Down".action.switch-preset-column-width = [ ];
@@ -201,6 +201,9 @@
           "${hyper}+Up".action.move-window-up = [ ];
           "${hyper}+Right".action.move-column-right = [ ];
           "${meh}+Delete".action.spawn = "${lib.getExe pkgs.swaylock}";
+          "${hyper}+Delete".action.quit.skip-confirmation = true;
+
+          # FIXME these don't work
           "${meh}+percent" = {
             allow-when-locked = true;
             action.spawn-sh = "brightnessctl --class=backlight set -10%";
@@ -233,7 +236,6 @@
           "${hyper}+C".action.center-visible-columns = [ ];
           "${hyper}+WheelScrollDown".action.move-column-right = [ ];
           "${hyper}+WheelScrollUp".action.move-column-left = [ ];
-          "${hyper}+Q".action.quit = [ ];
         };
 
       window-rules = [
