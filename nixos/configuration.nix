@@ -101,6 +101,15 @@
     shell = pkgs.zsh;
   };
 
+  services.xremap = {
+    enable = true;
+    withNiri = true;
+    serviceMode = "user";
+    userName = "vargasd";
+    # config is done in home-manager (but this is required)
+    config.keymap = [ ];
+  };
+
   programs.zsh.enable = true;
 
   environment.variables = {

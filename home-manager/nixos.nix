@@ -9,7 +9,6 @@
   /*
     TODO
       - input
-        - xremap
         - compose key
         - emoji picker (bemoji?)
       - foot as primary terminal
@@ -28,6 +27,7 @@
   imports = [
     ./default.nix
     inputs.niri-flake.homeModules.niri
+    inputs.xremap.homeManagerModules.default
   ];
 
   home = {
@@ -286,4 +286,29 @@
   programs.fuzzel = {
     enable = true;
   };
+
+  services.xremap = {
+    enable = true;
+    withNiri = true;
+    config = {
+      keymap = [
+        {
+          name = "emacs keys";
+          application.not = [ "foot" ];
+          remap = {
+            "ctrl-a".with_mark = "home";
+            "ctrl-e".with_mark = "end";
+            "alt-b".with_mark = "ctrl-left";
+            "alt-f".with_mark = "ctrl-right";
+            "ctrl-w" = "ctrl-backspace";
+            "ctrl-u" = [
+              "shift-home"
+              "backspace"
+            ];
+          };
+        }
+      ];
+    };
+  };
+
 }

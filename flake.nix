@@ -61,6 +61,11 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    xremap = {
+      url = "github:xremap/nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -163,6 +168,7 @@
           modules = [
             { nixpkgs.overlays = overlays; }
             ./nixos/nuc.nix
+            inputs.xremap.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = specialArgs;
