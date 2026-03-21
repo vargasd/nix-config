@@ -24,11 +24,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771352763,
-        "narHash": "sha256-bjIRZNzBcqyYZyEPY0a9F0lSI6k7QqsFb1+CiKcePpw=",
+        "lastModified": 1774090372,
+        "narHash": "sha256-HBenr1H3Ln75srYs6Gu4Pv8o8czs1U3VeVRXfsUQB+w=",
         "owner": "vargasd",
         "repo": "enhansi",
-        "rev": "547a471e28e721cd5567ccfc2cd08278178e569d",
+        "rev": "1a38a92647490db7cb3c2d8c27da2f3361006f44",
         "type": "github"
       },
       "original": {
