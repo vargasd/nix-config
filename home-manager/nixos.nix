@@ -17,13 +17,12 @@
         - fuzzel switcher (open window jumping + zoxide to open new instance?)
         - neovim scrollback
       - clipboard (make it work/cliphist?)
-      - yazi as file picker (https://github.com/GermainZ/xdg-desktop-portal-termfilechooser?)
-      - better waybar (style or alternative)
+      - better waybar (style or alternative--ashell/bar-rs?)
       - notifications (mako?)
       - auto dark mode (darkman?)
+      - screencast/share (https://github.com/niri-wm/niri/wiki/Important-Software#portals)
     FIXME
       - colorless noto emoji
-      - pinentry for neovim terminal (use gui?)
   */
 
   imports = [
@@ -32,6 +31,10 @@
   ];
 
   home = {
+    sessionVariables = {
+      TERMCMD = "${lib.getExe pkgs.foot} -T floating.yazi";
+      GDK_DEBUG = "portals";
+    };
     packages = with pkgs; [
       bluetui
       brightnessctl
@@ -41,6 +44,27 @@
   };
 
   xdg = {
+    autostart.enable = true;
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-termfilechooser
+      ];
+      config.niri = {
+        "org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
+      };
+    };
+
+    configFile."xdg-desktop-portal-termfilechooser/config" = {
+      enable = true;
+      text = ''
+        [filechooser]
+        cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+      '';
+    };
+
     configFile."wifitui/theme.toml" = {
       enable = true;
       text = /* toml */ ''

@@ -95,7 +95,6 @@ in
         "sidebar.verticalTabs" = true;
         "sidebar.verticalTabs.dragToPinPromo.dismissed" = true; # ftux
         "sidebar.main.tools" = "history"; # need something here to disable the rest...
-
         "browser.uiCustomization.navBarWhenVerticalTabs" = navbar;
         "browser.uiCustomization.state" = {
           "placements" = {
@@ -107,6 +106,9 @@ in
 
         # disable password manager
         "signon.rememberSignons" = false;
+
+        # needed for yazi picker (?)
+        "widget.use-xdg-desktop-portal.file-picker" = 1;
       };
       extensions = {
         force = true;
