@@ -30,7 +30,7 @@
 
   home = {
     sessionVariables = {
-      TERMCMD = "${lib.getExe pkgs.foot} -T floating.yazi";
+      TERMCMD = "${pkgs.foot}/bin/footclient -T floating.yazi";
       GDK_DEBUG = "portals";
     };
     packages = with pkgs; [
@@ -202,10 +202,10 @@
           "${meh}+WheelScrollUp".action.focus-column-left = [ ];
 
           "${meh}+F".action.spawn-sh =
-            focusOrSpawn "title:floating.bluetui" "${lib.getExe pkgs.foot} -T floating.bluetui ${lib.getExe pkgs.bluetui}";
+            focusOrSpawn "title:floating.bluetui" "${pkgs.foot}/bin/footclient -T floating.bluetui ${lib.getExe pkgs.bluetui}";
 
           "${meh}+W".action.spawn-sh =
-            focusOrSpawn "title:floating.impala" "${lib.getExe pkgs.foot} -T floating.impala ${lib.getExe pkgs.impala}";
+            focusOrSpawn "title:floating.impala" "${pkgs.foot}/bin/footclient -T floating.impala ${lib.getExe pkgs.impala}";
 
           "${hyper}+Home".action.move-column-to-first = [ ];
           "${hyper}+End".action.move-column-to-last = [ ];
@@ -317,7 +317,11 @@
       keymap = [
         {
           name = "emacs keys";
-          application.not = [ "foot" ];
+          application.not = [
+            "foot"
+            "footclient"
+            "org.wezfurlong.wezterm"
+          ];
           remap = {
             "ctrl-a".with_mark = "home";
             "ctrl-e".with_mark = "end";
