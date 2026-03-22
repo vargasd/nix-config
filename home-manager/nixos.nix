@@ -11,13 +11,11 @@
       - input
         - compose key
         - emoji picker (bemoji?)
-      - foot as primary terminal
+      - foot/ghostty as primary terminal
         - tabbing rule (do we need stacking?)
         - fuzzel switcher (open window jumping + zoxide to open new instance?)
         - neovim scrollback
-      - clipboard (make it work/cliphist?)
-      - better waybar (style or alternative--ashell/bar-rs?)
-      - notifications (mako?)
+      - clipboard (cliphist?)
       - auto dark mode (darkman?)
       - screencast/share (https://github.com/niri-wm/niri/wiki/Important-Software#portals)
     FIXME
@@ -40,6 +38,7 @@
       brightnessctl
       impala
       wlrctl
+      libnotify
     ];
   };
 
@@ -122,7 +121,6 @@
       };
 
       spawn-at-startup = [
-        { argv = [ (lib.getExe pkgs.waybar) ]; }
         {
           argv = [
             (lib.getExe pkgs.foot)
@@ -167,7 +165,7 @@
             repeat = false;
           };
 
-          "${meh}+Slash".action."show-hotkey-overlay" = [ ];
+          "${meh}+Escape".action.spawn-sh = "${pkgs.mako}/bin/makoctl dismiss --all";
           "${meh}+T".action.spawn-sh = focusOrSpawn "foot" (lib.getExe pkgs.foot);
           "${meh}+B".action.spawn-sh = focusOrSpawn "firefox" (lib.getExe pkgs.firefox);
           "${meh}+Left".action."focus-column-left" = [ ];
@@ -233,10 +231,6 @@
     };
   };
 
-  programs.waybar = {
-    enable = true;
-  };
-
   programs.swaylock = {
     enable = true;
     settings = with colors.named; {
@@ -263,6 +257,57 @@
 
   programs.fuzzel = {
     enable = true;
+  };
+
+  services.mako = {
+    enable = true;
+    # this needs to be last to override
+    extraConfig = ''
+      [app-name=notify-send]
+      format=%s\n\n%b
+    '';
+    settings =
+      with colors.named;
+      let
+        format = "(%a) %s\\n\\n%b";
+      in
+      {
+        padding = 20;
+        font = "monospace 12";
+        width = 350;
+        background-color = "#${background}";
+        border-color = "#${bright_black}";
+        text-color = "#${white}";
+        inherit format;
+      }
+      // (
+        # gotta combine all these thingies like mad
+        [
+          {
+            rule = "actionable";
+            icon = "󰳽";
+          }
+          {
+            rule = "expiring";
+            icon = "";
+          }
+          {
+            rule = "urgency=critical";
+            icon = "‼";
+          }
+        ]
+        |> builtins.foldl' (
+          acc: conf:
+          acc
+          // lib.mapAttrs' (rules: val: {
+            name = "${rules} ${conf.rule}";
+            value.format = "${conf.icon} ${val.format}";
+          }) acc
+          // {
+            "${conf.rule}".format = "${conf.icon} ${format}";
+          }
+        ) { }
+      );
   };
 
   services.xremap = {
