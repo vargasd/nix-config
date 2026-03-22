@@ -24,7 +24,7 @@
 
   networking.hostName = "nuc";
 
-  networking.networkmanager.enable = true;
+  networking.wireless.iwd.enable = true;
 
   time.timeZone = "America/Indiana/Indianapolis";
 

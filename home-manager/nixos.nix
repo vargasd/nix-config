@@ -38,7 +38,7 @@
     packages = with pkgs; [
       bluetui
       brightnessctl
-      wifitui
+      impala
       wlrctl
     ];
   };
@@ -62,28 +62,6 @@
       text = ''
         [filechooser]
         cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
-      '';
-    };
-
-    configFile."wifitui/theme.toml" = {
-      enable = true;
-      text = /* toml */ ''
-        Primary = ["13", "13"]
-        Subtle = ["8", "8"]
-        Success = ["10", "10"]
-        Error = ["9", "9"]
-        Normal = ["15", "15"]
-        Disabled = ["7", "7"]
-        Border = ["8", "8"]
-        SignalHigh = ["#${colors.named.white}", "#${colors.named.white}"]
-        SignalLow = ["#${colors.named.bright_black}}", "#${colors.named.bright_black}"]
-        Saved = ["15", "15"]
-
-        TitleIcon = "󰖩 "
-        NetworkSecureIcon = "󱚿 "
-        NetworkOpenIcon = "󱛀 "
-        NetworkUnknownIcon = " "
-        NetworkSavedIcon = "󰆓 "
       '';
     };
   };
@@ -229,7 +207,7 @@
             focusOrSpawn "title:floating.bluetui" "${lib.getExe pkgs.foot} -T floating.bluetui ${lib.getExe pkgs.bluetui}";
 
           "${meh}+W".action.spawn-sh =
-            focusOrSpawn "title:floating.wifitui" "${lib.getExe pkgs.foot} -T floating.wifitui ${lib.getExe pkgs.wifitui} --theme=$HOME/.config/wifitui/theme.toml";
+            focusOrSpawn "title:floating.impala" "${lib.getExe pkgs.foot} -T floating.impala ${lib.getExe pkgs.impala}";
 
           "${hyper}+Home".action.move-column-to-first = [ ];
           "${hyper}+End".action.move-column-to-last = [ ];
