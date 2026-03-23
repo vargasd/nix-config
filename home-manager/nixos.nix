@@ -116,6 +116,32 @@
     };
   };
 
+  programs.ghostty = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = with colors; {
+      background = named.background;
+      foreground = named.white;
+      palette = colors.indexed |> lib.lists.imap0 (i: v: "${builtins.toString i} = ${v}");
+      cursor-color = named.white;
+      split-divider-color = named.bright_black;
+      cursor-style-blink = false;
+      cursor-style = "block";
+      mouse-hide-while-typing = true;
+      shell-integration-features = "no-cursor";
+      selection-foreground = "cell-background";
+      selection-background = "cell-foreground";
+      # TODO enable after updating
+      # search-foreground = named.black;
+      # search-background = named.dark_yellow;
+      # search-selected-foreground = named.black;
+      # search-selected-background = named.yellow;
+      bell-features = "no-audio";
+      font-size = 16;
+    };
+    # systemd.enable = true;
+  };
+
   programs.niri = {
     enable = true;
 
