@@ -294,10 +294,9 @@
   services.mako = {
     enable = true;
     # this needs to be last to override
-    extraConfig = ''
-      [app-name=notify-send]
-      format=%s\n\n%b
-    '';
+    extraConfig = lib.generators.toINI { } {
+      "app-name=notify-send".format = "%s\\n\\n%b";
+    };
     settings =
       with colors.named;
       let
