@@ -142,7 +142,7 @@
         cyan = "89b482";
         white = "efe2bc";
       };
-      indexed = import ./color256.nix baseColors;
+      indexed = import ./utils/color256.nix baseColors;
       colors = {
         named = baseColors;
         inherit indexed;
