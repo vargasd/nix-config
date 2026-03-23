@@ -198,6 +198,7 @@
             action.spawn-sh = "brightnessctl --class=backlight set +10%";
           };
 
+          "${meh}+U".action.spawn-sh = "${lib.getExe pkgs.bemoji} -t";
           "${meh}+X".action.screenshot = [ ];
 
           "${meh}+Z".action.screenshot-screen = [ ];
@@ -347,16 +348,21 @@
       keymap = [
         {
           name = "emacs keys";
-          application.not = [
-            "foot"
-            "footclient"
-            "org.wezfurlong.wezterm"
+          # put all GUI apps here; apparently the only way to get fuzzel working
+          application."only" = [
+            "firefox"
           ];
+          exact_match = true;
           remap = {
-            "ctrl-a".with_mark = "home";
-            "ctrl-e".with_mark = "end";
-            "alt-b".with_mark = "ctrl-left";
-            "alt-f".with_mark = "ctrl-right";
+            "ctrl-a" = "home";
+            "ctrl-e" = "end";
+            "alt-b" = "ctrl-left";
+            "alt-f" = "ctrl-right";
+            "shift-ctrl-a" = "shift-home";
+            "shift-ctrl-e" = "shift-end";
+            "shift-alt-b" = "shift-ctrl-left";
+            "shift-alt-f" = "shift-ctrl-right";
+
             "ctrl-w" = "ctrl-backspace";
             # TODO fix ctrl-u for fuzzel application.not doesn't work
             "ctrl-u" = [
