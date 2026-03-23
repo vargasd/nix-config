@@ -3,6 +3,7 @@
   inputs,
   lib,
   colors,
+  home,
   ...
 }:
 {
@@ -10,7 +11,6 @@
     TODO
       - input
         - compose key
-        - emoji picker (bemoji?)
       - foot/ghostty as primary terminal
         - tabbing rule (do we need stacking?)
         - fuzzel switcher (open window jumping + zoxide to open new instance?)
@@ -39,7 +39,17 @@
       impala
       wlrctl
       libnotify
+      bemoji
+      # needed to insert for bemoji
+      wtype
     ];
+
+    activation = {
+      # TODO manage in nix
+      downloadBemoji = lib.hm.dag.entryAfter [ "installPackages" ] ''
+        test -d ${home.homeDirectory}/.local/share/bemoji || ${lib.getExe pkgs.bemoji} --download all
+      '';
+    };
   };
 
   xdg = {
