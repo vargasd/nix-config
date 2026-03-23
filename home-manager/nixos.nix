@@ -257,6 +257,28 @@
 
   programs.fuzzel = {
     enable = true;
+    settings = {
+      main = {
+        use-bold = true;
+      };
+      colors =
+        with colors.named;
+        {
+          background = background;
+          text = white;
+          message = white;
+          prompt = magenta;
+          placeholder = bright_black;
+          input = white;
+          match = magenta;
+          selection = bright_black;
+          selection-text = white;
+          selection-match = magenta;
+          border = bright_black;
+        }
+        |> builtins.mapAttrs (n: val: "${val}ff");
+      border.radius = 0;
+    };
   };
 
   services.mako = {
@@ -328,6 +350,7 @@
             "alt-b".with_mark = "ctrl-left";
             "alt-f".with_mark = "ctrl-right";
             "ctrl-w" = "ctrl-backspace";
+            # TODO fix ctrl-u for fuzzel application.not doesn't work
             "ctrl-u" = [
               "shift-home"
               "backspace"
