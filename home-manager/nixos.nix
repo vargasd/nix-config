@@ -3,7 +3,7 @@
   inputs,
   lib,
   colors,
-  home,
+  symbols,
   ...
 }:
 {
@@ -43,13 +43,6 @@
       # needed to insert for bemoji
       wtype
     ];
-
-    activation = {
-      # TODO manage in nix
-      downloadBemoji = lib.hm.dag.entryAfter [ "installPackages" ] ''
-        test -d ${home.homeDirectory}/.local/share/bemoji || ${lib.getExe pkgs.bemoji} --download all
-      '';
-    };
   };
 
   xdg = {
@@ -72,6 +65,14 @@
         [filechooser]
         cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
       '';
+    };
+
+    dataFile."bemoji/data.txt" = {
+      enable = true;
+      text =
+        (import ../utils/symbols.nix { inherit pkgs; }).all
+        |> builtins.map (data: "${data.emoji} ${data.label}")
+        |> builtins.concatStringsSep "\n";
     };
   };
 
