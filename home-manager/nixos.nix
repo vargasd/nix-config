@@ -18,8 +18,6 @@
       - clipboard (cliphist?)
       - auto dark mode (darkman?)
       - screencast/share (https://github.com/niri-wm/niri/wiki/Important-Software#portals)
-    FIXME
-      - colorless noto emoji
   */
 
   imports = [
@@ -270,7 +268,7 @@
     enable = true;
     settings = {
       main = {
-        use-bold = true;
+        font = "monospace:size=15";
       };
       colors =
         with colors.named;

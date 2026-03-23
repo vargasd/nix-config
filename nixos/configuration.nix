@@ -54,15 +54,8 @@
   };
 
   fonts = {
-    enableDefaultPackages = false;
     packages = with pkgs; [
       jetbrains-mono
-      noto-fonts-monochrome-emoji
-      dejavu_fonts
-      freefont_ttf
-      gyre-fonts
-      liberation_ttf
-      unifont
       nerd-fonts.jetbrains-mono
     ];
   };
@@ -71,7 +64,7 @@
     enable = true;
     defaultFonts = {
       monospace = [ "JetBrainsMono NF SemiBold" ];
-      emoji = [ "Noto Emoji" ];
+      emoji = [ "Noto Color Emoji" ];
     };
   };
 
