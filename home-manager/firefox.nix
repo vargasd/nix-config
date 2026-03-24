@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   lib,
+  colors,
   ...
 }:
 let
@@ -34,6 +35,7 @@ in
         customAddons.tabDeduplicator
       ];
     in
+    with colors.named;
     {
       containersForce = true;
       containers = {
@@ -81,7 +83,6 @@ in
 
         # disable animations
         "toolkit.cosmeticAnimations.enabled" = false;
-        "toolkit.scrollbox.smoothScroll" = false;
 
         # disable AI tab groups
         "browser.tabs.groups.smart.userEnabled" = false;
@@ -90,6 +91,13 @@ in
         "ui.key.chromeAccess" = 2; # ctrl
         "ui.key.contentAccess" = 2; # ctrl
         "ui.key.menuAccessKey" = 0; # disable
+
+        "reader.color_scheme" = "custom";
+        "reader.custom_colors.background" = "#${black}";
+        "reader.custom_colors.foreground" = "#${white}";
+        "reader.custom_colors.selection-highlight" = "#${yellow}";
+        "reader.custom_colors.unvisited-links" = "#${blue}";
+        "reader.custom_colors.visited-links" = "#${magenta}";
 
         "sidebar.revamp" = true;
         "sidebar.verticalTabs" = true;
