@@ -1,0 +1,138 @@
+{ ... }:
+{
+  programs.git = {
+    enable = true;
+
+    ignores = [
+      ".DS_Store"
+      "[._]*.s[a-w][a-z]"
+      "[._]s[a-w][a-z]"
+      "Session.vim"
+      ".vim"
+      ".samignore"
+      ".gitoverlay"
+      ".direnv"
+      ".envrc"
+      ".lazy.lua"
+    ];
+
+    settings = {
+      alias = {
+        co = "checkout";
+        bco = # sh
+          ''!f() { git checkout -b "sam/$1"; }; f'';
+        bclean = # sh
+          "!f() { git branch --merged origin/main | xargs git branch -D; }; f";
+        fu = "commit --fixup";
+        fua = "commit -a --fixup";
+        graph = "log --graph --pretty=mine";
+        g = "log --graph --pretty=mine";
+        ga = "log --graph --all --pretty=mine";
+        mt = "mergetool";
+        pf = "push --force";
+        ri = # sh
+          ''!f() { git rebase -i "''\${1:-origin/HEAD}"; }; f'';
+        ra = "rebase --abort";
+        rc = "rebase --continue";
+        reste = "reset";
+      };
+
+      log.date = "format-local:%F %R";
+      column.ui = "auto";
+      commit.gpgSign = true;
+      # core.pager = "bat"; # conflict with delta.enabled
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "plain";
+        mnemonicPrefix = true;
+        renames = true;
+      };
+      fetch = {
+        prune = true;
+        pruneTags = true;
+        writeCommitGraph = true;
+      };
+      grep.lineNumber = true;
+      help.autocorrect = "prompt";
+      init.defaultBranch = "main";
+      pager.difftool = true;
+      pretty.mine = "%C(auto)%h%C(brightgreen bold)% (trailers:key=closes,valueonly,separator=%x2C)%C(brightblue bold)% (trailers:key=ref,valueonly,separator=%x2C) %C(auto)%s %C(cyan)%aL/%C(blue)%cL %C(magenta)%cd%C(auto)%d";
+      pull.rebase = true;
+      push = {
+        default = "current";
+        autoSetupRemote = true;
+        followTags = true;
+      };
+      rebase = {
+        autoSquash = true;
+        autoStash = true;
+        updateRefs = true;
+      };
+      receive.denyCurrentBranch = "warn";
+      rerere = {
+        enabled = true;
+        autoupdate = true;
+      };
+      tag = {
+        gpgSign = true;
+        sort = "version:refname";
+      };
+      user = {
+        email = "sam@varga.sh";
+        signingKey = "D3346FA3521F7F13";
+        name = "Samuel Varga";
+      };
+      merge = {
+        tool = "nvimdiff";
+        conflictStyle = "zdiff3";
+      };
+      mergetool = {
+        keepBackup = false;
+        nvimdiff.layout = "LOCAL,REMOTE / MERGED";
+        vimdiff.layout = "LOCAL,REMOTE / MERGED";
+      };
+    };
+
+    # includes = [
+    #   {
+    #     condition = "gitdir:~/work/";
+    #     contents.user.email = "samuel.varga@sap.com";
+    #   }
+    # ];
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      tabs = 2;
+      syntax-theme = "enhansi";
+      line-numbers-minus-style = "red";
+      line-numbers-plus-style = "green";
+    };
+  };
+
+  programs.gh = {
+    enable = true;
+    settings = {
+      git_protocol = "ssh";
+    };
+  };
+
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      git = {
+        pagers = [
+          {
+            pager = "delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
+            colorArg = "always";
+          }
+        ];
+        autoFetch = false;
+      };
+      os.editPreset = "nvim-remote";
+    };
+  };
+}

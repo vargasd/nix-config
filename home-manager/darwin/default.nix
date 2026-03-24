@@ -8,7 +8,7 @@
 }:
 {
   imports = [
-    ./default.nix
+    ../default.nix
     inputs.paneru.homeModules.paneru
   ];
 
@@ -72,10 +72,10 @@
 
   services.skhd = {
     enable = true;
-    config = pkgs.replaceVars ./darwin/skhdrc (
+    config = pkgs.replaceVars ./skhdrc (
       {
         clearNotificationsPkg = inputs.clear-notifications;
-        tunnelblickScript = ./darwin/tunnelblick.scpt;
+        tunnelblickScript = ./tunnelblick.scpt;
         home = home.homeDirectory;
       }
       // skhdVars

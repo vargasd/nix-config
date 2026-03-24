@@ -1,12 +1,19 @@
 {
   pkgs,
   inputs,
-  config,
-  vimPkgs,
-  colors,
   ...
-}@all:
+}:
 {
+  imports = [
+    ./modules/firefox
+    ./modules/git
+    ./modules/gpg
+    ./modules/neovim
+    ./modules/wezterm
+    ./modules/yazi
+    ./modules/zsh
+  ];
+
   home.stateVersion = "25.05";
 
   home.sessionVariables = {
@@ -123,18 +130,6 @@
     };
   };
 
-  programs.delta = {
-    enable = true;
-    enableGitIntegration = true;
-    options = {
-      navigate = true;
-      tabs = 2;
-      syntax-theme = "enhansi";
-      line-numbers-minus-style = "red";
-      line-numbers-plus-style = "green";
-    };
-  };
-
   programs.dircolors = {
     enable = true;
     enableZshIntegration = true;
@@ -149,95 +144,9 @@
     enable = true;
   };
 
-  programs.firefox = import ./firefox.nix all;
-
   programs.fzf = {
     enable = true;
     defaultOptions = [ "--color=16" ];
-  };
-
-  programs.gh = {
-    enable = true;
-    settings = {
-      git_protocol = "ssh";
-    };
-  };
-
-  programs.git = import ./git.nix;
-
-  programs.gpg = {
-    enable = true;
-    publicKeys = [
-      { source = ./D3346FA3521F7F13.asc; }
-    ];
-    settings = {
-      personal-cipher-preferences = [
-        "AES256"
-        "AES192"
-        "AES"
-      ];
-      personal-digest-preferences = [
-        "SHA512"
-        "SHA384"
-        "SHA256"
-      ];
-      personal-compress-preferences = [
-        "ZLIB"
-        "BZIP2"
-        "ZIP"
-        "Uncompressed"
-      ];
-      default-preference-list = [
-        "SHA512"
-        "SHA384"
-        "SHA256"
-        "AES256"
-        "AES192"
-        "AES"
-        "ZLIB"
-        "BZIP2"
-        "ZIP"
-        "Uncompressed"
-      ];
-      cert-digest-algo = "SHA512";
-      s2k-digest-algo = "SHA512";
-      s2k-cipher-algo = "AES256";
-      charset = "utf-8";
-      no-comments = true;
-      no-emit-version = true;
-      no-greeting = true;
-      keyid-format = "0xlong";
-      list-options = "show-uid-validity";
-      verify-options = "show-uid-validity";
-      with-fingerprint = true;
-      require-cross-certification = true;
-      require-secmem = true;
-      no-symkey-cache = true;
-      armor = true;
-      use-agent = true;
-      throw-keyids = true;
-    };
-  };
-
-  programs.lazygit = {
-    enable = true;
-    settings = {
-      git = {
-        pagers = [
-          {
-            pager = "delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
-            colorArg = "always";
-          }
-        ];
-        autoFetch = false;
-      };
-      os.editPreset = "nvim-remote";
-    };
-  };
-
-  programs.neovim = {
-    enable = true;
-    plugins = (vimPkgs pkgs);
   };
 
   programs.opencode = {
@@ -258,270 +167,12 @@
     };
   };
 
-  programs.wezterm = {
-    enable = true;
-    colorSchemes = {
-      bluvbox =
-        let
-          hexColors = colors.named |> builtins.mapAttrs (n: val: "#${val}");
-          # Full 256-color indexed palette (indices 16-255); 0-15 are ansi/brights
-          indexedPalette = builtins.listToAttrs (
-            builtins.genList (i: {
-              name = builtins.toString (i + 16);
-              value = "#${builtins.elemAt colors.indexed (i + 16)}";
-            }) 240
-          );
-        in
-        with hexColors;
-        {
-          background = background;
-          foreground = white;
-          cursor_bg = white;
-          cursor_border = white;
-          cursor_fg = background;
-          selection_bg = "#343d46";
-          selection_fg = white;
-          indexed = indexedPalette;
-          ansi = [
-            black
-            dark_red
-            dark_green
-            dark_yellow
-            dark_blue
-            dark_magenta
-            dark_cyan
-            gray
-          ];
-          brights = [
-            bright_black
-            red
-            green
-            yellow
-            blue
-            magenta
-            cyan
-            white
-          ];
-          # these should really be in the main config but whaddya gonna do
-          tab_bar = {
-            background = background;
-            active_tab = {
-              bg_color = yellow;
-              fg_color = background;
-            };
-            inactive_tab = {
-              bg_color = bright_black;
-              fg_color = background;
-            };
-          };
-        };
-    };
-    extraConfig = builtins.readFile ./wezterm/wezterm.lua;
-  };
-
-  programs.yazi = {
-    enable = true;
-    initLua = # lua
-      ''
-        th.git = th.git or {}
-        th.git.modified = ui.Style():fg("blue")
-        th.git.deleted = ui.Style():fg("red")
-        th.git.added = ui.Style():fg("green")
-        th.git.ignored = ui.Style():fg("darkgray")
-
-        th.git.modified_sign = "M"
-        th.git.added_sign = "A"
-        th.git.untracked_sign = "U"
-        th.git.ignored_sign = "I"
-        th.git.deleted_sign = "D"
-
-        require("git"):setup()
-      '';
-
-    keymap = {
-      mgr.prepend_keymap = [
-        {
-          on = [
-            "c"
-            "m"
-          ];
-          run = "plugin chmod";
-          desc = "Chmod on selected files";
-        }
-        {
-          on = "f";
-          run = "plugin jump-to-char";
-          desc = "Jump to char";
-        }
-      ];
-    };
-
-    plugins = {
-      git = pkgs.yaziPlugins.git;
-      chmod = pkgs.yaziPlugins.chmod;
-      piper = pkgs.yaziPlugins.piper;
-      "jump-to-char" = pkgs.yaziPlugins.jump-to-char;
-    };
-
-    theme = {
-      icon = {
-        dirs = [ ];
-        conds = [
-          {
-            "if" = "orphan";
-            text = "";
-            fg = "white";
-          }
-          {
-            "if" = "link";
-            text = "";
-            fg = "gray";
-          }
-          {
-            "if" = "block";
-            text = "";
-            fg = "yellow";
-          }
-          {
-            "if" = "char";
-            text = "";
-            fg = "yellow";
-          }
-          {
-            "if" = "fifo";
-            text = "";
-            fg = "yellow";
-          }
-          {
-            "if" = "sock";
-            text = "";
-            fg = "yellow";
-          }
-          {
-            "if" = "sticky & dir";
-            text = "󰉐";
-            fg = "yellow";
-          }
-          {
-            "if" = "sticky & !dir";
-            text = "";
-            fg = "yellow";
-          }
-          {
-            "if" = "dummy";
-            text = "";
-            fg = "red";
-          }
-          {
-            "if" = "dir";
-            text = "";
-            fg = "blue";
-          }
-          {
-            "if" = "exec";
-            text = "";
-            fg = "green";
-          }
-          {
-            "if" = "!dir";
-            text = "";
-            fg = "white";
-          }
-        ];
-      };
-    };
-
-    settings = {
-      mgr = {
-        show_hidden = true;
-        sort_by = "natural";
-        sort_reverse = false;
-        sort_dir_first = true;
-      };
-
-      plugin.prepend_previewers =
-        let
-          bat = "piper -- bat -p --color=always \"$1\"";
-        in
-        [
-          {
-            name = "*.tsp";
-            run = bat;
-          }
-          {
-            name = "*.gleam";
-            run = bat;
-          }
-        ];
-
-      plugin.prepend_fetchers = [
-        {
-          id = "git";
-          name = "*";
-          run = "git";
-        }
-        {
-          id = "git";
-          name = "*/";
-          run = "git";
-        }
-      ];
-    };
-  };
-
   programs.zoxide = {
     enable = true;
   };
 
-  programs.zsh = {
-    enable = true;
-    enableVteIntegration = true;
-    defaultKeymap = "emacs";
-    dotDir = "${config.xdg.configHome}/zsh";
-
-    history = {
-      append = false; # using INC_APPEND_HISTORY which home-manager doesn't support
-      ignoreAllDups = true;
-      ignoreSpace = true;
-      save = 50000;
-      size = 50000;
-      share = false;
-    };
-
-    initContent = builtins.readFile ./init.zsh + ''
-      source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh
-    '';
-
-    shellAliases = {
-      nvim = # sh
-        "env TERM=\${SAMTERM:-$TERM} nvim";
-      nixpkgs-search = # sh
-        ''
-          nix search nixpkgs --no-write-lock-file --reference-lock-file ${../flake.lock} ^ --json 2> /dev/null | \
-          jq -r 'to_entries | .[] | ((.key | sub("^legacyPackages.[^.]*."; "")) + ": " + .value.description)' | \
-          fzf --multi --bind 'enter:become(cut -d : -f 1 {+f})'
-        '';
-    };
-
-  };
-
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = true;
-    defaultCacheTtl = 60;
-    maxCacheTtl = 120;
-  };
-
   xdg = {
     enable = true;
-    configFile.nvim = {
-      enable = true;
-      source = ./nvim;
-    };
-    configFile."wezterm/plugins" = {
-      enable = true;
-      source = ./wezterm/plugins;
-    };
     configFile."typos-lsp/typos.toml" = {
       enable = true;
       text = # toml

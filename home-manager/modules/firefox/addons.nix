@@ -1,5 +1,4 @@
 { buildFirefoxXpiAddon, lib }:
-
 {
   prune = buildFirefoxXpiAddon rec {
     pname = "prune_tabs";

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./darwin.nix
+    ./default.nix
   ];
 
   home.sessionVariables = {
@@ -33,5 +33,4 @@
       term = ./k9s-skin.yaml;
     };
   };
-
 }
