@@ -1,6 +1,5 @@
 {
   pkgs,
-  vimPkgs,
   ...
 }:
 {
@@ -27,7 +26,7 @@
 
   shellHook =
     let
-      luarc = pkgs.mk-luarc-json { plugins = (vimPkgs pkgs); };
+      luarc = pkgs.mk-luarc-json { plugins = import ../utils/vim-pkgs.nix pkgs; };
     in
     /* bash */ ''
       ln -fs ${luarc} .luarc.json

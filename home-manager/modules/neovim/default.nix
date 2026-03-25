@@ -1,8 +1,8 @@
-{ vimPkgs, pkgs, ... }:
+{ pkgs, ... }:
 {
   programs.neovim = {
     enable = true;
-    plugins = (vimPkgs pkgs);
+    plugins = (import ../../../utils/vim-pkgs.nix pkgs);
   };
 
   xdg.configFile.nvim = {

@@ -81,48 +81,6 @@
         inputs.gen-luarc.overlays.default
         inputs.enhansi.overlays.default
       ];
-      vimPkgs = (
-        pkgs:
-        with pkgs.vimPlugins;
-        (
-          # lazy
-          [
-            mini-surround
-            vim-sleuth
-            flash-nvim
-            nvim-next
-            vim-fugitive
-            gitsigns-nvim
-            blink-cmp
-            nvim-dap
-            nvim-dap-virtual-text
-            vim-dadbod
-            vim-dadbod-completion
-            vim-dadbod-ui
-            which-key-nvim
-            yazi-nvim
-            nvim-treesitter-textobjects
-            undotree
-            lualine-nvim
-            noice-nvim
-            nui-nvim
-            render-markdown-nvim
-            rainbow_csv
-            nvim-lspconfig
-            snacks-nvim
-            nvim-treesitter.withAllGrammars # sure why not
-          ]
-          |> map (plugin: {
-            plugin = plugin;
-            optional = true;
-          })
-        )
-        # eager
-        ++ [
-          lze
-          enhansi-nvim
-        ]
-      );
       baseColors = {
         background = "162229";
         black = "1b2b34";
@@ -155,7 +113,6 @@
           specialArgs = {
             inherit inputs;
             inherit colors;
-            vimPkgs = vimPkgs;
             home = {
               homeDirectory = "/home/vargasd";
               user = "vargasd";
@@ -185,7 +142,6 @@
           specialArgs = {
             inherit inputs;
             inherit colors;
-            vimPkgs = vimPkgs;
             home = {
               homeDirectory = "/Users/I763291";
               user = "I763291";
@@ -222,7 +178,6 @@
           specialArgs = {
             inherit inputs;
             inherit colors;
-            vimPkgs = vimPkgs;
             home = {
               user = "vargasd";
               homeDirectory = "/Users/vargasd";
@@ -290,7 +245,7 @@
           c = import ./devShells/c.nix { inherit pkgs; };
           gleam = import ./devShells/gleam.nix { inherit pkgs; };
           kotlin = import ./devShells/kotlin.nix { inherit pkgs; };
-          lua = import ./devShells/lua.nix { inherit pkgs vimPkgs; };
+          lua = import ./devShells/lua.nix { inherit pkgs; };
           nix = import ./devShells/nix.nix { inherit pkgs; };
           php = import ./devShells/php.nix { inherit pkgs; };
           pnpm = import ./devShells/pnpm.nix { inherit pkgs; };
