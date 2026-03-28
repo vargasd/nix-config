@@ -65,11 +65,11 @@
     # fonts
     jetbrains-mono
     noto-fonts-monochrome-emoji
+    noto-fonts-color-emoji
     nerd-fonts.jetbrains-mono
   ];
 
   fonts.fontconfig.enable = true;
-
   programs.home-manager.enable = true;
 
   programs.atuin = {
