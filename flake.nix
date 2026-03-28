@@ -108,6 +108,37 @@
 
     in
     {
+      nixosConfigurations.inix = nixpkgs.lib.nixosSystem (
+        let
+          specialArgs = {
+            inherit inputs;
+            inherit colors;
+            home = {
+              homeDirectory = "/home/vargasd";
+              user = "vargasd";
+            };
+          };
+        in
+        {
+          inherit specialArgs;
+          system = "x86_64-linux";
+          modules = [
+            {
+              nixpkgs.overlays = overlays;
+            }
+            ./nixos/inix.nix
+            inputs.xremap.nixosModules.default
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${specialArgs.home.user} = import ./home-manager/nixos.nix;
+            }
+          ];
+        }
+      );
+
       nixosConfigurations.vm = nixpkgs.lib.nixosSystem (
         let
           specialArgs = {
