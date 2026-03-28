@@ -119,6 +119,7 @@
   programs.ghostty = {
     enable = true;
     enableZshIntegration = true;
+    clearDefaultKeybinds = true;
     settings = with colors; {
       background = named.background;
       foreground = named.white;
@@ -136,8 +137,29 @@
       # search-background = named.dark_yellow;
       # search-selected-foreground = named.black;
       # search-selected-background = named.yellow;
-      bell-features = "no-audio";
+      bell-features = "no-title no-attention";
       font-size = 16;
+      window-decoration = "none";
+      window-show-tab-bar = "never";
+      keybind =
+        {
+          "super+t" = "new_tab";
+          "super+s" = "toggle_tab_overview";
+          "super+c" = "copy_to_clipboard";
+          "super+v" = "paste_from_clipboard";
+          "alt+asterisk" = "toggle_split_zoom";
+          "alt+arrow_right" = "goto_split:right";
+          "alt+arrow_left" = "goto_split:left";
+          "alt+arrow_down" = "goto_split:down";
+          "alt+arrow_up" = "goto_split:up";
+          "alt+shift+arrow_right" = "new_split:right";
+          "alt+shift+arrow_left" = "new_split:left";
+          "alt+shift+arrow_down" = "new_split:down";
+          "alt+shift+arrow_up" = "new_split:up";
+          "ctrl+shift+x" = "write_scrollback_file:open";
+        }
+        |> lib.attrsets.attrsToList
+        |> builtins.map (kv: "${kv.name}=${kv.value}");
     };
     # systemd.enable = true;
   };
@@ -202,14 +224,15 @@
 
           "${meh}+Escape".action.spawn-sh = "${pkgs.mako}/bin/makoctl dismiss --all";
           "${meh}+T".action.spawn-sh = focusOrSpawn "foot" (lib.getExe pkgs.foot);
+          # "${meh}+T".action.spawn-sh = focusOrSpawn "com.mitchellh.ghostty" (lib.getExe pkgs.ghostty);
           "${meh}+B".action.spawn-sh = focusOrSpawn "firefox" (lib.getExe pkgs.firefox);
-          "${meh}+Left".action."focus-column-left" = [ ];
-          "${meh}+Right".action."focus-column-right" = [ ];
-          "${meh}+Down".action.switch-preset-column-width = [ ];
-          "${meh}+Up".action.maximize-column = [ ];
-          "${hyper}+Left".action.move-column-left = [ ];
-          "${hyper}+Down".action.move-window-down = [ ];
-          "${hyper}+Up".action.move-window-up = [ ];
+          "Super+Left".action."focus-column-left" = [ ];
+          "Super+Right".action."focus-column-right" = [ ];
+          "Super+Down".action.switch-preset-column-width = [ ];
+          "Super+Up".action.maximize-column = [ ];
+          "Super+Alt+Left".action.move-column-left = [ ];
+          "Super+Alt+Down".action.move-window-down = [ ];
+          "Super+Alt+Up".action.move-window-up = [ ];
           "${hyper}+Right".action.move-column-right = [ ];
           "${meh}+Delete".action.spawn = "${lib.getExe pkgs.swaylock}";
           "${hyper}+Delete".action.quit.skip-confirmation = true;
@@ -262,6 +285,12 @@
           default-column-width.proportion = 0.4;
           default-window-height.proportion = 0.7;
           open-focused = true;
+        }
+        {
+          matches = [
+            { app-id = "foot"; }
+          ];
+          default-column-display = "tabbed";
         }
       ];
     };
