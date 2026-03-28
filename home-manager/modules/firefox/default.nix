@@ -141,6 +141,10 @@ in
                   passKeys = "^ f ";
                   pattern = ":https://teams.microsoft.com/";
                 }
+                {
+                  passKeys = "l t ";
+                  pattern = ":https://app.slack.com/";
+                }
               ];
               linkHintCharacters = "trasneiogm";
               searchEngines = ''
