@@ -22,8 +22,6 @@
     "vt.cur_default=0x700010" # solid beam cursor
   ];
 
-  networking.hostName = "nuc";
-
   networking.wireless.iwd.enable = true;
 
   time.timeZone = "America/Indiana/Indianapolis";

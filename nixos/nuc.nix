@@ -12,6 +12,8 @@
     ./configuration.nix
   ];
 
+  networking.hostName = "nuc";
+
   boot.initrd.availableKernelModules = [
     "ahci"
     "xhci_pci"
