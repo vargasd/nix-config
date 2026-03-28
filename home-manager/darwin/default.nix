@@ -38,7 +38,7 @@
   };
 
   services.paneru = {
-    enable = true;
+    enable = false;
     settings = {
       options = {
         preset_column_widths = [
@@ -170,6 +170,36 @@
         NSAutomaticPeriodSubstitutionEnabled = false;
         NSAutomaticQuoteSubstitutionEnabled = false;
         NSAutomaticSpellingCorrectionEnabled = false;
+      };
+
+      "com.knollsoft.Rectangle" = {
+        launchOnLogin = true;
+        gapSize = 0;
+        almostMaximizeHeight = 0.75;
+        almostMaximizeWidth = 0.6;
+        hideMenuBarIcon = true;
+        cycleSizesIsChanged = true;
+        selectedCycleSizes = 18; # 2^1 + 2^4 -> https://github.com/rxhanson/Rectangle/blob/main/Rectangle/CycleSize.swift
+        subsequentExecutionMode = 0; # resize on repeat
+        # disables all default keybindings
+        bottomHalf = { };
+        bottomLeft = { };
+        bottomRight = { };
+        center = { };
+        larger = { };
+        leftHalf = { };
+        maximize = { };
+        maximizeHeight = { };
+        nextDisplay = { };
+        previousDisplay = { };
+        reflowTodo = { };
+        restore = { };
+        rightHalf = { };
+        smaller = { };
+        toggleTodo = { };
+        topHalf = { };
+        topLeft = { };
+        topRight = { };
       };
 
       "com.superultra.Homerow" = {

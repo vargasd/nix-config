@@ -8,15 +8,13 @@
       "homerow"
       "orcaslicer"
       "notunes"
+      "rectangle"
       "wezterm" # needed for terminfo
     ];
     onActivation = {
       autoUpdate = true;
       upgrade = true;
       cleanup = "zap";
-    };
-    caskArgs = {
-      no_quarantine = true;
     };
   };
 
