@@ -14,10 +14,11 @@
     settings = {
       input.keyboard.repeat-delay = 200;
       layout = {
-        gaps = 4;
+        default-column-width.proportion = 0.5;
+        gaps = 2;
         focus-ring = {
           enable = true;
-          width = 4;
+          width = 2;
         };
       };
 
@@ -36,7 +37,7 @@
             "-L"
             "-86.1"
             "-t"
-            "3500"
+            "3000"
             "-T"
             "5500"
           ];
@@ -68,7 +69,6 @@
 
           "${meh}+Escape".action.spawn-sh = "${pkgs.mako}/bin/makoctl dismiss --all";
           "${meh}+T".action.spawn-sh = focusOrSpawn "foot" (lib.getExe pkgs.foot);
-          # "${meh}+T".action.spawn-sh = focusOrSpawn "com.mitchellh.ghostty" (lib.getExe pkgs.ghostty);
           "${meh}+B".action.spawn-sh = focusOrSpawn "firefox" (lib.getExe pkgs.firefox);
           "Super+Left".action."focus-column-left" = [ ];
           "Super+Right".action."focus-column-right" = [ ];
@@ -125,13 +125,16 @@
             }
           ];
           open-floating = true;
-          default-column-width.proportion = 0.4;
+          default-column-width.fixed = 1200;
           default-window-height.proportion = 0.7;
           open-focused = true;
         }
         {
           matches = [
-            { app-id = "foot"; }
+            {
+              app-id = "^foot$";
+              title = "main";
+            }
           ];
           default-column-display = "tabbed";
         }
