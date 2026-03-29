@@ -29,7 +29,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   console = {
-    font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Bold.ttf";
     keyMap = "us";
     colors = with colors.named; [
       black
