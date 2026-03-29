@@ -1,10 +1,7 @@
-{
-  pkgs,
-  inputs,
-  ...
-}:
+{ pkgs, ... }:
 {
   imports = [
+    ./modules/bat
     ./modules/firefox
     ./modules/git
     ./modules/gpg
@@ -71,6 +68,14 @@
 
   fonts.fontconfig.enable = true;
   programs.home-manager.enable = true;
+  programs.browserpass.enable = true;
+  programs.dircolors.enable = true;
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+  programs.eza.enable = true;
+  programs.fzf.enable = true;
+  programs.fzf.defaultOptions = [ "--color=16" ];
+  programs.zoxide.enable = true;
 
   programs.atuin = {
     enable = true;
@@ -90,30 +95,6 @@
     };
   };
 
-  programs.bat = {
-    enable = true;
-    config = {
-      theme = "enhansi";
-      style = "plain";
-    };
-    syntaxes = {
-      typespec = {
-        src = inputs.langthing;
-        file = "typespec/syntax/typespec.sublime-syntax";
-      };
-      gleam = {
-        src = inputs.sublime-text-gleam;
-        file = "package/Gleam.sublime-syntax";
-      };
-    };
-    themes.enhansi = {
-      src = pkgs.enhansi-tmtheme;
-      file = "enhansi.tmTheme";
-    };
-  };
-
-  programs.browserpass.enable = true;
-
   programs.btop = {
     enable = true;
     settings = {
@@ -128,25 +109,6 @@
       proc_per_core = false;
       log_level = "ERROR";
     };
-  };
-
-  programs.dircolors = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-
-  programs.eza = {
-    enable = true;
-  };
-
-  programs.fzf = {
-    enable = true;
-    defaultOptions = [ "--color=16" ];
   };
 
   programs.opencode = {
@@ -165,10 +127,6 @@
       };
       mcp = { };
     };
-  };
-
-  programs.zoxide = {
-    enable = true;
   };
 
   xdg = {
