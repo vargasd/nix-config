@@ -5,11 +5,13 @@
     settings = with colors.named; {
       font = "monospace";
       color = background;
+      inside-color = background;
       font-size = 16;
       indicator-radius = 100;
       indicator-thickness = 15;
       disable-caps-lock-text = true;
       key-hl-color = magenta;
+      bs-hl-color = red;
       ring-color = white;
       text-color = white;
       text-ver-color = white;
