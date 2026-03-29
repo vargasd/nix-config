@@ -65,14 +65,14 @@ return {
 				"|v",
 				function()
 					local widgets = require("dap.ui.widgets")
-					widgets.centered_float(widgets.scopes, { border = "rounded" })
+					widgets.centered_float(widgets.scopes, { border = "single" })
 				end,
 			},
 			{
 				"|s",
 				function()
 					local widgets = require("dap.ui.widgets")
-					widgets.centered_float(widgets.frames, { border = "rounded" })
+					widgets.centered_float(widgets.frames, { border = "single" })
 				end,
 			},
 			{

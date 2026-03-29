@@ -24,7 +24,7 @@ vim.wo.signcolumn = "yes"
 vim.o.number = true
 
 -- until noice supports using this, we'll just go with what they use :(
-vim.o.winborder = "rounded"
+vim.o.winborder = "single"
 
 vim.opt.listchars = {
 	tab = "· ",
