@@ -22,13 +22,10 @@ export PROMPT='
 )
 %F{yellow}→ %f%b'
 
-ZSH_TITLE=""
 function xtitle () {
-	if [[ $# > 0 ]]; then
-		ZSH_TITLE=$@
+	if [[ "$TERM" == "wezterm" ]]; then
+		builtin print -n -- "\e]0;${(D)PWD}\a"
 	fi
-
-	builtin print -n -- "\e]0;${ZSH_TITLE:-${(D)PWD}}\a"
 }
 xtitle
 
