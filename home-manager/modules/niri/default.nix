@@ -2,6 +2,7 @@
   pkgs,
   lib,
   inputs,
+  colors,
   ...
 }:
 {
@@ -19,6 +20,21 @@
         focus-ring = {
           enable = true;
           width = 2;
+          active.color = colors.named.blue;
+          inactive.color = colors.named.gray;
+          urgent.color = colors.named.red;
+        };
+        tab-indicator = {
+          hide-when-single-tab = true;
+          gap = 0;
+          gaps-between-tabs = 2;
+          length.total-proportion = 0.8;
+          place-within-column = true;
+          # position = "bottom";
+          width = 2;
+          active.color = colors.named.yellow;
+          inactive.color = colors.named.bright_black;
+          urgent.color = colors.named.red;
         };
       };
 
