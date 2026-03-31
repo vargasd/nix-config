@@ -5,7 +5,7 @@
     server.enable = true;
     settings = {
       main = {
-        font = "monospace:size=14";
+        font = "monospace:size=12";
       };
       cursor = {
         blink = false;
@@ -39,6 +39,20 @@
             value = builtins.elemAt colors.indexed (i + 16);
           }) 240
         );
+      key-bindings = {
+        clipboard-copy = "Super+c";
+        clipboard-paste = "Super+v";
+        search-start = "Super+f";
+        font-increase = "Super+equal Super+plus";
+        font-decrease = "Super+minus";
+        font-reset = "Super+0";
+        spawn-terminal = "Super+n";
+        pipe-scrollback = "[sh -c \"nvim -c ':set nowrap nonumber signcolumn=no' --cmd 'au VimEnter * term cat - \"] Control+Shift+X";
+        #         pipe-scrollback=[sh -c "f=$(mktemp) && cat - > $f && foot emacsclient -t $f; rm $f"] Control+Shift+Print
+        prompt-prev = "Control+Shift+P";
+        prompt-next = "Control+Shift+N";
+        #
+      };
     };
   };
 }

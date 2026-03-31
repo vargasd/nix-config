@@ -34,6 +34,33 @@
             ];
           };
         }
+        {
+          name = "foot keybinds";
+          application."only" = [ "foot.main" ];
+          exact_match = true;
+          remap = {
+            "super-s".launch = [
+              "bash"
+              "-c"
+              /* bash */ ''
+                zoxide query --list |\
+                fuzzel -d |\
+                xargs -I {} sh -c \
+                'wlrctl window focus "app_id:foot.main" "title:{}" || (foot --app-id foot.main --title "{}" --working-directory "{}" sh -c "niri msg action consume-or-expel-window-left && $SHELL")'
+              ''
+            ];
+            "super-t".launch = [
+              "bash"
+              "-c"
+              /* bash */ ''
+                wlrctl toplevel list state:focused |\
+                cut -d' ' -f2- |\
+                xargs -I {} sh -c \
+                'foot --app-id foot.main --title "{}" --working-directory "{}" sh -c "niri msg action consume-or-expel-window-left && $SHELL"'
+              ''
+            ];
+          };
+        }
       ];
     };
   };

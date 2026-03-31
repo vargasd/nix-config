@@ -68,15 +68,16 @@
           };
 
           "${meh}+Escape".action.spawn-sh = "${pkgs.mako}/bin/makoctl dismiss --all";
-          "${meh}+T".action.spawn-sh = focusOrSpawn "foot" (lib.getExe pkgs.foot);
+          "${meh}+T".action.spawn-sh =
+            focusOrSpawn "app_id:foot.main" "${lib.getExe pkgs.foot} --app-id foot.main";
           "${meh}+B".action.spawn-sh = focusOrSpawn "firefox" (lib.getExe pkgs.firefox);
-          "Super+Left".action."focus-column-left" = [ ];
-          "Super+Right".action."focus-column-right" = [ ];
-          "Super+Down".action.switch-preset-column-width = [ ];
-          "Super+Up".action.maximize-column = [ ];
+          "Super+Left".action.focus-column-left = [ ];
+          "Super+Right".action.focus-column-right = [ ];
+          "Super+Down".action.focus-window-down = [ ];
+          "Super+Up".action.focus-window-up = [ ];
           "Super+Alt+Left".action.move-column-left = [ ];
-          "Super+Alt+Down".action.move-window-down = [ ];
-          "Super+Alt+Up".action.move-window-up = [ ];
+          "Super+Alt+Down".action.switch-preset-column-width = [ ];
+          "Super+Alt+Up".action.maximize-column = [ ];
           "${hyper}+Right".action.move-column-right = [ ];
           "${meh}+Delete".action.spawn = "${lib.getExe pkgs.swaylock}";
           "${hyper}+Delete".action.quit.skip-confirmation = true;
@@ -104,10 +105,10 @@
           "${meh}+WheelScrollUp".action.focus-column-left = [ ];
 
           "${meh}+F".action.spawn-sh =
-            focusOrSpawn "title:floating.bluetui" "${pkgs.foot}/bin/footclient -T floating.bluetui ${lib.getExe pkgs.bluetui}";
+            focusOrSpawn "title:floating.bluetui" "${pkgs.foot}/bin/footclient --app-id foot.floating.bluetui ${lib.getExe pkgs.bluetui}";
 
           "${meh}+W".action.spawn-sh =
-            focusOrSpawn "title:floating.impala" "${pkgs.foot}/bin/footclient -T floating.impala ${lib.getExe pkgs.impala}";
+            focusOrSpawn "title:floating.impala" "${pkgs.foot}/bin/footclient --app-id foot.floating.impala ${lib.getExe pkgs.impala}";
 
           "${hyper}+Home".action.move-column-to-first = [ ];
           "${hyper}+End".action.move-column-to-last = [ ];
@@ -118,24 +119,14 @@
 
       window-rules = [
         {
-          matches = [
-            {
-              app-id = "foot";
-              title = "floating";
-            }
-          ];
+          matches = [ { app-id = "^foot.floating."; } ];
           open-floating = true;
           default-column-width.fixed = 1200;
           default-window-height.proportion = 0.7;
           open-focused = true;
         }
         {
-          matches = [
-            {
-              app-id = "^foot$";
-              title = "main";
-            }
-          ];
+          matches = [ { app-id = "^foot.main$"; } ];
           default-column-display = "tabbed";
         }
       ];
