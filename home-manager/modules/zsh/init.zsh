@@ -23,10 +23,13 @@ export PROMPT='
 %F{yellow}→ %f%b'
 
 function xtitle () {
+		builtin print -n -- "\e]0;$PWD\a"
+}
+
+function precmd () { 
 	if [[ "$TERM" == "wezterm" ]]; then
-		builtin print -n -- "\e]0;${(D)PWD}\a"
+		xtitle 
 	fi
 }
-xtitle
 
-function precmd () { xtitle }
+xtitle

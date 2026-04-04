@@ -46,7 +46,7 @@
                 zoxide query --list |\
                 fuzzel -d |\
                 xargs -I {} sh -c \
-                'wlrctl window focus "app_id:foot.main" "title:{}" || (foot --app-id foot.main --title "{}" --working-directory "{}" sh -c "niri msg action consume-or-expel-window-left && $SHELL")'
+                'wlrctl window focus "app_id:foot.main" "title:{}" || (foot --app-id foot.main --working-directory "{}" sh -c "niri msg action consume-or-expel-window-left && $SHELL")'
               ''
             ];
             "super-t".launch = [
@@ -56,7 +56,7 @@
                 wlrctl toplevel list state:focused |\
                 cut -d' ' -f2- |\
                 xargs -I {} sh -c \
-                'foot --app-id foot.main --title "{}" --working-directory "{}" sh -c "niri msg action consume-or-expel-window-left && $SHELL"'
+                'foot --app-id foot.main --working-directory "{}" sh -c "niri msg action consume-or-expel-window-left && $SHELL"'
               ''
             ];
           };

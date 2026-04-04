@@ -5,8 +5,6 @@
       - input
         - compose key
       - foot/ghostty as primary terminal
-        - tabbing rule (do we need stacking?)
-        - fuzzel switcher (open window jumping + zoxide to open new instance?)
         - neovim scrollback
       - clipboard (cliphist?)
       - auto dark mode (darkman?)
