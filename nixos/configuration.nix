@@ -30,6 +30,7 @@
 
   console = {
     keyMap = "us";
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-122b.psf.gz";
     colors = with colors.named; [
       black
       dark_red
@@ -52,7 +53,6 @@
 
   fonts = {
     packages = with pkgs; [
-      jetbrains-mono
       nerd-fonts.jetbrains-mono
     ];
   };

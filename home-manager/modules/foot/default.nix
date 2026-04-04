@@ -5,7 +5,7 @@
     server.enable = true;
     settings = {
       main = {
-        font = "monospace:size=12";
+        font = "JetBrainsMonoNL NF:weight:bold:size=16";
       };
       cursor = {
         blink = false;
