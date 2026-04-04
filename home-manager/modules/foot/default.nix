@@ -47,8 +47,7 @@
         font-decrease = "Super+minus";
         font-reset = "Super+0";
         spawn-terminal = "Super+n";
-        pipe-scrollback = "[sh -c \"nvim -c ':set nowrap nonumber signcolumn=no' --cmd 'au VimEnter * term cat - \"] Control+Shift+X";
-        #         pipe-scrollback=[sh -c "f=$(mktemp) && cat - > $f && foot emacsclient -t $f; rm $f"] Control+Shift+Print
+        pipe-scrollback = "[sh -c \"f=$(mktemp) && cat - > $f; foot nvim -c ':set nowrap nonumber signcolumn=no readonly' $f; rm $f\"] Control+Shift+X";
         prompt-prev = "Control+Shift+P";
         prompt-next = "Control+Shift+N";
         #
