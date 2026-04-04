@@ -149,18 +149,14 @@ return {
 	},
 
 	{
-		"undotree",
-		cmd = { "UndotreeShow" },
+		"nvim.undotree",
+		cmd = { "Undotree" },
 		keys = {
 			{
 				"<leader>u",
-				function()
-					vim.cmd.UndotreeShow()
-					vim.cmd.UndotreeFocus()
-				end,
+				function() require("undotree").open() end,
 			},
 		},
-		before = function() vim.g.undotree_DiffAutoOpen = 0 end,
 	},
 
 	{

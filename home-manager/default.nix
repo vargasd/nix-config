@@ -11,7 +11,7 @@
     ./modules/zsh
   ];
 
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
 
   home.sessionVariables = {
     LESS = "-i -R --no-init --tabs 2";

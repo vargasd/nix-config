@@ -18,7 +18,6 @@ with pkgs.vimPlugins;
     which-key-nvim
     yazi-nvim
     nvim-treesitter-textobjects
-    undotree
     lualine-nvim
     noice-nvim
     nui-nvim

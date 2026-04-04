@@ -11,7 +11,7 @@
         blink = false;
         blink-rate = 0;
       };
-      colors =
+      colors-dark =
         with colors.named;
         {
           background = background;
