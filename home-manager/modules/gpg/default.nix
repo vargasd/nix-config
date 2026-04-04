@@ -52,6 +52,9 @@
       use-agent = true;
       throw-keyids = true;
     };
+    scdaemonSettings = {
+      disable-ccid = true;
+    };
   };
 
   services.gpg-agent = {
