@@ -19,7 +19,12 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
-  networking.hostName = "vm";
+
+  networking = {
+    resolvconf.enable = false;
+    nameservers = [ "1.1.1.1" ];
+    hostName = "vm";
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
