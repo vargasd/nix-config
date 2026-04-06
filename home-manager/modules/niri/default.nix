@@ -94,7 +94,7 @@
           "Super+Alt+Left".action.move-column-left = [ ];
           "Super+Alt+Down".action.switch-preset-column-width = [ ];
           "Super+Alt+Up".action.maximize-column = [ ];
-          "${hyper}+Right".action.move-column-right = [ ];
+          "Super+Alt+Right".action.move-column-right = [ ];
           "${meh}+Delete".action.spawn = "${lib.getExe pkgs.swaylock}";
           "${hyper}+Delete".action.quit.skip-confirmation = true;
 
