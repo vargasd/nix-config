@@ -24,7 +24,8 @@
 
   home = {
     sessionVariables = {
-      TERMCMD = "${pkgs.foot}/bin/footclient -T floating.yazi";
+      TERMCMD = "${pkgs.foot}/bin/footclient";
+      TERMINAL = "${pkgs.foot}/bin/footclient";
       GDK_DEBUG = "portals";
     };
     packages = with pkgs; [
@@ -41,6 +42,12 @@
 
   xdg = {
     autostart.enable = true;
+    terminal-exec = {
+      enable = true;
+      settings = {
+        default = [ "foot.desktop" ];
+      };
+    };
     portal = {
       enable = true;
       extraPortals = with pkgs; [

@@ -58,4 +58,9 @@
       };
     };
   };
+
+  xdg.desktopEntries.foot-server = {
+    name = "foot server";
+    noDisplay = true;
+  };
 }
