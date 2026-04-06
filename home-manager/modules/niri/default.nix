@@ -85,7 +85,7 @@
 
           "${meh}+Escape".action.spawn-sh = "${pkgs.mako}/bin/makoctl dismiss --all";
           "${meh}+T".action.spawn-sh =
-            focusOrSpawn "app_id:foot.main" "${lib.getExe pkgs.foot} --app-id foot.main";
+            "niri msg --json windows | jq 'first(.[] | select(.app_id == \"foot.main\")).layout.pos_in_scrolling_layout[0]' | xargs niri msg action focus-column || niri msg action spawn -- foot --app-id foot.main";
           "${meh}+B".action.spawn-sh = focusOrSpawn "firefox" (lib.getExe pkgs.firefox);
           "Super+Left".action.focus-column-left = [ ];
           "Super+Right".action.focus-column-right = [ ];
