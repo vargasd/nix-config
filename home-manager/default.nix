@@ -6,7 +6,6 @@
     ./modules/git
     ./modules/gpg
     ./modules/neovim
-    ./modules/wezterm
     ./modules/yazi
     ./modules/zsh
   ];

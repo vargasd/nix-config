@@ -9,6 +9,7 @@
 {
   imports = [
     ../default.nix
+    ../modules/wezterm
     inputs.paneru.homeModules.paneru
   ];
 
