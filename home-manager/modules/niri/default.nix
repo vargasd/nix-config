@@ -98,11 +98,13 @@
           "${meh}+Delete".action.spawn = "${lib.getExe pkgs.swaylock}";
           "${hyper}+Delete".action.quit.skip-confirmation = true;
 
-          "${meh}+percent" = {
+          # percent
+          "${meh}+5" = {
             allow-when-locked = true;
             action.spawn-sh = "brightnessctl set 10%-";
           };
-          "${meh}+asterisk" = {
+          # asterisk
+          "${meh}+8" = {
             allow-when-locked = true;
             action.spawn-sh = "brightnessctl set 10%+";
           };
