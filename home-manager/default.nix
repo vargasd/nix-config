@@ -41,7 +41,7 @@
     # presenterm
     ripgrep
     sqlite
-    # up # https://github.com/akavel/up
+    up # https://github.com/akavel/up
     yubikey-manager
 
     # language servers
