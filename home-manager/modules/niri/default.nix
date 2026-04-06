@@ -123,13 +123,10 @@
           "${meh}+WheelScrollUp".action.focus-column-left = [ ];
 
           "${meh}+F".action.spawn-sh =
-            focusOrSpawn "floating.bluetui" "${pkgs.foot}/bin/footclient --app-id foot.floating.bluetui ${lib.getExe pkgs.bluetui}";
-
+            focusOrSpawn "floating.bluetui" "footclient --app-id foot.floating.bluetui bluetui";
           "${meh}+W".action.spawn-sh =
-            focusOrSpawn "floating.impala" "${pkgs.foot}/bin/footclient --app-id foot.floating.impala ${lib.getExe pkgs.impala}";
-
-          "${meh}+E".action.spawn-sh =
-            focusOrSpawn "floating.yazi" "${pkgs.foot}/bin/footclient --app-id foot.floating.yazi ${lib.getExe pkgs.yazi}";
+            focusOrSpawn "floating.impala" "${pkgs.foot}/bin/footclient --app-id foot.floating.impala impala";
+          "${meh}+E".action.spawn-sh = focusOrSpawn "foot.yazi" "footclient --app-id foot.yazi yazi";
 
           "${hyper}+Home".action.move-column-to-first = [ ];
           "${hyper}+End".action.move-column-to-last = [ ];
