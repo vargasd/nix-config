@@ -47,10 +47,14 @@
         font-decrease = "Super+minus";
         font-reset = "Super+0";
         spawn-terminal = "Super+n";
-        pipe-scrollback = "[sh -c \"f=$(mktemp) && cat - > $f; foot nvim -c ':set nowrap nonumber signcolumn=no readonly' $f; rm $f\"] Control+Shift+X";
+        # TODO implement nvim client as text opener and use that instance here
+        pipe-scrollback = "[sh -c \"f=$(mktemp) && cat - > $f; footclient nvim -c ':set nowrap nonumber signcolumn=no readonly' $f; rm $f\"] Control+Shift+X";
         prompt-prev = "Control+Shift+P";
         prompt-next = "Control+Shift+N";
         #
+      };
+      mouse = {
+        hide-when-typing = true;
       };
     };
   };
