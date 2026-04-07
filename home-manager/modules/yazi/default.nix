@@ -149,9 +149,4 @@
       ];
     };
   };
-
-  xdg.desktopEntries.yazi = {
-    name = "yazi";
-    noDisplay = true;
-  };
 }

@@ -75,5 +75,28 @@
         |> builtins.map (data: "${data.emoji} ${data.label}")
         |> builtins.concatStringsSep "\n";
     };
+
+    xdg.desktopEntries = {
+      yazi = {
+        name = "yazi";
+        noDisplay = true;
+      };
+      foot-server = {
+        name = "foot server";
+        noDisplay = true;
+      };
+      vim = {
+        name = "vim";
+        noDisplay = true;
+      };
+      gvim = {
+        name = "gvim";
+        noDisplay = true;
+      };
+      nvim = {
+        name = "nvim";
+        noDisplay = true;
+      };
+    };
   };
 }
