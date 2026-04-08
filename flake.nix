@@ -306,6 +306,7 @@
         devEnvs = {
           biome = import ./devShells/biome.nix { inherit pkgs; };
           c = import ./devShells/c.nix { inherit pkgs; };
+          go = import ./devShells/go.nix { inherit pkgs; };
           gleam = import ./devShells/gleam.nix { inherit pkgs; };
           kotlin = import ./devShells/kotlin.nix { inherit pkgs; };
           lua = import ./devShells/lua.nix { inherit pkgs; };
