@@ -112,7 +112,7 @@
 
   programs.opencode = {
     enable = true;
-    settings = {
+    tui.settings = {
       theme = "system";
       share = "disabled";
       keybinds = {
