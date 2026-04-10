@@ -3,6 +3,7 @@
   packages = with pkgs; [
     go
     gopls
+    delve
   ];
 
   lspConfig = {
