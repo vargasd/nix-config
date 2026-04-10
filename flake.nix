@@ -313,6 +313,7 @@
           nix = import ./devShells/nix.nix { inherit pkgs; };
           php = import ./devShells/php.nix { inherit pkgs; };
           pnpm = import ./devShells/pnpm.nix { inherit pkgs; };
+          python = import ./devShells/python.nix { inherit pkgs; };
           ruby = import ./devShells/ruby.nix { inherit pkgs; };
           terraform = import ./devShells/terraform.nix { inherit pkgs; };
           tsserver = import ./devShells/tsserver.nix { inherit pkgs; };
