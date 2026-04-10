@@ -69,6 +69,7 @@ config.keys = {
 	{ mods = "ALT|SHIFT", key = "DownArrow", action = act.SplitPane({ direction = "Down" }) },
 	{ mods = "ALT|SHIFT", key = "*", action = act.TogglePaneZoomState },
 	{ key = "o", mods = "CTRL|SHIFT", action = open_link },
+	{ key = "w", mods = "SUPER", action = act.CloseCurrentPane({ confirm = true }) },
 	{ key = "s", mods = "SUPER", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
 	{ key = "z", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCopyMode },
 	{ key = "x", mods = "CTRL|SHIFT", action = act.EmitEvent("trigger-vim-with-scrollback") },
