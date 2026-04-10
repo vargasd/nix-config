@@ -174,13 +174,14 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)
 					local client = vim.lsp.get_client_by_id(ev.data.client_id)
+					if client == nil then return end
+
 					local config = servers[client.name]
 					if config and not config.enable_highlights then
 						client.server_capabilities.semanticTokensProvider = nil
 					end
 
-					-- TODO: remove nvim-colorizer and use this when upgrading to 0.12
-					-- vim.lsp.document_color.enable(true, args.buf)
+					if client:supports_method("textDocument/documentColor") then vim.lsp.document_color.enable(true) end
 				end,
 			})
 
