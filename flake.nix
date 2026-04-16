@@ -316,6 +316,7 @@
           python = import ./devShells/python.nix { inherit pkgs; };
           ruby = import ./devShells/ruby.nix { inherit pkgs; };
           terraform = import ./devShells/terraform.nix { inherit pkgs; };
+          tsgo = import ./devShells/tsgo.nix { inherit pkgs; };
           tsserver = import ./devShells/tsserver.nix { inherit pkgs; };
           vue = import ./devShells/vue.nix { inherit pkgs; };
         };

@@ -101,7 +101,7 @@ return {
 					},
 				},
 				ts_ls = {
-					filetypes = {},
+					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 					init_options = {
 						hostInfo = "neovim",
 						preferences = {
@@ -112,7 +112,7 @@ return {
 					},
 				},
 				tsgo = {
-					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+					filetypes = {},
 					init_options = {
 						hostInfo = "neovim",
 						preferences = {

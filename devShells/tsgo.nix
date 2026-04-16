@@ -1,9 +1,13 @@
 { pkgs, ... }:
 {
-  packages = with pkgs; [ typescript-language-server ];
+  packages = with pkgs; [ typescript-go ];
 
   lspConfigs = {
     tsgo = {
+      autostart = false;
+      filetypes = [ ];
+    };
+    ts_ls = {
       filetypes = [
         "typescript"
         "javascript"
@@ -11,10 +15,6 @@
         "typescriptreact"
         "vue"
       ];
-    };
-    ts_ls = {
-      autostart = false;
-      filetypes = [ ];
     };
   };
 }

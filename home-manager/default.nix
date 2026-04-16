@@ -50,7 +50,7 @@
     harper
     marksman
     postgres-language-server
-    typescript-go
+    typescript-language-server
     # typos-lsp
     yaml-language-server
 
