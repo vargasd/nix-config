@@ -86,6 +86,9 @@ in
 
           # disable AI tab groups
           "browser.tabs.groups.smart.userEnabled" = false;
+          "browser.ml.linkPreview.enabled" = false;
+          "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
+          "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
 
           "ui.key.accelKey" = 91; # super
           # https://kb.mozillazine.org/Ui.key.chromeAccess
