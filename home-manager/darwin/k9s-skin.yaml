@@ -1,131 +1,131 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/derailed/k9s/refs/heads/master/internal/config/json/schemas/skin.json
 
-# bg: &bg default
-# black: &black black
-# darkred: &darkred maroon
-# darkgreen: &darkgreen green
-# darkyellow: &darkyellow olive
-# darkblue: &darkblue navy
-# darkmagenta: &darkmagenta fuchsia
-# darkcyan: &darkcyan teal
-# gray: &gray silver
-# darkgray: &darkgray gray
-# red: &red red
-# green: &green lime
-# yellow: &yellow yellow
-# blue: &blue blue
-# magenta: &magenta purple
-# cyan: &cyan aqua
-# white: &white white
+bg: &bg default
+black: &black black
+darkred: &darkred maroon
+darkgreen: &darkgreen green
+darkyellow: &darkyellow olive
+darkblue: &darkblue navy
+darkmagenta: &darkmagenta fuchsia
+darkcyan: &darkcyan teal
+gray: &gray silver
+brightblack: &brightblack gray
+red: &red red
+green: &green lime
+yellow: &yellow yellow
+blue: &blue blue
+magenta: &magenta purple
+cyan: &cyan aqua
+white: &white white
 
 k9s:
   body:
-    fgColor: blue
-    bgColor: default
-    logoColor: yellow
+    fgColor: *blue
+    bgColor: *bg
+    logoColor: *yellow
 
   help:
-    fgColor: silver
-    bgColor: default
-    keyColor: aqua
-    numKeyColor: purple
-    sectionColor: white
+    fgColor: *gray
+    bgColor: *bg
+    keyColor: *cyan
+    numKeyColor: *magenta
+    sectionColor: *white
 
   prompt:
-    fgColor: blue
-    bgColor: default
-    suggestColor: silver
+    fgColor: *blue
+    bgColor: *bg
+    suggestColor: *gray
 
   info:
-    fgColor: yellow
-    sectionColor: white
-    memColor: yellow
-    cpuColor: yellow
-    k9sRevColor: lime
+    fgColor: *yellow
+    sectionColor: *white
+    memColor: *yellow
+    cpuColor: *yellow
+    k9sRevColor: *green
 
   dialog:
-    fgColor: blue
-    bgColor: default
-    buttonFgColor: black
-    buttonBgColor: blue
-    buttonFocusFgColor: white
-    buttonFocusBgColor: aqua
-    labelFgColor: purple
-    fieldFgColor: blue
+    fgColor: *blue
+    bgColor: *bg
+    buttonFgColor: *black
+    buttonBgColor: *blue
+    buttonFocusFgColor: *white
+    buttonFocusBgColor: *cyan
+    labelFgColor: *magenta
+    fieldFgColor: *blue
 
   frame:
     border:
-      fgColor: gray
-      focusColor: green
-      bgColor: default
+      fgColor: *brightblack
+      focusColor: *darkgreen
+      bgColor: *bg
 
     menu:
-      fgColor: white
+      fgColor: *white
       fgStyle: dim
-      keyColor: blue
-      numKeyColor: purple
+      keyColor: *blue
+      numKeyColor: *magenta
 
     crumbs:
-      keyColor: lime
-      fgColor: black
-      bgColor: blue
-      activeColor: yellow
+      keyColor: *green
+      fgColor: *black
+      bgColor: *blue
+      activeColor: *yellow
 
     status:
-      newColor: blue
-      modifyColor: yellow
-      addColor: white
-      errorColor: red
-      pendingColor: silver
-      highlightColor: aqua
-      killColor: maroon
-      completedColor: lime
+      newColor: *blue
+      modifyColor: *yellow
+      addColor: *white
+      errorColor: *red
+      pendingColor: *gray
+      highlightColor: *cyan
+      killColor: *darkred
+      completedColor: *green
 
     title:
-      bgColor: default
-      fgColor: aqua
-      highlightColor: purple
-      counterColor: yellow
-      filterColor: blue
+      bgColor: *bg
+      fgColor: *cyan
+      highlightColor: *magenta
+      counterColor: *yellow
+      filterColor: *blue
 
   views:
     charts:
-      bgColor: default
+      bgColor: *bg
       defaultDialColors:
-        - green
-        - maroon
+        - *darkgreen
+        - *darkred
       defaultChartColors:
-        - lime
-        - red
+        - *green
+        - *red
 
     table:
-      fgColor: blue
-      bgColor: default
-      cursorFgColor: white
-      cursorBgColor: gray
-      markColor: olive
+      fgColor: *blue
+      bgColor: *bg
+      cursorFgColor: *white
+      cursorBgColor: *brightblack
+      markColor: *darkyellow
       header:
-        fgColor: white
-        bgColor: default
-        sorterColor: yellow
+        fgColor: *white
+        bgColor: *bg
+        sorterColor: *yellow
 
     xray:
-      fgColor: blue
-      bgColor: default
-      cursorColor: purple
-      graphicColor: olive
+      fgColor: *blue
+      bgColor: *bg
+      cursorColor: *magenta
+      graphicColor: *darkyellow
       showIcons: true
 
     yaml:
-      keyColor: blue
-      colonColor: white
-      valueColor: lime
+      keyColor: *blue
+      colonColor: *white
+      valueColor: *green
 
     logs:
-      fgColor: white
-      bgColor: default
+      fgColor: *white
+      bgColor: *bg
       indicator:
-        fgColor: blue
-        bgColor: default
-        toggleOnColor: lime
-        toggleOffColor: red
+        fgColor: *blue
+        bgColor: *bg
+        toggleOnColor: *green
+        toggleOffColor: *red
