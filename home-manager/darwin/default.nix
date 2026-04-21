@@ -10,7 +10,6 @@
   imports = [
     ../default.nix
     ../modules/wezterm
-    inputs.paneru.homeModules.paneru
   ];
 
   home = {
@@ -35,39 +34,6 @@
     enable = true;
     keyboard = {
       Capslock = "Escape";
-    };
-  };
-
-  services.paneru = {
-    enable = false;
-    settings = {
-      options = {
-        preset_column_widths = [
-          0.33
-          0.5
-          0.66
-        ];
-        focus_follows_mouse = false;
-        mouse_follows_focus = false;
-        border_active_window = true;
-        swipe_gesture_fingers = 3;
-        continuous_swipe = false;
-      };
-      bindings =
-        let
-          meh = "alt + ctrl + shift";
-          hyper = "${meh} + cmd";
-        in
-        {
-          window_focus_west = "${meh} - leftarrow";
-          window_focus_east = "${meh} - rightarrow";
-          window_swap_west = "${hyper} - leftarrow";
-          window_swap_east = "${hyper} - rightarrow";
-          window_center = "${meh} - c";
-          window_resize = "${meh} - downarrow";
-          window_fullwidth = "${meh} - uparrow";
-          window_manage = "${meh} - q";
-        };
     };
   };
 

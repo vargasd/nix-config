@@ -51,12 +51,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    paneru = {
-      # TODO: switch back to karinushka/paneru after PR(s) merged
-      url = "github:vargasd/paneru";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     niri-flake = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";

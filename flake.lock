@@ -454,26 +454,6 @@
         "type": "github"
       }
     },
-    "paneru": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1773754228,
-        "narHash": "sha256-C1vH0Q7d9UE49TUOd/6AJnculSSYOg13GG5/JXdUF1I=",
-        "owner": "vargasd",
-        "repo": "paneru",
-        "rev": "888659616314b17929dd83a6ad64d7a703c1370f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vargasd",
-        "repo": "paneru",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "clear-notifications": "clear-notifications",
@@ -486,7 +466,6 @@
         "niri-flake": "niri-flake",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
-        "paneru": "paneru",
         "sublime-text-gleam": "sublime-text-gleam",
         "systems": "systems",
         "xremap": "xremap"

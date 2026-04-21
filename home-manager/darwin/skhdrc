@@ -12,7 +12,6 @@ meh - b        : open -a "@home@/Applications/Home Manager Apps/Firefox.app"
 hyper - b      : open -a safari
 
 meh - delete   : open -a ScreenSaverEngine
-hyper - q      : killall paneru
 
 hyper - left   : open -g "rectangle://execute-action?name=previous-display"
 hyper - up     : open -g "rectangle://execute-action?name=larger"
