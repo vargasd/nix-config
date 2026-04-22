@@ -76,7 +76,7 @@
         |> builtins.concatStringsSep "\n";
     };
 
-    xdg.desktopEntries = {
+    desktopEntries = {
       yazi = {
         name = "yazi";
         noDisplay = true;
