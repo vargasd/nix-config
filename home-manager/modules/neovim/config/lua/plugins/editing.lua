@@ -62,7 +62,17 @@ return {
 			local builtins = require("nvim-next.builtins")
 			local move = require("nvim-next.move")
 			local next_integrations = require("nvim-next.integrations")
-			local diagnostics = next_integrations.diagnostic()
+			local diag_prev, diag_next = move.make_repeatable_pair(function()
+				vim.diagnostic.jump({
+					count = 1,
+					on_jump = function() vim.diagnostic.open_float() end,
+				})
+			end, function()
+				vim.diagnostic.jump({
+					count = -1,
+					on_jump = function() vim.diagnostic.open_float() end,
+				})
+			end)
 			local qf = next_integrations.quickfix()
 
 			require("nvim-next").setup({
@@ -75,13 +85,8 @@ return {
 			vim.keymap.set({ "n", "x", "o" }, ",", move.repeat_last_move)
 			vim.keymap.set({ "n", "x", "o" }, ";", move.repeat_last_move_opposite)
 
-			local diagnostic_opts = {
-				severity = {
-					min = vim.diagnostic.severity.WARN,
-				},
-			}
-			vim.keymap.set({ "n", "x", "o" }, "[d", diagnostics.goto_prev(diagnostic_opts))
-			vim.keymap.set({ "n", "x", "o" }, "]d", diagnostics.goto_next(diagnostic_opts))
+			vim.keymap.set({ "n", "x", "o" }, "[d", diag_prev)
+			vim.keymap.set({ "n", "x", "o" }, "]d", diag_next)
 			vim.keymap.set("n", "[q", qf.cprevious)
 			vim.keymap.set("n", "]q", qf.cnext)
 		end,
