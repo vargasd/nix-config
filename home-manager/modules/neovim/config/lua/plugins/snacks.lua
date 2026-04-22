@@ -15,70 +15,7 @@ return {
 		after = function()
 			require("snacks").setup({
 				bigfile = { enabled = true },
-				dashboard = {
-					enabled = true,
-					preset = {
-						keys = {
-							{
-								icon = " ",
-								key = "f",
-								desc = "Find File",
-								action = ":lua Snacks.dashboard.pick('files')",
-							},
-							{
-								icon = " ",
-								key = "/",
-								desc = "Find Text",
-								action = ":lua Snacks.dashboard.pick('live_grep')",
-							},
-							{
-								icon = " ",
-								key = "s",
-								desc = "Start/Restore Session",
-								action = function()
-									vim.cmd("silent! source Session.vim")
-
-									vim.api.nvim_create_autocmd("VimLeavePre", {
-										callback = function()
-											vim.cmd("silent! 1tabonly!") -- only keep the first tab
-											vim.cmd("silent! mksession!")
-										end,
-									})
-								end,
-							},
-							{ icon = "󰙅 ", key = "e", desc = "Yazi", action = ":Yazi" },
-							{ icon = " ", key = "d", desc = "DBUI", action = ":bd | DBUI" },
-							{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
-						},
-					},
-					sections = {
-						function()
-							math.randomseed(os.time())
-							local shuffled = {}
-							for _, v in ipairs({
-								[[███    ██ ███████  ██████  ██    ██ ██ ███    ███]],
-								[[████   ██ ██      ██    ██ ██    ██ ██ ████  ████]],
-								[[██ ██  ██ █████   ██    ██ ██    ██ ██ ██ ████ ██]],
-								[[██  ██ ██ ██      ██    ██  ██  ██  ██ ██  ██  ██]],
-								[[██   ████ ███████  ██████    ████   ██ ██      ██]],
-							}) do
-								local pos = math.random(1, #shuffled + 1)
-								table.insert(shuffled, pos, v)
-							end
-							return {
-								header = table.concat(shuffled, "\n"),
-								align = "center",
-								padding = 2,
-							}
-						end,
-						{ section = "keys", gap = 1, padding = 1 },
-						{ section = "projects", padding = 1 },
-					},
-				},
-				image = {
-					enabled = true,
-					doc = { enabled = false },
-				},
+				image = { enabled = true, doc = { enabled = false } },
 				lazygit = { configure = false },
 				picker = {
 					enabled = true,

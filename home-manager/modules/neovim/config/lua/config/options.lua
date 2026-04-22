@@ -46,3 +46,19 @@ vim.opt.fillchars.stlnc = " "
 
 vim.o.laststatus = 0
 vim.o.statusline = " "
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		if vim.fn.argc() == 0 then
+			vim.keymap.set("n", "s", function()
+				vim.cmd("silent! source Session.vim")
+				vim.api.nvim_create_autocmd("VimLeavePre", {
+					callback = function()
+						vim.cmd("silent! 1tabonly!")
+						vim.cmd("silent! mksession!")
+					end,
+				})
+			end, { buffer = true, desc = "Start/Restore Session" })
+		end
+	end,
+})
