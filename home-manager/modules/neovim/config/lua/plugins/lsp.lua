@@ -24,6 +24,12 @@ return {
 				},
 			}
 
+			local eslint_d = {
+				formatCommand = "eslint_d --stdin --stdin-filename ${INPUT} --fix-to-stdout",
+				formatStdin = true,
+				rootMarkers = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", "eslint.config.js", "eslint.config.mjs" },
+			}
+
 			local _, env_lsp = pcall(vim.json.decode, os.getenv("SAM_LSP_CONFIGS") or "{}")
 			local servers = vim.tbl_deep_extend("keep", vim.g.sam_lsp_configs or {}, env_lsp or {}, {
 				bashls = {
@@ -101,6 +107,7 @@ return {
 					},
 				},
 				ts_ls = {
+					format = false,
 					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 					init_options = {
 						hostInfo = "neovim",
@@ -112,6 +119,7 @@ return {
 					},
 				},
 				tsgo = {
+					format = false,
 					filetypes = {},
 					init_options = {
 						hostInfo = "neovim",
@@ -126,11 +134,11 @@ return {
 					init_options = { documentFormatting = true },
 					settings = {
 						languages = {
-							javascript = { prettier },
+							javascript = { eslint_d, prettier },
 							json = { prettier },
 							jsonc = { prettier },
-							typescript = { prettier },
-							svelte = { prettier },
+							typescript = { eslint_d, prettier },
+							svelte = { eslint_d, prettier },
 							sql = {
 								{
 									formatCommand = "sqruff fix -",
@@ -140,7 +148,7 @@ return {
 							},
 							markdown = { prettier },
 							typespec = { prettier },
-							vue = { prettier },
+							vue = { eslint_d, prettier },
 							yaml = { prettier },
 						},
 					},
@@ -148,40 +156,22 @@ return {
 				eslint = {
 					settings = {
 						workingDirectories = { mode = "auto" },
-						codeActionOnSave = { enable = true },
 					},
 				},
 			})
 
-			local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = lsp_fmt_group,
-				callback = function(ev)
-					if not vim.bo.modifiable or vim.b.skip_autoformat == true then return end
-
-					local efm = vim.lsp.get_clients({ name = "efm", bufnr = ev.buf })
-					local eslint = vim.lsp.get_clients({ name = "eslint", bufnr = ev.buf })
-					if not vim.tbl_isempty(eslint) then vim.lsp.buf.format({ name = "eslint" }) end
-
-					if vim.tbl_isempty(efm) then
-						vim.lsp.buf.format()
-					else
-						vim.lsp.buf.format({ name = "efm" })
-					end
-				end,
-			})
-
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)
+					vim.lsp.semantic_tokens.enable(false)
+
 					local client = vim.lsp.get_client_by_id(ev.data.client_id)
-					if client == nil then return end
 
-					local config = servers[client.name]
-					if config and not config.enable_highlights then
-						client.server_capabilities.semanticTokensProvider = nil
+					if client and client.name == "efm" then
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							buffer = ev.buf,
+							callback = function() vim.lsp.buf.format({ name = client.name, bufnr = ev.buf }) end,
+						})
 					end
-
-					if client:supports_method("textDocument/documentColor") then vim.lsp.document_color.enable(true) end
 				end,
 			})
 
