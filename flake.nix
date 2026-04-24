@@ -60,6 +60,11 @@
       url = "github:xremap/nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # TODO: remove after https://github.com/NixOS/nixpkgs/pull/468608 (also the homebrew installation)
+    zmx = {
+      url = "github:neurosnap/zmx";
+    };
   };
 
   outputs =
@@ -74,6 +79,9 @@
       overlays = [
         inputs.gen-luarc.overlays.default
         inputs.enhansi.overlays.default
+        (final: prev: {
+          zmx = inputs.zmx.packages.${final.system}.zmx;
+        })
       ];
       baseColors = {
         background = "162229";

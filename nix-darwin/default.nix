@@ -2,7 +2,8 @@
 {
   homebrew = {
     enable = true;
-    brews = [ ];
+    enableZshIntegration = true;
+    brews = [ "neurosnap/tap/zmx" ];
     casks = [
       "brave-browser"
       "homerow"

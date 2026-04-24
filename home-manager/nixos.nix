@@ -37,6 +37,7 @@
       bemoji
       # needed to insert for bemoji
       wtype
+      zmx
     ];
   };
 
