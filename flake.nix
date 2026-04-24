@@ -313,6 +313,7 @@
           tsgo = import ./devShells/tsgo.nix { inherit pkgs; };
           tsserver = import ./devShells/tsserver.nix { inherit pkgs; };
           vue = import ./devShells/vue.nix { inherit pkgs; };
+          zig = import ./devShells/zig.nix { inherit pkgs; };
         };
       in
       {
