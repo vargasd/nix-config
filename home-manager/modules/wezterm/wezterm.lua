@@ -21,11 +21,6 @@ config.use_resize_increments = false
 config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = false
 config.default_workspace = "~"
-config.term = "wezterm"
-config.set_environment_variables = {
-	SAMTERM = "wezterm",
-}
-
 config.window_padding = {
 	left = 0,
 	right = 0,

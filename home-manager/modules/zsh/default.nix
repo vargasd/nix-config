@@ -20,8 +20,6 @@
     '';
 
     shellAliases = {
-      nvim = # sh
-        "env TERM=\${SAMTERM:-$TERM} nvim";
       nixpkgs-search = # sh
         ''
           nix search nixpkgs --no-write-lock-file --reference-lock-file ${../../../flake.lock} ^ --json 2> /dev/null | \
