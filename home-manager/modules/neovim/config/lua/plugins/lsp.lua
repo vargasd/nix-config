@@ -162,15 +162,17 @@ return {
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)
-					vim.lsp.semantic_tokens.enable(false)
-
 					local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
-					if client and client.name == "efm" then
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							buffer = ev.buf,
-							callback = function() vim.lsp.buf.format({ name = client.name, bufnr = ev.buf }) end,
-						})
+					if client then
+						if client.server_capabilities then client.server_capabilities.semanticTokensProvider = nil end
+
+						if client.name == "efm" then
+							vim.api.nvim_create_autocmd("BufWritePre", {
+								buffer = ev.buf,
+								callback = function() vim.lsp.buf.format({ name = client.name, bufnr = ev.buf }) end,
+							})
+						end
 					end
 				end,
 			})
