@@ -22,7 +22,7 @@ config.window_padding = {
 	top = 0,
 	bottom = 0,
 }
-
+config.term = "wezterm"
 config.color_scheme = "bluvbox"
 config.bold_brightens_ansi_colors = "No"
 config.quick_select_alphabet = "arstqwfpzxcvneioluymdhgjbk"
