@@ -44,18 +44,6 @@
             cyan
             white
           ];
-          # these should really be in the main config but whaddya gonna do
-          tab_bar = {
-            background = background;
-            active_tab = {
-              bg_color = yellow;
-              fg_color = background;
-            };
-            inactive_tab = {
-              bg_color = bright_black;
-              fg_color = background;
-            };
-          };
         };
     };
     extraConfig = builtins.readFile ./wezterm.lua;
