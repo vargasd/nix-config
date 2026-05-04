@@ -227,7 +227,11 @@ in
                 value = "CC";
               };
               whiteList = {
-                value = "";
+                value =
+                  [
+                    "https://kibana.service.emarsys.net/*"
+                  ]
+                  |> lib.strings.concatLines;
               };
             };
           };
