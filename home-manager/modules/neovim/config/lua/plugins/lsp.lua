@@ -1,3 +1,4 @@
+local func = require("vim.func")
 ---@type lze.Spec[]
 return {
 	{
@@ -22,12 +23,6 @@ return {
 					"prettier.config.cjs",
 					"prettier.config.mjs",
 				},
-			}
-
-			local eslint_d = {
-				formatCommand = "eslint_d --stdin --stdin-filename ${INPUT} --fix-to-stdout",
-				formatStdin = true,
-				rootMarkers = { ".eslintrc", ".eslintrc.js", ".eslintrc.json", "eslint.config.js", "eslint.config.mjs" },
 			}
 
 			local _, env_lsp = pcall(vim.json.decode, os.getenv("SAM_LSP_CONFIGS") or "{}")
@@ -134,11 +129,11 @@ return {
 					init_options = { documentFormatting = true },
 					settings = {
 						languages = {
-							javascript = { eslint_d, prettier },
+							javascript = { prettier },
 							json = { prettier },
 							jsonc = { prettier },
-							typescript = { eslint_d, prettier },
-							svelte = { eslint_d, prettier },
+							typescript = { prettier },
+							svelte = { prettier },
 							sql = {
 								{
 									formatCommand = "sqruff fix -",
@@ -148,13 +143,14 @@ return {
 							},
 							markdown = { prettier },
 							typespec = { prettier },
-							vue = { eslint_d, prettier },
+							vue = { prettier },
 							yaml = { prettier },
 						},
 					},
 				},
 				eslint = {
 					settings = {
+						codeActionOnSave = { enable = true },
 						workingDirectories = { mode = "auto" },
 					},
 				},
@@ -167,12 +163,17 @@ return {
 					if client then
 						if client.server_capabilities then client.server_capabilities.semanticTokensProvider = nil end
 
-						if client.name == "efm" then
-							vim.api.nvim_create_autocmd("BufWritePre", {
-								buffer = ev.buf,
-								callback = function() vim.lsp.buf.format({ name = client.name, bufnr = ev.buf }) end,
-							})
-						end
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							buffer = ev.buf,
+							callback = function()
+								if #vim.lsp.get_clients({ bufnr = ev.buf, name = "eslint" }) > 0 then
+									vim.lsp.buf.format({ name = "eslint" })
+								end
+								if #vim.lsp.get_clients({ bufnr = ev.buf, name = "efm" }) > 0 then
+									vim.lsp.buf.format({ name = "efm" })
+								end
+							end,
+						})
 					end
 				end,
 			})

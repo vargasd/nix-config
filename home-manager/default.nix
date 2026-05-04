@@ -55,7 +55,6 @@
     yaml-language-server
 
     # formatters
-    eslint_d
     prettierd
     vscode-js-debug
 
