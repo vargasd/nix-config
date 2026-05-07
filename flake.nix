@@ -246,7 +246,7 @@
             home = {
               user = "vargasd";
               homeDirectory = "/Users/vargasd";
-              defaultbrowser = "firefox";
+              defaultbrowser = "librewolf";
             };
             skhdVars = {
               issues = "open https://github.com/vargasd";

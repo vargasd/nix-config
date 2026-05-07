@@ -43,7 +43,7 @@
       {
         clearNotificationsPkg = inputs.clear-notifications;
         tunnelblickScript = ./tunnelblick.scpt;
-        home = home.homeDirectory;
+        browser = home.defaultbrowser;
       }
       // skhdVars
     );

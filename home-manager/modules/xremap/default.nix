@@ -13,7 +13,7 @@
           name = "emacs keys";
           # put all GUI apps here; apparently the only way to get fuzzel working
           application."only" = [
-            "firefox"
+            "librewolf"
           ];
           exact_match = true;
           remap = {
