@@ -64,12 +64,12 @@ return {
 			local next_integrations = require("nvim-next.integrations")
 			local diag_prev, diag_next = move.make_repeatable_pair(function()
 				vim.diagnostic.jump({
-					count = 1,
+					count = -1,
 					on_jump = function() vim.diagnostic.open_float() end,
 				})
 			end, function()
 				vim.diagnostic.jump({
-					count = -1,
+					count = 1,
 					on_jump = function() vim.diagnostic.open_float() end,
 				})
 			end)
