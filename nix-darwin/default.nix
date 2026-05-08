@@ -1,4 +1,9 @@
-{ home, ... }:
+{
+  home,
+  pkgs,
+  lib,
+  ...
+}:
 {
   homebrew = {
     enable = true;
@@ -18,6 +23,14 @@
       cleanup = "zap";
     };
   };
+
+  users.users.${home.user} = {
+    home = home.homeDirectory;
+  };
+
+  environment.shells = [
+    pkgs.zsh
+  ];
 
   nix.enable = false;
 

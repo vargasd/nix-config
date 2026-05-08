@@ -232,7 +232,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${specialArgs.home.user} = import ./home-manager/darwin/work.nix;
-              users.users.${specialArgs.home.user}.home = specialArgs.home.homeDirectory;
             }
           ];
         }
@@ -267,7 +266,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${specialArgs.home.user} = import ./home-manager/darwin;
-              users.users.${specialArgs.home.user}.home = specialArgs.home.homeDirectory;
             }
           ];
         }
