@@ -24,6 +24,7 @@ let
   exts = [
     ext.vimium-c
     ext.ublock-origin
+    ext.kagi-privacy-pass
     ext.multi-account-containers
     ext.browserpass
     customAddons.tabDeduplicator
