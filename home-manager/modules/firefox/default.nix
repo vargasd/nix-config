@@ -89,6 +89,11 @@ let
       "ui.key.contentAccess" = 2; # ctrl
       "ui.key.menuAccessKey" = 0; # disable
 
+      "ui.textSelectAttentionBackground" = "#${yellow}";
+      "ui.textSelectAttentionForeground" = "#${black}";
+      "ui.textHighlightBackground" = "#${magenta}";
+      "ui.textHighlightForeground" = "#${black}";
+
       "reader.color_scheme" = "custom";
       "reader.custom_colors.background" = "#${black}";
       "reader.custom_colors.foreground" = "#${white}";
