@@ -15,7 +15,7 @@
       share = false;
     };
 
-    initContent = builtins.readFile ./init.zsh + ''
+    initContent = builtins.readFile ../bash/shared.sh + builtins.readFile ./init.zsh + ''
       source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh
     '';
 

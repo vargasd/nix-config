@@ -3,6 +3,7 @@
   programs.ghostty = {
     enable = true;
     enableZshIntegration = true;
+    enableBashIntegration = true;
     clearDefaultKeybinds = true;
     settings = with colors; {
       background = named.background;

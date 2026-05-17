@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./modules/bash
     ./modules/bat
     ./modules/firefox
     ./modules/git

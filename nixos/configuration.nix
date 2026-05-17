@@ -88,7 +88,7 @@
       "wheel"
       "sudo"
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.bashInteractive;
   };
 
   services.xremap = {
@@ -101,6 +101,8 @@
   };
 
   programs.zsh.enable = true;
+
+  environment.pathsToLink = [ "/share/bash-completion" ];
 
   environment.variables = {
     EDITOR = "nvim";
