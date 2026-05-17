@@ -28,11 +28,11 @@
           hide-when-single-tab = true;
           gap = 0;
           gaps-between-tabs = 2;
-          length.total-proportion = 0.8;
+          length.total-proportion = 0.5;
           place-within-column = true;
           # position = "bottom";
           width = 2;
-          active.color = colors.named.yellow;
+          active.color = colors.named.magenta;
           inactive.color = colors.named.bright_black;
           urgent.color = colors.named.red;
         };
@@ -95,6 +95,8 @@
           "Super+Alt+Down".action.switch-preset-column-width = [ ];
           "Super+Alt+Up".action.maximize-column = [ ];
           "Super+Alt+Right".action.move-column-right = [ ];
+          "Super+Comma".action.consume-or-expel-window-left = [ ];
+          "Super+Period".action.consume-or-expel-window-right = [ ];
           "${meh}+Delete".action.spawn = "${lib.getExe pkgs.swaylock}";
           "${hyper}+Delete".action.quit.skip-confirmation = true;
 
