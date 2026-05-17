@@ -43,10 +43,9 @@
               "bash"
               "-c"
               /* bash */ ''
-                zoxide query --list |\
+                echo "$HOME\n$(zoxide query --list)" |\
                 fuzzel -d |\
-                xargs -I {} sh -c \
-                'wlrctl window focus "app_id:foot.main" "title:{}" || foot --app-id foot.main --working-directory "{}"'
+                xargs -I {} wlrctl window focus "app_id:foot.main" "title:{}" || foot --app-id foot.main --working-directory "{}" zmx attach "$(basename '{}')#1"
               ''
             ];
           };

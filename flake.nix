@@ -323,8 +323,10 @@
         };
       in
       {
-        inherit devEnvs;
-        inherit mkDevShell;
+        packages = {
+          inherit devEnvs;
+          inherit mkDevShell;
+        };
         devShells.default = mkDevShell {
           devEnvs = [
             devEnvs.nix
