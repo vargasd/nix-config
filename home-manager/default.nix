@@ -86,6 +86,10 @@
       invert = true;
       prefers_reduced_motion = true;
       show_numeric_shortcuts = false;
+      logs = {
+        enabled = false;
+        dir = "~/.local/state/atuin/logs";
+      };
       search.filters = [
         "global"
         "workspace"
@@ -128,6 +132,7 @@
     };
   };
 
+  home.preferXdgDirectories = true;
   xdg = {
     enable = true;
     configFile."typos-lsp/typos.toml" = {
