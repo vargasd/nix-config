@@ -126,11 +126,11 @@
         in
         [
           {
-            name = "*.tsp";
+            url = "*.tsp";
             run = bat;
           }
           {
-            name = "*.gleam";
+            url = "*.gleam";
             run = bat;
           }
         ];
@@ -138,12 +138,14 @@
       plugin.prepend_fetchers = [
         {
           id = "git";
-          name = "*";
+          group = "git";
+          url = "*";
           run = "git";
         }
         {
           id = "git";
-          name = "*/";
+          group = "git";
+          url = "*/";
           run = "git";
         }
       ];
