@@ -1,5 +1,5 @@
 # shift-tab backwards through menu
-bindkey -M emacs '^[[Z' reverse-menu-complete
+bindkey '^[[Z' reverse-menu-complete
 # completion menu highlighting
 zstyle ':completion:*' menu select
 # case-insensitive completion
@@ -10,8 +10,8 @@ autoload -U select-word-style
 select-word-style bash
 
 # bind [delete] for forward deletion
-bindkey -M emacs "^[[3~" delete-char
-bindkey -M emacs "^[3;5~" delete-char
+bindkey "^[[3~" delete-char
+bindkey "^[3;5~" delete-char
 
 setopt INC_APPEND_HISTORY
 
@@ -23,13 +23,11 @@ export PROMPT='
 %F{yellow}→ %f%b'
 
 function s () {
-  if [[ -n "$ZMX_SESSION" && -n "$1" ]]; then
-    zmx attach "$(echo $ZMX_SESSION | cut -d# -f1)#$1"
+  local n="${1:-1}"
+  if [[ -n "$ZMX_SESSION" ]]; then
+    zmx attach "$(echo $ZMX_SESSION | cut -d# -f1)#$n"
   else
-    local dir=$(zoxide query --interactive)
-    if [[ -n "$dir" ]]; then
-      zsh -c "cd ${(q)dir} && zmx attach ${(q)session}"
-    fi
+    zmx attach "${PWD:t}#$n"
   fi
 }
 
@@ -45,7 +43,6 @@ function zmx-session () {
   fi
 }
 zle -N .zmx-session zmx-session
-bindkey -M emacs "^T" .zmx-session
 
 function zmx-subsession () {
   if [[ -n "$ZMX_SESSION" ]]; then
@@ -53,10 +50,6 @@ function zmx-subsession () {
     zmx attach "$(echo $ZMX_SESSION | cut -d# -f1)#$n"
   fi
 }
-for i in {1..9}; do
-  zle -N ".zmx-subsession_$i" zmx-subsession
-  bindkey -M emacs "\e$i" ".zmx-subsession_$i"
-done
 
 function zmx-scrollback () {
   if [[ -n "$ZMX_SESSION" ]]; then
@@ -66,16 +59,24 @@ function zmx-scrollback () {
   fi
 }
 zle -N .zmx-scrollback zmx-scrollback
-bindkey -M emacs "\ez" .zmx-scrollback
+
+if [[ -z "$NVIM" ]]; then
+  bindkey "^[s" .zmx-session
+  bindkey "^[z" .zmx-scrollback
+  for i in {1..9}; do
+    zle -N ".zmx-subsession_$i" zmx-subsession
+    bindkey "^[$i" ".zmx-subsession_$i"
+  done
+fi
 
 function xtitle () {
-		builtin print -n -- "\e]0;$PWD\a"
+  builtin print -n -- "\e]0;$PWD\a"
 }
 
-function precmd () { 
-	if [[ "$TERM" == "wezterm" ]]; then
-		xtitle 
-	fi
+function precmd () {
+  if [[ "$TERM" == "wezterm" ]]; then
+    xtitle
+  fi
 }
 
 xtitle
