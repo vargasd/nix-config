@@ -11,6 +11,7 @@
   ];
   programs.niri = {
     enable = true;
+    package = pkgs.niri-unstable;
 
     settings = {
       input.keyboard.repeat-delay = 200;
@@ -146,11 +147,14 @@
           default-window-height.proportion = 0.7;
           open-focused = true;
         }
-        {
-          matches = [ { app-id = "^foot.main$"; } ];
-          default-column-display = "tabbed";
-        }
       ];
+      extraConfig = ''
+        window-rule {
+          match app-id="^foot.main$"
+          default-column-display "tabbed"
+          open-consume-into-column "first"
+        }
+      '';
     };
   };
 }

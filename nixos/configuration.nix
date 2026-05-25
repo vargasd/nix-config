@@ -119,7 +119,10 @@
     wl-clipboard-rs
   ];
 
-  programs.niri.enable = true;
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

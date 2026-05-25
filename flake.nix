@@ -52,7 +52,8 @@
     };
 
     niri-flake = {
-      url = "github:sodiboo/niri-flake";
+      url = "github:sodiboo/niri-flake/pull/1717/head"; # extraConfig
+      inputs.niri-unstable.url = "github:niri-wm/niri/pull/3508/head"; # open-consume-into-window
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -79,6 +80,7 @@
       overlays = [
         inputs.gen-luarc.overlays.default
         inputs.enhansi.overlays.default
+        inputs.niri-flake.overlays.niri
         (final: prev: {
           zmx = inputs.zmx.packages.${final.system}.zmx;
         })
@@ -323,8 +325,10 @@
         };
       in
       {
-        inherit devEnvs;
-        inherit mkDevShell;
+        packages = {
+          inherit devEnvs;
+          inherit mkDevShell;
+        };
         devShells.default = mkDevShell {
           devEnvs = [
             devEnvs.nix

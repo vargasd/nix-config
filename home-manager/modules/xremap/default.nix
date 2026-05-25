@@ -27,7 +27,6 @@
             "shift-alt-f" = "shift-ctrl-right";
 
             "ctrl-w" = "ctrl-backspace";
-            # TODO fix ctrl-u for fuzzel application.not doesn't work
             "ctrl-u" = [
               "shift-home"
               "backspace"
@@ -39,14 +38,17 @@
           application."only" = [ "/^foot/" ];
           exact_match = true;
           remap = {
+            "super-t".launch = [
+              "foot"
+              "--app-id"
+              "foot.main"
+            ];
             "super-s".launch = [
               "bash"
               "-c"
               /* bash */ ''
-                zoxide query --list |\
-                fuzzel -d |\
-                xargs -I {} sh -c \
-                'wlrctl window focus "app_id:foot.main" "title:{}" || foot --app-id foot.main --working-directory "{}"'
+                dir=$(printf "$HOME\n$(zoxide query --list)" | fuzzel -d)
+                wlrctl window focus "app_id:foot.main" "title:$dir" || foot --app-id foot.main --working-directory "$dir" zmx attach "$(basename $dir)#1"
               ''
             ];
           };
