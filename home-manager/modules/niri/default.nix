@@ -79,6 +79,9 @@
             repeat = false;
           };
           "Super+Space".action.spawn = lib.getExe pkgs.fuzzel;
+          "Alt+Space".action.spawn-sh = ''
+            niri msg --json windows | jq '.[] | (.id | tostring) + " " + .app_id + ": " + .title' -r | fuzzel -d | cut -d' ' -f1 | xargs niri msg action focus-window --id
+          '';
           "Super+Q" = {
             action.close-window = [ ];
             repeat = false;
