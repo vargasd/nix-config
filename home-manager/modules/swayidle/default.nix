@@ -18,7 +18,7 @@
           command = lock;
         }
         {
-          timeout = lockTime + 60;
+          timeout = lockTime * 2;
           command = display "off";
           resumeCommand = display "on";
         }
