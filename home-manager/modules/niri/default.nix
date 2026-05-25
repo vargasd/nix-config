@@ -87,6 +87,7 @@
           "${meh}+T".action.spawn-sh =
             "niri msg --json windows | jq 'first(.[] | select(.app_id == \"foot.main\")).layout.pos_in_scrolling_layout[0]' | xargs niri msg action focus-column || niri msg action spawn -- foot --app-id foot.main";
           "${meh}+B".action.spawn-sh = focusOrSpawn "librewolf" (lib.getExe pkgs.librewolf);
+          "Super+Shift+8".action.center-column = [ ];
           "Super+Left".action.focus-column-left = [ ];
           "Super+Right".action.focus-column-right = [ ];
           "Super+Down".action.focus-window-down = [ ];
@@ -110,6 +111,7 @@
             allow-when-locked = true;
             action.spawn-sh = "brightnessctl set 10%+";
           };
+          "${meh}+C".action.spawn-sh = ''notify-send "$(date)" -t 3000'';
 
           "${meh}+U".action.spawn-sh = "${lib.getExe pkgs.bemoji} -t";
           "${meh}+X".action.screenshot = [ ];
@@ -117,7 +119,6 @@
           "${meh}+Z".action.screenshot-screen = [ ];
           "${hyper}+Z".action.screenshot-window = [ ];
 
-          "${meh}+C".action.center-column = [ ];
           "${meh}+Q".action.toggle-window-floating = [ ];
           "${meh}+Home".action.focus-column-first = [ ];
           "${meh}+End".action.focus-column-last = [ ];
