@@ -13,6 +13,10 @@ select-word-style bash
 bindkey "^[[3~" delete-char
 bindkey "^[3;5~" delete-char
 
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
 setopt INC_APPEND_HISTORY
 
 setopt PROMPT_SUBST
