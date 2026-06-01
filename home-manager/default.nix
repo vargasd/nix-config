@@ -55,8 +55,6 @@
     # typos-lsp
     yaml-language-server
 
-    # formatters
-    prettierd
     vscode-js-debug
 
     # fonts

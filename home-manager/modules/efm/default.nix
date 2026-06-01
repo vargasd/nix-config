@@ -1,8 +1,10 @@
-{ lib, ... }:
+# https://github.com/creativenull/efmls-configs-nvim is your friend
+# Use ${pkgs.*} for globally-installed formatters
+{ pkgs, lib, ... }:
 let
   prettier = {
     format-can-range = true;
-    format-command = "prettierd '\${INPUT}' \${--range-start=charStart} \${--range-end=charEnd} --config-precedence=prefer-file";
+    format-command = "${lib.getExe pkgs.prettierd} '\${INPUT}' \${--range-start=charStart} \${--range-end=charEnd} --config-precedence=prefer-file";
     format-stdin = true;
     root-markers = [
       ".prettierrc"
@@ -18,6 +20,7 @@ let
       "prettier.config.cjs"
       "prettier.config.mjs"
     ];
+    require-marker = true;
   };
 
   biome = {
