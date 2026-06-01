@@ -4,15 +4,7 @@ return {
 		"nvim-lspconfig",
 		lazy = false,
 		after = function()
-			local has_biome = vim.fn.executable("biome") == 1
-			local has_vue = vim.fn.executable("vue-language-server") == 1
 			local has_tsgo = vim.fn.executable("tsgo") == 1
-
-			local ts_preferences = {
-				completions = { completeFunctionCalls = false },
-				includeCompletionsWithSnippetText = false,
-				includeCompletionsForImportStatements = true,
-			}
 
 			local servers = {
 				bashls = {
@@ -101,12 +93,13 @@ return {
 				phpactor = {},
 				eslint = {},
 				efm = {},
-				biome = has_biome and {} or nil,
-				vue_ls = has_vue and {} or nil,
-				ts_ls = not has_tsgo and {
+				biome = {},
+				vue_ls = {},
+				ts_ls = {
+					autostart = not has_tsgo,
 					format = false,
 					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-					init_options = not has_vue and { hostInfo = "neovim", preferences = ts_preferences } or {
+					init_options = {
 						hostInfo = "neovim",
 						plugins = {
 							{
@@ -117,14 +110,12 @@ return {
 								configNamespace = "typescript",
 							},
 						},
-						preferences = ts_preferences,
 					},
 				} or nil,
-				tsgo = has_tsgo and {
+				tsgo = {
+					autostart = has_tsgo,
 					format = false,
-					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
-					init_options = { hostInfo = "neovim", preferences = ts_preferences },
-				} or nil,
+				},
 			}
 
 			vim.api.nvim_create_autocmd("LspAttach", {
