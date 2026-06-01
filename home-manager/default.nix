@@ -49,7 +49,7 @@
     vscode-langservers-extracted # css, eslint, html, json
     efm-langserver
     harper
-    marksman
+    markdown-oxide
     postgres-language-server
     typescript-language-server
     # typos-lsp

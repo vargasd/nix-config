@@ -28,7 +28,7 @@ return {
 				},
 				cssls = {},
 				html = {},
-				marksman = {},
+				markdown_oxide = {},
 				harper_ls = {
 					filetypes = { "markdown", "asciidoc", "tex" },
 					settings = {
