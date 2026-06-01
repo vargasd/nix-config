@@ -44,17 +44,6 @@
     up # https://github.com/akavel/up
     yubikey-manager
 
-    # language servers
-    bash-language-server
-    vscode-langservers-extracted # css, eslint, html, json
-    efm-langserver
-    harper
-    markdown-oxide
-    postgres-language-server
-    typescript-language-server
-    # typos-lsp
-    yaml-language-server
-
     vscode-js-debug
 
     # fonts
@@ -134,16 +123,6 @@
   home.preferXdgDirectories = true;
   xdg = {
     enable = true;
-    configFile."typos-lsp/typos.toml" = {
-      enable = true;
-      text = # toml
-        ''
-          [default]
-          extend-ignore-words-re = [
-            "\\b[Nn]oice\\b"
-          ]
-        '';
-    };
     configFile."presenterm/config.yaml" = {
       enable = true;
       text = builtins.toJSON {
