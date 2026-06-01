@@ -161,8 +161,6 @@ return {
 					local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
 					if client then
-						if client.server_capabilities then client.server_capabilities.semanticTokensProvider = nil end
-
 						vim.api.nvim_create_autocmd("BufWritePre", {
 							buffer = ev.buf,
 							callback = function()
@@ -176,6 +174,10 @@ return {
 						})
 					end
 				end,
+			})
+
+			vim.lsp.config("*", {
+				on_init = function(client) client.server_capabilities.semanticTokensProvider = nil end,
 			})
 
 			for server_name, config in pairs(servers) do
