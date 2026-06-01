@@ -1,32 +1,20 @@
-local func = require("vim.func")
 ---@type lze.Spec[]
 return {
 	{
 		"nvim-lspconfig",
 		lazy = false,
 		after = function()
-			local prettier = {
-				formatCanRange = true,
-				formatCommand = "prettierd '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd} --config-precedence=prefer-file",
-				formatStdin = true,
-				rootMarkers = {
-					".prettierrc",
-					".prettierrc.json",
-					".prettierrc.js",
-					".prettierrc.yml",
-					".prettierrc.yaml",
-					".prettierrc.json5",
-					".prettierrc.mjs",
-					".prettierrc.cjs",
-					".prettierrc.toml",
-					"prettier.config.js",
-					"prettier.config.cjs",
-					"prettier.config.mjs",
-				},
+			local has_biome = vim.fn.executable("biome") == 1
+			local has_vue = vim.fn.executable("vue-language-server") == 1
+			local has_tsgo = vim.fn.executable("tsgo") == 1
+
+			local ts_preferences = {
+				completions = { completeFunctionCalls = false },
+				includeCompletionsWithSnippetText = false,
+				includeCompletionsForImportStatements = true,
 			}
 
-			local _, env_lsp = pcall(vim.json.decode, os.getenv("SAM_LSP_CONFIGS") or "{}")
-			local servers = vim.tbl_deep_extend("keep", vim.g.sam_lsp_configs or {}, env_lsp or {}, {
+			local servers = {
 				bashls = {
 					settings = {
 						bashIde = {
@@ -101,60 +89,43 @@ return {
 						},
 					},
 				},
-				ts_ls = {
+				gopls = {},
+				pyright = {},
+				nixd = {},
+				emmylua_ls = {},
+				kotlin_language_server = {},
+				gleam = {},
+				zls = {},
+				terraformls = {},
+				tflint = {},
+				phpactor = {},
+				eslint = {},
+				efm = {},
+				biome = has_biome and {} or nil,
+				vue_ls = has_vue and {} or nil,
+				ts_ls = not has_tsgo and {
 					format = false,
-					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-					init_options = {
+					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+					init_options = not has_vue and { hostInfo = "neovim", preferences = ts_preferences } or {
 						hostInfo = "neovim",
-						preferences = {
-							completions = { completeFunctionCalls = false },
-							includeCompletionsWithSnippetText = false,
-							includeCompletionsForImportStatements = true,
-						},
-					},
-				},
-				tsgo = {
-					format = false,
-					filetypes = {},
-					init_options = {
-						hostInfo = "neovim",
-						preferences = {
-							completions = { completeFunctionCalls = false },
-							includeCompletionsWithSnippetText = false,
-							includeCompletionsForImportStatements = true,
-						},
-					},
-				},
-				efm = {
-					init_options = { documentFormatting = true },
-					settings = {
-						languages = {
-							javascript = { prettier },
-							json = { prettier },
-							jsonc = { prettier },
-							typescript = { prettier },
-							svelte = { prettier },
-							sql = {
-								{
-									formatCommand = "sqruff fix -",
-									formatStdin = true,
-									rootMarkers = { ".sqruff" },
-								},
+						plugins = {
+							{
+								name = "@vue/typescript-plugin",
+								location = vim.fn.exepath("vue-language-server"):gsub("/bin/[^/]+$", "")
+									.. "/lib/language-tools/packages/language-server",
+								languages = { "vue" },
+								configNamespace = "typescript",
 							},
-							markdown = { prettier },
-							typespec = { prettier },
-							vue = { prettier },
-							yaml = { prettier },
 						},
+						preferences = ts_preferences,
 					},
-				},
-				eslint = {
-					settings = {
-						codeActionOnSave = { enable = true },
-						workingDirectories = { mode = "auto" },
-					},
-				},
-			})
+				} or nil,
+				tsgo = has_tsgo and {
+					format = false,
+					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
+					init_options = { hostInfo = "neovim", preferences = ts_preferences },
+				} or nil,
+			}
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)

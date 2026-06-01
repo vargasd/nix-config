@@ -2,6 +2,7 @@
 {
   imports = [
     ./modules/bat
+    ./modules/efm
     ./modules/firefox
     ./modules/git
     ./modules/gpg

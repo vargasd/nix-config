@@ -310,65 +310,28 @@
             inherit system;
             inherit overlays;
           };
-
-          mkDevShell =
-            {
-              devEnvs,
-              lspConfig ? { },
-              packages ? [ ],
-            }:
-            pkgs.mkShell {
-              packages = (devEnvs |> (map (cfg: cfg.packages or [ ])) |> builtins.concatLists) ++ packages;
-
-              SAM_LSP_CONFIGS =
-                devEnvs
-                |> builtins.foldl' (
-                  acc: cfg: pkgs.lib.attrsets.recursiveUpdate acc (cfg.lspConfig or { })
-                ) lspConfig
-                |> builtins.toJSON;
-
-              shellHook =
-                devEnvs
-                |> map (cfg: cfg.shellHook or "")
-                |> builtins.filter (hook: hook != null && hook != "")
-                |> builtins.concatStringsSep "\n";
-            };
-
-          devEnvs = {
-            biome = import ./devShells/biome.nix { inherit pkgs; };
-            c = import ./devShells/c.nix { inherit pkgs; };
-            go = import ./devShells/go.nix { inherit pkgs; };
-            gleam = import ./devShells/gleam.nix { inherit pkgs; };
-            kotlin = import ./devShells/kotlin.nix { inherit pkgs; };
-            lua = import ./devShells/lua.nix { inherit pkgs; };
-            nix = import ./devShells/nix.nix { inherit pkgs; };
-            php = import ./devShells/php.nix { inherit pkgs; };
-            pnpm = import ./devShells/pnpm.nix { inherit pkgs; };
-            python = import ./devShells/python.nix { inherit pkgs; };
-            ruby = import ./devShells/ruby.nix { inherit pkgs; };
-            terraform = import ./devShells/terraform.nix { inherit pkgs; };
-            tsgo = import ./devShells/tsgo.nix { inherit pkgs; };
-            tsserver = import ./devShells/tsserver.nix { inherit pkgs; };
-            vue = import ./devShells/vue.nix { inherit pkgs; };
-            zig = import ./devShells/zig.nix { inherit pkgs; };
-          };
         in
         {
-          packages = {
-            inherit devEnvs;
-            inherit mkDevShell;
-          };
-          devShells.default = mkDevShell {
-            devEnvs = [
-              devEnvs.nix
-              devEnvs.lua
+          devShells.default = pkgs.mkShell {
+            packages = with pkgs; [
+              emmylua-ls
+              stylua
+              nixd
+              nixfmt
             ];
+
+            shellHook =
+              let
+                luarc = pkgs.mk-luarc-json { plugins = import ./utils/vim-pkgs.nix pkgs; };
+              in
+              /* bash */ ''
+                ln -fs ${luarc} .luarc.json
+              '';
           };
         };
 
       systems = [
         "x86_64-linux"
-        "aarch64-darwin"
         "aarch64-darwin"
       ];
     };
