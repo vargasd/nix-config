@@ -251,6 +251,32 @@ let
             }
           ];
         };
+        "DuckDuckGo (No AI)" = {
+          urls = [
+            {
+              template = "https://noai.duckduckgo.com/?";
+              params = [
+                {
+                  name = "q";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+        };
+        "DuckDuckGo (No JS)" = {
+          urls = [
+            {
+              template = "https://html.duckduckgo.com/html?";
+              params = [
+                {
+                  name = "q";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+        };
       };
     };
   };
