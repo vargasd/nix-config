@@ -3,6 +3,7 @@
   xdg.dataFile."nvim/site/lua/lsp_servers.lua".text = ''
     return ${
       lib.generators.toLua { } {
+
         bashls = {
           cmd = [
             "${lib.getExe pkgs.bash-language-server}"
@@ -13,23 +14,12 @@
             "SC2034"
           ];
         };
-        cssls = {
-          cmd = [
-            "${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server"
-            "--stdio"
-          ];
-        };
-        html = {
-          cmd = [
-            "${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server"
-            "--stdio"
-          ];
-        };
-        markdown_oxide = {
-          cmd = [ "${lib.getExe pkgs.markdown-oxide}" ];
-        };
+
         harper_ls = {
-          cmd = [ "${lib.getExe pkgs.harper}" "--stdio" ];
+          cmd = [
+            "${lib.getExe pkgs.harper}"
+            "--stdio"
+          ];
           filetypes = [
             "markdown"
             "asciidoc"
@@ -37,6 +27,7 @@
           ];
           settings."harper-ls".linters.SentenceCapitalization = false;
         };
+
         yamlls = {
           cmd = [
             "${lib.getExe pkgs.yaml-language-server}"
@@ -53,6 +44,7 @@
             };
           };
         };
+
         jsonls = {
           cmd = [
             "${pkgs.vscode-langservers-extracted}/bin/vscode-json-language-server"
@@ -89,69 +81,7 @@
             }
           ];
         };
-        eslint = {
-          cmd = [
-            "${pkgs.vscode-langservers-extracted}/bin/vscode-eslint-language-server"
-            "--stdio"
-          ];
-        };
-        efm = {
-          cmd = [ "${lib.getExe pkgs.efm-langserver}" ];
-        };
-        gopls = {
-          cmd = [ "${lib.getExe pkgs.gopls}" ];
-        };
-        pyright = {
-          cmd = [ "${pkgs.pyright}/bin/pyright-langserver" "--stdio" ];
-        };
-        nixd = {
-          cmd = [ "${lib.getExe pkgs.nixd}" ];
-        };
-        emmylua_ls = {
-          cmd = [ "${lib.getExe pkgs.emmylua-ls}" ];
-        };
-        kotlin_language_server = {
-          cmd = [ "${lib.getExe pkgs.kotlin-language-server}" ];
-        };
-        gleam = {
-          cmd = [
-            "${lib.getExe pkgs.gleam}"
-            "lsp"
-          ];
-        };
-        zls = {
-          cmd = [ "${lib.getExe pkgs.zls}" ];
-        };
-        terraformls = {
-          cmd = [
-            "${lib.getExe pkgs.terraform-ls}"
-            "serve"
-          ];
-        };
-        tflint = {
-          cmd = [
-            "${lib.getExe pkgs.tflint}"
-            "--langserver"
-          ];
-        };
-        phpactor = {
-          cmd = [
-            "${lib.getExe pkgs.phpactor}"
-            "language-server"
-          ];
-        };
-        biome = {
-          cmd = [
-            "${lib.getExe pkgs.biome}"
-            "lsp-proxy"
-          ];
-        };
-        vue_ls = {
-          cmd = [
-            "${lib.getExe pkgs.vue-language-server}"
-            "--stdio"
-          ];
-        };
+
         ts_ls = {
           cmd = [
             "${lib.getExe pkgs.typescript-language-server}"
@@ -177,9 +107,55 @@
             ];
           };
         };
-        postgres_lsp = {
-          cmd = [ "${lib.getExe pkgs.postgres-language-server}" ];
-        };
+
+        cssls.cmd = [
+          "${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server"
+          "--stdio"
+        ];
+        html.cmd = [
+          "${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server"
+          "--stdio"
+        ];
+        markdown_oxide.cmd = [ "${lib.getExe pkgs.markdown-oxide}" ];
+        eslint.cmd = [
+          "${pkgs.vscode-langservers-extracted}/bin/vscode-eslint-language-server"
+          "--stdio"
+        ];
+        efm.cmd = [ "${lib.getExe pkgs.efm-langserver}" ];
+        gopls.cmd = [ "${lib.getExe pkgs.gopls}" ];
+        pyright.cmd = [
+          "${pkgs.pyright}/bin/pyright-langserver"
+          "--stdio"
+        ];
+        nixd.cmd = [ "${lib.getExe pkgs.nixd}" ];
+        emmylua_ls.cmd = [ "${lib.getExe pkgs.emmylua-ls}" ];
+        kotlin_language_server.cmd = [ "${lib.getExe pkgs.kotlin-language-server}" ];
+        gleam.cmd = [
+          "${lib.getExe pkgs.gleam}"
+          "lsp"
+        ];
+        zls.cmd = [ "${lib.getExe pkgs.zls}" ];
+        terraformls.cmd = [
+          "${lib.getExe pkgs.terraform-ls}"
+          "serve"
+        ];
+        tflint.cmd = [
+          "${lib.getExe pkgs.tflint}"
+          "--langserver"
+        ];
+        phpactor.cmd = [
+          "${lib.getExe pkgs.phpactor}"
+          "language-server"
+        ];
+        biome.cmd = [
+          "${lib.getExe pkgs.biome}"
+          "lsp-proxy"
+        ];
+        vue_ls.cmd = [
+          "${lib.getExe pkgs.vue-language-server}"
+          "--stdio"
+        ];
+        postgres_lsp.cmd = [ "${lib.getExe pkgs.postgres-language-server}" ];
       }
     }
   '';
