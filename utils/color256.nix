@@ -216,8 +216,8 @@ let
     colors.gray # 7  white-ish
     colors.bright_black # 8
     colors.red # 9
-    colors.yellow # 10
-    colors.green # 11
+    colors.green # 10
+    colors.yellow # 11
     colors.blue # 12
     colors.magenta # 13
     colors.cyan # 14
