@@ -29,6 +29,7 @@
   };
 
   services.gpg-agent.pinentry.package = pkgs.pinentry_mac;
+  programs.ghostty.package = pkgs.ghostty-bin;
 
   services.macos-remap-keys = {
     enable = true;

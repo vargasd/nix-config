@@ -2,7 +2,6 @@
 {
   programs.ghostty = {
     enable = true;
-    enableZshIntegration = true;
     clearDefaultKeybinds = true;
     settings = with colors; {
       background = named.background;
@@ -16,13 +15,20 @@
       shell-integration-features = "no-cursor";
       selection-foreground = "cell-background";
       selection-background = "cell-foreground";
-      # TODO enable after updating
-      # search-foreground = named.black;
-      # search-background = named.dark_yellow;
-      # search-selected-foreground = named.black;
-      # search-selected-background = named.yellow;
-      bell-features = "no-title no-attention";
+      search-foreground = named.black;
+      search-background = named.dark_yellow;
+      search-selected-foreground = named.black;
+      search-selected-background = named.yellow;
+      bell-features = [
+        "no-title"
+        "no-attention"
+      ];
       font-size = 16;
+      font-family = "JetBrainsMonoNL Nerd Font Mono";
+      font-style = "Bold";
+      font-style-bold = "ExtraBold";
+      font-style-italic = "Bold Italic";
+      font-style-bold-italic = "ExtraBold Italic";
       window-decoration = "none";
       window-show-tab-bar = "never";
       keybind =
@@ -31,7 +37,7 @@
           "super+s" = "toggle_tab_overview";
           "super+c" = "copy_to_clipboard";
           "super+v" = "paste_from_clipboard";
-          "alt+asterisk" = "toggle_split_zoom";
+          "alt+shift+8" = "toggle_split_zoom";
           "alt+arrow_right" = "goto_split:right";
           "alt+arrow_left" = "goto_split:left";
           "alt+arrow_down" = "goto_split:down";

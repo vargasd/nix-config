@@ -6,6 +6,7 @@
     ./modules/firefox
     ./modules/git
     ./modules/gpg
+    ./modules/ghostty
     ./modules/neovim
     ./modules/yazi
     ./modules/zsh
