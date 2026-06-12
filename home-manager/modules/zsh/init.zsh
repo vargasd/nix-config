@@ -21,9 +21,7 @@ setopt INC_APPEND_HISTORY
 
 setopt PROMPT_SUBST
 export PROMPT='
-%B%(?.%F{green}.%F{red})%~%F{magenta}${ZMX_SESSION:+ $ZMX_SESSION} %F{cyan}$(
-  git symbolic-ref --short HEAD 2> /dev/null || git rev-parse --short HEAD 2> /dev/null
-)
+%B%(?.%F{green}.%F{red})%~%F{magenta} $ZMX_SESSION
 %F{yellow}→ %f%b'
 
 function s () {
