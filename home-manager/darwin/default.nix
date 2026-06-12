@@ -40,14 +40,39 @@
 
   services.skhd = {
     enable = true;
-    config = pkgs.replaceVars ./skhdrc (
+    config =
       {
-        clearNotificationsPkg = inputs.clear-notifications;
-        tunnelblickScript = ./tunnelblick.scpt;
-        browser = home.defaultbrowser;
+        "meh-e" = "open -a finder";
+        "meh-v" = "${skhdVars.videoconf}";
+        "meh-s" = "open -a slack";
+        "meh-m" = "open -a mail";
+        "hyper-m" = "open -a messages";
+        "meh-i" = "${skhdVars.issues}";
+        "meh-t" = "open -a wezterm";
+        "hyper-t" = "open -a ghostty";
+        "meh-b" = ''open -a "${home.defaultbrowser}"'';
+        "hyper-b" = "open -a safari";
+        "meh-delete" = "open -a ScreenSaverEngine";
+        "hyper-left" = "open -g rectangle://execute-action?name=previous-display";
+        "hyper-up" = "open -g rectangle://execute-action?name=larger";
+        "hyper-down" = "open -g rectangle://execute-action?name=smaller";
+        "hyper-right" = "open -g rectangle://execute-action?name=next-display";
+        "meh-left" = "open -g rectangle://execute-action?name=left-half";
+        "meh-up" = "open -g rectangle://execute-action?name=maximize";
+        "meh-right" = "open -g rectangle://execute-action?name=right-half";
+        "meh-c" = "open -g rectangle://execute-action?name=center-two-thirds";
+
+        "fn-h" = "skhd -k left";
+        "fn-j" = "skhd -k down";
+        "fn-k" = "skhd -k up";
+        "fn-l" = "skhd -k right";
+
+        "meh-escape" = "osascript ${inputs.clear-notifications}/close_notifications_applescript.js";
+        "meh-tab" = "osascript ${./tunnelblick.scpt}";
+        "hyper-tab" = ''osascript -e $'tell application "Tunnelblick"\ndisconnect all\nend tell' '';
       }
-      // skhdVars
-    );
+      |> pkgs.lib.mapAttrsToList (name: val: "${name} : ${val}")
+      |> builtins.concatStringsSep "\n";
   };
 
   targets.darwin = {
