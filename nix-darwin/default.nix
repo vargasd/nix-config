@@ -1,14 +1,15 @@
 {
   home,
   pkgs,
-  lib,
   ...
 }:
 {
   homebrew = {
     enable = true;
     enableZshIntegration = true;
-    brews = [ "neurosnap/tap/zmx" ];
+    # TODO uncomment after https://github.com/nix-darwin/nix-darwin/pull/1789
+    # brews = [ "neurosnap/tap/zmx" ];
+    taps = [ "neurosnap/tap" ];
     casks = [
       "brave-browser"
       "homerow"
@@ -21,6 +22,8 @@
       autoUpdate = true;
       upgrade = true;
       cleanup = "zap";
+      # TODO remove after https://github.com/nix-darwin/nix-darwin/pull/1789
+      extraFlags = [ "--force-cleanup" ];
     };
   };
 
