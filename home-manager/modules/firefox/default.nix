@@ -25,24 +25,10 @@ let
     ext.vimium-c
     ext.ublock-origin
     ext.kagi-privacy-pass
-    ext.multi-account-containers
     ext.browserpass
     customAddons.tabDeduplicator
   ];
   config = {
-    containersForce = true;
-    containers = {
-      primary = {
-        color = "blue";
-        icon = "fingerprint";
-        id = 1;
-      };
-      alt = {
-        color = "orange";
-        icon = "fingerprint";
-        id = 2;
-      };
-    };
     isDefault = true;
     # https://support.mozilla.org/en-US/questions/1372399
     userChrome = /* css */ ''
