@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   ...
 }:
 {
@@ -8,7 +7,6 @@
     enable = true;
     enableVteIntegration = true;
     defaultKeymap = "emacs";
-    dotDir = "${config.xdg.configHome}/zsh";
 
     history = {
       append = false; # using INC_APPEND_HISTORY which home-manager doesn't support
