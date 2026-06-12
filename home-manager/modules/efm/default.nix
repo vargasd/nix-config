@@ -134,6 +134,12 @@ in
             format-stdin = true;
           }
         ];
+        fish = [
+          {
+            format-command = "${pkgs.fish}/bin/fish_indent";
+            format-stdin = true;
+          }
+        ];
         gleam = [
           {
             format-command = "${lib.getExe pkgs.gleam} format --stdin";

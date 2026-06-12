@@ -4,6 +4,7 @@
     ./modules/bat
     ./modules/efm
     ./modules/firefox
+    ./modules/fish
     ./modules/git
     ./modules/gpg
     ./modules/ghostty

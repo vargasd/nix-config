@@ -92,7 +92,7 @@
       "wheel"
       "sudo"
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   services.xremap = {
@@ -104,6 +104,7 @@
     config.keymap = [ ];
   };
 
+  programs.fish.enable = true;
   programs.zsh.enable = true;
 
   environment.variables = {

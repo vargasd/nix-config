@@ -7,6 +7,7 @@
   homebrew = {
     enable = true;
     enableZshIntegration = true;
+    enableFishIntegration = true;
     # TODO uncomment after https://github.com/nix-darwin/nix-darwin/pull/1789
     # brews = [ "neurosnap/tap/zmx" ];
     taps = [ "neurosnap/tap" ];
@@ -29,11 +30,15 @@
 
   users.users.${home.user} = {
     home = home.homeDirectory;
+    shell = pkgs.fish;
   };
 
   environment.shells = [
+    pkgs.fish
     pkgs.zsh
   ];
+
+  programs.fish.enable = true;
 
   nix.enable = false;
 

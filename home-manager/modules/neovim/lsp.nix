@@ -134,6 +134,10 @@
           "${lib.getExe pkgs.gleam}"
           "lsp"
         ];
+        fish_lsp.cmd = [
+          "${lib.getExe pkgs.fish-lsp}"
+          "start"
+        ];
         zls.cmd = [ "${lib.getExe pkgs.zls}" ];
         terraformls.cmd = [
           "${lib.getExe pkgs.terraform-ls}"
