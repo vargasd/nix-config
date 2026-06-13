@@ -11,6 +11,12 @@
     "pipe-operators"
   ];
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 10d";
+  };
+
   # Use the systemd-boot EFI boot loader.
   # boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
