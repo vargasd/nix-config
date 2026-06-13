@@ -139,6 +139,22 @@
 
   services.geoclue2.enable = true;
 
+  services.keyd = {
+    enable = true;
+    keyboards.default.settings = {
+      main = {
+        capslock = "overload(navmeh, esc)";
+        sysrq = "layer(meta)";
+      };
+      "navmeh:C-A-S" = {
+        h = "left";
+        j = "down";
+        k = "up";
+        l = "right";
+      };
+    };
+  };
+
   hardware.bluetooth.enable = true;
 
   # This value determines the NixOS release from which the default
