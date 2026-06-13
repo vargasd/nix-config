@@ -59,6 +59,12 @@
             "5500"
           ];
         }
+        {
+          argv = [
+            "${pkgs.keyd}/bin/keyd-application-mapper"
+            "-d"
+          ];
+        }
       ];
       hotkey-overlay.skip-at-startup = true;
       prefer-no-csd = true;
@@ -112,6 +118,11 @@
           "Super+Period".action.consume-or-expel-window-right = [ ];
           "${meh}+Delete".action.spawn = "${lib.getExe pkgs.swaylock}";
           "${hyper}+Delete".action.quit.skip-confirmation = true;
+          "Ctrl+F1".action.spawn-sh = "foot --app-id foot.main";
+          "Ctrl+F2".action.spawn-sh = /* bash */ ''
+            dir=$(printf "$HOME\n$(zoxide query --list)" | fuzzel -d)
+            wlrctl window focus "app_id:foot.main" "title:$dir" || foot --app-id foot.main --working-directory "$dir" zmx attach "$(basename $dir)#1"
+          '';
 
           # percent
           "${meh}+5" = {

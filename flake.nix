@@ -55,11 +55,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    xremap = {
-      url = "github:xremap/nix-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # TODO: remove after https://github.com/NixOS/nixpkgs/pull/468608 (also the homebrew installation)
     zmx = {
       url = "github:neurosnap/zmx";
@@ -130,7 +125,6 @@
               nixpkgs.overlays = overlays;
             }
             ./nixos/thia.nix
-            inputs.xremap.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = specialArgs;
@@ -161,7 +155,6 @@
               nixpkgs.overlays = overlays;
             }
             ./nixos/inix.nix
-            inputs.xremap.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = specialArgs;
@@ -193,7 +186,6 @@
               nixpkgs.config.allowUnfree = true;
             }
             ./nixos/vm.nix
-            inputs.xremap.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = specialArgs;
@@ -222,7 +214,6 @@
           modules = [
             { nixpkgs.overlays = overlays; }
             ./nixos/nuc.nix
-            inputs.xremap.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = specialArgs;

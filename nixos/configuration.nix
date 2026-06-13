@@ -94,19 +94,16 @@
     isNormalUser = true;
     extraGroups = [
       "wheel"
-      "sudo"
+      "keyd"
+      "input"
+      "uinput"
     ];
     shell = pkgs.fish;
   };
-
-  services.xremap = {
-    enable = true;
-    withNiri = true;
-    serviceMode = "user";
-    userName = "vargasd";
-    # config is done in home-manager (but this is required)
-    config.keymap = [ ];
-  };
+  # https://github.com/NixOS/nixpkgs/issues/290161
+  systemd.services.keyd.serviceConfig.CapabilityBoundingSet = [ "CAP_SETGID" ];
+  systemd.services.keyd.serviceConfig.AmbientCapabilities = [ "CAP_SETGID" ];
+  users.groups.keyd = { };
 
   programs.fish.enable = true;
   programs.zsh.enable = true;
@@ -122,6 +119,7 @@
     neovim
     git
     wl-clipboard-rs
+    keyd
   ];
 
   programs.niri = {
@@ -138,6 +136,22 @@
   services.pcscd.enable = true;
 
   services.geoclue2.enable = true;
+
+  services.keyd = {
+    enable = true;
+    keyboards.default.settings = {
+      main = {
+        capslock = "overload(navmeh, esc)";
+        sysrq = "layer(meta)";
+      };
+      "navmeh:C-A-S" = {
+        h = "left";
+        j = "down";
+        k = "up";
+        l = "right";
+      };
+    };
+  };
 
   hardware.bluetooth.enable = true;
 
