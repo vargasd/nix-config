@@ -24,7 +24,6 @@ let
   exts = [
     ext.vimium-c
     ext.ublock-origin
-    ext.kagi-privacy-pass
     ext.browserpass
     customAddons.tabDeduplicator
   ];
@@ -40,6 +39,12 @@ let
       }
     '';
     settings = with colors.named; {
+      # librewolf
+      "privacy.clearOnShutdown.history" = false;
+      "privacy.clearOnShutdown.cookies" = false;
+      "network.cookie.lifetimePolicy" = 0;
+      "privacy.resistFingerprinting.letterboxing" = true;
+
       "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       # blank pages for things
       "browser.startup.homepage" = "about:blank";
