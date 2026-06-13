@@ -122,14 +122,14 @@
           "--stdio"
         ];
         efm.cmd = [ "${lib.getExe pkgs.efm-langserver}" ];
-        gopls.cmd = [ "${lib.getExe pkgs.gopls}" ];
+        gopls.cmd = [ "gopls" ]; # lib.getExe pkgs.gopls
         pyright.cmd = [
           "${pkgs.pyright}/bin/pyright-langserver"
           "--stdio"
         ];
         nixd.cmd = [ "${lib.getExe pkgs.nixd}" ];
         emmylua_ls.cmd = [ "${lib.getExe pkgs.emmylua-ls}" ];
-        kotlin_language_server.cmd = [ "${lib.getExe pkgs.kotlin-language-server}" ];
+        kotlin_language_server.cmd = [ "kotlin-language-server" ]; # lib.getExe pkgs.kotlin-language-server
         gleam.cmd = [
           "${lib.getExe pkgs.gleam}"
           "lsp"
@@ -138,21 +138,21 @@
           "${lib.getExe pkgs.fish-lsp}"
           "start"
         ];
-        zls.cmd = [ "${lib.getExe pkgs.zls}" ];
+        zls.cmd = [ "zls" ]; # pkgs.zls
         terraformls.cmd = [
-          "${lib.getExe pkgs.terraform-ls}"
+          "terraform-ls" # pkgs.terraform-ls
           "serve"
         ];
         tflint.cmd = [
-          "${lib.getExe pkgs.tflint}"
+          "tflint" # pkgs.tflint
           "--langserver"
         ];
         phpactor.cmd = [
-          "${lib.getExe pkgs.phpactor}"
+          "phpactor" # pkgs.phpactor
           "language-server"
         ];
         biome.cmd = [
-          "${lib.getExe pkgs.biome}"
+          "biome" # pkgs.biome
           "lsp-proxy"
         ];
         vue_ls.cmd = [

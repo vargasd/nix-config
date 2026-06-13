@@ -22,14 +22,20 @@ let
     ];
     require-marker = true;
   };
+  nixfmt = lib.getExe pkgs.nixfmt;
+  sqruff = lib.getExe pkgs.sqruff;
+  stylua = lib.getExe pkgs.stylua;
+  gleam = lib.getExe pkgs.gleam;
 
+  ruff = "ruff"; # lib.getExe pkgs.ruff
+  ktfmt = "ktfmt"; # lib.getExe pkgs.ktfmt
+  zig = "zig"; # lib.getExe pkgs.zig
   biome = {
-    format-command = "${lib.getExe pkgs.biome} check --write --stdin-file-path '\${INPUT}'";
+    format-command = "biome check --write --stdin-file-path '\${INPUT}'";
     format-stdin = true;
     root-markers = [ "biome.json" ];
     require-marker = true;
   };
-
 in
 {
   xdg.configFile."efm-langserver/config.yaml" = {
@@ -81,14 +87,14 @@ in
         yaml = [ prettier ];
         sql = [
           {
-            format-command = "${lib.getExe pkgs.sqruff} fix -";
+            format-command = "${sqruff} fix -";
             format-stdin = true;
             root-markers = [ ".sqruff" ];
           }
         ];
         python = [
           {
-            format-command = "${lib.getExe pkgs.ruff} format --no-cache -";
+            format-command = "${ruff} format --no-cache -";
             format-stdin = true;
             root-markers = [
               "pyproject.toml"
@@ -99,7 +105,7 @@ in
         ];
         nix = [
           {
-            format-command = "${lib.getExe pkgs.nixfmt}";
+            format-command = nixfmt;
             format-stdin = true;
             root-markers = [
               "flake.nix"
@@ -111,7 +117,7 @@ in
         lua = [
           {
             format-can-range = true;
-            format-command = "${lib.getExe pkgs.stylua} --color Never \${--range-start:charStart} \${--range-end:charEnd} --stdin-filepath '\${INPUT}' -";
+            format-command = "${stylua} --color Never \${--range-start:charStart} \${--range-end:charEnd} --stdin-filepath '\${INPUT}' -";
             format-stdin = true;
             root-markers = [
               "stylua.toml"
@@ -130,7 +136,7 @@ in
               "%\\s%#%l:%c %# %tarning  %m"
             ];
             lint-ignore-exit-code = true;
-            format-command = "${lib.getExe pkgs.ktfmt} -";
+            format-command = "${ktfmt} -";
             format-stdin = true;
           }
         ];
@@ -142,13 +148,13 @@ in
         ];
         gleam = [
           {
-            format-command = "${lib.getExe pkgs.gleam} format --stdin";
+            format-command = "${gleam} format --stdin";
             format-stdin = true;
           }
         ];
         zig = [
           {
-            format-command = "${lib.getExe pkgs.zig} fmt --stdin";
+            format-command = "${zig} fmt --stdin";
             format-stdin = true;
           }
         ];
