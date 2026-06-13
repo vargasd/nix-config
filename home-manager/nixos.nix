@@ -2,10 +2,6 @@
 {
   /*
     TODO
-      - input
-        - compose key
-      - foot/ghostty as primary terminal
-        - neovim scrollback
       - clipboard (cliphist?)
       - auto dark mode (darkman?)
       - screencast/share (https://github.com/niri-wm/niri/wiki/Important-Software#portals)
@@ -75,6 +71,11 @@
         (import ../utils/symbols.nix { inherit pkgs; }).all
         |> builtins.map (data: "${data.emoji} ${data.label}")
         |> builtins.concatStringsSep "\n";
+    };
+
+    mimeApps = {
+      enable = true;
+      defaultApplicationPackages = with pkgs; [ librewolf ];
     };
 
     desktopEntries = {
