@@ -98,6 +98,14 @@
           "Super+Up".action.focus-window-up = [ ];
           "Super+Alt+Left".action.move-column-left = [ ];
           "Super+Alt+Down".action.switch-preset-column-width = [ ];
+          "${meh}+Left".action.focus-monitor-left = [ ];
+          "${meh}+Down".action.focus-monitor-down = [ ];
+          "${meh}+Up".action.focus-monitor-up = [ ];
+          "${meh}+Right".action.focus-monitor-right = [ ];
+          "${hyper}+Left".action.move-column-to-monitor-left = [ ];
+          "${hyper}+Down".action.move-column-to-monitor-down = [ ];
+          "${hyper}+Up".action.move-column-to-monitor-up = [ ];
+          "${hyper}+Right".action.move-column-to-monitor-right = [ ];
           "Super+Alt+Up".action.maximize-column = [ ];
           "Super+Alt+Right".action.move-column-right = [ ];
           "Super+Comma".action.consume-or-expel-window-left = [ ];
