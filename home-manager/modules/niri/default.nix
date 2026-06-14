@@ -124,15 +124,33 @@
             wlrctl window focus "app_id:foot.main" "title:$dir" || foot --app-id foot.main --working-directory "$dir" zmx attach "$(basename $dir)#1"
           '';
 
-          # percent
           "${meh}+5" = {
             allow-when-locked = true;
             action.spawn-sh = "brightnessctl set 10%-";
           };
-          # asterisk
+          "XF86MonBrightnessDown" = {
+            allow-when-locked = true;
+            action.spawn-sh = "brightnessctl set 10%-";
+          };
           "${meh}+8" = {
             allow-when-locked = true;
             action.spawn-sh = "brightnessctl set 10%+";
+          };
+          "XF86MonBrightnessUp" = {
+            allow-when-locked = true;
+            action.spawn-sh = "brightnessctl set 10%+";
+          };
+          "XF86AudioMute" = {
+            allow-when-locked = true;
+            action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0";
+          };
+          "XF86AudioLowerVolume" = {
+            allow-when-locked = true;
+            action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+          };
+          "XF86AudioRaiseVolume" = {
+            allow-when-locked = true;
+            action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
           };
           "${meh}+C".action.spawn-sh = ''notify-send "$(date)" -t 3000'';
 
