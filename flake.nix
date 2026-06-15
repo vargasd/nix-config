@@ -19,11 +19,6 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    langthing = {
-      url = "github:vargasd/langthing";
-      flake = false;
-    };
-
     enhansi = {
       url = "github:vargasd/enhansi";
       inputs.nixpkgs.follows = "nixpkgs";

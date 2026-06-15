@@ -83,7 +83,6 @@ in
           biome
         ];
         markdown = [ prettier ];
-        typespec = [ prettier ];
         yaml = [ prettier ];
         sql = [
           {

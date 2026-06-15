@@ -238,22 +238,6 @@
         "type": "github"
       }
     },
-    "langthing": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1750085972,
-        "narHash": "sha256-h9d4otkVLWlOpKt5UT/5uSpkxsM8MuNGjAvfaug/X0w=",
-        "owner": "vargasd",
-        "repo": "langthing",
-        "rev": "4852a6a36f2608f8048318fd0a460d6bb87b2edd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vargasd",
-        "repo": "langthing",
-        "type": "github"
-      }
-    },
     "luvit-meta": {
       "flake": false,
       "locked": {
@@ -449,7 +433,6 @@
         "flake-parts": "flake-parts_2",
         "gen-luarc": "gen-luarc",
         "home-manager": "home-manager",
-        "langthing": "langthing",
         "niri-flake": "niri-flake",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",

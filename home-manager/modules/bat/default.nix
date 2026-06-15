@@ -7,10 +7,6 @@
       style = "plain";
     };
     syntaxes = {
-      typespec = {
-        src = inputs.langthing;
-        file = "typespec/syntax/typespec.sublime-syntax";
-      };
       gleam = {
         src = inputs.sublime-text-gleam;
         file = "package/Gleam.sublime-syntax";

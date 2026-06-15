@@ -126,10 +126,6 @@
         in
         [
           {
-            url = "*.tsp";
-            run = bat;
-          }
-          {
             url = "*.gleam";
             run = bat;
           }
