@@ -27,7 +27,6 @@
       bluetui
       brightnessctl
       impala
-      wlrctl
       libnotify
       bemoji
       # needed to insert for bemoji

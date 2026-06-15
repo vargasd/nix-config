@@ -76,8 +76,8 @@
           meh = "Alt+Ctrl+Shift";
           hyper = "${meh}+Super";
           focusOrSpawn =
-            winmatch: exe:
-            "${lib.getExe pkgs.wlrctl} window focus ${winmatch} || niri msg action spawn -- ${exe}";
+            app_id: bin:
+            ''niri msg -j windows | jq '.[] | select(.app_id == "${app_id}") | .id' | xargs niri msg action focus-window --id || niri msg action spawn -- ${bin}'';
         in
         {
           "Ctrl+Up" = {
