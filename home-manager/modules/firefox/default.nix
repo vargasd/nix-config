@@ -25,8 +25,30 @@ let
     ext.vimium-c
     ext.ublock-origin
     ext.browserpass
+    ext.firefox-color
+    ext.darkreader
     customAddons.tabDeduplicator
   ];
+  hexToDecMap = {
+    "0" = 0;
+    "1" = 1;
+    "2" = 2;
+    "3" = 3;
+    "4" = 4;
+    "5" = 5;
+    "6" = 6;
+    "7" = 7;
+    "8" = 8;
+    "9" = 9;
+    "a" = 10;
+    "b" = 11;
+    "c" = 12;
+    "d" = 13;
+    "e" = 14;
+    "f" = 15;
+  };
+  toHex = n: hexToDecMap."${n}";
+  profile = "default";
   config = {
     isDefault = true;
     # https://support.mozilla.org/en-US/questions/1372399
@@ -43,7 +65,7 @@ let
       "privacy.clearOnShutdown.history" = false;
       "privacy.clearOnShutdown.cookies" = false;
       "network.cookie.lifetimePolicy" = 0;
-      "privacy.resistFingerprinting.letterboxing" = true;
+      # "privacy.resistFingerprinting.letterboxing" = true;
 
       "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       # blank pages for things
@@ -91,7 +113,7 @@ let
       "reader.custom_colors.selection-highlight" = "#${yellow}";
       "reader.custom_colors.unvisited-links" = "#${blue}";
       "reader.custom_colors.visited-links" = "#${magenta}";
-
+      "layout.css.prefers-color-scheme.content-override" = 0; # dark mode
       "sidebar.revamp" = true;
       "sidebar.verticalTabs" = true;
       "sidebar.verticalTabs.dragToPinPromo.dismissed" = true; # ftux
@@ -224,6 +246,116 @@ let
           };
         };
       };
+
+      settings.${ext.firefox-color.addonId} = {
+        force = true;
+        settings =
+          with colors.named
+          |> builtins.mapAttrs (
+            n: val: {
+              r = (toHex (builtins.substring 0 1 val)) * 16 + (toHex (builtins.substring 1 1 val));
+              g = (toHex (builtins.substring 2 1 val)) * 16 + (toHex (builtins.substring 3 1 val));
+              b = (toHex (builtins.substring 4 1 val)) * 16 + (toHex (builtins.substring 5 1 val));
+            }
+          ); {
+            firstRunDone = true;
+            theme.colors = {
+              frame = black;
+              frame_inactive = black;
+
+              toolbar = bright_black;
+              toolbar_text = gray;
+              toolbar_field = bright_black;
+              toolbar_field_text = gray;
+              toolbar_field_highlight = dark_blue;
+              toolbar_field_border = bright_black;
+              toolbar_field_focus = black;
+              toolbar_field_border_focus = blue;
+              toolbar_field_text_focus = white;
+              bookmark_text = gray;
+
+              tab_background_text = gray;
+              tab_line = bright_black;
+              tab_loading = gray;
+              tab_text = gray;
+
+              button_background_active = bright_black;
+              button_background_hover = bright_black;
+
+              icons_attention = red;
+              icons = gray;
+
+              ntp_background = black;
+              ntp_text = gray;
+
+              sidebar = black;
+              sidebar_text = gray;
+              sidebar_border = bright_black;
+              sidebar_highlight = dark_blue;
+              sidebar_highlight_text = white;
+
+              popup = black;
+              popup_text = gray;
+              popup_border = bright_black;
+              popup_highlight = dark_blue;
+              popup_highlight_text = white;
+            };
+          };
+      };
+
+      settings.${ext.darkreader.addonId} = {
+        force = true;
+        settings = with colors.named; {
+          schemeVersion = 2;
+          enabled = true;
+          fetchNews = false;
+          theme = {
+            mode = 1;
+            # brightness = 100;
+            # contrast = 100;
+            # grayscale = 0;
+            # sepia = 0;
+            useFont = true;
+            fontFamily = "JetBrains Mono";
+            # textStroke = 0;
+            engine = "dynamicTheme";
+            # stylesheet = "";
+            darkSchemeBackgroundColor = "#${black}";
+            darkSchemeTextColor = "#${white}";
+            lightSchemeBackgroundColor = "#${white}";
+            lightSchemeTextColor = "#${black}";
+            # scrollbarColor = "";
+            # selectionColor = "";
+            styleSystemControls = false;
+            lightColorScheme = "Default";
+            darkColorScheme = "Default";
+            immediateModify = false;
+          };
+          enabledByDefault = true;
+          changeBrowserTheme = false;
+          syncSettings = false;
+          syncSitesFixes = false;
+          automation = {
+            behavior = "Scheme";
+            enabled = false;
+            mode = "";
+          };
+          time = {
+            activation = "18:00";
+            deactivation = "9:00";
+          };
+          location = {
+            latitude = null;
+            longitude = null;
+          };
+          previewNewDesign = false;
+          previewNewestDesign = false;
+          enableForPDF = true;
+          enableForProtectedPages = true;
+          enableContextMenus = false;
+          detectDarkTheme = true;
+        };
+      };
     };
     search = {
       force = true;
@@ -273,9 +405,44 @@ let
   };
 in
 {
-  programs.firefox.profiles.default = config;
+  programs.firefox.profiles.${profile} = config;
   programs.librewolf = {
     enable = true;
     profiles.default = config;
+  };
+
+  textfox = {
+    enable = true;
+    profiles = [ profile ];
+    config = with colors.named; {
+      background.color = "#${black}";
+      border = {
+        color = "#${bright_black}";
+        width = "2px";
+        transition = "none";
+        radius = "0";
+      };
+      navbar = {
+        margin = "2px";
+        padding = "2px";
+      };
+      displayWindowControls = false;
+      displayNavButtons = true;
+      displayUrlbarIcons = false;
+      displaySidebarTools = false;
+      displayTitles = false;
+      font = {
+        family = "'JetBrains Mono', monospace";
+        size = "15px";
+      };
+      tabs.vertical.enable = true;
+      bookmarks.alignment = "left";
+      icons = {
+        toolbar.extensions.enable = true;
+        context.extensions.enable = true;
+        context.firefox.enable = true;
+      };
+      extraConfig = "/* custom css here */";
+    };
   };
 }

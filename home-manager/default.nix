@@ -1,6 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
+    inputs.textfox.homeManagerModules.default
     ./modules/bat
     ./modules/efm
     ./modules/firefox

@@ -51,8 +51,11 @@
     };
 
     # TODO: remove after https://github.com/NixOS/nixpkgs/pull/468608 (also the homebrew installation)
-    zmx = {
-      url = "github:neurosnap/zmx";
+    zmx.url = "github:neurosnap/zmx";
+
+    textfox = {
+      url = "github:adriankarlen/textfox";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
