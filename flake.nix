@@ -54,7 +54,7 @@
     zmx.url = "github:neurosnap/zmx";
 
     textfox = {
-      url = "github:adriankarlen/textfox";
+      url = "github:vargasd/textfox";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

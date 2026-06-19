@@ -300,11 +300,11 @@
     "niri-unstable": {
       "flake": false,
       "locked": {
-        "lastModified": 1778690654,
-        "narHash": "sha256-Lb+uyam4gZpA6tnSRHnYhcEs2ZGUTn7l45B4Fs52p1s=",
+        "lastModified": 1781721860,
+        "narHash": "sha256-RdWmxjM+CJ7dtuRulaExpvjiphWmGWQaGyg07Cralyg=",
         "owner": "niri-wm",
         "repo": "niri",
-        "rev": "c63aef06f2c1df6debc984f556825720d0d1a100",
+        "rev": "448a51d8d11c3c3bb208628e2ddf3fe1ca90badb",
         "type": "github"
       },
       "original": {
@@ -479,15 +479,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1780405768,
-        "narHash": "sha256-WhPHaupeq5yWP53anFH6vr/ZMQQtAYGtpgUhzqWx9Ws=",
-        "owner": "adriankarlen",
+        "lastModified": 1781717354,
+        "narHash": "sha256-TIfbUdXaXEwszjkE9e2Mrs1s3QNQuJGQctVxTU/NtVU=",
+        "owner": "vargasd",
         "repo": "textfox",
-        "rev": "d6895da75f10fa17f1b637759aec3d84818b20e2",
+        "rev": "c77559c947df7c369f097da7805bbe9a47916443",
         "type": "github"
       },
       "original": {
-        "owner": "adriankarlen",
+        "owner": "vargasd",
         "repo": "textfox",
         "type": "github"
       }
