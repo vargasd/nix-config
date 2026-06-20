@@ -1,4 +1,9 @@
-{ colors, lib, ... }:
+{
+  pkgs,
+  colors,
+  lib,
+  ...
+}:
 {
   programs.ghostty = {
     enable = true;
@@ -51,6 +56,6 @@
         |> lib.attrsets.attrsToList
         |> builtins.map (kv: "${kv.name}=${kv.value}");
     };
-    # systemd.enable = true;
+    systemd.enable = lib.mkIf pkgs.stdenv.isLinux true;
   };
 }
