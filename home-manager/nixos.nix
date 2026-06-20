@@ -11,6 +11,7 @@
     ./default.nix
     ./modules/foot
     ./modules/fuzzel
+    ./modules/keyd
     ./modules/mako
     ./modules/niri
     ./modules/swayidle
@@ -62,29 +63,6 @@
         [filechooser]
         cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
       '';
-    };
-
-    configFile."keyd/app.conf" = {
-      enable = true;
-      text =
-        let
-          guiSettings = {
-            "control.a" = "home";
-            "control.e" = "end";
-            "alt.b" = "C-left";
-            "alt.f" = "C-right";
-            "control.w" = "C-backspace";
-            "control.u" = "macro(S-home backspace)";
-          };
-        in
-        pkgs.lib.generators.toINI { } {
-          librewolf = guiSettings;
-          firefox = guiSettings;
-          "foot-main" = {
-            "meta.t" = "C-f1";
-            "meta.s" = "C-f2";
-          };
-        };
     };
 
     dataFile."bemoji/data.txt" = {
