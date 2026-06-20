@@ -10,6 +10,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ./configuration.nix
+    ./laptop.nix
   ];
 
   networking.hostName = "thia";
