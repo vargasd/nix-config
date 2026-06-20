@@ -387,7 +387,10 @@ let
   };
 in
 {
-  programs.firefox.profiles.${profile} = config;
+  programs.firefox = {
+    enable = true;
+    profiles.${profile} = config;
+  };
   programs.librewolf = {
     enable = true;
     profiles.default = config;
@@ -405,7 +408,7 @@ in
         radius = "0";
       };
       navbar = {
-        margin = "8px 8px 2px";
+        margin = "8px 2px 0px 8px";
         padding = "4px";
       };
       displayWindowControls = false;
