@@ -143,6 +143,8 @@
       main = {
         capslock = "overload(navmeh, esc)";
         sysrq = "layer(meta)";
+        # rightalt acts as altgr by default
+        rightalt = "layer(alt)";
       };
       "navmeh:C-A-S" = {
         h = "left";
