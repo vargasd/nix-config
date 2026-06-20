@@ -67,6 +67,7 @@
             "-d"
           ];
         }
+        { argv = [ (lib.getExe pkgs.waybar) ]; }
       ];
       hotkey-overlay.skip-at-startup = true;
       prefer-no-csd = true;
@@ -95,6 +96,7 @@
             repeat = false;
           };
 
+          "${meh}+H".action.spawn-sh = "killall -SIGUSR1 waybar .waybar-wrapped";
           "${meh}+Escape".action.spawn-sh = "${pkgs.mako}/bin/makoctl dismiss --all";
           "${meh}+T".action.spawn-sh =
             "niri msg --json windows | jq 'first(.[] | select(.app_id == \"foot.main\")).layout.pos_in_scrolling_layout[0]' | xargs niri msg action focus-column || niri msg action spawn -- foot --app-id foot.main";

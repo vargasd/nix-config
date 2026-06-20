@@ -15,6 +15,7 @@
     ./modules/niri
     ./modules/swayidle
     ./modules/swaylock
+    ./modules/waybar
   ];
 
   home = {
