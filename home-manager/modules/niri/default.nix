@@ -15,15 +15,17 @@
 
     settings = {
       input.keyboard.repeat-delay = 200;
-      layout = {
+      layout = with colors.named; {
         default-column-width.proportion = 0.5;
+        default-column-display = "tabbed";
+        background-color = background;
         gaps = 2;
         focus-ring = {
           enable = true;
           width = 2;
-          active.color = colors.named.blue;
-          inactive.color = colors.named.gray;
-          urgent.color = colors.named.red;
+          active.color = gray;
+          inactive.color = bright_black;
+          urgent.color = red;
         };
         tab-indicator = {
           hide-when-single-tab = true;
@@ -33,9 +35,9 @@
           place-within-column = true;
           # position = "bottom";
           width = 2;
-          active.color = colors.named.magenta;
-          inactive.color = colors.named.bright_black;
-          urgent.color = colors.named.red;
+          active.color = magenta;
+          inactive.color = bright_black;
+          urgent.color = red;
         };
       };
 
@@ -99,12 +101,19 @@
           "${meh}+B".action.spawn-sh = focusOrSpawn "firefox" (lib.getExe pkgs.firefox);
 
           "Super+Shift+8".action.center-column = [ ];
+          "Super+Page_Down".action.switch-preset-column-width = [ ];
+          "Super+Page_Up".action.maximize-column = [ ];
+
           "Super+Left".action.focus-column-left = [ ];
           "Super+Right".action.focus-column-right = [ ];
-          "Super+Down".action.focus-window-down = [ ];
           "Super+Up".action.focus-window-up = [ ];
+          "Super+Down".action.focus-window-down = [ ];
+
           "Super+Alt+Left".action.move-column-left = [ ];
-          "Super+Alt+Down".action.switch-preset-column-width = [ ];
+          "Super+Alt+Right".action.move-column-right = [ ];
+          "Super+Alt+Up".action.move-window-up = [ ];
+          "Super+Alt+Down".action.move-window-down = [ ];
+
           "${meh}+Left".action.focus-monitor-left = [ ];
           "${meh}+Down".action.focus-monitor-down = [ ];
           "${meh}+Up".action.focus-monitor-up = [ ];
@@ -113,10 +122,10 @@
           "${hyper}+Down".action.move-column-to-monitor-down = [ ];
           "${hyper}+Up".action.move-column-to-monitor-up = [ ];
           "${hyper}+Right".action.move-column-to-monitor-right = [ ];
-          "Super+Alt+Up".action.maximize-column = [ ];
-          "Super+Alt+Right".action.move-column-right = [ ];
+
           "Super+Comma".action.consume-or-expel-window-left = [ ];
           "Super+Period".action.consume-or-expel-window-right = [ ];
+          "Super+Slash".action.toggle-column-tabbed-display = [ ];
           "${meh}+Delete".action.spawn = "${lib.getExe pkgs.swaylock}";
           "${hyper}+Delete".action.quit.skip-confirmation = true;
           "Ctrl+F1".action.spawn-sh = "foot --app-id foot.main";
@@ -189,10 +198,9 @@
           open-focused = true;
         }
       ];
-      extraConfig = ''
+      extraConfig = /* kdl */ ''
         window-rule {
           match app-id="^foot.main$"
-          default-column-display "tabbed"
           open-consume-into-column "first"
         }
       '';

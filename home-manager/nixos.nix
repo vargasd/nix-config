@@ -96,7 +96,10 @@
 
     mimeApps = {
       enable = true;
-      defaultApplicationPackages = with pkgs; [ librewolf ];
+      defaultApplicationPackages = with pkgs; [
+        firefox
+        librewolf
+      ];
     };
 
     desktopEntries = {
