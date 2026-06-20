@@ -48,7 +48,6 @@ let
     "f" = 15;
   };
   toHex = n: hexToDecMap."${n}";
-  profile = "default";
   config = {
     isDefault = true;
     # https://support.mozilla.org/en-US/questions/1372399
@@ -387,54 +386,15 @@ let
   };
 in
 {
+  imports = [ ./textfox.nix ];
+
   programs.firefox = {
     enable = true;
-    profiles.${profile} = config;
+    profiles.default = config;
   };
   programs.librewolf = {
     enable = true;
     profiles.default = config;
   };
 
-  textfox = {
-    enable = true;
-    profiles = [ profile ];
-    config = with colors.named; {
-      background.color = "#${background}";
-      border = {
-        color = "#${bright_black}";
-        width = "1px";
-        transition = "none";
-        radius = "0";
-      };
-      navbar = {
-        margin = "8px 2px 0px 8px";
-        padding = "4px";
-      };
-      displayWindowControls = false;
-      displayNavButtons = true;
-      displayUrlbarIcons = true;
-      displaySidebarTools = false;
-      displayTitles = false;
-      font = {
-        family = "'JetBrains Mono', monospace";
-        size = "15px";
-        accent = "#${bright_black}";
-      };
-      tabs.vertical.enable = true;
-      bookmarks.alignment = "left";
-      icons = {
-        toolbar.extensions.enable = true;
-        context.extensions.enable = true;
-        context.firefox.enable = true;
-      };
-      extraConfig = /* css */ ''
-        findbar {
-          order: -1 !important; /* for 113 and newer */
-          transition: none !important;
-          margin: 0 0 1rem !important
-        }
-      '';
-    };
-  };
 }
