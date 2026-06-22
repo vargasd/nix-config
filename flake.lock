@@ -257,7 +257,9 @@
     "niri-flake": {
       "inputs": {
         "niri-stable": "niri-stable",
-        "niri-unstable": "niri-unstable",
+        "niri-unstable": [
+          "niri-unstable"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -298,13 +300,17 @@
       }
     },
     "niri-unstable": {
-      "flake": false,
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1781721860,
-        "narHash": "sha256-RdWmxjM+CJ7dtuRulaExpvjiphWmGWQaGyg07Cralyg=",
+        "lastModified": 1782073839,
+        "narHash": "sha256-ksqYK5Y/58wBzeq/iT7B5rIhU7w/EAGVnU/L63CmlbQ=",
         "owner": "niri-wm",
         "repo": "niri",
-        "rev": "448a51d8d11c3c3bb208628e2ddf3fe1ca90badb",
+        "rev": "adaa96ac304009dc5e44522aefa8f669362752e0",
         "type": "github"
       },
       "original": {
@@ -434,6 +440,7 @@
         "gen-luarc": "gen-luarc",
         "home-manager": "home-manager",
         "niri-flake": "niri-flake",
+        "niri-unstable": "niri-unstable",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "sublime-text-gleam": "sublime-text-gleam",

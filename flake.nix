@@ -44,9 +44,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    niri-unstable = {
+      url = "github:niri-wm/niri/pull/3508/head"; # open-consume-into-window
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     niri-flake = {
       url = "github:sodiboo/niri-flake/pull/1717/head"; # extraConfig
-      inputs.niri-unstable.url = "github:niri-wm/niri/pull/3508/head"; # open-consume-into-window
+      inputs.niri-unstable.follows = "niri-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
