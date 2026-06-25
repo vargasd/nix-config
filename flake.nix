@@ -169,37 +169,6 @@
         }
       );
 
-      flake.nixosConfigurations.vm = nixpkgs.lib.nixosSystem (
-        let
-          specialArgs = {
-            inherit inputs;
-            inherit colors;
-            home = {
-              homeDirectory = "/home/vargasd";
-              user = "vargasd";
-            };
-          };
-        in
-        {
-          inherit specialArgs;
-          system = "aarch64-linux";
-          modules = [
-            {
-              nixpkgs.overlays = overlays;
-              nixpkgs.config.allowUnfree = true;
-            }
-            ./nixos/vm.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.home.user} = import ./home-manager/nixos.nix;
-            }
-          ];
-        }
-      );
-
       flake.nixosConfigurations.nuc = nixpkgs.lib.nixosSystem (
         let
           specialArgs = {
