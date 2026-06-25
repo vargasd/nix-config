@@ -26,6 +26,12 @@
     MOZ_DISABLE_SAFE_MODE_KEY = 1;
   };
 
+  programs.man = {
+    enable = true;
+    generateCaches = true;
+    package = pkgs.man;
+  };
+
   home.packages = with pkgs; [
     docker
     fd
