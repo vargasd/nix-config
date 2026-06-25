@@ -320,27 +320,6 @@
         "type": "github"
       }
     },
-    "nix-darwin": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1781190061,
-        "narHash": "sha256-QRMpLbsmlciMGv4yx75FUoIl54K02JbIX1tgdPHPw1s=",
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "rev": "f2b3fdb347f91dfd344ad196666a0b0fe8aad05c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "LnL7",
-        "ref": "nix-darwin-26.05",
-        "repo": "nix-darwin",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1781216227,
@@ -441,7 +420,6 @@
         "home-manager": "home-manager",
         "niri-flake": "niri-flake",
         "niri-unstable": "niri-unstable",
-        "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "sublime-text-gleam": "sublime-text-gleam",
         "textfox": "textfox",

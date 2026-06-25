@@ -13,6 +13,9 @@
   ];
 
   home = {
+    username = home.user;
+    homeDirectory = home.homeDirectory;
+
     packages = with pkgs; [
       defaultbrowser
     ];
@@ -22,8 +25,17 @@
     };
 
     activation = {
+      disableStartupChime = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        if [ "$(/usr/sbin/nvram SystemAudioVolume 2>/dev/null)" != "SystemAudioVolume	%80" ]; then
+          run /usr/bin/sudo /usr/sbin/nvram SystemAudioVolume=%80
+        fi
+      '';
       defaultbrowser = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         run ${pkgs.defaultbrowser}/bin/defaultbrowser ${home.defaultbrowser}
+      '';
+      brewBundle = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        run /opt/homebrew/bin/brew trust neurosnap/tap
+        run /opt/homebrew/bin/brew bundle --file=${./Brewfile} --cleanup --force
       '';
     };
   };

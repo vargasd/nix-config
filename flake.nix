@@ -4,11 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
 
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin?ref=nix-darwin-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -55,7 +50,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TODO: remove after https://github.com/NixOS/nixpkgs/pull/468608 (also the homebrew installation)
+    # TODO: remove after https://github.com/NixOS/nixpkgs/pull/533683 (also the homebrew installation)
     zmx.url = "github:neurosnap/zmx";
 
     textfox = {
@@ -69,7 +64,6 @@
       flake-parts,
       nixpkgs,
       home-manager,
-      nix-darwin,
       ...
     }:
     let
@@ -197,74 +191,46 @@
         }
       );
 
-      flake.darwinConfigurations.work = nix-darwin.lib.darwinSystem (
-        let
-          specialArgs = {
-            inherit inputs;
-            inherit colors;
-            home = {
-              homeDirectory = "/Users/I763291";
-              user = "I763291";
-              defaultbrowser = "firefox";
-            };
-            skhdVars = {
-              issues = "open 'https://emarsys.jira.com/jira/software/c/projects/SC/boards/1088?quickFilter=3743'";
-              videoconf = "open -a 'Microsoft Teams'";
-            };
+      flake.homeConfigurations.work = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "aarch64-darwin";
+          overlays = overlays;
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = {
+          inherit inputs colors;
+          home = {
+            homeDirectory = "/Users/I763291";
+            user = "I763291";
+            defaultbrowser = "firefox";
           };
-        in
-        {
-          inherit specialArgs;
-          modules = [
-            ./nix-darwin
-            {
-              nixpkgs.overlays = overlays;
-              nixpkgs.config.allowUnfree = true;
-            }
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.home.user} = import ./home-manager/darwin/work.nix;
-            }
-          ];
-        }
-      );
+          skhdVars = {
+            issues = "open 'https://emarsys.jira.com/jira/software/c/projects/SC/boards/1088?quickFilter=3743'";
+            videoconf = "open -a 'Microsoft Teams'";
+          };
+        };
+        modules = [ ./home-manager/darwin/work.nix ];
+      };
 
-      flake.darwinConfigurations.home = nix-darwin.lib.darwinSystem (
-        let
-          specialArgs = {
-            inherit inputs;
-            inherit colors;
-            home = {
-              user = "vargasd";
-              homeDirectory = "/Users/vargasd";
-              defaultbrowser = "librewolf";
-            };
-            skhdVars = {
-              issues = "open https://github.com/vargasd";
-              videoconf = "open -a facetime";
-            };
+      flake.homeConfigurations.darwin = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "aarch64-darwin";
+          overlays = overlays;
+        };
+        extraSpecialArgs = {
+          inherit inputs colors;
+          home = {
+            user = "vargasd";
+            homeDirectory = "/Users/vargasd";
+            defaultbrowser = "firefox";
           };
-        in
-        {
-          inherit specialArgs;
-          modules = [
-            ./nix-darwin
-            {
-              nixpkgs.overlays = overlays;
-            }
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.home.user} = import ./home-manager/darwin;
-            }
-          ];
-        }
-      );
+          skhdVars = {
+            issues = "open https://github.com/vargasd";
+            videoconf = "open -a facetime";
+          };
+        };
+        modules = [ ./home-manager/darwin ];
+      };
 
       perSystem =
         { system, ... }:

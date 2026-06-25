@@ -33,6 +33,10 @@
       + /* fish */ ''
         source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.fish
         zmx completions fish | source
-      '';
+      ''
+      # https://github.com/nix-community/home-manager/issues/6568
+      + (pkgs.lib.optionalString pkgs.stdenv.isDarwin ''
+        source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
+      '');
   };
 }
