@@ -4,12 +4,43 @@
     enable = true;
     settings.mainBar = {
       spacing = 8;
+      modules-left = [ "clock" ];
       modules-center = [ "niri/window" ];
       modules-right = [
-        "clock"
+        "bluetooth"
+        "network"
+        "wireplumber"
         "battery"
         "custom/power"
       ];
+      wireplumber = {
+        format = "{icon}";
+        format-muted = "";
+        format-icons = [
+          ""
+          ""
+          ""
+        ];
+      };
+      network = {
+        interface = "wlan0";
+        format = "󰲛";
+        format-wifi = "";
+        format-ethernet = "󰛳";
+        tooltip-format = "{ipaddr}/{cidr} {ifname} via {gwaddr}";
+        tooltip-format-wifi = "{essid} ({signalStrength}%) ";
+        tooltip-format-ethernet = "{ifname} ";
+        tooltip-format-disconnected = "Disconnected";
+      };
+      bluetooth = {
+        format = "󰂯";
+        format-off = "󰂲";
+        format-connected = "󰂱";
+        tooltip-format = "{controller_alias}\t{controller_address}";
+        tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+        tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+        tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
+      };
       battery = {
         format = "{capacity}% {icon}";
         states = {
@@ -58,10 +89,13 @@
           hibernate = "systemctl hibernate";
         };
       };
+      "niri/window" = {
+        "format" = "{app_id} – {title}";
+      };
     };
     style = with colors.named; /* css */ ''
       * {
-        font-family: 'JetBrainsMonoNL Nerd Font Mono', monospace;
+        font-family: 'JetBrainsMonoNL Nerd Font Propo', monospace;
         font-weight: 700;
         font-size: 16px;
         transition: none;
@@ -90,12 +124,9 @@
 
       #battery {
         background-color: #${dark_green};
+        background-color: #${white};
         color: #${black};
         padding: 0 1rem;
-      }
-
-      #battery.not-full {
-        background-color: #${white};
       }
 
       #battery.warning:not(.charging) {
