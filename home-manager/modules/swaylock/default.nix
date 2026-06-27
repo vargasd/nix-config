@@ -6,8 +6,9 @@
       font = "monospace";
       color = background;
       inside-color = background;
-      font-size = 16;
-      indicator-radius = 100;
+      font-size = 32;
+      indicator-idle-visible = true;
+      indicator-radius = 250;
       indicator-thickness = 15;
       disable-caps-lock-text = true;
       key-hl-color = magenta;
