@@ -138,6 +138,11 @@
 
   services.geoclue2.enable = true;
 
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+  };
+
   services.keyd = {
     enable = true;
     keyboards.default.settings = {
