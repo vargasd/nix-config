@@ -20,6 +20,9 @@
           "meta.t" = "C-f1";
           "meta.s" = "C-f2";
         };
+        "ghostty-main" = {
+          "meta.s" = "C-f4";
+        };
       };
   };
 }

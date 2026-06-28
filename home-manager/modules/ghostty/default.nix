@@ -29,19 +29,23 @@
         "no-attention"
       ];
       font-size = 16;
-      font-family = "JetBrainsMonoNL Nerd Font Mono";
+      font-family = "JetBrainsMono Nerd Font Mono";
       font-style = "Bold";
       font-style-bold = "ExtraBold";
       font-style-italic = "Bold Italic";
       font-style-bold-italic = "ExtraBold Italic";
       window-decoration = "none";
       window-show-tab-bar = "never";
+      confirm-close-surface = "false";
+      split-preserve-zoom = "navigation";
       keybind =
         {
-          "super+t" = "new_tab";
-          "super+s" = "toggle_tab_overview";
+          "super+n" = "new_window";
           "super+c" = "copy_to_clipboard";
           "super+v" = "paste_from_clipboard";
+          "super+w" = "close_surface";
+          "alt+left_bracket" = "goto_split:previous";
+          "alt+right_bracket" = "goto_split:next";
           "alt+shift+8" = "toggle_split_zoom";
           "alt+arrow_right" = "goto_split:right";
           "alt+arrow_left" = "goto_split:left";

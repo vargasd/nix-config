@@ -1,3 +1,6 @@
+# Many system defined special functions
+# @fish-lsp-disable 4004
+
 function zmx_launch_cmd
     set dir $argv[1]
     echo "$SHELL -c 'cd "(string escape $dir)" && zmx attach "(string escape $(basename $dir))#1"'"
@@ -73,4 +76,10 @@ function fish_prompt
     end
     echo ""
     echo -n (set_color yellow)"→ "(set_color normal)
+end
+
+function fish_title
+    if test -n "$ZMX_SESSION"
+        echo "$ZMX_SESSION"
+    end
 end

@@ -98,8 +98,10 @@
 
           "${meh}+H".action.spawn-sh = "killall -SIGUSR1 waybar .waybar-wrapped";
           "${meh}+Escape".action.spawn-sh = "${pkgs.mako}/bin/makoctl dismiss --all";
-          "${meh}+T".action.spawn-sh =
+          "${hyper}+T".action.spawn-sh =
             "niri msg --json windows | jq 'first(.[] | select(.app_id == \"foot.main\")).layout.pos_in_scrolling_layout[0]' | xargs niri msg action focus-column || niri msg action spawn -- foot --app-id foot.main";
+          "${meh}+T".action.spawn-sh =
+            ''niri msg --json windows | jq 'first(.[] | select(.app_id == "ghostty.main")).layout.pos_in_scrolling_layout[0]' | xargs niri msg action focus-column || niri msg action spawn -- ghostty --class=ghostty.main --command='zmx a "~#1"' '';
           "${meh}+B".action.spawn-sh = focusOrSpawn "firefox" (lib.getExe pkgs.firefox);
 
           "Super+Shift+8".action.center-column = [ ];
@@ -133,7 +135,17 @@
           "Ctrl+F1".action.spawn-sh = "foot --app-id foot.main";
           "Ctrl+F2".action.spawn-sh = /* bash */ ''
             dir=$(printf "$HOME\n$(zoxide query --list)" | fuzzel -d)
-            wlrctl window focus "app_id:foot.main" "title:$dir" || foot --app-id foot.main --working-directory "$dir" zmx attach "$(basename $dir)#1"
+            ${lib.getExe pkgs.wlrctl} window focus "app_id:foot.main" "title:$dir" || foot --app-id foot.main --working-directory "$dir" zmx attach "$(basename $dir)#1"
+          '';
+          "Ctrl+F4".action.spawn-sh = /* bash */ ''
+            dir=$(printf "$HOME\n$(zoxide query --list)" | fuzzel -d)
+            if test -n "$dir"; then
+              base="$(cd "$dir" && basename $(dirs))"
+              niri msg -j windows | \
+              jq ".[] | select(.app_id == \"ghostty.main\" and (.title | startswith(\"$base#\"))) | .id" |\
+              xargs niri msg action focus-window --id || \
+              ghostty --class=ghostty.main --working-directory="$dir" --title="$base#1" --initial-command="zmx attach '$base#1'"
+            fi
           '';
 
           "${meh}+5" = {
@@ -203,7 +215,7 @@
       ];
       extraConfig = /* kdl */ ''
         window-rule {
-          match app-id="^foot.main$"
+          match app-id="^foot|ghostty.main$"
           open-consume-into-column "first"
         }
       '';
