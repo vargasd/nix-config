@@ -122,6 +122,10 @@
         background-color: #${dark_blue};
       }
 
+      .modules-center {
+        margin: 0 1rem;
+      }
+
       #battery {
         background-color: #${dark_green};
         background-color: #${white};
