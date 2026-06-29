@@ -10,7 +10,7 @@ config.cursor_blink_rate = 0
 config.audible_bell = "Disabled"
 config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
-config.font = wezterm.font("JetBrainsMonoNL NF", { weight = "Bold" })
+config.font = wezterm.font("JetBrainsMono NF", { weight = "Bold" })
 config.font_size = 16
 config.use_resize_increments = false
 config.send_composed_key_when_left_alt_is_pressed = false
