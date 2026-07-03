@@ -69,16 +69,22 @@
       enable = true;
       text =
         (import ../utils/symbols.nix { inherit pkgs; }).all
-        |> builtins.map (data: "${data.emoji} ${data.label}")
+        |> map (data: "${data.emoji} ${data.label}")
         |> builtins.concatStringsSep "\n";
     };
 
     mimeApps = {
       enable = true;
-      defaultApplicationPackages = with pkgs; [
-        firefox
-        librewolf
-      ];
+      defaultApplications =
+        let
+          browser = "firefox.desktop";
+          nvim = "nvim.desktop";
+        in
+        {
+          "text/html" = browser;
+          "text/plain" = nvim;
+          "application/octet-stream" = browser;
+        };
     };
 
     desktopEntries = {
@@ -100,7 +106,6 @@
       };
       nvim = {
         name = "nvim";
-        noDisplay = true;
       };
     };
   };

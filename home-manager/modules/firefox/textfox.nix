@@ -3,7 +3,7 @@
   imports = [ inputs.textfox.homeManagerModules.default ];
 
   textfox = {
-    enable = true;
+    enable = false;
     profiles = [ "default" ];
     config = with colors.named; {
       background.color = "#${background}";
