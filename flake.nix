@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -122,6 +127,36 @@
               nixpkgs.overlays = overlays;
             }
             ./nixos/thia.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${specialArgs.home.user} = import ./home-manager/nixos.nix;
+            }
+          ];
+        }
+      );
+
+      flake.nixosConfigurations.itamo = nixpkgs.lib.nixosSystem (
+        let
+          specialArgs = {
+            inherit inputs;
+            inherit colors;
+            home = {
+              homeDirectory = "/home/vargasd";
+              user = "vargasd";
+            };
+          };
+        in
+        {
+          inherit specialArgs;
+          system = "x86_64-linux";
+          modules = [
+            {
+              nixpkgs.overlays = overlays;
+            }
+            ./nixos/itamo.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = specialArgs;
