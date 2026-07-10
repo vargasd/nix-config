@@ -51,6 +51,7 @@
     sqlite
     up # https://github.com/akavel/up
     yubikey-manager
+    unstable.zmx # TODO: remove when updating
 
     vscode-js-debug
 

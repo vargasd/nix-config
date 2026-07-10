@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
+    pkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -55,9 +56,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TODO: remove after https://github.com/NixOS/nixpkgs/pull/533683 (also the homebrew installation)
-    zmx.url = "github:neurosnap/zmx";
-
     textfox = {
       url = "github:vargasd/textfox";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,7 +75,9 @@
         inputs.enhansi.overlays.default
         inputs.niri-flake.overlays.niri
         (final: prev: {
-          zmx = inputs.zmx.packages.${final.system}.zmx;
+          unstable = import inputs.pkgs-unstable {
+            system = prev.system;
+          };
         })
       ];
       baseColors = {

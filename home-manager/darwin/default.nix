@@ -34,7 +34,6 @@
         run ${pkgs.defaultbrowser}/bin/defaultbrowser ${home.defaultbrowser}
       '';
       brewBundle = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        run /opt/homebrew/bin/brew trust neurosnap/tap
         run /opt/homebrew/bin/brew bundle --file=${./Brewfile} --cleanup --force
       '';
     };

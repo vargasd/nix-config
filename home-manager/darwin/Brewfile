@@ -1,6 +1,3 @@
-tap "neurosnap/tap"
-
-brew "neurosnap/tap/zmx"
 cask "brave-browser"
 cask "homerow"
 cask "orcaslicer"

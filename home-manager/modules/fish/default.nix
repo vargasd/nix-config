@@ -36,7 +36,6 @@
       )
       + /* fish */ ''
         source ${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.fish
-        zmx completions fish | source
       '';
   };
 }
