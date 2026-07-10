@@ -80,7 +80,9 @@
         "fn-l" = "skhd -k right";
 
         "meh-escape" = "osascript ${inputs.clear-notifications}/close_notifications_applescript.js";
-        "meh-tab" = "osascript ${./tunnelblick.scpt}";
+        "meh-tab" = "osascript ${
+          pkgs.replaceVars ./tunnelblick.scpt { ykman = pkgs.lib.getExe pkgs.yubikey-manager; }
+        }";
         "hyper-tab" = ''osascript -e $'tell application "Tunnelblick"\ndisconnect all\nend tell' '';
       }
       |> pkgs.lib.mapAttrsToList (name: val: "${name} : ${val}")
