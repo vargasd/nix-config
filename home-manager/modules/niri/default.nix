@@ -102,7 +102,7 @@
             "niri msg --json windows | jq 'first(.[] | select(.app_id == \"foot.main\")).layout.pos_in_scrolling_layout[0]' | xargs niri msg action focus-column || niri msg action spawn -- foot --app-id foot.main";
           "${meh}+T".action.spawn-sh =
             ''niri msg --json windows | jq 'first(.[] | select(.app_id == "ghostty.main")).layout.pos_in_scrolling_layout[0]' | xargs niri msg action focus-column || niri msg action spawn -- ghostty --class=ghostty.main --command='zmx a "~#1"' '';
-          "${meh}+B".action.spawn-sh = focusOrSpawn "firefox" (lib.getExe pkgs.firefox);
+          "${meh}+B".action.spawn-sh = focusOrSpawn "zen-beta" "zen-beta";
 
           "Super+Shift+8".action.center-column = [ ];
           "Super+Page_Down".action.switch-preset-column-width = [ ];

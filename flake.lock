@@ -427,7 +427,8 @@
         "nixpkgs": "nixpkgs",
         "pkgs-unstable": "pkgs-unstable",
         "sublime-text-gleam": "sublime-text-gleam",
-        "textfox": "textfox"
+        "textfox": "textfox",
+        "zen-browser": "zen-browser"
       }
     },
     "sublime-text-gleam": {
@@ -496,6 +497,29 @@
       "original": {
         "owner": "Supreeeme",
         "repo": "xwayland-satellite",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "pkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1783668941,
+        "narHash": "sha256-KFnepHImqltAzpJZ8sh8i3qzC1NRVNQX3WBVoD5oBRM=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "71e156423dae9496d7fd9e89029a1a82516fb9d8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }

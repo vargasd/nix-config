@@ -56,6 +56,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        nixpkgs.follows = "pkgs-unstable";
+        home-manager.follows = "home-manager";
+      };
+    };
+
     textfox = {
       url = "github:vargasd/textfox";
       inputs.nixpkgs.follows = "nixpkgs";

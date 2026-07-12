@@ -16,6 +16,7 @@
       pkgs.lib.generators.toINI { } {
         librewolf = guiSettings;
         firefox = guiSettings;
+        zen-beta = guiSettings;
         "foot-main" = {
           "meta.t" = "C-f1";
           "meta.s" = "C-f2";

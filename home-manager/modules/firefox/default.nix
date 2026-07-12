@@ -386,7 +386,16 @@ let
   };
 in
 {
-  imports = [ ./textfox.nix ];
+  imports = [
+    inputs.zen-browser.homeModules.beta
+    ./textfox.nix
+  ];
+
+  programs.zen-browser = {
+    enable = true;
+    profiles.default = config;
+    setAsDefaultBrowser = true;
+  };
 
   programs.firefox = {
     enable = true;
