@@ -51,16 +51,14 @@ let
   config = {
     isDefault = true;
     # https://support.mozilla.org/en-US/questions/1372399
-    # userChrome = /* css */ ''
-    #   .browserContainer > findbar {
-    #     order: -1 !important; /* for 113 and newer */
-    #     border-top: none !important;
-    #     border-bottom: 1px solid ThreeDShadow !important;
-    #     transition: none !important;
-    #   }
-    #
-    #   [hidden] { display: none; }
-    # '';
+    userChrome = /* css */ ''
+      .browserContainer > findbar {
+        order: -1 !important; /* for 113 and newer */
+        border-top: none !important;
+        border-bottom: 1px solid ThreeDShadow !important;
+        transition: none !important;
+      }
+    '';
     settings = with colors.named; {
       # librewolf
       "privacy.clearOnShutdown.history" = false;
@@ -388,7 +386,6 @@ in
 {
   imports = [
     inputs.zen-browser.homeModules.beta
-    ./textfox.nix
   ];
 
   programs.zen-browser = {

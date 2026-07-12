@@ -63,11 +63,6 @@
         home-manager.follows = "home-manager";
       };
     };
-
-    textfox = {
-      url = "github:vargasd/textfox";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =

@@ -427,7 +427,6 @@
         "nixpkgs": "nixpkgs",
         "pkgs-unstable": "pkgs-unstable",
         "sublime-text-gleam": "sublime-text-gleam",
-        "textfox": "textfox",
         "zen-browser": "zen-browser"
       }
     },
@@ -444,26 +443,6 @@
       "original": {
         "owner": "digitalcora",
         "repo": "sublime-text-gleam",
-        "type": "github"
-      }
-    },
-    "textfox": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1781717354,
-        "narHash": "sha256-TIfbUdXaXEwszjkE9e2Mrs1s3QNQuJGQctVxTU/NtVU=",
-        "owner": "vargasd",
-        "repo": "textfox",
-        "rev": "c77559c947df7c369f097da7805bbe9a47916443",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vargasd",
-        "repo": "textfox",
         "type": "github"
       }
     },
