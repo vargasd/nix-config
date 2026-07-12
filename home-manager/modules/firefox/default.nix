@@ -25,29 +25,8 @@ let
     ext.vimium-c
     ext.ublock-origin
     ext.browserpass
-    ext.firefox-color
-    ext.darkreader
     customAddons.tabDeduplicator
   ];
-  hexToDecMap = {
-    "0" = 0;
-    "1" = 1;
-    "2" = 2;
-    "3" = 3;
-    "4" = 4;
-    "5" = 5;
-    "6" = 6;
-    "7" = 7;
-    "8" = 8;
-    "9" = 9;
-    "a" = 10;
-    "b" = 11;
-    "c" = 12;
-    "d" = 13;
-    "e" = 14;
-    "f" = 15;
-  };
-  toHex = n: hexToDecMap."${n}";
   config = {
     isDefault = true;
     # https://support.mozilla.org/en-US/questions/1372399
@@ -203,6 +182,8 @@ let
       settings.${customAddons.tabDeduplicator.addonId} = {
         force = true;
         settings = {
+          caseInsensitive.value = true;
+          ignore3w.value = true;
           blackList = {
             value = "";
           };
@@ -246,93 +227,6 @@ let
         };
       };
 
-      settings.${ext.firefox-color.addonId} = {
-        force = true;
-        settings =
-          with colors.named
-          |> builtins.mapAttrs (
-            n: val: {
-              r = (toHex (builtins.substring 0 1 val)) * 16 + (toHex (builtins.substring 1 1 val));
-              g = (toHex (builtins.substring 2 1 val)) * 16 + (toHex (builtins.substring 3 1 val));
-              b = (toHex (builtins.substring 4 1 val)) * 16 + (toHex (builtins.substring 5 1 val));
-            }
-          ); {
-            firstRunDone = true;
-            theme.colors = {
-              frame = background;
-              frame_inactive = background;
-
-              toolbar = bright_black;
-              toolbar_text = gray;
-              toolbar_field = bright_black;
-              toolbar_field_text = gray;
-              toolbar_field_highlight = dark_blue;
-              # toolbar_field_border = bright_black;
-              toolbar_field_focus = background;
-              toolbar_field_border_focus = blue;
-              toolbar_field_text_focus = white;
-              bookmark_text = gray;
-
-              tab_background_text = gray;
-              tab_line = bright_black;
-              tab_loading = gray;
-              tab_text = gray;
-
-              button_background_active = bright_black;
-              button_background_hover = bright_black;
-
-              icons_attention = red;
-              icons = gray;
-
-              ntp_background = background;
-              ntp_text = white;
-
-              sidebar = background;
-              sidebar_text = gray;
-              # sidebar_border = bright_black;
-              sidebar_highlight = dark_blue;
-              sidebar_highlight_text = white;
-
-              popup = black;
-              popup_text = gray;
-              # popup_border = bright_black;
-              popup_highlight = dark_blue;
-              popup_highlight_text = white;
-            };
-          };
-      };
-
-      settings.${ext.darkreader.addonId} = {
-        force = true;
-        settings = with colors.named; {
-          schemeVersion = 2;
-          enabled = true;
-          fetchNews = false;
-          theme = {
-            mode = 1;
-            useFont = true;
-            fontFamily = "JetBrains Mono";
-            engine = "dynamicTheme";
-            darkSchemeBackgroundColor = "#${background}";
-            darkSchemeTextColor = "#${white}";
-            lightSchemeBackgroundColor = "#${white}";
-            lightSchemeTextColor = "#${black}";
-            styleSystemControls = false;
-            lightColorScheme = "Default";
-            darkColorScheme = "Default";
-            immediateModify = false;
-          };
-          enabledByDefault = true;
-          changeBrowserTheme = false;
-          syncSettings = false;
-          syncSitesFixes = false;
-          automation.enabled = false;
-          previewNewDesign = false;
-          previewNewestDesign = false;
-          enableForPDF = false;
-          enableForProtectedPages = true;
-          enableContextMenus = false;
-          detectDarkTheme = false;
         };
       };
     };
