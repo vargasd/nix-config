@@ -173,6 +173,9 @@ let
             unmap /
             unmap o
             unmap O
+
+            # close tabs in tab view
+            mapKey <c-x:o> <s-delete> 
           '';
           searchUrl = "https://www.google.com/search?q=$s Google";
           showAdvancedCommands = false;
