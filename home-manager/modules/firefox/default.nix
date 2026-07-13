@@ -25,7 +25,7 @@ let
     ext.vimium-c
     ext.ublock-origin
     ext.browserpass
-    customAddons.tabDeduplicator
+    customAddons.duplicate-tab-closer
   ];
   config = {
     isDefault = true;
@@ -179,54 +179,25 @@ let
         };
       };
 
-      settings.${customAddons.tabDeduplicator.addonId} = {
+      settings.${customAddons.duplicate-tab-closer.addonId} = {
         force = true;
         settings = {
           caseInsensitive.value = true;
           ignore3w.value = true;
-          blackList = {
-            value = "";
-          };
-          caseInsensitive = {
-            value = true;
-          };
-          ignore3w = {
-            value = true;
-          };
-          ignoreHashPart = {
-            value = true;
-          };
-          ignorePathPart = {
-            value = false;
-          };
-          ignoreSearchPart = {
-            value = false;
-          };
-          keepPinnedTab = {
-            value = true;
-          };
-          keepTabWithHttps = {
-            value = true;
-          };
-          onDuplicateTabDetected = {
-            value = "A";
-          };
-          onRemainingTab = {
-            value = "A";
-          };
-          scope = {
-            value = "CC";
-          };
-          whiteList = {
-            value =
-              [
-                "https://kibana.service.emarsys.net/*"
-              ]
-              |> lib.strings.concatLines;
-          };
-        };
-      };
-
+          ignoreHashPart.value = true;
+          ignorePathPart.value = false;
+          ignoreSearchPart.value = false;
+          keepPinnedTab.value = true;
+          keepTabWithHttps.value = true;
+          onDuplicateTabDetected.value = "A";
+          onRemainingTab.value = "A";
+          scope.value = "CC";
+          blackList.value = [ ] |> lib.strings.concatLines;
+          whiteList.value =
+            [
+              "https://kibana.service.emarsys.net/*"
+            ]
+            |> lib.strings.concatLines;
         };
       };
     };
