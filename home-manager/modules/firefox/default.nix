@@ -263,9 +263,4 @@ in
     enable = true;
     profiles.default = config;
   };
-  programs.librewolf = {
-    enable = true;
-    profiles.default = config;
-  };
-
 }

@@ -76,7 +76,6 @@
       enable = true;
       defaultApplicationPackages = with pkgs; [
         firefox
-        librewolf
       ];
     };
 

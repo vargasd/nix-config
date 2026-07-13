@@ -14,7 +14,6 @@
         };
       in
       pkgs.lib.generators.toINI { } {
-        librewolf = guiSettings;
         firefox = guiSettings;
         zen-beta = guiSettings;
         "foot-main" = {
