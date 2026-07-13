@@ -110,6 +110,13 @@ let
 
       # needed for yazi picker (?)
       "widget.use-xdg-desktop-portal.file-picker" = 1;
+
+      "devtools.everOpened" = true;
+      "devtools.toolbox.host" = "window";
+      "devtools.chrome.enabled" = true;
+      "devtools.debugger.remote-enabled" = true;
+
+      "extensions.update.enabled" = false;
     };
     extensions = {
       force = true;
