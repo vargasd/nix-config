@@ -240,7 +240,6 @@
           home = {
             homeDirectory = "/Users/I763291";
             user = "I763291";
-            defaultbrowser = "firefox";
           };
           skhdVars = {
             issues = "open 'https://emarsys.jira.com/jira/software/c/projects/SC/boards/1088?quickFilter=3743'";
@@ -260,7 +259,6 @@
           home = {
             user = "vargasd";
             homeDirectory = "/Users/vargasd";
-            defaultbrowser = "firefox";
           };
           skhdVars = {
             issues = "open https://github.com/vargasd";

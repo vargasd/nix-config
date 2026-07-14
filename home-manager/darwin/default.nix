@@ -16,10 +16,6 @@
     username = home.user;
     homeDirectory = home.homeDirectory;
 
-    packages = with pkgs; [
-      defaultbrowser
-    ];
-
     sessionVariables = {
       LIBSQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.dylib";
     };
@@ -29,9 +25,6 @@
         if [ "$(/usr/sbin/nvram SystemAudioVolume 2>/dev/null)" != "SystemAudioVolume	%80" ]; then
           run /usr/bin/sudo /usr/sbin/nvram SystemAudioVolume=%80
         fi
-      '';
-      defaultbrowser = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        run ${pkgs.defaultbrowser}/bin/defaultbrowser ${home.defaultbrowser}
       '';
       brewBundle = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         run /opt/homebrew/bin/brew bundle --file=${./Brewfile} --cleanup --force
@@ -61,7 +54,7 @@
         "meh-i" = "${skhdVars.issues}";
         "meh-t" = "open -a wezterm";
         "hyper-t" = "open -a ghostty";
-        "meh-b" = ''open -a "${home.defaultbrowser}"'';
+        "meh-b" = ''open -a "Zen Browser (Beta)"'';
         "hyper-b" = "open -a safari";
         "meh-delete" = "open -a ScreenSaverEngine";
         "hyper-left" = "open -g rectangle://execute-action?name=previous-display";
