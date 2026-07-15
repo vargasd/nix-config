@@ -57,14 +57,14 @@
         "meh-b" = ''open -a "Zen Browser (Beta)"'';
         "hyper-b" = "open -a safari";
         "meh-delete" = "open -a ScreenSaverEngine";
-        "hyper-left" = "open -g rectangle://execute-action?name=previous-display";
-        "hyper-up" = "open -g rectangle://execute-action?name=larger";
-        "hyper-down" = "open -g rectangle://execute-action?name=smaller";
-        "hyper-right" = "open -g rectangle://execute-action?name=next-display";
-        "meh-left" = "open -g rectangle://execute-action?name=left-half";
-        "meh-up" = "open -g rectangle://execute-action?name=maximize";
-        "meh-right" = "open -g rectangle://execute-action?name=right-half";
-        "meh-c" = "open -g rectangle://execute-action?name=center-two-thirds";
+        "hyper-left" = "open -g 'rectangle://execute-action?name=previous-display'";
+        "hyper-up" = "open -g 'rectangle://execute-action?name=larger'";
+        "hyper-down" = "open -g 'rectangle://execute-action?name=smaller'";
+        "hyper-right" = "open -g 'rectangle://execute-action?name=next-display'";
+        "meh-left" = "open -g 'rectangle://execute-action?name=left-half'";
+        "meh-up" = "open -g 'rectangle://execute-action?name=maximize'";
+        "meh-right" = "open -g 'rectangle://execute-action?name=right-half'";
+        "meh-c" = "open -g 'rectangle://execute-action?name=center-two-thirds'";
 
         "fn-h" = "skhd -k left";
         "fn-j" = "skhd -k down";
