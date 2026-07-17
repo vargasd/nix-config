@@ -15,13 +15,6 @@ function s
     end
 end
 
-function zmx_subsession
-    set n $argv[1]
-    if test -n "$ZMX_SESSION"
-        zmx attach (string split -f1 "#" $ZMX_SESSION)"#$n"
-    end
-end
-
 function zmx_scrollback
     if test -n "$ZMX_SESSION"
         zmx history $ZMX_SESSION --vt | nvim -c ':call nvim_open_term(0, #{})'
@@ -50,7 +43,7 @@ function fish_user_key_bindings
         bind \es _zmx_session
         bind \ez _zmx_scrollback
         for i in 1 2 3 4 5 6 7 8 9
-            bind \e$i "zmx_subsession $i"
+            bind \e$i "s $i"
         end
     end
 end
