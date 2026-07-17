@@ -123,6 +123,13 @@
     keyd
   ];
 
+  environment.shells = with pkgs; [
+    bashInteractive
+    zsh
+    fish
+    nushell
+  ];
+
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;

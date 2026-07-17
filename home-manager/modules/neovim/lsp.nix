@@ -134,6 +134,10 @@
           "${lib.getExe pkgs.gleam}"
           "lsp"
         ];
+        nushell.cmd = [
+          "${lib.getExe pkgs.nushell}"
+          "--lsp"
+        ];
         fish_lsp.cmd = [
           "${lib.getExe pkgs.fish-lsp}"
           "start"

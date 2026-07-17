@@ -151,6 +151,12 @@ in
             format-stdin = true;
           }
         ];
+        nu = [
+          {
+            format-command = "${lib.getExe pkgs.nufmt} --stdin";
+            format-stdin = true;
+          }
+        ];
         zig = [
           {
             format-command = "${zig} fmt --stdin";

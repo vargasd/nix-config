@@ -9,6 +9,7 @@
     ./modules/gpg
     ./modules/ghostty
     ./modules/neovim
+    ./modules/nushell
     ./modules/yazi
     ./modules/zsh
   ];
