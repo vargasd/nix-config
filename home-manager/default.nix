@@ -12,6 +12,7 @@
     ./modules/nushell
     ./modules/yazi
     ./modules/zsh
+    ./modules/bash
   ];
 
   home.stateVersion = "26.05";
