@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/derailed/k9s/refs/heads/master/internal/config/json/schemas/skin.json
+# $schema: https://raw.githubusercontent.com/derailed/k9s/refs/heads/master/internal/config/json/schemas/skin.json
 
 bg: &bg default
 black: &black black
@@ -19,6 +19,7 @@ cyan: &cyan aqua
 white: &white white
 
 k9s:
+
   body:
     fgColor: *blue
     bgColor: *bg

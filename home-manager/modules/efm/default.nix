@@ -29,6 +29,7 @@ let
 
   ruff = "ruff"; # lib.getExe pkgs.ruff
   ktfmt = "ktfmt"; # lib.getExe pkgs.ktfmt
+  yamllint = lib.getExe pkgs.yamllint;
   zig = "zig"; # lib.getExe pkgs.zig
   biome = {
     format-command = "biome check --write --stdin-file-path '\${INPUT}'";
@@ -83,7 +84,15 @@ in
           biome
         ];
         markdown = [ prettier ];
-        yaml = [ prettier ];
+        yaml = [
+          prettier
+          {
+            lint-source = "yamllint";
+            lint-command = "${yamllint} -f parsable -";
+            lint-stdin = true;
+            root-markers = [ ".yamllint" ];
+          }
+        ];
         sql = [
           {
             format-command = "${sqruff} fix -";
@@ -126,7 +135,6 @@ in
         ];
         kotlin = [
           {
-            prefix = "ktlint";
             lint-source = "ktlint";
             lint-command = "--no-color --stdin-filename '\${INPUT}' --stdin";
             lint-stdin = true;
