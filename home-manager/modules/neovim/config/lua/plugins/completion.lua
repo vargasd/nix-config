@@ -16,6 +16,7 @@ return {
 					documentation = { auto_show = true },
 					menu = { border = "none", auto_show = true },
 					list = { selection = { preselect = false } },
+					accept = { auto_brackets = { enabled = false } },
 				},
 			})
 			vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { link = "FloatBorder" })
