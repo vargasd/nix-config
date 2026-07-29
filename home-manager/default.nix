@@ -75,28 +75,6 @@
   programs.fzf.defaultOptions = [ "--color=16" ];
   programs.zoxide.enable = true;
 
-  programs.atuin = {
-    enable = true;
-    flags = [ "--disable-up-arrow" ];
-    # daemon.enable = true;
-    settings = {
-      update_check = false;
-      show_help = false;
-      invert = true;
-      prefers_reduced_motion = true;
-      show_numeric_shortcuts = false;
-      logs = {
-        enabled = false;
-        dir = "~/.local/state/atuin/logs";
-      };
-      search.filters = [
-        "global"
-        "workspace"
-        "directory"
-      ];
-    };
-  };
-
   programs.btop = {
     enable = true;
     settings = {
