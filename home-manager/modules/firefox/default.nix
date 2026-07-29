@@ -45,6 +45,9 @@ let
       "network.cookie.lifetimePolicy" = 0;
       # "privacy.resistFingerprinting.letterboxing" = true;
 
+      # zen
+      "media.videocontrols.picture-in-picture.enabled" = false;
+
       "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       # blank pages for things
       # "browser.startup.homepage" = "about:blank";
@@ -55,9 +58,7 @@ let
       "browser.shell.checkDefaultBrowser" = false;
       "browser.toolbarbuttons.introduced.sidebar-button" = true;
       "browser.aboutConfig.showWarning" = false;
-
-      # always prompt on download
-      "browser.download.useDownloadDir" = false;
+      "browser.tabs.dragDrop.createGroup.enabled" = false;
 
       # disable bad suggestions
       "browser.urlbar.suggest.engines" = false;
