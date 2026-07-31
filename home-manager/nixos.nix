@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, home, ... }:
 {
   /*
     TODO
@@ -62,6 +62,20 @@
         [filechooser]
         cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
       '';
+    };
+
+    configFile."Yubico/u2f_keys" = {
+      enable = true;
+      text =
+        [
+          home.user
+          # nix-shell -p pam_u2f --command "pamu2fcfg --type=EDDSA --origin=pam://sam --appid=pam://sam --pin-verification --nouser | cut -d: -f2"
+          "2zmrxcXGd8PCp0r5vtGKU4RbDSxvNGH2sRoCjH5c+SaJhyjNkKzosYtOGiPuE97sKvHyB+7QUvPtloT10S7rPd+ee3ftiG6Mb5YOrYzqFFU1SdzfNPx6vLqQRe/dxNzJOdgPmbR+EP6mugeRpYQsK/ZlnvrAe8EHcye1aeln2P4=,c2J3te4nkqT1rR44HdVbszsH2oeggH/wrSBFLGh8qSc=,eddsa,+presence+pin" # 33160604
+          "Nafc+KcyWrEePS27MfdQznknD9ZXzGES/n/SXR+g9k1PXiHHKan83b0GmB+rgBjSU0otDLQ4UotM5kNaDOkieBxVXPnP3BgtBONfFjOITGX4nfth43zcNCaO8JkxaCWtEGIYc4mWKOYJhrLd1RTRDyGXFRrMhlel8nY8PnzsEvc=,TMXh5r/Hed8t7gFyesbc9zgIUkqOtaQhj1SS2VnmjOk=,eddsa,+presence+pin" # 27249233
+          "R0TKtJa8BJg9ThWHeXuPzQ16SVDZZ5wFeeEYsMYsUXnL1dGpy2RTgI7C+QKRQS+tCmNR7t5B/ZNiiLLD/F3bEzljkPK+N0LdS0SE4tN8SvZLYU/hVCRUfGDTC9jwEYxXDZmM/dPDq82e1pZkIaxPqVxfUeWzzubcwxQRSA3FO34=,eYSAIGCKXKwl7HsTlKFo1x/2B2u07fBGEX9gdIkvZTQ=,eddsa,+presence+pin" # 33983772
+          "vev7YghAlk7P0dzI66VSxAa7JP23G6Um6FTXFF7gVfqN+FlUy1ttb7u3X53siJkSdO7HJaM/LkUCqNTJ/uBhG618nCtqN7ZszPc5/BpkdBFLCqca4EJ8Z1diIRCB076bdH0dlJJiFh1eI3asQmgvGT31ON5/YyCZyTVntqysEJg=,MmdHdNDu6KOqp4DLM85I9A4Dcb6qNOQpDiNZbws3T4g=,eddsa,+presence+pin" # 33391299
+        ]
+        |> builtins.concatStringsSep ":";
     };
 
     dataFile."bemoji/data.txt" = {
