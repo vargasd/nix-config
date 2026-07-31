@@ -67,7 +67,7 @@ function fish_prompt
     if test -n "$ref"
         echo -n (set_color cyan)" $ref"
     end
-    echo ""
+    echo (set_color white)" 󰈺"
     echo -n (set_color yellow)"→ "(set_color normal)
 end
 

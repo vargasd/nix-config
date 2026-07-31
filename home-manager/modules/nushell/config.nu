@@ -98,9 +98,9 @@ def create_left_prompt [] {
     let code = $env.LAST_EXIT_CODE
     let cwd = ($env.PWD | str replace --regex $'^($env.HOME)' '~')
     let cwd_colored = if $code == 0 {
-        $"(ansi green)($cwd)(ansi reset)"
+        $"(ansi green)($cwd)"
     } else {
-        $"(ansi red)($cwd)(ansi reset)"
+        $"(ansi red)($cwd)"
     }
     let session_part = if ($env | get -o ZMX_SESSION | is-not-empty) {
         $" (ansi magenta)($env.ZMX_SESSION)(ansi reset)"
@@ -115,7 +115,7 @@ def create_left_prompt [] {
     let git_part = if ($git_ref | is-not-empty) {
         $" (ansi cyan)($git_ref)(ansi reset)"
     } else { "" }
-    $"\n($cwd_colored)($session_part)($git_part)\n(ansi yellow)→ (ansi reset)"
+    $"\n(ansi bo)($cwd_colored)($session_part)($git_part) (ansi white)󰟆\n(ansi yellow)→ (ansi reset)"
 }
 $env.PROMPT_COMMAND = { create_left_prompt }
 def s [n: int = 1] {

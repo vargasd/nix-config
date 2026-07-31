@@ -37,7 +37,7 @@
       setopt PROMPT_SUBST
 
       export PROMPT='
-      %B%(?.%F{green}.%F{red})%~%F{magenta} $ZMX_SESSION
+      %B%(?.%F{green}.%F{red})%~%F{magenta} $ZMX_SESSION %F{white}ƶ
       %F{yellow}→ %f%b'
     '';
   };
