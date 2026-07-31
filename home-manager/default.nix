@@ -12,7 +12,6 @@
     ./modules/nushell
     ./modules/yazi
     ./modules/zsh
-    ./modules/bash
   ];
 
   home.stateVersion = "26.05";
@@ -66,6 +65,7 @@
 
   fonts.fontconfig.enable = true;
   programs.home-manager.enable = true;
+  programs.bash.enable = true;
   programs.browserpass.enable = true;
   programs.dircolors.enable = true;
   programs.direnv.enable = true;
