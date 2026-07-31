@@ -271,7 +271,7 @@ in
   };
 
   programs.firefox = {
-    enable = true;
+    enable = false;
     profiles.default = config;
   };
 }
