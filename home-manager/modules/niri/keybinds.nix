@@ -31,7 +31,7 @@
       "${hyper}+T".action.spawn-sh =
         "niri msg --json windows | jq 'first(.[] | select(.app_id == \"foot.main\")).layout.pos_in_scrolling_layout[0]' | xargs niri msg action focus-column || niri msg action spawn -- foot --app-id foot.main";
       "${meh}+T".action.spawn-sh =
-        ''niri msg --json windows | jq 'first(.[] | select(.app_id == "ghostty.main")).layout.pos_in_scrolling_layout[0]' | xargs niri msg action focus-column || niri msg action spawn -- ghostty --class=ghostty.main --command='zmx a "~#1"' '';
+        ''niri msg --json windows | jq 'first(.[] | select(.app_id == "ghostty.main")).layout.pos_in_scrolling_layout[0]' | xargs niri msg action focus-column || niri msg action spawn -- ghostty --class=ghostty.main --initial-command='zmx a "~#1"' '';
       "${meh}+B".action.spawn-sh = focusOrSpawn "zen-beta" "zen-beta";
 
       "Super+Shift+8".action.center-column = [ ];
@@ -106,11 +106,9 @@
         allow-when-locked = true;
         action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
       };
-      "${meh}+C".action.spawn-sh = ''notify-send "$(date)" -t 3000'';
 
       "${meh}+U".action.spawn-sh = "${lib.getExe pkgs.bemoji} -t";
       "${meh}+X".action.screenshot = [ ];
-
       "${meh}+Z".action.screenshot-screen = [ ];
       "${hyper}+Z".action.screenshot-window = [ ];
 
