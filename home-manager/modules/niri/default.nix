@@ -86,7 +86,7 @@
       ];
       extraConfig = /* kdl */ ''
         window-rule {
-          match app-id="^foot|ghostty.main$"
+          match app-id="^(foot|ghostty).main$"
           open-consume-into-column "first"
         }
       '';
