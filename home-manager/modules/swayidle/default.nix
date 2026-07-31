@@ -4,6 +4,7 @@
     let
       lock = "${pkgs.swaylock}/bin/swaylock --daemonize";
       display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
+      plugged = "${pkgs.pmutils}/bin/on_ac_power";
       lockTime = 300;
     in
     {
@@ -18,13 +19,9 @@
           command = lock;
         }
         {
-          timeout = lockTime * 2;
-          command = display "off";
-          resumeCommand = display "on";
-        }
-        {
           timeout = 3600;
-          command = "${pkgs.systemd}/bin/systemctl suspend";
+          command = "${plugged} && ${display "off"} || systemctl suspend";
+          resumeCommand = display "on";
         }
       ];
       events = {
