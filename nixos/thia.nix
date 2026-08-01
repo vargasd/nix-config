@@ -1,16 +1,12 @@
 {
   config,
   lib,
-  pkgs,
-  modulesPath,
   ...
 }:
 
 {
   imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    ./configuration.nix
-    ./laptop.nix
+    ./modules/laptop.nix
   ];
 
   networking.hostName = "thia";

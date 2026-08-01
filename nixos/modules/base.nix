@@ -1,11 +1,14 @@
 {
   pkgs,
   colors,
-  lib,
+  modulesPath,
   ...
 }:
-
 {
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -81,16 +84,6 @@
     mountOnMedia = true;
   };
 
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri-session";
-        user = "vargasd";
-      };
-    };
-  };
-
   users.users.vargasd = {
     isNormalUser = true;
     extraGroups = [
@@ -130,11 +123,6 @@
     nushell
   ];
 
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri-unstable;
-  };
-
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -166,33 +154,7 @@
 
   services.openssh.enable = true;
   services.pcscd.enable = true;
-
   services.geoclue2.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    audio.enable = true;
-  };
-
-  services.keyd = {
-    enable = true;
-    keyboards.default.settings = {
-      main = {
-        capslock = "overload(navmeh, esc)";
-        sysrq = "layer(meta)";
-        # rightalt acts as altgr by default
-        rightalt = "layer(alt)";
-      };
-      "navmeh:C-A-S" = {
-        h = "left";
-        j = "down";
-        k = "up";
-        l = "right";
-      };
-    };
-  };
-
-  hardware.bluetooth.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

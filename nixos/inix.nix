@@ -1,14 +1,12 @@
 {
   config,
   lib,
-  modulesPath,
   ...
 }:
 
 {
   imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    ./configuration.nix
+    ./modules/desktop.nix
   ];
 
   networking.hostName = "inix";

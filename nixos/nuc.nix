@@ -1,15 +1,12 @@
 {
   config,
   lib,
-  pkgs,
-  modulesPath,
   ...
 }:
 
 {
   imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    ./configuration.nix
+    ./modules/base.nix
   ];
 
   networking.hostName = "nuc";

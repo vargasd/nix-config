@@ -2,15 +2,12 @@
   config,
   lib,
   inputs,
-  modulesPath,
   ...
 }:
-
 {
   imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    ./configuration.nix
     inputs.disko.nixosModules.disko
+    ./modules/desktop.nix
   ];
 
   disko.devices = {
