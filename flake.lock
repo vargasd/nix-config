@@ -397,6 +397,22 @@
         "type": "github"
       }
     },
+    "pinentry-fuzzel": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1738915806,
+        "narHash": "sha256-vOCaWNBjKT5O7GiCN4reLUxS+pnONdtcYWRMSU3Hfhs=",
+        "owner": "WingsZeng",
+        "repo": "pinentry-fuzzel",
+        "rev": "44807141913b7218e394b40a2fdc5ff4ffe425c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "WingsZeng",
+        "repo": "pinentry-fuzzel",
+        "type": "github"
+      }
+    },
     "pkgs-unstable": {
       "locked": {
         "lastModified": 1783475452,
@@ -425,6 +441,7 @@
         "niri-flake": "niri-flake",
         "niri-unstable": "niri-unstable",
         "nixpkgs": "nixpkgs",
+        "pinentry-fuzzel": "pinentry-fuzzel",
         "pkgs-unstable": "pkgs-unstable",
         "sublime-text-gleam": "sublime-text-gleam",
         "zen-browser": "zen-browser"

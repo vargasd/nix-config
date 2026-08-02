@@ -35,6 +35,11 @@
       flake = false;
     };
 
+    pinentry-fuzzel = {
+      url = "github:WingsZeng/pinentry-fuzzel";
+      flake = false;
+    };
+
     sublime-text-gleam = {
       url = "github:digitalcora/sublime-text-gleam";
       flake = false;
