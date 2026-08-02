@@ -66,7 +66,10 @@
   fonts.fontconfig.enable = true;
   programs.home-manager.enable = true;
   programs.bash.enable = true;
-  programs.browserpass.enable = true;
+  programs.browserpass = {
+    enable = true;
+    browsers = [ "firefox" ]; # zen uses this: https://github.com/zen-browser/desktop/issues/10622
+  };
   programs.dircolors.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
