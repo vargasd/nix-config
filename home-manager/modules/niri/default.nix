@@ -10,6 +10,11 @@
     inputs.niri-flake.homeModules.niri
     ./keybinds.nix
   ];
+
+  services.pass-secret-service.enable = true;
+  # https://github.com/sodiboo/niri-flake/issues/1801
+  services.gnome-keyring.enable = lib.mkForce false;
+
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;
