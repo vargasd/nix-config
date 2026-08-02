@@ -1,4 +1,9 @@
-{ pkgs, home, ... }:
+{
+  pkgs,
+  lib,
+  home,
+  ...
+}:
 {
   /*
     TODO
@@ -30,6 +35,7 @@
       brightnessctl
       impala
       libnotify
+      neovim-remote
       bemoji
       # needed to insert for bemoji
       wtype
@@ -87,32 +93,42 @@
 
     mimeApps = {
       enable = true;
-      defaultApplicationPackages = with pkgs; [
-        firefox
-      ];
+      defaultApplications = {
+        "text/plain" = "nvim.desktop";
+        "text/markdown" = "nvim.desktop";
+        "application/json" = "nvim.desktop";
+        "application/schema+json" = "nvim.desktop";
+        "text/css" = "nvim.desktop";
+      };
     };
 
-    desktopEntries = {
-      yazi = {
-        name = "yazi";
-        noDisplay = true;
+    desktopEntries =
+      let
+        disable = {
+          name = "";
+          noDisplay = true;
+        };
+      in
+      {
+        foot-server = disable;
+        vim = disable;
+        gvim = disable;
+        nvim = {
+          name = "Neovim";
+          icon = ../assets/neovim.svg;
+          exec = "${
+            pkgs.writeShellScript "nvim-open" /* sh */ ''
+              # wlrctl errors but we need it because we don't have NIRI_SOCKET and it's too annoying to find
+              ${lib.getExe pkgs.wlrctl} toplevel focus app_id:foot.neovim >/dev/null 2>/dev/null
+              if test $? -ne 134 -a $? -ne 0; then
+                footclient --no-wait --app-id foot.neovim zmx attach neovim nvim --listen /tmp/nvimsocket
+              fi
+              if test -n "$1"; then
+                nvr --servername /tmp/nvimsocket $@
+              fi
+            ''
+          } %F";
+        };
       };
-      foot-server = {
-        name = "foot server";
-        noDisplay = true;
-      };
-      vim = {
-        name = "vim";
-        noDisplay = true;
-      };
-      gvim = {
-        name = "gvim";
-        noDisplay = true;
-      };
-      nvim = {
-        name = "nvim";
-        noDisplay = true;
-      };
-    };
   };
 }

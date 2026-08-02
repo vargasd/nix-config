@@ -55,7 +55,7 @@
           "alt+shift+arrow_left" = "new_split:left";
           "alt+shift+arrow_down" = "new_split:down";
           "alt+shift+arrow_up" = "new_split:up";
-          "ctrl+shift+x" = "write_scrollback_file:open";
+          "ctrl+shift+z" = "write_screen_file:open";
         }
         |> lib.attrsets.attrsToList
         |> builtins.map (kv: "${kv.name}=${kv.value}");
