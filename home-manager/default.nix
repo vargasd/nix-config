@@ -75,7 +75,10 @@
   programs.direnv.nix-direnv.enable = true;
   programs.eza.enable = true;
   programs.fzf.enable = true;
-  programs.fzf.defaultOptions = [ "--color=16" ];
+  programs.fzf.defaultOptions = [
+    "--color=16"
+    "--reverse"
+  ];
   programs.zoxide.enable = true;
 
   programs.btop = {
