@@ -1,6 +1,7 @@
 require("config.options")
 require("config.keymap")
-require("config.lze")
+
+if not vim.g.no_plugins then require("config.lze") end
 
 vim.diagnostic.config({
 	signs = false,

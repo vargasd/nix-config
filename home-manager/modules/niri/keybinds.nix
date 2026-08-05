@@ -124,6 +124,8 @@
         focusOrSpawn "foot.floating.impala" "footclient --app-id foot.floating.impala -- zmx attach impala impala";
       "${meh}+E".action.spawn-sh =
         focusOrSpawn "foot.yazi" "footclient --app-id foot.yazi -- zmx attach yazi yazi";
+      "${meh}+M".action.spawn-sh =
+        focusOrSpawn "foot.mail" "footclient --app-id foot.mail -- zmx attach mail aerc";
 
       "${hyper}+Home".action.move-column-to-first = [ ];
       "${hyper}+End".action.move-column-to-last = [ ];

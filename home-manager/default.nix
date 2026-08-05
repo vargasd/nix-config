@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./modules/aerc
     ./modules/bat
     ./modules/efm
     ./modules/firefox
