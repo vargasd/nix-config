@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   home,
   ...
 }:
@@ -41,6 +42,17 @@
       wtype
     ];
   };
+
+  services.gpg-agent.pinentry =
+    let
+      program = "pinentry-fuzzel";
+    in
+    {
+      package = pkgs.writeShellScriptBin program (
+        lib.strings.readFile "${inputs.pinentry-fuzzel}/pinentry-fuzzel"
+      );
+      program = program;
+    };
 
   xdg = {
     autostart.enable = true;

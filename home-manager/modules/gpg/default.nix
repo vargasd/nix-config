@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  ...
-}:
+{ ... }:
 {
   programs.gpg = {
     enable = true;
@@ -67,15 +62,5 @@
     enableSshSupport = true;
     defaultCacheTtl = 60;
     maxCacheTtl = 120;
-    pinentry =
-      let
-        program = "pinentry-fuzzel";
-      in
-      {
-        package = pkgs.writeShellScriptBin program (
-          lib.strings.readFile "${inputs.pinentry-fuzzel}/pinentry-fuzzel"
-        );
-        program = program;
-      };
   };
 }
