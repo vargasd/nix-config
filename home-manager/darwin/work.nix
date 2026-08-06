@@ -2,6 +2,7 @@
 {
   imports = [
     ./default.nix
+    ../modules/kubernetes
   ];
 
   home.sessionVariables = {
@@ -10,7 +11,6 @@
 
   home.packages = with pkgs; [
     mongosh
-    kubectl
     claude-code
     (google-cloud-sdk.withExtraComponents (
       with google-cloud-sdk.components;
@@ -20,17 +20,4 @@
       ]
     ))
   ];
-
-  programs.k9s = {
-    enable = true;
-    settings = {
-      k9s = {
-        readonly = true;
-        skin = "term";
-      };
-    };
-    skins = {
-      term = ./k9s-skin.yaml;
-    };
-  };
 }
