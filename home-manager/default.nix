@@ -4,6 +4,7 @@
     ./modules/aerc
     ./modules/bat
     ./modules/efm
+    ./modules/elinks
     ./modules/firefox
     ./modules/fish
     ./modules/git

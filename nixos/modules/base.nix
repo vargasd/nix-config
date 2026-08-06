@@ -109,6 +109,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    elinks
     vim
     neovim
     git
