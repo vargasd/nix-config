@@ -36,6 +36,7 @@
   };
 
   home.packages = with pkgs; [
+    chafa
     docker
     fd
     # go-task # Taskfile support
