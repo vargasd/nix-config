@@ -13,7 +13,7 @@
         ''niri msg -j windows | jq '.[] | select(.app_id == "${app_id}") | .id' | xargs niri msg action focus-window --id || niri msg action spawn -- ${bin}'';
     in
     {
-      "Ctrl+Up" = {
+      "${meh}+Tab" = {
         action.toggle-overview = [ ];
         repeat = false;
       };
