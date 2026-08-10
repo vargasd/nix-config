@@ -54,12 +54,12 @@
       url = "github:niri-wm/niri/pull/3508/head"; # open-consume-into-window
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     niri-flake = {
       url = "github:sodiboo/niri-flake/pull/1717/head"; # extraConfig
       inputs.niri-unstable.follows = "niri-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri-autoselect-portal.url = "git+https://codeberg.org/debugloop/niri-autoselect-portal.git";
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";

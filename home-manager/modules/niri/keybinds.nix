@@ -18,9 +18,13 @@
         repeat = false;
       };
       "Super+Space".action.spawn = lib.getExe pkgs.fuzzel;
-      "Alt+Space".action.spawn-sh = ''
+      "Alt+Space".action.spawn-sh = /* sh */ ''
         niri msg --json windows | jq '.[] | (.id | tostring) + " " + .app_id + ": " + .title' -r | fuzzel -d | cut -d' ' -f1 | xargs niri msg action focus-window --id
       '';
+      "${meh}+Space".action.spawn-sh = /* sh */ ''
+        niri msg action clear-dynamic-cast-target && niri msg --json windows | jq '.[] | (.id | tostring) + " " + .app_id + ": " + .title' -r | fuzzel -d | cut -d' ' -f1 | xargs niri msg action set-dynamic-cast-window --id
+      '';
+      "${hyper}+Space".action.spawn-sh = "niri msg action set-dynamic-cast-monitor";
       "Super+Q" = {
         action.close-window = [ ];
         repeat = false;
