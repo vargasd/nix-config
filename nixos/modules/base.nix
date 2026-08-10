@@ -144,15 +144,6 @@
     };
   };
 
-  services.udev.extraRules = ''
-    ACTION=="remove",\
-     ENV{ID_BUS}=="usb",\
-     ENV{ID_MODEL}=="YubiKey_*",\
-     ENV{ID_VENDOR_ID}=="1050",\
-     ENV{ID_VENDOR}=="Yubico",\
-     RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
-  '';
-
   services.openssh.enable = true;
   services.pcscd.enable = true;
   services.geoclue2.enable = true;
