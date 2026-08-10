@@ -234,6 +234,23 @@
         }
       );
 
+      flake.nixosConfigurations.iso = nixpkgs.lib.nixosSystem (
+        let
+          specialArgs = {
+            inherit inputs;
+            inherit colors;
+          };
+        in
+        {
+          inherit specialArgs;
+          system = "x86_64-linux";
+          modules = [
+            { nixpkgs.overlays = overlays; }
+            ./nixos/iso.nix
+          ];
+        }
+      );
+
       flake.homeConfigurations.work = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = "aarch64-darwin";

@@ -33,6 +33,7 @@
   ];
 
   networking.wireless.iwd.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
 
   time.timeZone = "America/Indiana/Indianapolis";
 
@@ -110,6 +111,7 @@
 
   environment.systemPackages = with pkgs; [
     elinks
+    impala
     vim
     neovim
     git

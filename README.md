@@ -21,3 +21,15 @@ Using home-manager and not nix-darwin because nix-darwin wasn't adding that much
    writing, not time of reading 😅).
 1. Switch default shell to fish or keep zsh if you want; they're both supported as of now (time of
 1. Log out and back in (or restart) and things should be loaded.
+
+### Generating ISO
+
+Generate ISO:
+```sh
+nix run nixpkgs#nixos-generators -- --format iso --flake .#iso -o .samignore/iso
+```
+
+Copy to USB (use `lsblk` first):
+```sh
+sudo dd if=./.samignore/iso/iso/*.iso of=/dev/sdX bs=4M status=progress conv=fdatasync
+```
