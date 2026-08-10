@@ -19,7 +19,8 @@
         "text/calendar" = "calendar";
         "message/delivery-status" = "colorize";
         "message/rfc822" = "colorize";
-        "text/html" = "${lib.getExe pkgs.elinks} | colorize";
+        # "text/html" = "${lib.getExe pkgs.elinks} | colorize";
+        "text/html" = "html | colorize";
         "image/*" = "${lib.getExe pkgs.catimg} -w $(tput cols) -";
       };
       ui = {
