@@ -54,6 +54,10 @@
       program = program;
     };
 
+  dconf.settings = {
+    "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  };
+
   xdg = {
     autostart.enable = true;
     terminal-exec = {
