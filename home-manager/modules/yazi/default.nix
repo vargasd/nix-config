@@ -27,12 +27,14 @@
             "m"
           ];
           run = "plugin chmod";
-          desc = "Chmod on selected files";
+        }
+        {
+          on = "M";
+          run = "plugin mount";
         }
         {
           on = "f";
           run = "plugin jump-to-char";
-          desc = "Jump to char";
         }
       ];
     };
@@ -40,6 +42,7 @@
     plugins = {
       git = pkgs.yaziPlugins.git;
       chmod = pkgs.yaziPlugins.chmod;
+      mount = pkgs.yaziPlugins.mount;
       piper = pkgs.yaziPlugins.piper;
       "jump-to-char" = pkgs.yaziPlugins.jump-to-char;
     };
