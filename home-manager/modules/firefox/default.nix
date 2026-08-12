@@ -215,6 +215,7 @@ let
     search = {
       force = true;
       default = "Kagi";
+      privateDefault = "DuckDuckGo (No AI)";
       engines = {
         "Kagi" = {
           urls = [
