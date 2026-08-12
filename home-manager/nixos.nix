@@ -29,7 +29,6 @@
     sessionVariables = {
       TERMCMD = "${pkgs.foot}/bin/footclient";
       TERMINAL = "${pkgs.foot}/bin/footclient";
-      GDK_DEBUG = "portals";
     };
     packages = with pkgs; [
       bluetui
