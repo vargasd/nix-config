@@ -37,6 +37,8 @@
       "${meh}+T".action.spawn-sh =
         ''niri msg --json windows | jq 'first(.[] | select(.app_id == "ghostty.main")).layout.pos_in_scrolling_layout[0]' | xargs niri msg action focus-column || niri msg action spawn -- ghostty --class=ghostty.main --initial-command='zmx a "~#1"' '';
       "${meh}+B".action.spawn-sh = focusOrSpawn "zen-beta" "zen-beta";
+      "${meh}+V".action.spawn-sh = "cliphist list | fuzzel -d | cliphist decode | wl-copy";
+      "${hyper}+V".action.spawn-sh = "cliphist list | fuzzel -d | cliphist delete";
 
       "Super+Shift+8".action.center-column = [ ];
       "Super+Page_Down".action.switch-preset-column-width = [ ];

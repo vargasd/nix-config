@@ -6,13 +6,9 @@
   ...
 }:
 {
-  /*
-    TODO
-      - clipboard (cliphist?)
-  */
-
   imports = [
     ./default.nix
+    ./modules/cliphist
     ./modules/foot
     ./modules/fuzzel
     ./modules/keyd

@@ -116,7 +116,7 @@
     neovim
     git
     psmisc
-    wl-clipboard-rs
+    wl-clipboard
     keyd
   ];
 
