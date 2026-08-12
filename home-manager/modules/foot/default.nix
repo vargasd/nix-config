@@ -2,7 +2,10 @@
 {
   programs.foot = {
     enable = true;
-    server.enable = true;
+    server = {
+      enable = true;
+      systemdTarget = "graphical-session.target";
+    };
     settings = {
       main = {
         font = "JetBrainsMonoNL NF:weight:bold:size=16";

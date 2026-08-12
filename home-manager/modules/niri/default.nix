@@ -49,34 +49,6 @@
         };
       };
 
-      spawn-at-startup = [
-        {
-          argv = [
-            (lib.getExe pkgs.foot)
-            "--server"
-          ];
-        }
-        {
-          argv = [
-            (lib.getExe pkgs.wlsunset)
-            "-l"
-            "39.9"
-            "-L"
-            "-86.1"
-            "-t"
-            "3000"
-            "-T"
-            "5500"
-          ];
-        }
-        {
-          argv = [
-            "${pkgs.keyd}/bin/keyd-application-mapper"
-            "-d"
-          ];
-        }
-        { argv = [ (lib.getExe pkgs.waybar) ]; }
-      ];
       hotkey-overlay.skip-at-startup = true;
       prefer-no-csd = true;
       screenshot-path = "/tmp/screenshot_%Y-%m-%dT%H-%M-%S.png";

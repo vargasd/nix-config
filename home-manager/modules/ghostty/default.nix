@@ -60,6 +60,5 @@
         |> lib.attrsets.attrsToList
         |> builtins.map (kv: "${kv.name}=${kv.value}");
     };
-    systemd.enable = lib.mkIf pkgs.stdenv.isLinux true;
   };
 }
