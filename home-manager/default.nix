@@ -66,7 +66,16 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      monospace = [ "JetBrainsMono NF SemiBold" ];
+      emoji = [ "Noto Color Emoji" ];
+      serif = [ "Noto Serif" ];
+      sansSerif = [ "Noto Sans" ];
+    };
+  };
+
   programs.home-manager.enable = true;
   programs.bash.enable = true;
   programs.browserpass = {
