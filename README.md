@@ -33,3 +33,30 @@ Copy to USB (use `lsblk` first):
 ```sh
 sudo dd if=./.samignore/iso/iso/*.iso of=/dev/sdX bs=4M status=progress conv=fdatasync
 ```
+
+### Disko-ing from scratch
+
+Set up disko for the host.
+Generally, build an iso and pull down this repo.
+
+```sh
+nix run github:nix-community/disko/latest -- --flake .#<flake-attr> --disk <disk-name> <disk-device>
+```
+
+e.g.
+```sh
+nix run github:nix-community/disko/latest -- --flake .#thia --disk main nvme0n1
+```
+
+This will partition and install the flake for the new setup. Afterwards enroll remaining Yubikeys via:
+
+```sh
+sudo systemd-cryptenroll /dev/nvme0n1p2 \
+  --fido2-device=/dev/hidraw1 \
+  --fido2-with-client-pin=yes \
+  --fido2-with-user-presence=yes \
+  --unlock-fido2-device=/dev/hidraw0
+
+```
+
+Use `ls /dev/hidraw*` and plug around to figure out which Yubikey is which
