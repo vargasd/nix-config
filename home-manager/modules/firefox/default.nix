@@ -106,6 +106,12 @@ let
         "currentVersion" = 21; # also needed
       };
 
+      "font.minimum-size.x-western" = 14;
+      "font.name.monospace.x-western" = "monospace";
+      "font.name.sans-serif.x-western" = "sans-serif";
+      "font.name.serif.x-western" = "serif";
+      "font.size.monospace.x-western" = 14;
+
       # disable password manager
       "signon.rememberSignons" = false;
 
@@ -129,10 +135,6 @@ let
           vimSync = true;
           keyLayout = 2;
           exclusionRules = [
-            {
-              passKeys = "t ";
-              pattern = ":https://mail.google.com/";
-            }
             {
 
               passKeys = "m ";
