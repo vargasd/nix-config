@@ -112,82 +112,34 @@
         named = baseColors;
         inherit indexed;
       };
+      specialArgs = {
+        inherit inputs;
+        inherit colors;
+      };
     in
 
     flake-parts.lib.mkFlake { inherit inputs; } {
 
-      flake.nixosConfigurations.thia = nixpkgs.lib.nixosSystem (
-        let
-          specialArgs = {
-            inherit inputs;
-            inherit colors;
-            home = {
-              homeDirectory = "/home/vargasd";
-              user = "vargasd";
-            };
-          };
-        in
-        {
+      flake.nixosConfigurations = {
+        thia = nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           system = "x86_64-linux";
           modules = [
-            {
-              nixpkgs.overlays = overlays;
-            }
+            { nixpkgs.overlays = overlays; }
             ./nixos/thia.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.home.user} = import ./home-manager/nixos.nix;
-            }
           ];
-        }
-      );
+        };
 
-      flake.nixosConfigurations.itamo = nixpkgs.lib.nixosSystem (
-        let
-          specialArgs = {
-            inherit inputs;
-            inherit colors;
-            home = {
-              homeDirectory = "/home/vargasd";
-              user = "vargasd";
-            };
-          };
-        in
-        {
+        itamo = nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           system = "x86_64-linux";
           modules = [
-            {
-              nixpkgs.overlays = overlays;
-            }
+            { nixpkgs.overlays = overlays; }
             ./nixos/itamo.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.home.user} = import ./home-manager/nixos.nix;
-            }
           ];
-        }
-      );
+        };
 
-      flake.nixosConfigurations.inix = nixpkgs.lib.nixosSystem (
-        let
-          specialArgs = {
-            inherit inputs;
-            inherit colors;
-            home = {
-              homeDirectory = "/home/vargasd";
-              user = "vargasd";
-            };
-          };
-        in
-        {
+        inix = nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           system = "x86_64-linux";
           modules = [
@@ -195,99 +147,72 @@
               nixpkgs.overlays = overlays;
             }
             ./nixos/inix.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.home.user} = import ./home-manager/nixos.nix;
-            }
           ];
-        }
-      );
+        };
 
-      flake.nixosConfigurations.nuc = nixpkgs.lib.nixosSystem (
-        let
-          specialArgs = {
-            inherit inputs;
-            inherit colors;
-            home = {
-              homeDirectory = "/home/vargasd";
-              user = "vargasd";
-            };
-          };
-        in
-        {
+        nuc = nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           system = "x86_64-linux";
           modules = [
             { nixpkgs.overlays = overlays; }
             ./nixos/nuc.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${specialArgs.home.user} = import ./home-manager/nixos.nix;
-            }
           ];
-        }
-      );
+        };
 
-      flake.nixosConfigurations.iso = nixpkgs.lib.nixosSystem (
-        let
-          specialArgs = {
-            inherit inputs;
-            inherit colors;
-          };
-        in
-        {
+        flake.nixosConfigurations.iso = nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           system = "x86_64-linux";
           modules = [
             { nixpkgs.overlays = overlays; }
             ./nixos/iso.nix
           ];
-        }
-      );
-
-      flake.homeConfigurations.work = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "aarch64-darwin";
-          overlays = overlays;
-          config.allowUnfree = true;
         };
-        extraSpecialArgs = {
-          inherit inputs colors;
-          home = {
-            homeDirectory = "/Users/I763291";
-            user = "I763291";
-          };
-          skhdVars = {
-            issues = "open 'https://emarsys.jira.com/jira/software/c/projects/SC/boards/1088?quickFilter=3743'";
-            videoconf = "open -a 'Microsoft Teams'";
-          };
-        };
-        modules = [ ./home-manager/darwin/work.nix ];
       };
 
-      flake.homeConfigurations.darwin = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "aarch64-darwin";
-          overlays = overlays;
-        };
-        extraSpecialArgs = {
-          inherit inputs colors;
-          home = {
-            user = "vargasd";
-            homeDirectory = "/Users/vargasd";
+      flake.homeConfigurations = {
+        nixos = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            overlays = overlays;
           };
-          skhdVars = {
-            issues = "open https://github.com/vargasd";
-            videoconf = "open -a facetime";
+          extraSpecialArgs = {
+            inherit inputs colors;
           };
+          modules = [ ./home-manager/nixos.nix ];
         };
-        modules = [ ./home-manager/darwin ];
+
+        work = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            overlays = overlays;
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = {
+            inherit inputs colors;
+          };
+          modules = [ ./home-manager/work.nix ];
+        };
+
+        darwin = home-manager.lib.homeManagerConfiguration {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          pkgs = import nixpkgs {
+            system = "aarch64-darwin";
+            overlays = overlays;
+          };
+          extraSpecialArgs = {
+            inherit inputs colors;
+            home = {
+              user = "vargasd";
+              homeDirectory = "/Users/vargasd";
+            };
+            skhdVars = {
+              issues = "open https://github.com/vargasd";
+              videoconf = "open -a facetime";
+            };
+          };
+          modules = [ ./home-manager/darwin ];
+        };
       };
 
       perSystem =

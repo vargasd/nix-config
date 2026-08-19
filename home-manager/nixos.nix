@@ -2,7 +2,7 @@
   pkgs,
   lib,
   inputs,
-  home,
+  config,
   ...
 }:
 {
@@ -21,6 +21,8 @@
   ];
 
   home = {
+    username = "vargasd";
+    homeDirectory = "/home/vargasd";
     sessionVariables = {
       TERMCMD = "${pkgs.foot}/bin/footclient";
       TERMINAL = "${pkgs.foot}/bin/footclient";
@@ -86,7 +88,7 @@
       enable = true;
       text =
         [
-          home.user
+          config.home.username
           # nix-shell -p pam_u2f --command "pamu2fcfg --type=EDDSA --origin=pam://sam --appid=pam://sam --pin-verification --nouser | cut -d: -f2"
           "2zmrxcXGd8PCp0r5vtGKU4RbDSxvNGH2sRoCjH5c+SaJhyjNkKzosYtOGiPuE97sKvHyB+7QUvPtloT10S7rPd+ee3ftiG6Mb5YOrYzqFFU1SdzfNPx6vLqQRe/dxNzJOdgPmbR+EP6mugeRpYQsK/ZlnvrAe8EHcye1aeln2P4=,c2J3te4nkqT1rR44HdVbszsH2oeggH/wrSBFLGh8qSc=,eddsa,+presence+pin" # 33160604
           "Nafc+KcyWrEePS27MfdQznknD9ZXzGES/n/SXR+g9k1PXiHHKan83b0GmB+rgBjSU0otDLQ4UotM5kNaDOkieBxVXPnP3BgtBONfFjOITGX4nfth43zcNCaO8JkxaCWtEGIYc4mWKOYJhrLd1RTRDyGXFRrMhlel8nY8PnzsEvc=,TMXh5r/Hed8t7gFyesbc9zgIUkqOtaQhj1SS2VnmjOk=,eddsa,+presence+pin" # 27249233

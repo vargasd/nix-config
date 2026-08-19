@@ -10,6 +10,12 @@
       "ghostty-main" = {
         "meta.s" = "C-f4";
       };
+      slack = {
+        "meta.k" = "C-k";
+        "meta.a" = "C-a";
+        "meta.f" = "C-f";
+        "meta.enter" = "C-enter";
+      };
     };
   };
 

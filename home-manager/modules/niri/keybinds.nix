@@ -132,6 +132,7 @@
         focusOrSpawn "foot.yazi" "footclient --app-id foot.yazi -- zmx attach yazi yazi";
       "${meh}+M".action.spawn-sh =
         focusOrSpawn "foot.mail" "footclient --app-id foot.mail -- zmx attach mail aerc";
+      "${meh}+S".action.spawn-sh = focusOrSpawn "slack" "slack";
 
       "${hyper}+Home".action.move-column-to-first = [ ];
       "${hyper}+End".action.move-column-to-last = [ ];
