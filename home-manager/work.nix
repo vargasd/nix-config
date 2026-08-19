@@ -24,6 +24,7 @@
 
     packages = with pkgs; [
       slack
+      claude-code
 
       corepack_24
       nodejs_24
