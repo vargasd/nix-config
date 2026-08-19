@@ -5,6 +5,7 @@
     settings = {
       main = {
         font = "monospace:size=15";
+        width = 50;
       };
       colors =
         with colors.named;
