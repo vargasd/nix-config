@@ -78,7 +78,7 @@
         if test -n "$dir"; then
           base="$(cd "$dir" && basename $(dirs))"
           niri msg -j windows | \
-          jq ".[] | select(.app_id == \"ghostty.main\" and (.title | startswith(\"$base#\"))) | .id" |\
+          jq ".[] | select(.app_id == \"ghostty.main\" and (.title | contains(\"$base#\"))) | .id" |\
           xargs niri msg action focus-window --id || \
           ghostty --class=ghostty.main --working-directory="$dir" --title="$base#1" --initial-command="zmx attach '$base#1'"
         fi
