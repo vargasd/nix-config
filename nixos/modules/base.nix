@@ -85,6 +85,11 @@
     mountOnMedia = true;
   };
 
+  virtualisation.docker = {
+    enable = true;
+    rootless.enable = true;
+  };
+
   users.users.vargasd = {
     isNormalUser = true;
     extraGroups = [
@@ -92,6 +97,7 @@
       "keyd"
       "input"
       "uinput"
+      "docker"
     ];
     shell = pkgs.fish;
   };
