@@ -26,6 +26,7 @@
       slack
       claude-code
 
+      openssl
       corepack_24
       nodejs_24
 
@@ -41,4 +42,20 @@
       prisma
     ];
   };
+
+  programs.aerc.extraAccounts.work =
+    let
+      passGetter = pkgs.writeShellScript "pass-getter" "pass show $1 | head -1";
+    in
+    {
+      source = "imaps://sam.varga%40championhq.com@imap.gmail.com";
+      source-cred-cmd = "${passGetter} work/aerc.gmail";
+      outgoing = "smtp://sam.varga%40championhq.com@smtp.gmail.com";
+      outgoing-cred-cmd = "${passGetter} work/aerc.gmail";
+      default = "INBOX";
+      from = "Sam Varga <sam.varga@championhq.com>";
+      cache-headers = true;
+      folders-sort = "INBOX";
+      postpone = "[Gmail]/Drafts";
+    };
 }

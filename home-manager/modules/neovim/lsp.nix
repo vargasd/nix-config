@@ -108,6 +108,13 @@
           };
         };
 
+        prismals = {
+          cmd = [
+            "${lib.getExe pkgs.prisma-language-server}"
+            "--stdio"
+          ];
+        };
+
         cssls.cmd = [
           "${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server"
           "--stdio"
