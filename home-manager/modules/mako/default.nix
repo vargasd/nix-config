@@ -12,12 +12,13 @@
         format = "(%a) %s\\n\\n%b";
       in
       {
-        padding = 20;
+        padding = 5;
         font = "monospace 12";
-        width = 350;
-        background-color = "#${background}";
+        width = 400;
+        height = 200;
+        background-color = "#${white}";
         border-color = "#${bright_black}";
-        text-color = "#${white}";
+        text-color = "#${black}";
         inherit format;
       }
       // (
