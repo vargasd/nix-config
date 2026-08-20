@@ -29,10 +29,6 @@
             icon = "󰳽";
           }
           {
-            rule = "expiring";
-            icon = "";
-          }
-          {
             rule = "urgency=critical";
             icon = "‼";
           }
