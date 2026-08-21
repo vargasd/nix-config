@@ -25,10 +25,7 @@ local mappings = {
 
 	-- insert/command mode emacs bindings
 	{ "<C-a>", "<Home>", { mode = { "i", "c" } } },
-	{ "<C-b>", "<Left>", { mode = { "i", "c" } } },
-	{ "<C-d>", "<Del>", { mode = { "i", "c" } } },
 	{ "<C-e>", "<End>", { mode = { "i", "c" } } },
-	{ "<C-f>", "<Right>", { mode = { "i", "c" } } },
 	{ "<C-n>", "<Down>", { mode = { "i", "c" } } },
 	{ "<C-p>", "<Up>", { mode = { "i", "c" } } },
 	{ "<M-b>", "<S-Left>", { mode = { "i", "c" } } },
