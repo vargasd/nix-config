@@ -9,8 +9,14 @@
   imports = [
     inputs.niri-flake.homeModules.niri
     inputs.niri-autoselect-portal.homeManagerModules.default
+    inputs.niri-notify-focus.homeManagerModules.default
     ./keybinds.nix
   ];
+
+  services.niri-notify-focus = {
+    enable = true;
+    settings.effect = "none";
+  };
 
   services.niri-autoselect-portal.enable = true;
   services.pass-secret-service.enable = true;

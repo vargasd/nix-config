@@ -60,6 +60,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri-autoselect-portal.url = "git+https://codeberg.org/debugloop/niri-autoselect-portal.git";
+    niri-notify-focus = {
+      url = "github:Oaklight/niri-notify-focus/pull/1/head";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
