@@ -58,4 +58,11 @@
       folders-sort = "INBOX";
       postpone = "[Gmail]/Drafts";
     };
+
+  programs.git.includes = [
+    {
+      condition = "gitdir:~/work/";
+      contents.user.email = "sam.varga@championhq.com";
+    }
+  ];
 }

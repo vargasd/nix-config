@@ -92,13 +92,6 @@
         vimdiff.layout = "LOCAL,REMOTE / MERGED";
       };
     };
-
-    # includes = [
-    #   {
-    #     condition = "gitdir:~/work/";
-    #     contents.user.email = "samuel.varga@sap.com";
-    #   }
-    # ];
   };
 
   programs.delta = {
