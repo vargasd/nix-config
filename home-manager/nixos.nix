@@ -34,6 +34,7 @@
       libnotify
       neovim-remote
       bemoji
+      unzip
       # needed to insert for bemoji
       wtype
     ];
