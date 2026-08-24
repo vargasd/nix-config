@@ -5,7 +5,7 @@
       lock = "${pkgs.swaylock}/bin/swaylock --daemonize";
       display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
       plugged = "${pkgs.pmutils}/bin/on_ac_power";
-      lockTime = 300;
+      lockTime = 1200;
     in
     {
       enable = true;
