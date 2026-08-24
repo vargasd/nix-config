@@ -23,6 +23,11 @@ return {
 						vim.api.nvim_create_autocmd("BufWritePre", {
 							buffer = ev.buf,
 							callback = function()
+								if #vim.lsp.get_clients({ bufnr = ev.buf, name = "prismals" }) > 0 then
+									vim.lsp.buf.format({ name = "prismals" })
+									return
+								end
+
 								if #vim.lsp.get_clients({ bufnr = ev.buf, name = "eslint" }) > 0 then
 									vim.lsp.buf.format({ name = "eslint" })
 								end

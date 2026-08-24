@@ -100,17 +100,6 @@ in
             root-markers = [ ".sqruff" ];
           }
         ];
-        # prisma = [
-        #   {
-        #     format-command = "prisma format --schema '\${INPUT}'";
-        #     format-stdin = false;
-        #     rootMarkers = [
-        #       "package.json"
-        #       "schema.prisma"
-        #       "prisma.config.ts"
-        #     ];
-        #   }
-        # ];
         python = [
           {
             format-command = "${ruff} format --no-cache -";
