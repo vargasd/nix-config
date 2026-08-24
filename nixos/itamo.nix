@@ -8,6 +8,7 @@
   imports = [
     inputs.disko.nixosModules.disko
     ./modules/desktop.nix
+    ./modules/work.nix
   ];
 
   disko.devices = {

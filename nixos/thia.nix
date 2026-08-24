@@ -9,6 +9,7 @@
   imports = [
     inputs.disko.nixosModules.disko
     ./modules/laptop.nix
+    ./modules/work.nix
   ];
   networking.hostName = "thia";
 

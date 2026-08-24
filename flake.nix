@@ -72,6 +72,16 @@
         home-manager.follows = "home-manager";
       };
     };
+
+    # work
+    globalprotect-openconnect = {
+      url = "github:yuezk/GlobalProtect-openconnect";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sentinelone = {
+      url = "github:devusb/sentinelone-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
