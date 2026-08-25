@@ -32,6 +32,7 @@ vim.filetype.add({
 		mustache = "handlebars",
 		keymap = "dts",
 		overlay = "dts",
+		mjml = "html",
 	},
 	pattern = {
 		[".env.*"] = "sh",
