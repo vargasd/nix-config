@@ -81,7 +81,14 @@
   programs.bash.enable = true;
   programs.browserpass = {
     enable = true;
-    browsers = [ "firefox" ]; # zen uses this: https://github.com/zen-browser/desktop/issues/10622
+    browsers = [
+      "firefox" # zen uses this: https://github.com/zen-browser/desktop/issues/10622
+      "chromium"
+    ];
+  };
+  programs.chromium = {
+    enable = true;
+    package = pkgs.ungoogled-chromium;
   };
   programs.dircolors.enable = true;
   programs.direnv.enable = true;
