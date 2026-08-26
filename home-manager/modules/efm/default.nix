@@ -22,6 +22,24 @@ let
     ];
     require-marker = true;
   };
+  eslint = {
+    formatCommand = "${pkgs.eslint_d} --fix-to-stdout --stdin-filename '\${INPUT}' --stdin";
+    formatStdin = true;
+    root-markers = [
+      ".eslintrc"
+      ".eslintrc.js"
+      ".eslintrc.mjs"
+      ".eslintrc.cjs"
+      "eslint.config.js"
+      "eslint.config.ts"
+      "eslint.config.cjs"
+      "eslint.config.cts"
+      "eslint.config.mjs"
+      "eslint.config.mts"
+    ];
+    require-marker = true;
+  };
+
   nixfmt = lib.getExe pkgs.nixfmt;
   sqruff = lib.getExe pkgs.sqruff;
   stylua = lib.getExe pkgs.stylua;
@@ -45,14 +63,17 @@ in
       languages = {
         javascript = [
           prettier
+          eslint
           biome
         ];
         javascriptreact = [
           prettier
+          eslint
           biome
         ];
         typescript = [
           prettier
+          eslint
           biome
         ];
         typescriptreact = [

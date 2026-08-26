@@ -28,9 +28,6 @@ return {
 									return
 								end
 
-								if #vim.lsp.get_clients({ bufnr = ev.buf, name = "eslint" }) > 0 then
-									vim.lsp.buf.format({ name = "eslint" })
-								end
 								if #vim.lsp.get_clients({ bufnr = ev.buf, name = "efm" }) > 0 then
 									vim.lsp.buf.format({ name = "efm" })
 								end
