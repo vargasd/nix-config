@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -7,7 +12,7 @@
 
   services.sentinelone = {
     enable = true;
-    sentinelOneManagementTokenPath = /etc/s1/token; # TODO: Should use sops. Need to write token from pass in plaintext :/
+    sentinelOneManagementTokenPath = "/etc/secrets/sentinelone-key"; # TODO: Should use sops. Need to write token from pass in plaintext :/
     package = pkgs.sentinelone.overrideAttrs (old: {
       version = "25.2.2.14";
       src = pkgs.fetchurl {
@@ -17,8 +22,15 @@
     });
   };
 
-  environment.systemPackages = [
-    # can i just use `openconnect --protocol=gp aovpn.ostra.net`?
-    inputs.globalprotect-openconnect.packages."x86_64-linux".default
-  ];
+  networking.openconnect.interfaces.vpn = {
+    gateway = "aovpn.ostra.net";
+    protocol = "gp";
+    user = "sam.varga@championhq.com";
+    passwordFile = "/etc/secrets/openconnect-password";
+    autoStart = true;
+    extraOptions = {
+      authgroup = "AlwaysOn";
+      local-hostname = config.networking.hostName;
+    };
+  };
 }
