@@ -67,7 +67,7 @@
       "Super+Comma".action.consume-or-expel-window-left = [ ];
       "Super+Period".action.consume-or-expel-window-right = [ ];
       "Super+Slash".action.toggle-column-tabbed-display = [ ];
-      "${meh}+Delete".action.spawn = "${lib.getExe pkgs.swaylock}";
+      "${meh}+Delete".action.spawn-sh = "gpg-connect-agent reloadagent /bye; ${lib.getExe pkgs.swaylock}";
       "${hyper}+Delete".action.quit.skip-confirmation = true;
       "Ctrl+F1".action.spawn-sh = "foot --app-id foot.main";
       "Ctrl+F2".action.spawn-sh = /* bash */ ''

@@ -2,7 +2,7 @@
 {
   services.swayidle =
     let
-      lock = "${pkgs.swaylock}/bin/swaylock --daemonize";
+      lock = "gpg-connect-agent reloadagent /bye; ${pkgs.swaylock}/bin/swaylock --daemonize";
       display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
       plugged = "${pkgs.pmutils}/bin/on_ac_power";
       lockTime = 1200;
