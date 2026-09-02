@@ -16,9 +16,10 @@
         font = "monospace 12";
         width = 400;
         height = 200;
-        background-color = "#${white}";
+        border-size = 0;
+        background-color = "#${bright_black}";
         border-color = "#${bright_black}";
-        text-color = "#${black}";
+        text-color = "#${white}";
         inherit format;
       }
       // (
