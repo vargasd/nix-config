@@ -166,10 +166,6 @@
           "biome" # pkgs.biome
           "lsp-proxy"
         ];
-        vue_ls.cmd = [
-          "${lib.getExe pkgs.vue-language-server}"
-          "--stdio"
-        ];
         postgres_lsp.cmd = [ "${lib.getExe pkgs.postgres-language-server}" ];
       }
     }
