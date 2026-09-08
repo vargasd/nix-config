@@ -13,6 +13,8 @@
   ];
   networking.hostName = "thia";
 
+  services.fwupd.enable = true;
+
   disko.devices = {
     disk = {
       main = {
