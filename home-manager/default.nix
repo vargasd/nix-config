@@ -45,17 +45,13 @@
     podman
     podman-compose
     fd
-    # go-task # Taskfile support
     hurl
-    # imagemagick
     jless
     jq
     mermaid-cli
-    # neofetch
     nodejs
     pass
     postgresql
-    # presenterm
     ripgrep
     sqlite
     unzip
