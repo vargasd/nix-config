@@ -42,6 +42,15 @@
         k = "up";
         l = "right";
       };
+      "alt" = {
+        b = "C-left";
+        f = "C-right";
+      };
+      # always prefer meh
+      "control+alt+shift" = {
+        b = "C-A-S-b";
+        f = "C-A-S-f";
+      };
     };
   };
 

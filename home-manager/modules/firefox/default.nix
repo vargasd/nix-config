@@ -75,10 +75,8 @@ let
       "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
       "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
 
-      "ui.key.accelKey" = 91; # super
       # https://kb.mozillazine.org/Ui.key.chromeAccess
       "ui.key.chromeAccess" = 4; # alt
-      "ui.key.contentAccess" = 2; # ctrl
       "ui.key.menuAccessKey" = 0; # disable
 
       "ui.textSelectAttentionBackground" = "#${yellow}";

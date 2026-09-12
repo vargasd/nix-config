@@ -55,7 +55,6 @@
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       prefers-reduced-motion = "reduced";
-      gtk-key-theme = "Emacs";
     };
   };
 
