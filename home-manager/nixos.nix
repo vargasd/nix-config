@@ -11,7 +11,6 @@
     ./modules/cliphist
     ./modules/foot
     ./modules/fuzzel
-    ./modules/keyd
     ./modules/mako
     ./modules/niri
     ./modules/swayidle

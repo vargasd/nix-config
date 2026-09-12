@@ -94,7 +94,6 @@
     isNormalUser = true;
     extraGroups = [
       "wheel"
-      "keyd"
       "input"
       "uinput"
       "docker"

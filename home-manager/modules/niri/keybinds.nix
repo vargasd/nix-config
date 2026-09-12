@@ -69,15 +69,10 @@
       "Super+Slash".action.toggle-column-tabbed-display = [ ];
       "${meh}+Delete".action.spawn-sh = "gpg-connect-agent reloadagent /bye; ${lib.getExe pkgs.swaylock}";
       "${hyper}+Delete".action.quit.skip-confirmation = true;
-      "Ctrl+F1".action.spawn-sh = "foot --app-id foot.main";
-      "Ctrl+F2".action.spawn-sh = /* bash */ ''
-        dir=$(printf "$HOME\n$(zoxide query --list)" | fuzzel -d)
-        ${lib.getExe pkgs.wlrctl} window focus "app_id:foot.main" "title:$dir" || foot --app-id foot.main --working-directory "$dir" zmx attach "$(basename $dir)#1"
-      '';
-      "Ctrl+F4".action.spawn-sh = /* bash */ ''
+      "Super+S".action.spawn-sh = /* bash */ ''
         dir=$(printf "$HOME\n$(zoxide query --list)" | fuzzel -d)
         if test -n "$dir"; then
-          base="$(cd "$dir" && basename $(dirs))"
+          base="$(basename $dir)"
           niri msg -j windows | \
           jq ".[] | select(.app_id == \"ghostty.main\" and (.title | contains(\"$base#\"))) | .id" |\
           xargs niri msg action focus-window --id || \
