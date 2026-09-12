@@ -124,6 +124,7 @@
           }
         ];
         autoFetch = false;
+        overrideGpg = true;
       };
       os.editPreset = "nvim-remote";
     };
