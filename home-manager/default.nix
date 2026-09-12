@@ -18,15 +18,20 @@
 
   home.stateVersion = "26.05";
 
-  home.sessionVariables = {
-    LESS = "-i -R --no-init --tabs 2";
-    LESSHISTFILE = "-";
-    MANPAGER = "nvim +Man!";
-    HUSKY = 0;
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-    TZ = "America/Indiana/Indianapolis";
-    MOZ_DISABLE_SAFE_MODE_KEY = 1;
+  home = {
+    shellAliases = {
+      docker = "podman";
+    };
+    sessionVariables = {
+      LESS = "-i -R --no-init --tabs 2";
+      LESSHISTFILE = "-";
+      MANPAGER = "nvim +Man!";
+      HUSKY = 0;
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      TZ = "America/Indiana/Indianapolis";
+      MOZ_DISABLE_SAFE_MODE_KEY = 1;
+    };
   };
 
   programs.man = {
@@ -37,14 +42,14 @@
 
   home.packages = with pkgs; [
     chafa
-    docker
+    podman
+    podman-compose
     fd
     # go-task # Taskfile support
     hurl
     # imagemagick
     jless
     jq
-    # lazydocker
     mermaid-cli
     # neofetch
     nodejs

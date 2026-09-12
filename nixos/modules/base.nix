@@ -85,9 +85,9 @@
     mountOnMedia = true;
   };
 
-  virtualisation.docker = {
+  virtualisation.podman = {
     enable = true;
-    rootless.enable = true;
+    defaultNetwork.settings.dns_enabled = true;
   };
 
   users.users.vargasd = {
@@ -96,7 +96,6 @@
       "wheel"
       "input"
       "uinput"
-      "docker"
     ];
     shell = pkgs.fish;
   };
