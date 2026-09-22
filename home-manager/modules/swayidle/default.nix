@@ -5,7 +5,7 @@
       lock = "gpg-connect-agent reloadagent /bye; ${pkgs.swaylock}/bin/swaylock --daemonize";
       display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
       plugged = "${pkgs.pmutils}/bin/on_ac_power";
-      lockTime = 1200;
+      lockTime = 600;
     in
     {
       enable = true;
@@ -19,7 +19,7 @@
           command = lock;
         }
         {
-          timeout = 3600;
+          timeout = 1800;
           command = "${plugged} && ${display "off"} || systemctl suspend";
           resumeCommand = display "on";
         }
